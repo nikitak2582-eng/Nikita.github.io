@@ -1,89 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For You 🖤</title>
+<title>For You ⚡</title>
 
 <style>
 body {
-  background: #0a0a0a;
+  margin: 0;
+  background: black;
   color: #e0e0e0;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
-  padding: 40px;
   overflow-x: hidden;
+}
+
+/* 🌌 Stars background */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 /* Glow heading */
 h1 {
-  font-size: 28px;
+  margin-top: 40px;
   color: #00f7ff;
-  text-shadow: 0 0 10px #00f7ff;
-  animation: fadeIn 1.5s ease-in;
+  text-shadow: 0 0 15px #00f7ff;
 }
 
 /* Cards */
 .card {
-  background: #121212;
+  background: rgba(20,20,20,0.8);
   padding: 20px;
   border-radius: 15px;
   margin: 20px auto;
   max-width: 400px;
-  box-shadow: 0 0 20px rgba(0, 247, 255, 0.1);
-  animation: fadeUp 1s ease;
+  box-shadow: 0 0 20px rgba(0,247,255,0.1);
 }
 
 /* Buttons */
 button {
   padding: 12px 18px;
-  border: none;
-  background: #111;
+  border: 1px solid #00f7ff;
+  background: transparent;
   color: #00f7ff;
   border-radius: 8px;
   margin: 10px;
-  border: 1px solid #00f7ff;
   transition: 0.3s;
 }
 
 button:hover {
   background: #00f7ff;
-  color: #000;
+  color: black;
   box-shadow: 0 0 10px #00f7ff;
 }
 
-/* Hidden text */
 .hidden {
   display: none;
   margin-top: 10px;
-  color: #aaa;
-  animation: fadeIn 1s ease;
+  color: #ccc;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Secret link */
+.secret {
+  margin-top: 40px;
+  font-size: 12px;
+  opacity: 0.3;
 }
 </style>
 </head>
 
 <body>
 
+<canvas id="stars"></canvas>
+
 <h1>Hey You ⚡</h1>
 
 <div class="card">
   <p>I know you built something from scratch…  
-  so I made something my way.</p>
+  so I made something you’d feel.</p>
 </div>
 
 <div class="card">
@@ -95,16 +90,77 @@ button:hover {
 
   <button onclick="show('sleep')">When you can’t sleep</button>
   <p id="sleep" class="hidden">Close your eyes… I’m right there.</p>
+
+  <button onclick="playSong()">Tap this</button>
 </div>
 
 <div class="card">
-  <p>More unlocking soon...</p>
+  <p>We’ve been us for:</p>
+  <h2 id="timer"></h2>
 </div>
+
+<!-- 🔒 Secret Page -->
+<div class="secret">
+  <a href="secret.html" style="color:#00f7ff;">.</a>
+</div>
+
+<!-- 🎵 Hidden Song -->
+<audio id="song" src="YOUR_SONG_LINK.mp3"></audio>
 
 <script>
 function show(id) {
   document.getElementById(id).style.display = "block";
 }
+
+/* 🎵 play music */
+function playSong() {
+  document.getElementById("song").play();
+}
+
+/* ⏳ Timer */
+const startDate = new Date("2024-01-01"); // CHANGE THIS
+
+function updateTimer() {
+  const now = new Date();
+  const diff = now - startDate;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("timer").innerText = days + " days ❤️";
+}
+
+setInterval(updateTimer, 1000);
+
+/* 🌌 Stars animation */
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for (let i = 0; i < 100; i++) {
+  stars.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 1.5
+  });
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+
+  stars.forEach(star => {
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(drawStars);
+}
+
+drawStars();
 </script>
 
 </body>
