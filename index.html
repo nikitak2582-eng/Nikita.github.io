@@ -23,10 +23,10 @@ body {
 
   background: linear-gradient(
     to bottom,
-    #4f5d75 0%,
-    #7d8ca3 30%,
-    #c9a7b5 65%,
-    #f3d1b0 100%
+    #3a4f7a 0%,     /* deeper blue */
+    #5f7fa6 25%,    /* brighter sky */
+    #b48fa3 55%,    /* richer pink */
+    #ffd6a5 100%    /* warm glow bottom */
   );
 }
 
@@ -39,9 +39,12 @@ body {
   height: 100%;
   z-index: -2;
 
-  background: radial-gradient(circle at 50% 70%, rgba(255,255,255,0.15), transparent 60%);
+  background: radial-gradient(
+    circle at 50% 70%,
+    rgba(255,255,255,0.25),
+    transparent 60%
+  );
 }
-
 /* 🌟 Stars */
 .star {
   position: absolute;
@@ -52,7 +55,11 @@ body {
 
 .star.small { width: 1px; height: 1px; opacity: 0.6; }
 .star.medium { width: 2px; height: 2px; }
-.star.big { width: 3px; height: 3px; box-shadow: 0 0 6px white; }
+.star.big {
+  width: 3px;
+  height: 3px;
+  box-shadow: 0 0 10px white;
+}
 
 @keyframes twinkle {
   0%, 100% { opacity: 0.2; }
@@ -134,15 +141,22 @@ button {
 <div class="glow"></div>
 
 <!-- 🌟 Stars -->
-<div class="star small" style="top:5%; left:10%;"></div>
-<div class="star medium" style="top:15%; left:25%;"></div>
-<div class="star big" style="top:20%; left:70%;"></div>
-<div class="star small" style="top:30%; left:50%;"></div>
-<div class="star medium" style="top:40%; left:80%;"></div>
-<div class="star small" style="top:60%; left:20%;"></div>
-<div class="star big" style="top:70%; left:60%;"></div>
-<div class="star medium" style="top:80%; left:35%;"></div>
+<div class="star small" style="top:8%; left:60%;"></div>
+<div class="star small" style="top:12%; left:35%;"></div>
+<div class="star medium" style="top:18%; left:80%;"></div>
+<div class="star small" style="top:22%; left:15%;"></div>
+<div class="star medium" style="top:27%; left:55%;"></div>
 
+<div class="star small" style="top:35%; left:75%;"></div>
+<div class="star small" style="top:45%; left:10%;"></div>
+<div class="star medium" style="top:50%; left:65%;"></div>
+<div class="star small" style="top:55%; left:40%;"></div>
+
+<div class="star small" style="top:65%; left:85%;"></div>
+<div class="star medium" style="top:72%; left:25%;"></div>
+<div class="star small" style="top:78%; left:55%;"></div>
+<div class="star small" style="top:85%; left:15%;"></div>
+  
 <!-- 💖 Hearts -->
 <div class="heart" style="left:10%; animation-delay:0s;"></div>
 <div class="heart" style="left:30%; animation-delay:2s;"></div>
