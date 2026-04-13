@@ -6,66 +6,27 @@
 <style>
 body {
   margin: 0;
-  background: black;
-  color: #e0e0e0;
   font-family: 'Segoe UI', sans-serif;
+  color: white;
   text-align: center;
   overflow-x: hidden;
+
+  /* 🌌 Your Name sky gradient */
+  background: linear-gradient(
+    to bottom,
+    #0b1d51,
+    #1b3c73,
+    #3a6ea5,
+    #6a89cc
+  );
 }
 
-/* 🌌 Stars background */
+/* Canvas for stars */
 canvas {
   position: fixed;
   top: 0;
   left: 0;
   z-index: -1;
-}
-
-/* Glow heading */
-h1 {
-  margin-top: 40px;
-  color: #00f7ff;
-  text-shadow: 0 0 15px #00f7ff;
-}
-
-/* Cards */
-.card {
-  background: rgba(20,20,20,0.8);
-  padding: 20px;
-  border-radius: 15px;
-  margin: 20px auto;
-  max-width: 400px;
-  box-shadow: 0 0 20px rgba(0,247,255,0.1);
-}
-
-/* Buttons */
-button {
-  padding: 12px 18px;
-  border: 1px solid #00f7ff;
-  background: transparent;
-  color: #00f7ff;
-  border-radius: 8px;
-  margin: 10px;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #00f7ff;
-  color: black;
-  box-shadow: 0 0 10px #00f7ff;
-}
-
-.hidden {
-  display: none;
-  margin-top: 10px;
-  color: #ccc;
-}
-
-/* Secret link */
-.secret {
-  margin-top: 40px;
-  font-size: 12px;
-  opacity: 0.3;
 }
 </style>
 </head>
@@ -106,31 +67,8 @@ button:hover {
 
 <!-- 🎵 Hidden Song -->
 <audio id="song" src="YOUR_SONG_LINK.mp3"></audio>
-
+  
 <script>
-function show(id) {
-  document.getElementById(id).style.display = "block";
-}
-
-/* 🎵 play music */
-function playSong() {
-  document.getElementById("song").play();
-}
-
-/* ⏳ Timer */
-const startDate = new Date("2024-01-01"); // CHANGE THIS
-
-function updateTimer() {
-  const now = new Date();
-  const diff = now - startDate;
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById("timer").innerText = days + " days ❤️";
-}
-
-setInterval(updateTimer, 1000);
-
-/* 🌌 Stars animation */
 const canvas = document.getElementById("stars");
 const ctx = canvas.getContext("2d");
 
@@ -139,21 +77,24 @@ canvas.height = window.innerHeight;
 
 let stars = [];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 150; i++) {
   stars.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    radius: Math.random() * 1.5
+    radius: Math.random() * 1.5,
+    alpha: Math.random()
   });
 }
 
 function drawStars() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "white";
 
   stars.forEach(star => {
+    star.alpha += (Math.random() - 0.5) * 0.05;
+
     ctx.beginPath();
     ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(255,255,255," + star.alpha + ")";
     ctx.fill();
   });
 
