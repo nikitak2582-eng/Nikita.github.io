@@ -7,78 +7,68 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  color: white;
   text-align: center;
   overflow-x: hidden;
-
-  /* 🌸 Sakura sky */
-  background: linear-gradient(to bottom, #bcdcff, #e6f2ff);
+  color: white;
 }
 
-/* 🌸 Pixel overlay */
-body::after {
-  content: "";
+/* 🌌 SKY */
+.sky {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("https://www.transparenttextures.com/patterns/pixel-weave.png");
-  opacity: 0.15;
-  z-index: -1;
+  z-index: -3;
+
+  background: linear-gradient(
+    to bottom,
+    #a8d8ff,
+    #cdb4db,
+    #ffc8dd,
+    #ffe5ec
+  );
 }
 
-/* 🌸 Sakura image layer */
-.sakura-bg {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 60%;
-  background: url("https://raw.githubusercontent.com/mdn/learning-area/main/css/styling-boxes/backgrounds/sakura.png") no-repeat bottom center;
-  background-size: contain;
-  z-index: -1;
-}
-
-/* 🌸 Petals */
-.petal {
-  position: fixed;
-  top: -10px;
-  width: 10px;
-  height: 10px;
-  background: pink;
+/* ☁️ CLOUDS */
+.cloud {
+  position: absolute;
+  background: white;
   border-radius: 50%;
-  opacity: 0.7;
-  animation: fall linear infinite;
+  opacity: 0.6;
+  filter: blur(10px);
+  animation: float 80s linear infinite;
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(100vh) translateX(50px);
-    opacity: 0;
-  }
+@keyframes float {
+  from { transform: translateX(-200px); }
+  to { transform: translateX(120vw); }
 }
 
-/* Content */
+/* CONTENT */
 h1 {
-  margin-top: 40px;
-  color: #ff7aa2;
+  margin-top: 60px;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
 }
 
 .card {
-  background: rgba(255,255,255,0.6);
-  color: #333;
+  background: rgba(0,0,0,0.3);
+  backdrop-filter: blur(8px);
   padding: 20px;
   border-radius: 15px;
   margin: 20px auto;
   max-width: 400px;
-  backdrop-filter: blur(8px);
 }
 
 button {
-  padding: 10px 18px;
+  padding: 10px 15px;
   border: none;
-  background: #ff7aa2;
-  color: white;
+  background: #ff9eb5;
+  color: black;
   border-radius: 8px;
   margin: 10px;
+  cursor: pointer;
 }
 
 .hidden {
@@ -90,8 +80,15 @@ button {
 
 <body>
 
-<div class="sakura-bg"></div>
+<!-- 🌌 SKY -->
+<div class="sky"></div>
 
+<!-- ☁️ CLOUDS -->
+<div class="cloud" style="width:140px;height:70px;top:20%;left:5%;"></div>
+<div class="cloud" style="width:200px;height:90px;top:30%;left:40%;"></div>
+<div class="cloud" style="width:120px;height:60px;top:15%;left:70%;"></div>
+
+<!-- 💖 CONTENT -->
 <h1>Hey You 🌸</h1>
 
 <div class="card">
@@ -100,7 +97,7 @@ button {
 
 <div class="card">
   <button onclick="show('miss')">When you miss me</button>
-  <p id="miss" class="hidden">I’m always right here, just not always visible.</p>
+  <p id="miss" class="hidden">I’m always right here.</p>
 
   <button onclick="show('sad')">When you're not okay</button>
   <p id="sad" class="hidden">You don’t have to carry everything alone.</p>
@@ -113,22 +110,6 @@ button {
 function show(id) {
   document.getElementById(id).style.display = "block";
 }
-
-/* 🌸 Falling petals */
-function createPetal() {
-  const petal = document.createElement("div");
-  petal.classList.add("petal");
-  petal.style.left = Math.random() * 100 + "vw";
-  petal.style.animationDuration = (3 + Math.random() * 5) + "s";
-
-  document.body.appendChild(petal);
-
-  setTimeout(() => {
-    petal.remove();
-  }, 8000);
-}
-
-setInterval(createPetal, 300);
 </script>
 
 </body>
