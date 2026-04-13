@@ -12,7 +12,7 @@ body {
   color: white;
 }
 
-/* 🌌 SKY */
+/* 🌌 SKY (original) */
 .sky {
   position: fixed;
   top: 0;
@@ -67,63 +67,30 @@ body {
   to { transform: translateX(120vw); }
 }
 
-/* 🌸 SAKURA TREE */
+/* 🌸 SAKURA (slightly smaller than original) */
 .sakura {
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 280px;
-  height: 280px;
+  width: 380px;   /* reduced from 450px */
+  height: 380px;
   background: url("sakura.png") no-repeat bottom left;
   background-size: contain;
   z-index: -2;
 }
 
-/* 🍃 PETALS FROM TREE */
-.petal-container {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 300px;   /* same area as tree */
-  height: 300px;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.petal {
+/* 🌱 small green ground at trunk */
+.sakura::after {
+  content: "";
   position: absolute;
-  top: 0;  /* start from top of tree area */
-  width: 14px;
-  height: 14px;
-  background: #ff6f91;
-  border-radius: 50% 0 50% 0;
-  opacity: 1;
-  box-shadow: 0 0 8px #ff9eb5;
-  animation: fall 8s linear infinite;
-}
-
-/* petals only spawn within tree width */
-.petal:nth-child(1) { left: 20%; animation-delay: 0s; }
-.petal:nth-child(2) { left: 35%; animation-delay: 2s; }
-.petal:nth-child(3) { left: 50%; animation-delay: 4s; }
-.petal:nth-child(4) { left: 65%; animation-delay: 1s; }
-.petal:nth-child(5) { left: 80%; animation-delay: 3s; }
-
-@keyframes fall {
-  0% {
-    transform: translateY(0) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(150px) translateX(20px) rotate(180deg);
-  }
-  100% {
-    transform: translateY(110vh) translateX(-40px) rotate(360deg);
-    opacity: 0;
-  }
+  bottom: 0;
+  left: 40px;
+  width: 120px;
+  height: 30px;
+  background: radial-gradient(circle, #7ed957 0%, #4caf50 60%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(2px);
+  z-index: -1;
 }
 
 /* CONTENT */
@@ -156,6 +123,39 @@ button {
   display: none;
   margin-top: 10px;
 }
+
+/* 🍃 PETALS (original layout, brighter) */
+.petal {
+  position: fixed;
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  background: #ff4d73;  /* brighter */
+  border-radius: 50% 0 50% 0;
+  opacity: 1;
+  box-shadow: 0 0 6px #ff9eb5;
+  animation: fall 10s linear infinite;
+}
+
+.petal:nth-child(1) { left: 10%; animation-delay: 0s; }
+.petal:nth-child(2) { left: 25%; animation-delay: 2s; }
+.petal:nth-child(3) { left: 40%; animation-delay: 4s; }
+.petal:nth-child(4) { left: 60%; animation-delay: 1s; }
+.petal:nth-child(5) { left: 80%; animation-delay: 3s; }
+
+@keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
 </style>
 </head>
 
@@ -169,7 +169,6 @@ button {
 
 <div class="sakura"></div>
 
-<!-- petals now originate from tree -->
 <div class="petal-container">
   <div class="petal"></div>
   <div class="petal"></div>
