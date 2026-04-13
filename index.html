@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>For You 🌸</title>
+<title>For You ❤️</title>
 
 <style>
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   text-align: center;
-  overflow-x: hidden;
+  overflow: hidden;
   color: white;
 }
 
-/* 🌌 SKY */
+/* 🌙 Romantic Gradient Background */
 .sky {
   position: fixed;
   top: 0;
@@ -23,74 +23,94 @@ body {
 
   background: linear-gradient(
     to bottom,
-    #bfe8ff,
-    #a8dcff,
-    #cfefff,
-    #f0fbff
+    #1e1f3a,
+    #2c2f5a,
+    #4b3f72,
+    #6a4c93,
+    #ff9eb5
   );
 }
 
-/* ☁️ CLOUDS */
-.cloud {
-  position: absolute;
-  width: 200px;
-  height: 60px;
-  background: white;
-  border-radius: 50px;
-  opacity: 0.6;
-  filter: blur(12px);
-  animation: float 120s linear infinite; /* ✅ fixed */
-}
-
-/* Cloud puffs */
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: white;
-  width: 100px;
-  height: 80px;
-  border-radius: 50%;
-}
-
-.cloud::before {
-  top: -30px;
-  left: 30px;
-}
-
-.cloud::after {
-  top: -20px;
-  left: 90px;
-}
-
-/* 🎬 Animation */
-@keyframes float {
-  from { transform: translateX(-200px); }
-  to { transform: translateX(120vw); }
-}
-
-/* 🌸 Sakura tree */
-.sakura {
+/* ✨ Soft glow */
+.glow {
   position: fixed;
-  bottom: 0;
-  left: 0;              /* moved to left corner */
-  width: 400px;   /* reduced from 450px */
-  height: 400px;
-  background: url("sakura.png") no-repeat bottom left;
-  background-size: contain;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 20%, rgba(255,158,181,0.15), transparent 40%);
   z-index: -2;
 }
 
-/* CONTENT */
+/* 🌟 Stars */
+.star {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* 💖 Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -10px;
+  width: 12px;
+  height: 12px;
+  background: #ff6b81;
+  transform: rotate(45deg);
+  animation: floatUp 8s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #ff6b81;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -6px;
+  left: 0;
+}
+
+.heart::after {
+  left: -6px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  100% {
+    transform: translateY(-110vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Content */
 h1 {
-  margin-top: 60px;
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+  margin-top: 80px;
+  font-size: 2.5rem;
+  text-shadow: 0 0 15px rgba(255,255,255,0.6);
 }
 
 .card {
-  background: rgba(0,0,0,0.3);
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 15px;
   margin: 20px auto;
@@ -111,81 +131,42 @@ button {
   display: none;
   margin-top: 10px;
 }
-
-/* 🍃 PETALS */
-.petal {
-  position: fixed;
-  top: -20px;
-  width: 12px;
-  height: 12px;
-  background: #ffb7c5;
-  border-radius: 50% 0 50% 0;
-  opacity: 0.8;
-  animation: fall 10s linear infinite;
-}
-
-/* Different starting positions */
-.petal:nth-child(1) { left: 10%; animation-delay: 0s; }
-.petal:nth-child(2) { left: 25%; animation-delay: 2s; }
-.petal:nth-child(3) { left: 40%; animation-delay: 4s; }
-.petal:nth-child(4) { left: 60%; animation-delay: 1s; }
-.petal:nth-child(5) { left: 80%; animation-delay: 3s; }
-
-/* 🌸 Falling animation */
-@keyframes fall {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<!-- 🌌 SKY -->
 <div class="sky"></div>
+<div class="glow"></div>
 
-<!-- ☁️ CLOUDS -->
-<div class="cloud" style="top:18%; left:5%;"></div>
-<div class="cloud" style="top:28%; left:40%; transform: scale(1.3);"></div>
-<div class="cloud" style="top:12%; left:70%; transform: scale(0.8);"></div>
+<!-- Stars -->
+<div class="star" style="top:10%; left:20%;"></div>
+<div class="star" style="top:30%; left:70%;"></div>
+<div class="star" style="top:60%; left:40%;"></div>
+<div class="star" style="top:80%; left:80%;"></div>
 
-<!-- 🌸 SAKURA (YOU WERE MISSING THIS) -->
-<div class="sakura"></div>
+<!-- Hearts -->
+<div class="heart" style="left:10%; animation-delay:0s;"></div>
+<div class="heart" style="left:30%; animation-delay:2s;"></div>
+<div class="heart" style="left:50%; animation-delay:4s;"></div>
+<div class="heart" style="left:70%; animation-delay:1s;"></div>
+<div class="heart" style="left:90%; animation-delay:3s;"></div>
 
-  <!-- 🍃 FLOATING PETALS (ADD THIS HERE) -->
-<div class="petal-container">
-  <div class="petal"></div>
-  <div class="petal"></div>
-  <div class="petal"></div>
-  <div class="petal"></div>
-  <div class="petal"></div>
-</div> 
-  
-<!-- 💖 CONTENT -->
-<h1>Hey You 🌸</h1>
+<h1>Hey You ❤️</h1>
 
 <div class="card">
-  <p>This feels like a quiet moment… just us.</p>
+  <p>I made this just for you… don’t rush it.</p>
 </div>
 
 <div class="card">
-  <button onclick="show('miss')">When you miss me</button>
-  <p id="miss" class="hidden">I’m always right here.</p>
+  <button onclick="show('one')">Click me</button>
+  <p id="one" class="hidden">You mean a lot more than you think.</p>
 
-  <button onclick="show('sad')">When you're not okay</button>
-  <p id="sad" class="hidden">You don’t have to carry everything alone.</p>
+  <button onclick="show('two')">And this</button>
+  <p id="two" class="hidden">I’m really lucky to have you.</p>
 
-  <button onclick="show('sleep')">When you can’t sleep</button>
-  <p id="sleep" class="hidden">Close your eyes… I’m there.</p>
+  <button onclick="show('three')">Last one</button>
+  <p id="three" class="hidden">Happy Birthday ❤️</p>
 </div>
 
 <script>
@@ -193,6 +174,6 @@ function show(id) {
   document.getElementById(id).style.display = "block";
 }
 </script>
-  
+
 </body>
 </html>
