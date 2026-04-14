@@ -7,12 +7,12 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  text-align: center;
   color: white;
-  overflow: hidden;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-/* 🌌 Gradient Sky */
+/* 🌇 Background (no gaps) */
 .sky {
   position: fixed;
   top: 0;
@@ -20,116 +20,97 @@ body {
   width: 100%;
   height: 100%;
   z-index: -3;
-
-  background: linear-gradient(
-    to bottom,
-    #3a4f7a 0%,     /* deeper blue */
-    #5f7fa6 25%,    /* brighter sky */
-    #b48fa3 55%,    /* richer pink */
-    #ffd6a5 100%    /* warm glow bottom */
-  );
+  background: linear-gradient(to bottom, #ffb7a5, #ff8fab, #7a6c9d, #3a3d5c);
 }
 
-/* ✨ Soft Glow */
-.glow {
+/* 🌄 Hills */
+.hill {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-
-  background: radial-gradient(
-    circle at 50% 70%,
-    rgba(255,255,255,0.25),
-    transparent 60%
-  );
-}
-/* 🌟 Stars */
-.star {
-  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 200px;
+  background: #2e2f4f;
   border-radius: 50%;
-  background: white;
-  animation: twinkle 3s infinite ease-in-out;
+  z-index: -1;
 }
 
-.star.small { width: 1px; height: 1px; opacity: 0.6; }
-.star.medium { width: 2px; height: 2px; }
-.star.big {
-  width: 3px;
-  height: 3px;
-  box-shadow: 0 0 10px white;
-}
+.hill.one { left: -50%; bottom: -80px; }
+.hill.two { left: -30%; bottom: -120px; background: #23243f; }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 1; }
-}
-
-/* 💖 Floating Hearts */
-.heart {
+/* 🌸 Petals */
+.petal {
   position: fixed;
-  bottom: -10px;
+  top: -10px;
   width: 12px;
   height: 12px;
-  background: #ff8fa3;
-  transform: rotate(45deg);
-  animation: floatUp 8s linear infinite;
+  background: #ffd1dc;
+  border-radius: 50% 0 50% 0;
+  opacity: 1;
+  box-shadow: 0 0 8px rgba(255,255,255,0.6);
+  animation: fall 10s linear infinite;
 }
 
-.heart::before,
-.heart::after {
-  content: "";
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: #ff8fa3;
-  border-radius: 50%;
-}
-
-.heart::before { top: -6px; left: 0; }
-.heart::after { left: -6px; top: 0; }
-
-@keyframes floatUp {
-  0% { transform: translateY(0) rotate(45deg); opacity: 0; }
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
   10% { opacity: 1; }
-  100% { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 
-/* 💖 Heading */
-h1 {
-  margin-top: 120px;
-  font-size: 2.8rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-shadow: 0 0 20px rgba(255,255,255,0.9);
+/* 💖 Top Banner */
+.top-banner {
+  width: 100%;
+  background: linear-gradient(to right, rgba(122,108,157,0.85), rgba(255,143,171,0.75));
+  padding: 35px 10px 25px;
+  text-align: center;
+  backdrop-filter: blur(12px);
 }
 
-/* 💖 Cards */
-.card {
-  background: rgba(60, 60, 70, 0.6);
-  backdrop-filter: blur(15px);
-  padding: 22px;
+.top-banner h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.top-banner p {
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+/* 💖 Sections Row */
+.sections {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 20px 10px 30px;
+  flex-wrap: wrap;
+}
+
+.section-btn {
+  background: rgba(122,108,157,0.35);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
   border-radius: 20px;
-  margin: 20px auto;
-  max-width: 420px;
-}
-
-/* 💖 Buttons */
-button {
-  padding: 10px 16px;
-  border: none;
-  background: #ff9eb5;
-  color: black;
-  border-radius: 10px;
-  margin: 10px;
   cursor: pointer;
-  font-weight: 500;
+  transition: 0.3s;
 }
 
-.hidden {
-  display: none;
-  margin-top: 10px;
+.section-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* 💖 Content Section */
+.content {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: rgba(122,108,157,0.35);
+  backdrop-filter: blur(15px);
+  padding: 30px;
+  border-radius: 25px;
 }
 
 </style>
@@ -138,55 +119,27 @@ button {
 <body>
 
 <div class="sky"></div>
-<div class="glow"></div>
+<div class="hill one"></div>
+<div class="hill two"></div>
 
-<!-- 🌟 Stars -->
-<div class="star small" style="top:8%; left:60%;"></div>
-<div class="star small" style="top:12%; left:35%;"></div>
-<div class="star medium" style="top:18%; left:80%;"></div>
-<div class="star small" style="top:22%; left:15%;"></div>
-<div class="star medium" style="top:27%; left:55%;"></div>
+<!-- petals -->
+<div class="petal" style="left:10%; animation-delay:0s;"></div>
+<div class="petal" style="left:30%; animation-delay:2s;"></div>
+<div class="petal" style="left:50%; animation-delay:4s;"></div>
+<div class="petal" style="left:70%; animation-delay:1s;"></div>
+<div class="petal" style="left:90%; animation-delay:3s;"></div>
 
-<div class="star small" style="top:35%; left:75%;"></div>
-<div class="star small" style="top:45%; left:10%;"></div>
-<div class="star medium" style="top:50%; left:65%;"></div>
-<div class="star small" style="top:55%; left:40%;"></div>
-
-<div class="star small" style="top:65%; left:85%;"></div>
-<div class="star medium" style="top:72%; left:25%;"></div>
-<div class="star small" style="top:78%; left:55%;"></div>
-<div class="star small" style="top:85%; left:15%;"></div>
-  
-<!-- 💖 Hearts -->
-<div class="heart" style="left:10%; animation-delay:0s;"></div>
-<div class="heart" style="left:30%; animation-delay:2s;"></div>
-<div class="heart" style="left:50%; animation-delay:4s;"></div>
-<div class="heart" style="left:70%; animation-delay:1s;"></div>
-<div class="heart" style="left:90%; animation-delay:3s;"></div>
-
-<!-- 💖 Heading -->
-<h1>Hey you.</h1>
-
-<div class="card">
-  <p>I made this for you… don’t rush it.</p>
+<!-- 💖 Banner -->
+<div class="top-banner">
+  <h1>Dhruv's Little Lobby &lt;3</h1>
+  <p>by the best girlfriend ever</p>
 </div>
 
-<div class="card">
-  <button onclick="show('one')">Click me</button>
-  <p id="one" class="hidden">You’re more special than you realize.</p>
-
-  <button onclick="show('two')">And this</button>
-  <p id="two" class="hidden">I really love having you in my life.</p>
-
-  <button onclick="show('three')">Last one</button>
-  <p id="three" class="hidden">Happy Birthday ❤️</p>
+<!-- 💖 Single Section -->
+<div class="sections" style="padding-top:10px;">
+  <div class="section-btn">Home</div>
 </div>
-
-<script>
-function show(id) {
-  document.getElementById(id).style.display = "block";
-}
-</script>
+</div>
 
 </body>
 </html>
