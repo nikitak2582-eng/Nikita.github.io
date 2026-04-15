@@ -135,11 +135,36 @@ body {
   <p>by the best girlfriend ever</p>
 </div>
 
-<!-- 💖 Single Section -->
+<!-- 💖 Sections -->
 <div class="sections" style="padding-top:10px;">
-  <div class="section-btn">Home</div>
+  <div class="section-btn" onclick="goHome()">Home</div>
+  <div class="section-btn" onclick="openDearYou()">Dear You</div>
 </div>
+
+<!-- 💖 Home Content (empty for now, stays default) -->
+<div id="home" class="content">
 </div>
+
+<!-- 💌 Dear You (hidden) -->
+<div id="dearYou" class="content" style="display:none;">
+  <div class="card">
+    <h2>Dear You</h2>
+    <p>This will be your letter space…</p>
+    <div class="section-btn" onclick="goHome()">← Back</div>
+  </div>
+</div>
+
+<script>
+function openDearYou() {
+  document.getElementById("home").style.display = "none";
+  document.getElementById("dearYou").style.display = "flex";
+}
+
+function goHome() {
+  document.getElementById("dearYou").style.display = "none";
+  document.getElementById("home").style.display = "flex";
+}
+</script>
 
 </body>
 </html>
