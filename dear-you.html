@@ -4,43 +4,29 @@
 <title>Dear You 💌</title>
 
 <style>
+/* 🌐 RESET */
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: 'Segoe UI', sans-serif;
   color: white;
-  height: 100%;
 }
 
-/* 🌇 Full-page gradient (NO WHITE GAP) */
+/* 🌇 BACKGROUND (FIXED + NO GLITCH) */
 body {
   background: linear-gradient(to bottom, #ffb7a5, #ff8fab, #7a6c9d, #3a3d5c);
   min-height: 100vh;
   background-attachment: fixed;
 }
-  
+
+/* prevents mobile overscroll color flash */
 html {
   background: #ffb7a5;
   overscroll-behavior: none;
 }
-  
-.fade {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
 
-.fade.show {
-  opacity: 1;
-}
-  
-/* 💖 Page wrapper */
-.page {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* 💖 Top Banner */
+/* 💖 TOP BANNER */
 .top-banner {
   width: 100%;
   background: linear-gradient(to right, rgba(122,108,157,0.85), rgba(255,143,171,0.75));
@@ -51,7 +37,7 @@ html {
 
 .top-banner h1 {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2.4rem;
 }
 
 .top-banner p {
@@ -59,7 +45,7 @@ html {
   opacity: 0.9;
 }
 
-/* 💖 Cards */
+/* 💖 GRID */
 .container {
   display: flex;
   justify-content: center;
@@ -68,90 +54,99 @@ html {
   flex-wrap: wrap;
 }
 
+/* 💖 CARDS */
 .card {
   width: 260px;
-  height: 140px;
+  min-height: 140px;
   background: rgba(122,108,157,0.35);
   backdrop-filter: blur(15px);
-  border-radius: 20px;
-  padding: 20px;
+  border-radius: 25px;
+  padding: 22px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.03);
+  transform: translateY(-6px) scale(1.04);
 }
 
+/* ✨ TEXT (FIXED COLOR - no more pink blending issue) */
 .card h3 {
   margin: 0;
-  color: #ff4d88;
+  color: #f5f0ff;
 }
 
 .card p {
   margin-top: 10px;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   opacity: 0.85;
 }
 
-/* 💖 Back */
+/* 💖 BACK BUTTON */
 .back {
   text-align: center;
-  padding-bottom: 40px;
+  margin: 20px 0 40px;
 }
 
 .back a {
-  color: white;
+  color: #f5f0ff;
   text-decoration: none;
-  opacity: 0.8;
+  opacity: 0.85;
+}
+
+/* ✨ FADE TRANSITION */
+.fade {
+  opacity: 0;
+  transform: scale(1.01);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade.show {
+  opacity: 1;
+  transform: scale(1);
 }
 </style>
-
 </head>
 
 <body class="fade">
 
-<div class="page">
+<!-- 💖 HEADER -->
+<div class="top-banner">
+  <h1>Dear You 💌</h1>
+  <p>a place where my words live</p>
+</div>
 
-  <!-- 💖 Banner -->
-  <div class="top-banner">
-    <h1>Dear You 💌</h1>
-    <p>a place where my words live</p>
+<!-- 💖 CARDS -->
+<div class="container">
+
+  <div class="card" onclick="location.href='echoes.html'">
+    <h3>Echoes in Envelopes</h3>
+    <p>letters written on the 22nd of every month</p>
   </div>
 
-  <!-- 💖 Sections -->
-  <div class="container">
-
-    <div class="card" onclick="location.href='echoes.html'">
-      <h3>Echoes in Envelopes</h3>
-      <p>letters written on the 22nd</p>
-    </div>
-
-    <div class="card" onclick="alert('Coming soon 💭')">
-      <h3>The Venting Machine</h3>
-      <p>a space for you to let it out</p>
-    </div>
-
-    <div class="card" onclick="alert('Locked 🔒')">
-      <h3>Unsent Archive</h3>
-      <p>things I never sent</p>
-    </div>
-
+  <div class="card" onclick="alert('Coming soon 💭')">
+    <h3>The Venting Machine</h3>
+    <p>a space for you to let it out</p>
   </div>
 
-  <!-- 💖 Back -->
-  <div class="back">
-    <a href="index.html">← Back Home</a>
+  <div class="card" onclick="alert('Locked 🔒')">
+    <h3>Unsent Archive</h3>
+    <p>things I never sent</p>
   </div>
 
 </div>
 
+<!-- 💖 BACK -->
+<div class="back">
+  <a href="index.html">← Back Home</a>
+</div>
+
+<!-- ✨ FADE SCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("show");
 });
 
-// smooth transition on click
 document.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", function(e) {
     e.preventDefault();
@@ -163,6 +158,6 @@ document.querySelectorAll("a").forEach(link => {
   });
 });
 </script>
-  
+
 </body>
 </html>
