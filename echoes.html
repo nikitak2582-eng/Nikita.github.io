@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Echoes 💌</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  background: linear-gradient(to bottom, #ffb7a5, #ff8fab, #7a6c9d, #3a3d5c);
+}
+
+.top {
+  text-align: center;
+  padding: 30px;
+}
+
+.list {
+  max-width: 600px;
+  margin: auto;
+}
+
+.month {
+  background: rgba(122,108,157,0.35);
+  backdrop-filter: blur(15px);
+  margin: 15px;
+  padding: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.month:hover {
+  transform: scale(1.03);
+}
+
+.letter {
+  display: none;
+  max-width: 600px;
+  margin: 30px auto;
+  background: rgba(122,108,157,0.35);
+  padding: 25px;
+  border-radius: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top">
+  <h1>Echoes in Envelopes</h1>
+</div>
+
+<div class="list">
+  <div class="month" onclick="openLetter('apr')">22 April</div>
+  <div class="month" onclick="openLetter('may')">22 May</div>
+  <div class="month" onclick="openLetter('jun')">22 June</div>
+  <div class="month" onclick="openLetter('jul')">22 July</div>
+  <div class="month" onclick="openLetter('aug')">22 August</div>
+  <div class="month" onclick="openLetter('sep')">22 September</div>
+</div>
+
+<div id="apr" class="letter">
+  <h3>22 April</h3>
+  <p>write your letter here...</p>
+</div>
+
+<div id="may" class="letter">
+  <h3>22 May</h3>
+  <p>write your letter here...</p>
+</div>
+
+<script>
+function openLetter(id) {
+  document.querySelectorAll('.letter').forEach(l => l.style.display = "none");
+  document.getElementById(id).style.display = "block";
+}
+</script>
+
+<div style="text-align:center; margin:30px;">
+  <a href="dear-you.html">← Back</a>
+</div>
+
+</body>
+</html>
