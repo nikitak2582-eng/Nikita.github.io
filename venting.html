@@ -14,7 +14,7 @@ html, body {
   overflow-x: hidden;
 }
 
-/* 🌅 GRADIENT (like your image) */
+/* 🌅 GRADIENT */
 body {
   background: linear-gradient(to bottom, #0f2a52, #3c4f8a, #d98ca3, #f6c29a);
   min-height: 100vh;
@@ -35,7 +35,7 @@ body {
   opacity: 0.85;
 }
 
-/* MAIN BOX */
+/* CONTAINER */
 .container {
   display: flex;
   justify-content: center;
@@ -50,53 +50,71 @@ body {
   border-radius: 20px;
   padding: 20px;
 }
-  
-.box::before {
-  content: "";
-  display: block;
-  height: 2px;
-  width: 100%;
-  margin-bottom: 10px;
-  background: rgba(0,0,0,0.1);
-  border-radius: 2px;
+
+/* 📜 LETTER */
+.letter {
+  background: linear-gradient(to bottom, #fffaf3, #fceee0);
+  border-radius: 18px;
+  padding: 18px 16px;
+  box-shadow: 
+    0 10px 25px rgba(0,0,0,0.15),
+    inset 0 0 10px rgba(0,0,0,0.05);
+  position: relative;
 }
 
-/* ✨ TEXTAREA (cuter + cleaner) */
+/* paper lines */
+.letter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 28px,
+    rgba(0,0,0,0.04) 29px
+  );
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+/* top text */
+.letter-top {
+  font-family: 'Georgia', serif;
+  color: #5a4634;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* textarea */
 textarea {
   width: 100%;
-  height: 180px;
+  height: 150px;
   border: none;
   outline: none;
   resize: none;
-  padding: 20px;
-  border-radius: 18px;
+  background: transparent;
 
-  font-size: 1rem;
   font-family: 'Georgia', serif;
-
-  /* 🧾 paper look */
-  background: linear-gradient(to bottom, #fffaf3, #fceee0);
+  font-size: 1rem;
   color: #5a4634;
 
-  box-shadow: 
-    inset 0 0 10px rgba(0,0,0,0.05),
-    0 8px 20px rgba(0,0,0,0.15);
-
   line-height: 1.6;
-
-  /* ✏️ subtle writing lines */
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 26px,
-    rgba(0,0,0,0.05) 27px
-  );
+  padding: 5px 0;
 }
 
-/* placeholder softer */
 textarea::placeholder {
   color: rgba(90, 70, 52, 0.5);
   font-style: italic;
+}
+
+/* bottom text */
+.letter-bottom {
+  margin-top: 10px;
+  text-align: right;
+  font-family: 'Georgia', serif;
+  font-size: 0.9rem;
+  color: rgba(90, 70, 52, 0.7);
 }
 
 /* BUTTON */
@@ -122,7 +140,7 @@ button:hover {
 }
 
 .vent {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.15);
   padding: 12px;
   border-radius: 12px;
   margin-top: 10px;
@@ -152,9 +170,15 @@ button:hover {
 
 <div class="container">
   <div class="box">
-    
-    <textarea id="ventInput" placeholder="type whatever you need to let out..."></textarea>
-    
+
+    <div class="letter">
+      <div class="letter-top">Dear You,</div>
+
+      <textarea id="ventInput" placeholder="write it all here..."></textarea>
+
+      <div class="letter-bottom">— let it rest</div>
+    </div>
+
     <button onclick="saveVent()">Let it rest</button>
 
     <div class="saved" id="savedVents"></div>
