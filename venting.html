@@ -10,15 +10,20 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #1f1c2c, #928dab);
   color: white;
   overflow-x: hidden;
+}
+
+/* 🌅 GRADIENT (like your image) */
+body {
+  background: linear-gradient(to bottom, #0f2a52, #3c4f8a, #d98ca3, #f6c29a);
+  min-height: 100vh;
 }
 
 /* HEADER */
 .header {
   text-align: center;
-  padding: 40px 20px 20px;
+  padding: 40px 20px 10px;
 }
 
 .header h1 {
@@ -27,36 +32,71 @@ html, body {
 }
 
 .header p {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* BOX */
+/* MAIN BOX */
 .container {
   display: flex;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 20px;
 }
 
 .box {
   width: 90%;
   max-width: 600px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(15px);
   border-radius: 20px;
   padding: 20px;
 }
+  
+.box::before {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  margin-bottom: 10px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 2px;
+}
 
-/* TEXTAREA */
+/* ✨ TEXTAREA (cuter + cleaner) */
 textarea {
   width: 100%;
-  height: 200px;
+  height: 180px;
   border: none;
   outline: none;
   resize: none;
-  padding: 15px;
-  border-radius: 12px;
+  padding: 20px;
+  border-radius: 18px;
+
   font-size: 1rem;
-  font-family: inherit;
+  font-family: 'Georgia', serif;
+
+  /* 🧾 paper look */
+  background: linear-gradient(to bottom, #fffaf3, #fceee0);
+  color: #5a4634;
+
+  box-shadow: 
+    inset 0 0 10px rgba(0,0,0,0.05),
+    0 8px 20px rgba(0,0,0,0.15);
+
+  line-height: 1.6;
+
+  /* ✏️ subtle writing lines */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 26px,
+    rgba(0,0,0,0.05) 27px
+  );
+}
+
+/* placeholder softer */
+textarea::placeholder {
+  color: rgba(90, 70, 52, 0.5);
+  font-style: italic;
 }
 
 /* BUTTON */
@@ -64,7 +104,7 @@ button {
   margin-top: 15px;
   padding: 10px 18px;
   border: none;
-  border-radius: 12px;
+  border-radius: 15px;
   cursor: pointer;
   background: #ff8fab;
   color: white;
@@ -74,6 +114,19 @@ button {
 
 button:hover {
   transform: scale(1.05);
+}
+
+/* SAVED VENTS */
+.saved {
+  margin-top: 25px;
+}
+
+.vent {
+  background: rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 12px;
+  margin-top: 10px;
+  font-size: 0.95rem;
 }
 
 /* HOME */
@@ -94,13 +147,18 @@ button:hover {
 
 <div class="header">
   <h1>Venting Machine 💭</h1>
-  <p>say what you can’t say out loud</p>
+  <p>leave it here… you don’t have to carry it</p>
 </div>
 
 <div class="container">
   <div class="box">
-    <textarea id="vent" placeholder="write everything here..."></textarea>
-    <button onclick="saveVent()">Save Vent</button>
+    
+    <textarea id="ventInput" placeholder="type whatever you need to let out..."></textarea>
+    
+    <button onclick="saveVent()">Let it rest</button>
+
+    <div class="saved" id="savedVents"></div>
+
   </div>
 </div>
 
@@ -110,16 +168,35 @@ button:hover {
 
 <script>
 function saveVent() {
-  let text = document.getElementById("vent").value;
+  let input = document.getElementById("ventInput");
+  let text = input.value.trim();
 
-  if (text.trim() === "") {
-    alert("Nothing to save 💭");
-    return;
-  }
+  if (text === "") return;
 
-  localStorage.setItem("vent", text);
-  alert("Saved safely 💾");
+  let vents = JSON.parse(localStorage.getItem("vents")) || [];
+  vents.unshift(text);
+
+  localStorage.setItem("vents", JSON.stringify(vents));
+
+  input.value = "";
+  displayVents();
 }
+
+function displayVents() {
+  let container = document.getElementById("savedVents");
+  let vents = JSON.parse(localStorage.getItem("vents")) || [];
+
+  container.innerHTML = "";
+
+  vents.forEach(v => {
+    let div = document.createElement("div");
+    div.className = "vent";
+    div.textContent = v;
+    container.appendChild(div);
+  });
+}
+
+displayVents();
 </script>
 
 </body>
