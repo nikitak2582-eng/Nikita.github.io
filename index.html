@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
 }
 
-/* 🌇 Background (no gaps) */
+/* 🌇 Background (UNCHANGED) */
 .sky {
   position: fixed;
   top: 0;
@@ -75,7 +75,7 @@ body {
   opacity: 0.9;
 }
 
-/* 💖 Sections Row */
+/* 💖 Sections */
 .sections {
   width: 100%;
   display: flex;
@@ -98,21 +98,10 @@ body {
   transform: translateY(-3px) scale(1.05);
 }
 
-/* 💖 Content Section */
-.content {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+a {
+  text-decoration: none;
+  color: white;
 }
-
-.card {
-  background: rgba(122,108,157,0.35);
-  backdrop-filter: blur(15px);
-  padding: 30px;
-  border-radius: 25px;
-}
-
 </style>
 </head>
 
@@ -136,35 +125,13 @@ body {
 </div>
 
 <!-- 💖 Sections -->
-<div class="sections" style="padding-top:10px;">
-  <div class="section-btn" onclick="goHome()">Home</div>
-  <div class="section-btn" onclick="openDearYou()">Dear You</div>
+<div class="sections">
+  <div class="section-btn">Home</div>
+
+  <a href="dear-you.html">
+    <div class="section-btn">Dear You</div>
+  </a>
 </div>
-
-<!-- 💖 Home Content (empty for now, stays default) -->
-<div id="home" class="content">
-</div>
-
-<!-- 💌 Dear You (hidden) -->
-<div id="dearYou" class="content" style="display:none;">
-  <div class="card">
-    <h2>Dear You</h2>
-    <p>This will be your letter space…</p>
-    <div class="section-btn" onclick="goHome()">← Back</div>
-  </div>
-</div>
-
-<script>
-function openDearYou() {
-  document.getElementById("home").style.display = "none";
-  document.getElementById("dearYou").style.display = "flex";
-}
-
-function goHome() {
-  document.getElementById("dearYou").style.display = "none";
-  document.getElementById("home").style.display = "flex";
-}
-</script>
 
 </body>
 </html>
