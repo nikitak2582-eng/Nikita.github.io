@@ -14,7 +14,12 @@ html, body {
   font-family: 'Segoe UI', sans-serif;
   color: white;
 
-  overflow-x: hidden; /* 🚫 stops left-right drag */
+  overflow-x: hidden;
+  overscroll-behavior: none;   /* ✅ add this */
+}
+  
+body {
+  overflow-x: hidden;
 }
 
 /* 🌇 BACKGROUND (FIXED + NO GLITCH) */
@@ -108,6 +113,17 @@ html {
 .fade.show {
   opacity: 1;
   transform: scale(1);
+}
+
+/* 🧼 GLOBAL SAFE BOX MODEL (prevents overflow bugs) */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* media safety */
+img, video {
+  max-width: 100%;
+  display: block;
 }
   
 </style>
