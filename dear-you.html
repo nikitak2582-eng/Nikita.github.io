@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dear You 💌</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  background: linear-gradient(to bottom, #ffb7a5, #ff8fab, #7a6c9d, #3a3d5c);
+}
+
+/* top */
+.top {
+  text-align: center;
+  padding: 30px;
+}
+
+/* grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 30px;
+}
+
+/* cards */
+.card {
+  background: rgba(122,108,157,0.35);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h2 {
+  color: #ff4d88;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+/* back */
+.back {
+  text-align: center;
+  margin-bottom: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top">
+  <h1>Dear You 💌</h1>
+  <p>a place where my words live</p>
+</div>
+
+<div class="grid">
+
+  <a href="echoes.html">
+    <div class="card">
+      <h2>Echoes in Envelopes</h2>
+      <p>letters written on the 22nd</p>
+    </div>
+  </a>
+
+  <div class="card">
+    <h2>The Venting Machine</h2>
+    <p>a space for you to let it out</p>
+  </div>
+
+  <div class="card">
+    <h2>Unsent Archive</h2>
+    <p>things I never sent</p>
+  </div>
+
+</div>
+
+<div class="back">
+  <a href="index.html">← Back Home</a>
+</div>
+
+</body>
+</html>
