@@ -91,28 +91,25 @@ html {
   opacity: 0.85;
 }
 
-/* 💖 BACK BUTTON */
-.back {
+/* 🏠 HOME */
+.home {
   text-align: center;
   margin: 20px 0 40px;
 }
 
-.back a {
+.home a {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: rgba(122,108,157,0.35);
   color: #f5f0ff;
   text-decoration: none;
-  opacity: 0.85;
+  backdrop-filter: blur(10px);
+  transition: 0.2s;
 }
 
-/* ✨ FADE TRANSITION */
-.fade {
-  opacity: 0;
-  transform: scale(1.01);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.fade.show {
-  opacity: 1;
-  transform: scale(1);
+.home a:hover {
+  transform: scale(1.05);
 }
 
 /* 🧼 GLOBAL SAFE BOX MODEL (prevents overflow bugs) */
@@ -156,29 +153,11 @@ img, video {
   </div>
 
 </div>
-
-<!-- 💖 BACK -->
-<div class="back">
-  <a href="index.html">← Back Home</a>
+  
+<!-- 🏠 HOME -->
+<div class="home">
+  <a href="index.html">🏠 Home</a>
 </div>
-
-<!-- ✨ FADE SCRIPT -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("show");
-});
-
-document.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", function(e) {
-    e.preventDefault();
-    let href = this.href;
-    document.body.classList.remove("show");
-    setTimeout(() => {
-      window.location = href;
-    }, 400);
-  });
-});
-</script>
-
+  
 </body>
 </html>
