@@ -4,157 +4,119 @@
 <title>Dear You 💌</title>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', sans-serif;
   color: white;
-  overflow-x: hidden;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
-/* SAME background as home */
-.sky {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -3;
+/* 🌇 FULL PAGE GRADIENT (fixes white gap) */
+body {
   background: linear-gradient(to bottom, #ffb7a5, #ff8fab, #7a6c9d, #3a3d5c);
+  background-attachment: fixed;
 }
 
-/* hills */
-.hill {
-  position: fixed;
-  bottom: 0;
-  width: 200%;
-  height: 200px;
-  background: #2e2f4f;
-  border-radius: 50%;
-  z-index: -1;
-}
-
-.hill.one { left: -50%; bottom: -80px; }
-.hill.two { left: -30%; bottom: -120px; background: #23243f; }
-
-/* 🌸 petals */
-.petal {
-  position: fixed;
-  top: -10px;
-  width: 12px;
-  height: 12px;
-  background: #ffd1dc;
-  border-radius: 50% 0 50% 0;
-  opacity: 1;
-  box-shadow: 0 0 8px rgba(255,255,255,0.6);
-  animation: fall 10s linear infinite;
-}
-
-@keyframes fall {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
-
-/* 💖 top */
-.top {
+/* 💖 Top Banner */
+.top-banner {
+  width: 100%;
+  background: linear-gradient(to right, rgba(122,108,157,0.85), rgba(255,143,171,0.75));
+  padding: 35px 10px 25px;
   text-align: center;
-  padding: 40px 20px 10px;
+  backdrop-filter: blur(12px);
 }
 
-.top h1 {
+.top-banner h1 {
   margin: 0;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
 }
 
-.top p {
-  opacity: 0.85;
+.top-banner p {
+  margin-top: 8px;
+  opacity: 0.9;
 }
 
-/* 💖 grid */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+/* 💖 Cards Section */
+.container {
+  display: flex;
+  justify-content: center;
   gap: 30px;
-  padding: 40px 20px;
-  max-width: 1000px;
-  margin: auto;
+  padding: 60px 20px;
+  flex-wrap: wrap;
 }
 
-/* 💖 cards */
+/* 💖 Cards */
 .card {
+  width: 260px;
+  height: 140px;
   background: rgba(122,108,157,0.35);
   backdrop-filter: blur(15px);
-  border-radius: 25px;
-  padding: 25px;
+  border-radius: 20px;
+  padding: 20px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.04);
+  transform: translateY(-5px) scale(1.03);
 }
 
-.card h2 {
-  margin-top: 0;
+.card h3 {
+  margin: 0;
   color: #ff4d88;
 }
 
-/* 💖 back */
-.back {
-  text-align: center;
-  margin: 20px 0 40px;
+.card p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  opacity: 0.85;
 }
 
-a {
-  text-decoration: none;
+/* 💖 Back Button */
+.back {
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.back a {
   color: white;
+  text-decoration: none;
+  opacity: 0.8;
 }
 </style>
+
 </head>
 
 <body>
 
-<div class="sky"></div>
-<div class="hill one"></div>
-<div class="hill two"></div>
-
-<!-- petals -->
-<div class="petal" style="left:10%; animation-delay:0s;"></div>
-<div class="petal" style="left:30%; animation-delay:2s;"></div>
-<div class="petal" style="left:50%; animation-delay:4s;"></div>
-<div class="petal" style="left:70%; animation-delay:1s;"></div>
-<div class="petal" style="left:90%; animation-delay:3s;"></div>
-
-<!-- 💌 header -->
-<div class="top">
+<!-- 💖 Banner -->
+<div class="top-banner">
   <h1>Dear You 💌</h1>
   <p>a place where my words live</p>
 </div>
 
-<!-- 💌 grid -->
-<div class="grid">
+<!-- 💖 Cards -->
+<div class="container">
 
-  <a href="echoes.html">
-    <div class="card">
-      <h2>Echoes in Envelopes</h2>
-      <p>letters written on the 22nd of every month</p>
-    </div>
-  </a>
-
-  <div class="card">
-    <h2>The Venting Machine</h2>
-    <p>a space where you can type and let it stay</p>
+  <div class="card" onclick="location.href='echoes.html'">
+    <h3>Echoes in Envelopes</h3>
+    <p>letters written on the 22nd</p>
   </div>
 
-  <div class="card">
-    <h2>Unsent Archive</h2>
-    <p>words that were never meant to be sent</p>
+  <div class="card" onclick="alert('Coming soon 💭')">
+    <h3>The Venting Machine</h3>
+    <p>a space for you to let it out</p>
+  </div>
+
+  <div class="card" onclick="alert('Locked 🔒')">
+    <h3>Unsent Archive</h3>
+    <p>things I never sent</p>
   </div>
 
 </div>
 
-<!-- back -->
+<!-- 💖 Back -->
 <div class="back">
   <a href="index.html">← Back Home</a>
 </div>
