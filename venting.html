@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* 🚫 FIX SCROLL GLITCH */
 html, body {
   margin: 0;
   padding: 0;
@@ -18,7 +17,6 @@ html {
   background: #0a1124;
 }
 
-/* 🌌 DREAMY NIGHT SKY */
 body {
   background:
     radial-gradient(circle at 20% 30%, rgba(120,130,255,0.2), transparent 40%),
@@ -30,7 +28,7 @@ body {
   color: white;
 }
 
-/* ✨ STARS (SMOOTH, NO GLITCH) */
+/* stars */
 .stars {
   position: fixed;
   inset: 0;
@@ -38,37 +36,16 @@ body {
   background:
     radial-gradient(2px 2px at 20% 30%, white, transparent),
     radial-gradient(1.5px 1.5px at 70% 20%, white, transparent),
-    radial-gradient(1.5px 1.5px at 40% 70%, white, transparent),
-    radial-gradient(2px 2px at 85% 60%, white, transparent),
-    radial-gradient(1px 1px at 60% 40%, white, transparent);
+    radial-gradient(1.5px 1.5px at 40% 70%, white, transparent);
   opacity: 0.7;
-
-  animation: twinkle 6s ease-in-out infinite;
 }
 
-@keyframes twinkle {
-  0%,100% { opacity: 0.6; }
-  50% { opacity: 0.9; }
-}
-
-/* 💌 HEADER */
+/* header */
 .top-banner {
   text-align: center;
   padding: 50px 20px 30px;
 }
 
-.top-banner h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  text-shadow: 0 4px 20px rgba(120,140,255,0.5);
-}
-
-.top-banner p {
-  margin-top: 8px;
-  color: #d6dcff;
-}
-
-/* 📦 LAYOUT */
 .container {
   display: flex;
   justify-content: center;
@@ -80,22 +57,12 @@ body {
   max-width: 600px;
 }
 
-/* 💌 LETTER */
+/* letter */
 .letter {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
   border-radius: 22px;
   padding: 22px;
-
-  box-shadow:
-    0 15px 40px rgba(0,0,0,0.5),
-    inset 0 0 10px rgba(255,255,255,0.1);
-}
-
-.letter-top {
-  color: #ffd6f0;
-  margin-bottom: 8px;
-  font-family: 'Georgia', serif;
 }
 
 textarea {
@@ -105,26 +72,11 @@ textarea {
   outline: none;
   resize: none;
   background: transparent;
-
-  font-family: 'Georgia', serif;
-  font-size: 1rem;
   color: #eef1ff;
-  line-height: 1.6;
+  font-size: 1rem;
 }
 
-textarea::placeholder {
-  color: rgba(230,236,255,0.5);
-  font-style: italic;
-}
-
-.letter-bottom {
-  text-align: right;
-  margin-top: 10px;
-  color: #b8c2ff;
-  font-family: 'Georgia', serif;
-}
-
-/* 🔘 BUTTONS */
+/* buttons */
 .btn-group {
   display: flex;
   gap: 10px;
@@ -133,36 +85,31 @@ textarea::placeholder {
 
 button {
   padding: 10px 18px;
-  border: none;
   border-radius: 20px;
+  border: none;
   cursor: pointer;
 }
 
 #saveBtn {
-  background: linear-gradient(to right, #7c8cff, #a5b4ff);
+  background: #7c8cff;
   color: white;
 }
 
 #eraseBtn {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.4);
-  color: #d6dcff;
+  border: 1px solid #ccc;
+  color: #ddd;
 }
 
-button:hover {
-  transform: scale(1.05);
-}
-
-/* 🔗 NAV */
+/* nav */
 .nav {
   text-align: center;
   margin-top: 20px;
 }
 
 .nav a {
-  margin: 0 10px;
+  color: #a5b4ff;
   text-decoration: none;
-  color: #d6dcff;
 }
 </style>
 </head>
@@ -180,11 +127,7 @@ button:hover {
   <div class="box">
 
     <div class="letter">
-      <div class="letter-top">Dear You,</div>
-
       <textarea id="ventInput" placeholder="write it all here..."></textarea>
-
-      <div class="letter-bottom">— i hear you</div>
     </div>
 
     <div class="btn-group">
@@ -194,7 +137,6 @@ button:hover {
 
     <div class="nav">
       <a href="vents.html">📜 View All</a>
-      <a href="index.html">🏠 Home</a>
     </div>
 
   </div>
@@ -203,22 +145,26 @@ button:hover {
 <script>
 const input = document.getElementById("ventInput");
 
-/* SAVE → transfers to vents page */
+/* SAVE WITH TIMESTAMP */
 document.getElementById("saveBtn").addEventListener("click", function() {
   let text = input.value.trim();
   if (text === "") return;
 
   let vents = JSON.parse(localStorage.getItem("vents")) || [];
-  vents.unshift(text);
+
+  let entry = {
+    text: text,
+    time: new Date().toLocaleString()
+  };
+
+  vents.unshift(entry);
+
   localStorage.setItem("vents", JSON.stringify(vents));
 
   input.value = "";
-
-  // optional: quick feedback
-  alert("Stored safely 💭");
 });
 
-/* ERASE (only clears current typing) */
+/* ERASE */
 document.getElementById("eraseBtn").addEventListener("click", function() {
   input.value = "";
 });
