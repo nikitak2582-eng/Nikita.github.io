@@ -4,119 +4,64 @@
 <title>Your Vents 📜</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
 body {
   margin: 0;
-  font-family: 'Cormorant Garamond', serif;
-  background: #5a3a2e;
-  color: #f5e9dc;
-}
-
-/* HEADER */
-.header {
-  text-align: center;
-  padding: 40px;
-}
-
-/* CONTAINER */
-.container {
-  max-width: 700px;
-  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0a1124;
+  color: white;
   padding: 20px;
 }
 
-/* 📜 LETTER VENTS */
-.vent {
-  background: #fffaf0;
-  color: #4b3b2a;
-  padding: 18px;
-  border-radius: 14px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-/* date */
-.date {
-  font-size: 0.8rem;
-  opacity: 0.6;
-  margin-bottom: 10px;
-}
-
-/* DELETE BUTTON */
-.delete {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #6b4f3a;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* NAV */
-.nav {
+h1 {
   text-align: center;
-  margin: 30px;
 }
 
-.nav a {
-  color: #f5e9dc;
+.vent {
+  background: rgba(255,255,255,0.08);
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.back {
+  text-align: center;
+  margin-top: 20px;
+}
+
+a {
+  color: #a5b4ff;
   text-decoration: none;
-  margin: 0 10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-  <h1>Your Vents 📜</h1>
-</div>
+<h1>Your Vents 📜</h1>
 
-<div class="container" id="ventList"></div>
+<div id="ventsContainer"></div>
 
-<div class="nav">
+<div class="back">
   <a href="venting.html">← Back</a>
 </div>
 
 <script>
 let vents = JSON.parse(localStorage.getItem("vents")) || [];
-let container = document.getElementById("ventList");
 
-function render() {
-  container.innerHTML = "";
+let container = document.getElementById("ventsContainer");
 
-  if (vents.length === 0) {
-    container.innerHTML = "<p>No vents yet</p>";
-    return;
-  }
-
-  vents.forEach((v, index) => {
+if (vents.length === 0) {
+  container.innerHTML = "<p>No vents yet...</p>";
+} else {
+  vents.forEach(v => {
     let div = document.createElement("div");
     div.className = "vent";
-
-    div.innerHTML = `
-      <button class="delete" onclick="deleteVent(${index})">Erase</button>
-      <div class="date">${v.date}</div>
-      <strong>Dear You,</strong><br><br>
-      ${v.content}
-      <br><br><em>— i hear you</em>
-    `;
-
+    div.textContent = v;
     container.appendChild(div);
   });
 }
-
-function deleteVent(index) {
-  vents.splice(index, 1);
-  localStorage.setItem("vents", JSON.stringify(vents));
-  render();
-}
-
-render();
 </script>
 
 </body>
