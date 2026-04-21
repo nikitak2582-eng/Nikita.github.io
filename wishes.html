@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wish Review 📜</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: sans-serif;
+  background: #fff0f6;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+select, input {
+  margin-top: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Wish Review 💖</h2>
+
+<div id="list"></div>
+
+<script>
+let wishes = JSON.parse(localStorage.getItem("wishes")) || [];
+let list = document.getElementById("list");
+
+function render() {
+  list.innerHTML = "";
+
+  wishes.forEach((w, i) => {
+    let div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <p>${w.text}</p>
+
+      Status:
+      <select onchange="updateStatus(${i}, this.value)">
+        <option ${w.status=="Pending"?"selected":""}>Pending</option>
+        <option ${w.status=="Granted"?"selected":""}>Granted</option>
+        <option ${w.status=="Not Granted"?"selected":""}>Not Granted</option>
+      </select>
+
+      <br>
+
+      Penalty:
+      <input type="text" value="${w.penalty}" 
+        onchange="updatePenalty(${i}, this.value)">
+    `;
+
+    list.appendChild(div);
+  });
+}
+
+function updateStatus(i, val) {
+  wishes[i].status = val;
+  localStorage.setItem("wishes", JSON.stringify(wishes));
+}
+
+function updatePenalty(i, val) {
+  wishes[i].penalty = val;
+  localStorage.setItem("wishes", JSON.stringify(wishes));
+}
+
+render();
+</script>
+
+</body>
+</html>
