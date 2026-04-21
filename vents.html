@@ -17,14 +17,34 @@ h1 {
   text-align: center;
 }
 
+/* vent card */
 .vent {
   background: rgba(255,255,255,0.08);
   padding: 15px;
   border-radius: 15px;
   margin-bottom: 15px;
-  line-height: 1.5;
+  position: relative;
 }
 
+/* delete */
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #ff9aa2;
+  cursor: pointer;
+}
+
+/* time */
+.time {
+  font-size: 0.8rem;
+  color: #aaa;
+  text-align: right;
+}
+
+/* nav */
 .back {
   text-align: center;
   margin-top: 20px;
@@ -41,7 +61,7 @@ a {
 
 <h1>Your Vents 📜</h1>
 
-<div id="ventsContainer"></div>
+<div id="container"></div>
 
 <div class="back">
   <a href="venting.html">← Back</a>
@@ -49,19 +69,37 @@ a {
 
 <script>
 let vents = JSON.parse(localStorage.getItem("vents")) || [];
+let container = document.getElementById("container");
 
-let container = document.getElementById("ventsContainer");
+function render() {
+  container.innerHTML = "";
 
-if (vents.length === 0) {
-  container.innerHTML = "<p>No vents yet...</p>";
-} else {
-  vents.forEach(v => {
+  if (vents.length === 0) {
+    container.innerHTML = "<p>No vents yet...</p>";
+    return;
+  }
+
+  vents.forEach((v, i) => {
     let div = document.createElement("div");
     div.className = "vent";
-    div.textContent = v;
+
+    div.innerHTML = `
+      <button class="delete-btn" onclick="del(${i})">✖</button>
+      <div>${v.text}</div>
+      <div class="time">${v.time}</div>
+    `;
+
     container.appendChild(div);
   });
 }
+
+function del(i) {
+  vents.splice(i, 1);
+  localStorage.setItem("vents", JSON.stringify(vents));
+  render();
+}
+
+render();
 </script>
 
 </body>
