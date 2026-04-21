@@ -1,106 +1,95 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 <title>Venting Machine 💭</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
 }
 
-/* 🤎 GLOSSY WENGE BACKGROUND */
+/* 🌌 DREAMY NIGHT SKY (SMOOTH, NO GREEN) */
 body {
   background:
-    linear-gradient(to bottom, rgba(255,255,255,0.08), transparent 40%),
-    linear-gradient(to bottom, #5a3a2e, #4a2f25);
-  min-height: 100vh;
+    radial-gradient(circle at 20% 30%, rgba(120,130,255,0.2), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(180,140,255,0.15), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(90,120,255,0.2), transparent 50%),
+    linear-gradient(to bottom, #0a1124, #121a3a, #1b2b5a);
+
+  color: white;
 }
 
-/* ✨ MINIMAL TOP STRIP */
-.banner {
+/* ✨ LIGHTWEIGHT STARS (NO HEAVY ANIMATION) */
+.stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(1.5px 1.5px at 70% 20%, white, transparent),
+    radial-gradient(1.5px 1.5px at 40% 70%, white, transparent),
+    radial-gradient(2px 2px at 85% 60%, white, transparent),
+    radial-gradient(1px 1px at 60% 40%, white, transparent);
+  opacity: 0.7;
+
+  animation: softTwinkle 6s ease-in-out infinite;
+}
+
+@keyframes softTwinkle {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.9; }
+}
+
+/* 💌 TOP */
+.top-banner {
   text-align: center;
-  padding: 25px 15px 15px;
-  color: #f5e9dc;
-
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.25),
-    rgba(0,0,0,0.05),
-    transparent
-  );
+  padding: 50px 20px 30px;
 }
 
-.banner h1 {
+.top-banner h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  text-shadow: 0 4px 20px rgba(120,140,255,0.5);
 }
 
-.banner p {
-  margin-top: 5px;
-  font-size: 0.9rem;
-  opacity: 0.75;
+.top-banner p {
+  margin-top: 8px;
+  color: #d6dcff;
 }
 
 /* CONTAINER */
 .container {
   display: flex;
   justify-content: center;
-  padding: 20px;
+  padding: 25px;
 }
 
-/* BOX */
 .box {
   width: 92%;
-  max-width: 650px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 20px;
-  padding: 20px;
-
-  box-shadow: 
-    inset 0 1px 2px rgba(255,255,255,0.1),
-    0 10px 25px rgba(0,0,0,0.3);
+  max-width: 600px;
 }
 
-/* 📜 LETTER */
+/* 🌙 LETTER */
 .letter {
-  background: #fffaf0;
-  border-radius: 18px;
-  padding: 22px 18px;
-  position: relative;
-  overflow: hidden; /* important */
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+  padding: 22px;
+
+  box-shadow:
+    0 15px 40px rgba(0,0,0,0.5),
+    inset 0 0 10px rgba(255,255,255,0.1);
 }
 
-/* FIXED overlay */
-.letter::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent,
-    transparent 30px,
-    rgba(0,0,0,0.05) 31px
-  );
-  border-radius: 18px;
-
-  pointer-events: none; /* 🔥 KEY FIX */
-  z-index: 0;
-}
-
-/* make content above overlay */
-.letter * {
-  position: relative;
-  z-index: 1;
-}
-
+/* TEXT */
 .letter-top {
-  color: #5a4634;
-  margin-bottom: 10px;
+  color: #ffd6f0;
+  margin-bottom: 8px;
+  font-family: 'Georgia', serif;
 }
 
 textarea {
@@ -108,33 +97,52 @@ textarea {
   height: 220px;
   border: none;
   outline: none;
-  background: transparent;
-  font-size: 1.1rem;
-  color: #4b3b2a;
-  line-height: 1.6;
   resize: none;
+  background: transparent;
+
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  color: #eef1ff;
+  line-height: 1.6;
 }
 
 textarea::placeholder {
-  color: rgba(75,59,42,0.5);
+  color: rgba(230,236,255,0.5);
+  font-style: italic;
 }
 
 .letter-bottom {
   text-align: right;
   margin-top: 10px;
-  color: #6b5642;
+  color: #b8c2ff;
+  font-family: 'Georgia', serif;
 }
 
-/* BUTTON */
-button {
+/* BUTTONS */
+.btn-group {
+  display: flex;
+  gap: 10px;
   margin-top: 15px;
+}
+
+button {
   padding: 10px 18px;
   border: none;
-  border-radius: 12px;
-  background: #6b4f3a;
-  color: white;
+  border-radius: 20px;
   cursor: pointer;
-  transition: 0.2s;
+}
+
+/* save */
+#saveBtn {
+  background: linear-gradient(to right, #7c8cff, #a5b4ff);
+  color: white;
+}
+
+/* erase */
+#eraseBtn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #d6dcff;
 }
 
 button:hover {
@@ -148,30 +156,20 @@ button:hover {
 }
 
 .nav a {
-  color: #f5e9dc;
+  margin: 0 10px;
   text-decoration: none;
-}
-
-/* 🏠 HOME BUTTON */
-.home {
-  text-align: center;
-  margin: 40px 0 30px;
-}
-
-.home a {
-  text-decoration: none;
-  color: #f5e9dc;
-  opacity: 0.85;
-  font-size: 0.95rem;
+  color: #d6dcff;
 }
 </style>
 </head>
 
 <body>
 
-<div class="banner">
+<div class="stars"></div>
+
+<div class="top-banner">
   <h1>Venting Machine 💭</h1>
-  <p>leave it here… you don’t have to carry it</p>
+  <p>leave it here… it doesn’t have to stay with you</p>
 </div>
 
 <div class="container">
@@ -185,35 +183,37 @@ button:hover {
       <div class="letter-bottom">— i hear you</div>
     </div>
 
-    <button id="saveBtn">Let it rest</button>
+    <div class="btn-group">
+      <button id="saveBtn">Let it rest</button>
+      <button id="eraseBtn">Erase</button>
+    </div>
 
     <div class="nav">
-      <a href="vents.html">📜 View All Vents</a>
+      <a href="vents.html">📜 View All</a>
+      <a href="index.html">🏠 Home</a>
     </div>
 
   </div>
 </div>
 
-<div class="home">
-  <a href="index.html">🏠 Home</a>
-</div>
-
 <script>
+const input = document.getElementById("ventInput");
+
+/* SAVE */
 document.getElementById("saveBtn").addEventListener("click", function() {
-  let text = document.getElementById("ventInput").value.trim();
-  if (!text) return;
+  let text = input.value.trim();
+  if (text === "") return;
 
   let vents = JSON.parse(localStorage.getItem("vents")) || [];
-
-  let entry = {
-    content: text,
-    date: new Date().toLocaleString()
-  };
-
-  vents.unshift(entry);
+  vents.unshift(text);
   localStorage.setItem("vents", JSON.stringify(vents));
 
-  window.location.href = "vents.html";
+  input.value = "";
+});
+
+/* ERASE (only clears box, no data loss) */
+document.getElementById("eraseBtn").addEventListener("click", function() {
+  input.value = "";
 });
 </script>
 
