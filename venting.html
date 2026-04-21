@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* 🚫 FIX SCROLL GLITCH */
 html, body {
   margin: 0;
   padding: 0;
@@ -15,22 +14,22 @@ html, body {
 }
 
 html {
-  background: #0a1124;
+  background: #070e22; /* slightly darker base */
 }
 
-/* 🌌 DREAMY SKY */
+/* 🌌 DARKER DREAMY SKY */
 body {
   background:
-    radial-gradient(circle at 20% 30%, rgba(120,130,255,0.25), transparent 40%),
-    radial-gradient(circle at 80% 20%, rgba(180,140,255,0.2), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(90,120,255,0.25), transparent 50%),
-    linear-gradient(to bottom, #0a1124, #121a3a, #1b2b5a);
+    radial-gradient(circle at 20% 30%, rgba(100,110,255,0.2), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(150,120,255,0.15), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(80,100,255,0.2), transparent 50%),
+    linear-gradient(to bottom, #070e22, #0f1a3a, #162a5a);
 
   font-family: 'Segoe UI', sans-serif;
   color: white;
 }
 
-/* ⭐ STARS (MORE + BRIGHTER) */
+/* ⭐ STARS */
 .stars,
 .stars::after {
   content: "";
@@ -39,7 +38,6 @@ body {
   pointer-events: none;
 }
 
-/* layer 1 */
 .stars {
   background:
     radial-gradient(2px 2px at 10% 20%, white, transparent),
@@ -54,14 +52,12 @@ body {
   animation: twinkle 5s ease-in-out infinite;
 }
 
-/* layer 2 */
 .stars::after {
   background:
     radial-gradient(1px 1px at 15% 60%, white, transparent),
     radial-gradient(1.5px 1.5px at 35% 75%, white, transparent),
     radial-gradient(1px 1px at 55% 50%, white, transparent),
-    radial-gradient(1.5px 1.5px at 75% 85%, white, transparent),
-    radial-gradient(1px 1px at 85% 25%, white, transparent);
+    radial-gradient(1.5px 1.5px at 75% 85%, white, transparent);
 
   opacity: 0.7;
   animation: twinkle 7s ease-in-out infinite;
@@ -72,20 +68,32 @@ body {
   50% { opacity: 1; }
 }
 
+/* 💫 SHOOTING STAR */
+.shooting-star {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  background: white;
+  box-shadow: 0 0 8px white;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes shoot {
+  0% {
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-300px, 300px) scale(0.5);
+    opacity: 0;
+  }
+}
+
 /* 💌 HEADER */
 .top-banner {
   text-align: center;
   padding: 50px 20px 30px;
-}
-
-.top-banner h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  text-shadow: 0 4px 20px rgba(120,140,255,0.6);
-}
-
-.top-banner p {
-  color: #d6dcff;
 }
 
 /* 📦 LAYOUT */
@@ -100,7 +108,7 @@ body {
   max-width: 600px;
 }
 
-/* 💌 LETTER (CUTE) */
+/* 💌 LETTER (UNCHANGED) */
 .letter {
   background: linear-gradient(to bottom, #fff9fb, #fff3f7);
   border-radius: 18px;
@@ -121,7 +129,6 @@ body {
   background: radial-gradient(circle at top left, rgba(255,255,255,0.7), transparent);
 }
 
-/* text */
 .letter-top {
   font-family: 'Georgia', serif;
   color: #d46a92;
@@ -190,6 +197,7 @@ button:hover {
 }
 
 .nav a {
+  margin: 0 10px;
   color: #a5b4ff;
   text-decoration: none;
 }
@@ -210,9 +218,7 @@ button:hover {
 
     <div class="letter">
       <div class="letter-top">💌 Dear You,</div>
-
       <textarea id="ventInput" placeholder="write it all here..."></textarea>
-
       <div class="letter-bottom">— i hear you</div>
     </div>
 
@@ -223,6 +229,7 @@ button:hover {
 
     <div class="nav">
       <a href="vents.html">📜 View All</a>
+      <a href="index.html">🏠 Home</a>
     </div>
 
   </div>
@@ -231,7 +238,7 @@ button:hover {
 <script>
 const input = document.getElementById("ventInput");
 
-/* SAVE WITH TIMESTAMP */
+/* SAVE */
 document.getElementById("saveBtn").addEventListener("click", function() {
   let text = input.value.trim();
   if (text === "") return;
@@ -244,7 +251,6 @@ document.getElementById("saveBtn").addEventListener("click", function() {
   };
 
   vents.unshift(entry);
-
   localStorage.setItem("vents", JSON.stringify(vents));
 
   input.value = "";
@@ -254,6 +260,28 @@ document.getElementById("saveBtn").addEventListener("click", function() {
 document.getElementById("eraseBtn").addEventListener("click", function() {
   input.value = "";
 });
+
+/* 💫 RANDOM SHOOTING STAR */
+function createStar() {
+  let star = document.createElement("div");
+  star.className = "shooting-star";
+
+  star.style.top = Math.random() * 50 + "%";
+  star.style.left = Math.random() * 100 + "%";
+
+  document.body.appendChild(star);
+
+  star.style.animation = "shoot 1s linear";
+
+  setTimeout(() => {
+    star.remove();
+  }, 1000);
+}
+
+/* random interval */
+setInterval(() => {
+  if (Math.random() < 0.3) createStar();
+}, 4000);
 </script>
 
 </body>
