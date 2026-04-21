@@ -5,14 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+/* 🚫 FIX SCROLL GLITCH */
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
-/* 🌌 DREAMY NIGHT SKY (SMOOTH, NO GREEN) */
+html {
+  background: #0a1124;
+}
+
+/* 🌌 DREAMY NIGHT SKY */
 body {
   background:
     radial-gradient(circle at 20% 30%, rgba(120,130,255,0.2), transparent 40%),
@@ -20,10 +26,11 @@ body {
     radial-gradient(circle at 50% 80%, rgba(90,120,255,0.2), transparent 50%),
     linear-gradient(to bottom, #0a1124, #121a3a, #1b2b5a);
 
+  font-family: 'Segoe UI', sans-serif;
   color: white;
 }
 
-/* ✨ LIGHTWEIGHT STARS (NO HEAVY ANIMATION) */
+/* ✨ STARS (SMOOTH, NO GLITCH) */
 .stars {
   position: fixed;
   inset: 0;
@@ -36,15 +43,15 @@ body {
     radial-gradient(1px 1px at 60% 40%, white, transparent);
   opacity: 0.7;
 
-  animation: softTwinkle 6s ease-in-out infinite;
+  animation: twinkle 6s ease-in-out infinite;
 }
 
-@keyframes softTwinkle {
-  0%, 100% { opacity: 0.6; }
+@keyframes twinkle {
+  0%,100% { opacity: 0.6; }
   50% { opacity: 0.9; }
 }
 
-/* 💌 TOP */
+/* 💌 HEADER */
 .top-banner {
   text-align: center;
   padding: 50px 20px 30px;
@@ -61,7 +68,7 @@ body {
   color: #d6dcff;
 }
 
-/* CONTAINER */
+/* 📦 LAYOUT */
 .container {
   display: flex;
   justify-content: center;
@@ -73,7 +80,7 @@ body {
   max-width: 600px;
 }
 
-/* 🌙 LETTER */
+/* 💌 LETTER */
 .letter {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
@@ -85,7 +92,6 @@ body {
     inset 0 0 10px rgba(255,255,255,0.1);
 }
 
-/* TEXT */
 .letter-top {
   color: #ffd6f0;
   margin-bottom: 8px;
@@ -118,7 +124,7 @@ textarea::placeholder {
   font-family: 'Georgia', serif;
 }
 
-/* BUTTONS */
+/* 🔘 BUTTONS */
 .btn-group {
   display: flex;
   gap: 10px;
@@ -132,13 +138,11 @@ button {
   cursor: pointer;
 }
 
-/* save */
 #saveBtn {
   background: linear-gradient(to right, #7c8cff, #a5b4ff);
   color: white;
 }
 
-/* erase */
 #eraseBtn {
   background: transparent;
   border: 1px solid rgba(255,255,255,0.4);
@@ -149,7 +153,7 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* NAV */
+/* 🔗 NAV */
 .nav {
   text-align: center;
   margin-top: 20px;
@@ -199,7 +203,7 @@ button:hover {
 <script>
 const input = document.getElementById("ventInput");
 
-/* SAVE */
+/* SAVE → transfers to vents page */
 document.getElementById("saveBtn").addEventListener("click", function() {
   let text = input.value.trim();
   if (text === "") return;
@@ -209,9 +213,12 @@ document.getElementById("saveBtn").addEventListener("click", function() {
   localStorage.setItem("vents", JSON.stringify(vents));
 
   input.value = "";
+
+  // optional: quick feedback
+  alert("Stored safely 💭");
 });
 
-/* ERASE (only clears box, no data loss) */
+/* ERASE (only clears current typing) */
 document.getElementById("eraseBtn").addEventListener("click", function() {
   input.value = "";
 });
