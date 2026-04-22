@@ -8,18 +8,14 @@
 
 <style>
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  min-height: 100%;
 }
 
-/* FIXED SMOOTH BACKGROUND */
 body {
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #ffe4ec, #ffd6e8, #fbcfe8);
-  background-attachment: fixed;
-  overscroll-behavior: none;
   font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #ffe4ec, #ffd6e8, #fbcfe8);
 }
 
 /* HEADER */
@@ -53,83 +49,19 @@ body {
   padding:16px;
   margin-bottom:15px;
   box-shadow:0 10px 25px rgba(0,0,0,0.1);
-  position:relative;
 }
 
-/* TEXT */
-.wish-text{
-  font-size:1rem;
-  color:#6a3b52;
-  margin-bottom:8px;
-}
+.wish-text{ color:#6a3b52; }
+.meta{ color:#9b5b78; font-size:0.85rem; }
+.badge{ background:#ffb6d2; padding:4px 10px; border-radius:999px; font-size:0.75rem; }
 
-.meta{
-  font-size:0.85rem;
-  color:#9b5b78;
-}
-
-.badge{
-  display:inline-block;
-  padding:4px 10px;
-  border-radius:999px;
-  background:#ffb6d2;
-  font-size:0.75rem;
-  margin-top:6px;
-}
-
-/* OPTIONS */
-.check{
-  margin-top:10px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  font-size:0.85rem;
-  color:#7a3f5b;
-}
-
-.options{
-  margin-top:10px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-/* BUTTONS */
 button{
   border:none;
   padding:8px 12px;
   border-radius:999px;
-  cursor:pointer;
   background:#ff9ac2;
   color:white;
-  font-size:0.85rem;
-  transition:0.2s;
-}
-
-button:hover{
-  transform:scale(1.05);
-}
-
-/* PENALTY */
-.penalty{
-  margin-top:8px;
-  font-size:0.85rem;
-  color:#7a3f5b;
-}
-
-/* STREAK */
-.streak{
-  text-align:center;
-  margin:10px;
-  font-family:'Dancing Script',cursive;
-  color:#b85c8e;
-  font-size:1.2rem;
-}
-
-/* LINK */
-a{
-  color:#b85c8e;
-  text-decoration:none;
+  cursor:pointer;
 }
 </style>
 </head>
@@ -138,111 +70,58 @@ a{
 
 <div class="header">
   <h1>Wish Review 💌</h1>
-  <p>30-day devotion cycle with soft accountability</p>
-  <p style="font-size:0.9rem; color:#b85c8e; margin-top:5px;">
-    here’s your space to softly judge my last 30 days… was i good or do i need to try harder? 💗
-  </p>
+  <p>review the past 30 days of wishes — fulfilled or failed 💭</p>
 </div>
-
-<div class="streak" id="streakBox"></div>
 
 <div class="container" id="list"></div>
 
-<div style="text-align:center;margin:20px;">
-  <a href="index.html">🏠 back home</a>
-</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 
-<script>
-let wishes = JSON.parse(localStorage.getItem("wishes")) || [];
-let streak = parseInt(localStorage.getItem("streak")) || 0;
+const firebaseConfig = {
+  apiKey: "AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
+  authDomain: "dhruv-s-little-lobby.firebaseapp.com",
+  databaseURL: "https://dhruv-s-little-lobby-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dhruv-s-little-lobby",
+  storageBucket: "dhruv-s-little-lobby.firebasestorage.app",
+  messagingSenderId: "129807376775",
+  appId: "1:129807376775:web:4e8d8d227772c0f115b322"
+};
 
-function save(){
-  localStorage.setItem("wishes", JSON.stringify(wishes));
-  localStorage.setItem("streak", streak);
-  render();
-}
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const wishesRef = ref(db, "wishes");
 
-function daysOld(t){
-  return Math.floor((Date.now() - (t||Date.now()))/(1000*60*60*24));
-}
+onValue(wishesRef, (snap)=>{
+  const data = snap.val() || {};
+  render(data);
+});
 
-function render(){
+function render(data){
   let box = document.getElementById("list");
   box.innerHTML = "";
 
-  document.getElementById("streakBox").innerHTML =
-    "💖 streak: " + streak + " wishes emotionally maintained";
-
-  wishes.forEach((w,i)=>{
-    if(!w.time) w.time = Date.now();
-
-    let d = daysOld(w.time);
-
+  Object.entries(data).reverse().forEach(([id,w])=>{
     let div = document.createElement("div");
-    div.className = "card";
+    div.className="card";
 
-    div.innerHTML = `
+    div.innerHTML=`
       <div class="wish-text">💌 ${w.text}</div>
-      <div class="meta">day ${d}/30 | status: ${w.status || "Pending"}</div>
-      <div class="badge">30-day review system</div>
+      <div class="meta">${w.status || "Pending"}</div>
 
-      <div class="check">
-        <label>
-          <input type="checkbox" ${w.granted ? "checked" : ""} onchange="grant(${i})">
-          granted 💖
-        </label>
-
-        <label>
-          <input type="checkbox" ${w.denied ? "checked" : ""} onchange="deny(${i})">
-          not granted 💔
-        </label>
-      </div>
-
-      <div class="options">
-        <button onclick="penalize(${i})">add penalty 🎀</button>
-        <button onclick="removeWish(${i})">erase 🗑️</button>
-      </div>
-
-      ${w.penalty ? `<div class='penalty'>💸 ${w.penalty}</div>` : ""}
+      <button onclick="grant('${id}')">Granted 💖</button>
+      <button onclick="deny('${id}')">Not Granted 💔</button>
+      <button onclick="removeWish('${id}')">Erase</button>
     `;
 
     box.appendChild(div);
   });
 }
 
-/* ONLY ONE OPTION ACTIVE */
-function grant(i){
-  wishes[i].granted = true;
-  wishes[i].denied = false;
-  wishes[i].status = "Granted 💖";
-  streak++;
-  save();
-}
-
-function deny(i){
-  wishes[i].denied = true;
-  wishes[i].granted = false;
-  wishes[i].status = "Not granted 💔";
-  streak = 0;
-  save();
-}
-
-/* penalty */
-function penalize(i){
-  let p = prompt("cute penalty?");
-  if(!p) return;
-  wishes[i].penalty = p;
-  save();
-}
-
-/* delete */
-function removeWish(i){
-  if(!confirm("erase this wish?")) return;
-  wishes.splice(i,1);
-  save();
-}
-
-render();
+window.grant = (id)=> update(ref(db,"wishes/"+id),{status:"Granted 💖"});
+window.deny = (id)=> update(ref(db,"wishes/"+id),{status:"Not granted 💔"});
+window.removeWish = (id)=> remove(ref(db,"wishes/"+id));
 </script>
 
 </body>
