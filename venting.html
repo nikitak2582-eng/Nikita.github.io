@@ -14,10 +14,9 @@ html, body {
 }
 
 html {
-  background: #070e22; /* slightly darker base */
+  background: #070e22;
 }
 
-/* 🌌 DARKER DREAMY SKY */
 body {
   background:
     radial-gradient(circle at 20% 30%, rgba(100,110,255,0.2), transparent 40%),
@@ -29,7 +28,6 @@ body {
   color: white;
 }
 
-/* ⭐ STARS */
 .stars,
 .stars::after {
   content: "";
@@ -68,7 +66,6 @@ body {
   50% { opacity: 1; }
 }
 
-/* 💫 SHOOTING STAR */
 .shooting-star {
   position: fixed;
   width: 2px;
@@ -80,23 +77,15 @@ body {
 }
 
 @keyframes shoot {
-  0% {
-    transform: translate(0,0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-300px, 300px) scale(0.5);
-    opacity: 0;
-  }
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(-300px, 300px) scale(0.5); opacity: 0; }
 }
 
-/* 💌 HEADER */
 .top-banner {
   text-align: center;
   padding: 50px 20px 30px;
 }
 
-/* 📦 LAYOUT */
 .container {
   display: flex;
   justify-content: center;
@@ -108,7 +97,6 @@ body {
   max-width: 600px;
 }
 
-/* 💌 LETTER (UNCHANGED) */
 .letter {
   background: linear-gradient(to bottom, #fff9fb, #fff3f7);
   border-radius: 18px;
@@ -127,7 +115,7 @@ body {
   inset: 0;
   border-radius: 18px;
   background: radial-gradient(circle at top left, rgba(255,255,255,0.7), transparent);
-  pointer-events: none; /* ✅ THIS FIXES IT */
+  pointer-events: none;
 }
 
 .letter-top {
@@ -162,7 +150,6 @@ textarea::placeholder {
   color: #c98aa5;
 }
 
-/* 🔘 BUTTONS */
 .btn-group {
   display: flex;
   gap: 10px;
@@ -191,7 +178,6 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* 🔗 NAV */
 .nav {
   text-align: center;
   margin-top: 20px;
@@ -236,7 +222,24 @@ button:hover {
   </div>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
+  authDomain: "dhruv-s-little-lobby.firebaseapp.com",
+  databaseURL: "https://dhruv-s-little-lobby-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dhruv-s-little-lobby",
+  storageBucket: "dhruv-s-little-lobby.firebasestorage.app",
+  messagingSenderId: "129807376775",
+  appId: "1:129807376775:web:4e8d8d227772c0f115b322"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const ventsRef = ref(db, "vents");
+
 const input = document.getElementById("ventInput");
 
 /* SAVE */
@@ -244,15 +247,12 @@ document.getElementById("saveBtn").addEventListener("click", function() {
   let text = input.value.trim();
   if (text === "") return;
 
-  let vents = JSON.parse(localStorage.getItem("vents")) || [];
-
-  let entry = {
+  push(ventsRef, {
     text: text,
-    time: new Date().toLocaleString()
-  };
-
-  vents.unshift(entry);
-  localStorage.setItem("vents", JSON.stringify(vents));
+    reply: "",
+    seen: false,
+    time: Date.now()
+  });
 
   input.value = "";
 });
@@ -262,7 +262,7 @@ document.getElementById("eraseBtn").addEventListener("click", function() {
   input.value = "";
 });
 
-/* 💫 RANDOM SHOOTING STAR */
+/* SHOOTING STAR */
 function createStar() {
   let star = document.createElement("div");
   star.className = "shooting-star";
@@ -279,10 +279,10 @@ function createStar() {
   }, 1000);
 }
 
-/* random interval */
 setInterval(() => {
   if (Math.random() < 0.3) createStar();
 }, 4000);
+
 </script>
 
 </body>
