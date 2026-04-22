@@ -7,15 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
+
+/* ✅ RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
+html{
+  height:100%;
+}
+
+/* ✅ SINGLE SMOOTH BACKGROUND (FIXED) */
+body{
+  min-height:100vh;
+  font-family:'Segoe UI',sans-serif;
   background: linear-gradient(to bottom, #ffe4ec, #ffd6e8, #fbcfe8);
+  background-attachment: fixed;
 }
 
 /* HEADER */
@@ -51,18 +60,58 @@ body {
   box-shadow:0 10px 25px rgba(0,0,0,0.1);
 }
 
-.wish-text{ color:#6a3b52; }
-.meta{ color:#9b5b78; font-size:0.85rem; }
-.badge{ background:#ffb6d2; padding:4px 10px; border-radius:999px; font-size:0.75rem; }
+/* TEXT */
+.wish-text{
+  color:#6a3b52;
+  margin-bottom:6px;
+}
 
+.meta{
+  font-size:0.85rem;
+  color:#9b5b78;
+}
+
+.badge{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  background:#ffb6d2;
+  font-size:0.75rem;
+  margin-top:6px;
+}
+
+/* CHECKBOX */
+.check{
+  margin-top:10px;
+  display:flex;
+  gap:15px;
+  font-size:0.9rem;
+  color:#7a3f5b;
+}
+
+/* BUTTONS */
 button{
+  margin-top:10px;
   border:none;
-  padding:8px 12px;
+  padding:7px 12px;
   border-radius:999px;
   background:#ff9ac2;
   color:white;
   cursor:pointer;
 }
+
+/* PENALTY */
+.penalty{
+  margin-top:6px;
+  font-size:0.85rem;
+  color:#7a3f5b;
+}
+
+a{
+  text-decoration:none;
+  color:#b85c8e;
+}
+
 </style>
 </head>
 
@@ -74,6 +123,10 @@ button{
 </div>
 
 <div class="container" id="list"></div>
+
+<div style="text-align:center;margin:20px;">
+  <a href="index.html">🏠 back home</a>
+</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
@@ -93,35 +146,83 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const wishesRef = ref(db, "wishes");
 
+/* 🔄 LIVE LOAD */
 onValue(wishesRef, (snap)=>{
   const data = snap.val() || {};
   render(data);
 });
 
+/* 🎀 RENDER */
 function render(data){
   let box = document.getElementById("list");
   box.innerHTML = "";
 
   Object.entries(data).reverse().forEach(([id,w])=>{
+
     let div = document.createElement("div");
     div.className="card";
 
     div.innerHTML=`
       <div class="wish-text">💌 ${w.text}</div>
-      <div class="meta">${w.status || "Pending"}</div>
 
-      <button onclick="grant('${id}')">Granted 💖</button>
-      <button onclick="deny('${id}')">Not Granted 💔</button>
-      <button onclick="removeWish('${id}')">Erase</button>
+      <div class="meta">
+        status: ${w.status || "Pending"}
+      </div>
+
+      <div class="badge">30-day soft review</div>
+
+      <div class="check">
+        <label>
+          <input type="checkbox" ${w.granted ? "checked":""}
+          onchange="grant('${id}')"> granted 💖
+        </label>
+
+        <label>
+          <input type="checkbox" ${w.denied ? "checked":""}
+          onchange="deny('${id}')"> not granted 💔
+        </label>
+      </div>
+
+      <button onclick="penalty('${id}')">add penalty 🎀</button>
+      <button onclick="removeWish('${id}')">erase 🗑️</button>
+
+      ${w.penalty ? `<div class="penalty">💸 ${w.penalty}</div>` : ""}
     `;
 
     box.appendChild(div);
   });
 }
 
-window.grant = (id)=> update(ref(db,"wishes/"+id),{status:"Granted 💖"});
-window.deny = (id)=> update(ref(db,"wishes/"+id),{status:"Not granted 💔"});
-window.removeWish = (id)=> remove(ref(db,"wishes/"+id));
+/* 💖 ACTIONS */
+window.grant = (id)=>{
+  update(ref(db,"wishes/"+id),{
+    granted:true,
+    denied:false,
+    status:"Granted 💖"
+  });
+}
+
+window.deny = (id)=>{
+  update(ref(db,"wishes/"+id),{
+    denied:true,
+    granted:false,
+    status:"Not granted 💔"
+  });
+}
+
+window.penalty = (id)=>{
+  let p = prompt("cute penalty?");
+  if(!p) return;
+
+  update(ref(db,"wishes/"+id),{
+    penalty:p
+  });
+}
+
+window.removeWish = (id)=>{
+  if(!confirm("erase this wish?")) return;
+  remove(ref(db,"wishes/"+id));
+}
 </script>
 
 </body>
