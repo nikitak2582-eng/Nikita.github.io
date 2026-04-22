@@ -75,10 +75,10 @@ body {
 
 .letter-top {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.4rem;
+  font-size: 1.5rem;   /* was 1.4rem */
   color: #d46a92;
 }
-
+  
 textarea {
   width: 100%;
   height: 140px;
@@ -87,6 +87,17 @@ textarea {
   background: transparent;
   margin-top: 10px;
   font-family: Georgia;
+
+  /* ✨ slight increase */
+  font-size: 1.05rem;
+  color: #6a3b52;
+}
+
+/* 💌 placeholder (Write your wish...) */
+textarea::placeholder {
+  font-size: 1.1rem;      /* slightly bigger than text */
+  color: #c97aa2;         /* soft romantic pink */
+  opacity: 1;
 }
 
 /* BUTTON */
@@ -161,21 +172,117 @@ html, body {
   </div>
 </div>
 
-<script>
-function saveWish() {
-  let text = document.getElementById("wishInput").value.trim();
-  if (!text) return;
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getDatabase, ref, onValue, update, remove, get } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 
-  let wishes = JSON.parse(localStorage.getItem("wishes")) || [];
+/* 🔑 CONFIG */
+const firebaseConfig = {
+  apiKey: "AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
+  authDomain: "dhruv-s-little-lobby.firebaseapp.com",
+  databaseURL: "https://dhruv-s-little-lobby-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dhruv-s-little-lobby",
+  storageBucket: "dhruv-s-little-lobby.firebasestorage.app",
+  messagingSenderId: "129807376775",
+  appId: "1:129807376775:web:4e8d8d227772c0f115b322"
+};
 
-  wishes.unshift({
-    text: text,
-    status: "Pending",
-    penalty: ""
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const wishesRef = ref(db, "wishes");
+const streakRef = ref(db, "streak");
+
+/* 🔄 REALTIME */
+onValue(wishesRef, (snap) => {
+  const data = snap.val() || {};
+  render(data);
+});
+
+onValue(streakRef, (snap) => {
+  const s = snap.val() || 0;
+  document.getElementById("streakBox").innerHTML =
+    "💖 streak: " + s + " wishes emotionally maintained";
+});
+
+/* 🧠 RENDER */
+function render(data){
+  let box = document.getElementById("list");
+  box.innerHTML = "";
+
+  Object.entries(data).reverse().forEach(([id, w]) => {
+
+    let d = Math.floor((Date.now() - (w.time||Date.now()))/(1000*60*60*24));
+
+    let div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <div class="wish-text">💌 ${w.text}</div>
+      <div class="meta">day ${d}/30 | status: ${w.status || "Pending"}</div>
+      <div class="badge">30-day review system</div>
+
+      <div class="check">
+        <label>
+          <input type="checkbox" ${w.granted ? "checked":""} onchange="grant('${id}')">
+          granted 💖
+        </label>
+
+        <label>
+          <input type="checkbox" ${w.denied ? "checked":""} onchange="deny('${id}')">
+          not granted 💔
+        </label>
+      </div>
+
+      <div class="options">
+        <button onclick="penalize('${id}')">add penalty 🎀</button>
+        <button onclick="removeWish('${id}')">erase 🗑️</button>
+      </div>
+
+      ${w.penalty ? `<div class='penalty'>💸 ${w.penalty}</div>` : ""}
+    `;
+
+    box.appendChild(div);
+  });
+}
+
+/* 💖 ACTIONS */
+
+window.grant = async function(id){
+  await update(ref(db, "wishes/" + id), {
+    granted: true,
+    denied: false,
+    status: "Granted 💖"
   });
 
-  localStorage.setItem("wishes", JSON.stringify(wishes));
-  document.getElementById("wishInput").value = "";
+  const snap = await get(streakRef);
+  let s = snap.val() || 0;
+  await update(ref(db), { streak: s + 1 });
+}
+
+window.deny = async function(id){
+  await update(ref(db, "wishes/" + id), {
+    denied: true,
+    granted: false,
+    status: "Not granted 💔"
+  });
+
+  await update(ref(db), { streak: 0 });
+}
+
+window.penalize = async function(id){
+  let p = prompt("cute penalty?");
+  if(!p) return;
+
+  await update(ref(db, "wishes/" + id), {
+    penalty: p
+  });
+}
+
+window.removeWish = async function(id){
+  if(!confirm("erase this wish?")) return;
+
+  await remove(ref(db, "wishes/" + id));
 }
 </script>
 
