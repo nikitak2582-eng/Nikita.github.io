@@ -8,7 +8,7 @@
 
 <style>
 
-/* ✅ RESET */
+/* RESET */
 *{
   margin:0;
   padding:0;
@@ -19,7 +19,7 @@ html{
   height:100%;
 }
 
-/* ✅ SINGLE SMOOTH BACKGROUND (FIXED) */
+/* ✅ SMOOTH BACKGROUND */
 body{
   min-height:100vh;
   font-family:'Segoe UI',sans-serif;
@@ -130,7 +130,7 @@ a{
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+import { getDatabase, ref, onValue, update, remove, get } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
@@ -146,13 +146,13 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const wishesRef = ref(db, "wishes");
 
-/* 🔄 LIVE LOAD */
+/* LIVE LOAD */
 onValue(wishesRef, (snap)=>{
   const data = snap.val() || {};
   render(data);
 });
 
-/* 🎀 RENDER */
+/* RENDER */
 function render(data){
   let box = document.getElementById("list");
   box.innerHTML = "";
@@ -193,20 +193,47 @@ function render(data){
   });
 }
 
-/* 💖 ACTIONS */
+/* ACTIONS */
+
 window.grant = (id)=>{
-  update(ref(db,"wishes/"+id),{
-    granted:true,
-    denied:false,
-    status:"Granted 💖"
+  let wishRef = ref(db,"wishes/"+id);
+
+  get(wishRef).then((snap)=>{
+    let w = snap.val() || {};
+
+    if(w.granted){
+      update(wishRef,{
+        granted:false,
+        status:"Pending"
+      });
+    } else {
+      update(wishRef,{
+        granted:true,
+        denied:false,
+        status:"Granted 💖"
+      });
+    }
   });
 }
 
 window.deny = (id)=>{
-  update(ref(db,"wishes/"+id),{
-    denied:true,
-    granted:false,
-    status:"Not granted 💔"
+  let wishRef = ref(db,"wishes/"+id);
+
+  get(wishRef).then((snap)=>{
+    let w = snap.val() || {};
+
+    if(w.denied){
+      update(wishRef,{
+        denied:false,
+        status:"Pending"
+      });
+    } else {
+      update(wishRef,{
+        denied:true,
+        granted:false,
+        status:"Not granted 💔"
+      });
+    }
   });
 }
 
@@ -223,6 +250,7 @@ window.removeWish = (id)=>{
   if(!confirm("erase this wish?")) return;
   remove(ref(db,"wishes/"+id));
 }
+
 </script>
 
 </body>
