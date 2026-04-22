@@ -4,13 +4,20 @@
 <title>Echoes in Envelopes 💌</title>
 
 <style>
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #070e22; /* 🔥 base layer to kill white flash */
+}
+
+/* keep your existing body gradient EXACTLY */
+body {
   font-family: 'Segoe UI', sans-serif;
   color: white;
-  background: linear-gradient(to bottom, #ffb7a5, #ff8fab, #7a6c9d, #3a3d5c);
-  min-height: 100vh;
-  text-align: center;
+  background:
+    linear-gradient(to bottom, #ffb7a5, #ff8fab, #7a6c9d, #3a3d5c);
+  background-attachment: fixed; /* smooth + no break */
 }
 
 h1 { margin-top: 40px; }
@@ -71,7 +78,8 @@ p { opacity: 0.8; }
 
 <div class="top-banner">
   <h1>Echoes in Envelopes 💌</h1>
-  <p>letters written on the 22nd</p>
+  <p>Remember once you told me how we haven't given enough attention to the date on which we met? 22nd september 2021..but how can i not? it's literally something 
+  that changed everything around me as i met you! someone who turned into my home</p>
 </div>
 
 <div class="grid">
