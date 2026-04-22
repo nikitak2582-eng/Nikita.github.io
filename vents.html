@@ -17,7 +17,6 @@ h1 {
   text-align: center;
 }
 
-/* vent card */
 .vent {
   background: rgba(255,255,255,0.08);
   padding: 15px;
@@ -26,7 +25,6 @@ h1 {
   position: relative;
 }
 
-/* delete */
 .delete-btn {
   position: absolute;
   top: 10px;
@@ -37,14 +35,12 @@ h1 {
   cursor: pointer;
 }
 
-/* time */
 .time {
   font-size: 0.8rem;
   color: #aaa;
   text-align: right;
 }
 
-/* nav */
 .back {
   text-align: center;
   margin-top: 20px;
@@ -67,39 +63,55 @@ a {
   <a href="venting.html">← Back</a>
 </div>
 
-<script>
-let vents = JSON.parse(localStorage.getItem("vents")) || [];
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
+  authDomain: "dhruv-s-little-lobby.firebaseapp.com",
+  databaseURL: "https://dhruv-s-little-lobby-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dhruv-s-little-lobby",
+  storageBucket: "dhruv-s-little-lobby.firebasestorage.app",
+  messagingSenderId: "129807376775",
+  appId: "1:129807376775:web:4e8d8d227772c0f115b322"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const ventsRef = ref(db, "vents");
+
 let container = document.getElementById("container");
 
-function render() {
+/* 🔄 LIVE LOAD */
+onValue(ventsRef, (snap)=>{
+  const data = snap.val();
+
   container.innerHTML = "";
 
-  if (vents.length === 0) {
+  if (!data) {
     container.innerHTML = "<p>No vents yet...</p>";
     return;
   }
 
-  vents.forEach((v, i) => {
+  Object.entries(data).reverse().forEach(([id, v]) => {
     let div = document.createElement("div");
     div.className = "vent";
 
     div.innerHTML = `
-      <button class="delete-btn" onclick="del(${i})">✖</button>
+      <button class="delete-btn" onclick="del('${id}')">✖</button>
       <div>${v.text}</div>
-      <div class="time">${v.time}</div>
+      <div class="time">${new Date(v.time).toLocaleString()}</div>
     `;
 
     container.appendChild(div);
   });
-}
+});
 
-function del(i) {
-  vents.splice(i, 1);
-  localStorage.setItem("vents", JSON.stringify(vents));
-  render();
+/* ❌ DELETE */
+window.del = (id)=>{
+  remove(ref(db, "vents/" + id));
 }
-
-render();
 </script>
 
 </body>
