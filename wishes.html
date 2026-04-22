@@ -139,6 +139,9 @@ a{
 <div class="header">
   <h1>Wish Review 💌</h1>
   <p>30-day devotion cycle with soft accountability</p>
+  <p style="font-size:0.9rem; color:#b85c8e; margin-top:5px;">
+    here’s your space to softly judge my last 30 days… was i good or do i need to try harder? 💗
+  </p>
 </div>
 
 <div class="streak" id="streakBox"></div>
@@ -184,12 +187,20 @@ function render(){
       <div class="badge">30-day review system</div>
 
       <div class="check">
-        <label><input type="checkbox" ${w.granted ? "checked" : ""} onchange="grant(${i})"> granted 💖</label>
-        <label><input type="checkbox" ${w.denied ? "checked" : ""} onchange="deny(${i})"> not granted 💔</label>
+        <label>
+          <input type="checkbox" ${w.granted ? "checked" : ""} onchange="grant(${i})">
+          granted 💖
+        </label>
+
+        <label>
+          <input type="checkbox" ${w.denied ? "checked" : ""} onchange="deny(${i})">
+          not granted 💔
+        </label>
       </div>
 
       <div class="options">
         <button onclick="penalize(${i})">add penalty 🎀</button>
+        <button onclick="removeWish(${i})">erase 🗑️</button>
       </div>
 
       ${w.penalty ? `<div class='penalty'>💸 ${w.penalty}</div>` : ""}
@@ -199,24 +210,35 @@ function render(){
   });
 }
 
+/* ONLY ONE OPTION ACTIVE */
 function grant(i){
-  wishes[i].granted = !wishes[i].granted;
-  wishes[i].status = wishes[i].granted ? "Granted 💖" : "Pending";
-  if(wishes[i].granted) streak++;
+  wishes[i].granted = true;
+  wishes[i].denied = false;
+  wishes[i].status = "Granted 💖";
+  streak++;
   save();
 }
 
 function deny(i){
-  wishes[i].denied = !wishes[i].denied;
-  wishes[i].status = wishes[i].denied ? "Not granted 💔" : "Pending";
-  if(wishes[i].denied) streak = 0;
+  wishes[i].denied = true;
+  wishes[i].granted = false;
+  wishes[i].status = "Not granted 💔";
+  streak = 0;
   save();
 }
 
+/* penalty */
 function penalize(i){
   let p = prompt("cute penalty?");
   if(!p) return;
   wishes[i].penalty = p;
+  save();
+}
+
+/* delete */
+function removeWish(i){
+  if(!confirm("erase this wish?")) return;
+  wishes.splice(i,1);
   save();
 }
 
