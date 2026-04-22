@@ -11,8 +11,6 @@ body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(to bottom, #ffe4ec, #ffd6e8, #fbcfe8);
-  min-height: 100vh;
-  min-width: 100vw;
 }
 
 /* HEADER */
@@ -75,10 +73,10 @@ body {
 
 .letter-top {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.5rem;   /* was 1.4rem */
+  font-size: 1.5rem;
   color: #d46a92;
 }
-  
+
 textarea {
   width: 100%;
   height: 140px;
@@ -87,16 +85,13 @@ textarea {
   background: transparent;
   margin-top: 10px;
   font-family: Georgia;
-
-  /* ✨ slight increase */
   font-size: 1.05rem;
   color: #6a3b52;
 }
 
-/* 💌 placeholder (Write your wish...) */
 textarea::placeholder {
-  font-size: 1.1rem;      /* slightly bigger than text */
-  color: #c97aa2;         /* soft romantic pink */
+  font-size: 1.1rem;
+  color: #c97aa2;
   opacity: 1;
 }
 
@@ -111,32 +106,19 @@ button {
   cursor: pointer;
 }
 
-/* NAV (UPDATED ONLY THIS PART) */
+/* NAV */
 .nav {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+  text-align: center;
   margin-top: 20px;
 }
 
 .nav a {
+  margin: 0 10px;
+}
+
+a {
   text-decoration: none;
   color: #b85c8e;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 8px 14px;
-  border-radius: 20px;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
-}
-
-.nav a:hover {
-  background: rgba(255, 255, 255, 0.9);
-  transform: scale(1.05);
-}
-
-html, body {
-  height: 100%;
-  overflow: hidden;
 }
 </style>
 </head>
@@ -151,7 +133,7 @@ html, body {
 <div class="terms">
   💌 You may place wishes here.<br>
   💌 Wishes are subject to review within 30 days.<br>
-  💌 Failure to comply may result in penalties (emotional or otherwise).
+  💌 Failure to comply may result in penalties.
 </div>
 
 <div class="container">
@@ -172,11 +154,11 @@ html, body {
   </div>
 </div>
 
+<!-- ✅ FIREBASE SCRIPT -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getDatabase, ref, onValue, update, remove, get } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 
-/* 🔑 CONFIG */
 const firebaseConfig = {
   apiKey: "AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
   authDomain: "dhruv-s-little-lobby.firebaseapp.com",
@@ -191,98 +173,22 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const wishesRef = ref(db, "wishes");
-const streakRef = ref(db, "streak");
 
-/* 🔄 REALTIME */
-onValue(wishesRef, (snap) => {
-  const data = snap.val() || {};
-  render(data);
-});
+/* ✅ FIXED BUTTON FUNCTION */
+window.saveWish = function() {
+  let text = document.getElementById("wishInput").value.trim();
+  if (!text) return;
 
-onValue(streakRef, (snap) => {
-  const s = snap.val() || 0;
-  document.getElementById("streakBox").innerHTML =
-    "💖 streak: " + s + " wishes emotionally maintained";
-});
-
-/* 🧠 RENDER */
-function render(data){
-  let box = document.getElementById("list");
-  box.innerHTML = "";
-
-  Object.entries(data).reverse().forEach(([id, w]) => {
-
-    let d = Math.floor((Date.now() - (w.time||Date.now()))/(1000*60*60*24));
-
-    let div = document.createElement("div");
-    div.className = "card";
-
-    div.innerHTML = `
-      <div class="wish-text">💌 ${w.text}</div>
-      <div class="meta">day ${d}/30 | status: ${w.status || "Pending"}</div>
-      <div class="badge">30-day review system</div>
-
-      <div class="check">
-        <label>
-          <input type="checkbox" ${w.granted ? "checked":""} onchange="grant('${id}')">
-          granted 💖
-        </label>
-
-        <label>
-          <input type="checkbox" ${w.denied ? "checked":""} onchange="deny('${id}')">
-          not granted 💔
-        </label>
-      </div>
-
-      <div class="options">
-        <button onclick="penalize('${id}')">add penalty 🎀</button>
-        <button onclick="removeWish('${id}')">erase 🗑️</button>
-      </div>
-
-      ${w.penalty ? `<div class='penalty'>💸 ${w.penalty}</div>` : ""}
-    `;
-
-    box.appendChild(div);
-  });
-}
-
-/* 💖 ACTIONS */
-
-window.grant = async function(id){
-  await update(ref(db, "wishes/" + id), {
-    granted: true,
-    denied: false,
-    status: "Granted 💖"
-  });
-
-  const snap = await get(streakRef);
-  let s = snap.val() || 0;
-  await update(ref(db), { streak: s + 1 });
-}
-
-window.deny = async function(id){
-  await update(ref(db, "wishes/" + id), {
-    denied: true,
+  push(wishesRef, {
+    text: text,
+    status: "Pending",
+    penalty: "",
     granted: false,
-    status: "Not granted 💔"
+    denied: false,
+    time: Date.now()
   });
 
-  await update(ref(db), { streak: 0 });
-}
-
-window.penalize = async function(id){
-  let p = prompt("cute penalty?");
-  if(!p) return;
-
-  await update(ref(db, "wishes/" + id), {
-    penalty: p
-  });
-}
-
-window.removeWish = async function(id){
-  if(!confirm("erase this wish?")) return;
-
-  await remove(ref(db, "wishes/" + id));
+  document.getElementById("wishInput").value = "";
 }
 </script>
 
