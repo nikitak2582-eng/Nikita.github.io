@@ -1,712 +1,208 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Echoes in Envelopes 💌</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-* {
-  box-sizing: border-box;
+
+html, body {
   margin: 0;
   padding: 0;
 }
 
-:root {
-  --desk: url("desk.jpg");
-  --paper: url("paper.jpg");
-  --postcard: url("postcard.png");
-  --envelope: url("envelope.png");
-  --kiss: url("kiss.png");
-  --wax: url("wax.png");
-  --stamp1: url("stamp1.png");
-  --stamp2: url("stamp2.png");
-
-  --ink: #3b241c;
-  --deep-red: #7A070C;
-  --brown: #8b4a2f;
-}
-
-html, body {
-  min-height: 100%;
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--ink);
-}
-
+/* 🌿 DESK BACKGROUND */
 body {
+  font-family: 'Georgia', serif;
+  color: #4a2c1f;
+
   background:
-    linear-gradient(rgba(55, 30, 14, 0.18), rgba(55, 30, 14, 0.35)),
-    var(--desk) center/cover fixed no-repeat;
-  overflow-x: hidden;
+    linear-gradient(rgba(30,15,8,0.2), rgba(30,15,8,0.3)),
+    url("desk.jpg") center/cover fixed no-repeat;
 }
 
-/* warm vintage light */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
+/* 🌿 HEADER */
+.top-banner {
+  padding: 50px 20px 30px;
   background:
-    radial-gradient(circle at 12% 12%, rgba(255, 230, 185, 0.32), transparent 40%),
-    radial-gradient(circle at 90% 90%, rgba(40, 18, 8, 0.36), transparent 48%),
-    inset 0 0 130px rgba(45, 20, 8, 0.52);
-  z-index: 0;
+    linear-gradient(rgba(245,224,190,0.75), rgba(225,190,145,0.75)),
+    url("paper.jpg") center/cover;
+  border-bottom: 1px solid rgba(90,50,30,0.2);
 }
 
-.page {
-  position: relative;
-  z-index: 1;
-  max-width: 1180px;
-  margin: auto;
-  padding: 34px 18px 70px;
-}
-
-.archive-sheet {
-  position: relative;
-  padding: 30px;
-  border-radius: 14px;
-  background:
-    linear-gradient(rgba(250, 235, 210, 0.88), rgba(232, 204, 168, 0.92)),
-    var(--paper) center/cover;
-  box-shadow: 0 28px 75px rgba(0,0,0,0.42);
-  overflow: hidden;
-}
-
-/* stacked paper illusion */
-.archive-sheet::before,
-.archive-sheet::after {
-  content: "";
-  position: absolute;
-  background:
-    linear-gradient(rgba(248, 230, 198, 0.72), rgba(220, 190, 148, 0.78)),
-    var(--paper) center/cover;
-  border-radius: 10px;
-  box-shadow: 0 14px 32px rgba(0,0,0,0.22);
-  z-index: -1;
-}
-
-.archive-sheet::before {
-  width: 72%;
-  height: 220px;
-  top: -36px;
-  right: 32px;
-  transform: rotate(2deg);
-}
-
-.archive-sheet::after {
-  width: 62%;
-  height: 250px;
-  left: -32px;
-  bottom: 155px;
-  transform: rotate(-2deg);
-}
-
-/* HEADER */
-.header {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 300px;
-  gap: 24px;
-  min-height: 215px;
-}
-
-.back {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(60,35,25,.55);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 1.5rem;
-}
-
-.title {
-  padding-left: 56px;
-}
-
-.title h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 4.2rem;
-  line-height: .9;
-  color: #4b2118;
-}
-
-.title span {
-  display: block;
-  font-family: 'Great Vibes', cursive;
+.top-banner h1 {
   font-size: 3rem;
-  margin-top: -2px;
-  color: #3a221b;
-}
-
-.tagline {
-  margin-top: 24px;
-  font-family: 'Special Elite', monospace;
-  font-size: .9rem;
-  line-height: 1.6;
-}
-
-.header-kiss {
-  position: absolute;
-  top: 8px;
-  left: 335px;
-  width: 118px;
-  height: 75px;
-  background: var(--kiss) center/contain no-repeat;
-  opacity: .52;
-  mix-blend-mode: multiply;
-  transform: rotate(-5deg);
-}
-
-.postcard-top {
-  position: relative;
-  min-height: 180px;
-  padding: 24px 22px;
-  background:
-    linear-gradient(rgba(238,212,175,.68), rgba(229,198,157,.74)),
-    var(--postcard) center/cover no-repeat;
-  border: 1px solid rgba(80,45,25,.25);
-  box-shadow: 0 12px 30px rgba(0,0,0,.20);
-  transform: rotate(1.5deg);
-}
-
-.postcard-top h2 {
-  text-align: center;
+  margin: 0;
   font-family: 'Playfair Display', serif;
-  font-size: 1.35rem;
-  letter-spacing: 2px;
-  opacity: .65;
 }
 
-.postcard-top p {
-  position: absolute;
-  bottom: 28px;
-  left: 28px;
-  font-family: 'Special Elite', monospace;
-  font-size: .82rem;
-  line-height: 1.55;
+.top-banner p {
+  max-width: 600px;
+  margin-top: 10px;
+  font-size: 0.95rem;
 }
 
-.big-wax {
-  position: absolute;
-  top: 30px;
-  right: 26px;
-  width: 98px;
-  height: 98px;
-  background: var(--wax) center/contain no-repeat;
-  filter: drop-shadow(0 8px 10px rgba(0,0,0,.38));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff6e8;
-  font-size: .95rem;
-  line-height: 1.15;
-  padding: 18px;
-}
-
-/* layout */
-.content-wrap {
-  margin-top: 18px;
-  display: grid;
-  grid-template-columns: 155px 1fr;
-  gap: 24px;
-}
-
-.sidebar {
-  padding-top: 12px;
-  font-size: 1.08rem;
-}
-
-.archive-tab {
-  margin-left: -30px;
-  padding: 10px 18px;
-  background: #4a2b1d;
-  color: #fff5e4;
-  font-family: 'Playfair Display', serif;
-  box-shadow: 0 8px 16px rgba(0,0,0,.22);
-}
-
-.menu-item {
-  margin: 22px 0;
-  display: flex;
-  gap: 10px;
-  color: #4d3025;
-}
-
-.note-card {
-  margin-top: 36px;
-  padding: 18px 14px;
-  border: 1px solid rgba(80,45,25,.28);
-  background: rgba(244,222,188,.45);
-  font-family: 'Special Elite', monospace;
-  font-size: .78rem;
-  line-height: 1.7;
-}
-
-.note-card b {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.45rem;
-  color: #4d251c;
-}
-
+/* 🌿 MAIN PANEL (NO GREY BG) */
 .main-panel {
-  padding: 22px 20px 28px;
-  background: rgba(238,215,184,.64);
-  border: 1px solid rgba(90,55,30,.18);
-  box-shadow: inset 0 0 35px rgba(255,244,220,.28);
+  max-width: 1150px;
+  margin: 30px auto;
+  padding: 20px;
 }
 
-.panel-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.panel-head h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.45rem;
-  font-weight: 500;
-}
-
+/* 🌿 LETTER GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
+  gap: 28px;
 }
 
-/* ENVELOPE CARDS */
+/* 🌿 ENVELOPE CARDS */
 .card {
   position: relative;
-  min-height: 152px;
+  min-height: 180px;
   padding: 18px;
   cursor: pointer;
-  overflow: hidden;
-  border-radius: 8px;
+  border-radius: 10px;
+
   background:
-    linear-gradient(rgba(240,214,178,.82), rgba(222,190,146,.88)),
-    var(--envelope) center/cover no-repeat;
-  border: 1px solid rgba(99,55,30,.32);
-  box-shadow: 0 10px 20px rgba(0,0,0,.26);
-  transition: .25s ease;
+    linear-gradient(rgba(240,214,178,.15), rgba(222,190,146,.2)),
+    url("envelope.png") center/140% no-repeat;
+
+  border: 1px solid rgba(99,55,30,.25);
+  box-shadow: 0 12px 25px rgba(0,0,0,.35);
+  transition: 0.25s;
 }
 
 .card:hover {
-  transform: translateY(-7px) rotate(-.5deg);
-  box-shadow: 0 16px 28px rgba(0,0,0,.32);
+  transform: translateY(-5px) scale(1.02);
 }
 
-.card:nth-child(2n) {
-  transform: rotate(.4deg);
+/* TEXT */
+.card .date {
+  font-size: 1.3rem;
+  font-family: 'Dancing Script', cursive;
+  color: #8a3d2f;
 }
 
-.card:nth-child(3n) {
-  transform: rotate(-.35deg);
+.card .sub {
+  font-size: 0.8rem;
+  margin-top: 5px;
 }
 
-.card small {
-  font-family: 'Special Elite', monospace;
-  font-size: .72rem;
-  opacity: .7;
-}
-
-.card h3 {
-  margin-top: 26px;
-  text-align: center;
-  font-family: 'Great Vibes', cursive;
-  font-size: 1.75rem;
-  font-weight: 400;
-  color: #8b2f2b;
-}
-
-.card p {
-  margin-top: 6px;
-  text-align: center;
-  font-family: 'Special Elite', monospace;
-  font-size: .72rem;
-  color: #5b3b2d;
-}
-
-.card::after {
-  content: "";
+/* STAMPS */
+.stamp {
   position: absolute;
-  top: 12px;
-  right: 14px;
-  width: 42px;
-  height: 54px;
-  background: var(--stamp1) center/cover no-repeat;
-  filter: sepia(.2) saturate(.85);
+  top: 10px;
+  right: 10px;
+  width: 38px;
+  opacity: 0.9;
 }
 
-.card:nth-child(even)::after {
-  background-image: var(--stamp2);
-}
-
-.card .seal {
-  position: absolute;
-  left: 50%;
-  bottom: 10px;
-  transform: translateX(-50%);
-  width: 56px;
-  height: 56px;
-  background: var(--wax) center/contain no-repeat;
-  filter: drop-shadow(0 5px 7px rgba(0,0,0,.38));
-}
-
-/* OPEN LETTER */
+/* 🌿 LETTER VIEW */
 #letter {
   display: none;
-  margin: 34px auto 0;
-  max-width: 940px;
-  min-height: 390px;
-  position: relative;
-  border-radius: 9px;
+  margin: 40px auto 0;
+  max-width: 950px;
+  min-height: 420px;
+  border-radius: 10px;
   overflow: hidden;
+
   background:
-    linear-gradient(rgba(248,229,198,.78), rgba(231,201,158,.84)),
-    var(--postcard) center/cover no-repeat;
-  border: 1px solid rgba(80,45,25,.28);
-  box-shadow: 0 20px 55px rgba(0,0,0,.38);
-}
+    linear-gradient(rgba(255,236,200,0.45), rgba(232,200,160,0.5)),
+    url("postcard.png") center/cover no-repeat;
 
-#letter::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: rgba(93,57,37,.25);
-}
+  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+  border: 1px solid rgba(80,45,25,0.3);
 
-#letter::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -20px;
-  transform: translateX(-50%);
-  width: 108px;
-  height: 108px;
-  background: var(--wax) center/contain no-repeat;
-  filter: drop-shadow(0 9px 12px rgba(0,0,0,.42));
-}
-
-.open-left,
-.open-right {
   position: relative;
-  width: 50%;
-  min-height: 390px;
-  padding: 38px 46px;
-  float: left;
+  padding: 40px;
 }
 
-.open-left h3 {
-  font-family: 'Great Vibes', cursive;
-  color: #8b2f2b;
-  font-size: 2rem;
-  font-weight: 400;
-  margin-bottom: 8px;
+/* TEXT INSIDE LETTER */
+#letter-content {
+  max-width: 60%;
+  line-height: 1.6;
 }
 
-.day {
-  font-family: 'Special Elite', monospace;
-  font-size: .85rem;
-  margin-bottom: 28px;
-}
-
-.letter-text {
-  font-family: 'Special Elite', monospace;
-  font-size: .9rem;
-  line-height: 1.7;
-  max-width: 330px;
-  white-space: pre-wrap;
-}
-
-.signoff {
-  margin-top: 22px;
-  font-family: 'Great Vibes', cursive;
-  font-size: 1.6rem;
-  color: #8b2f2b;
-}
-
+/* DECOR */
 .kiss {
   position: absolute;
-  left: 72px;
-  bottom: 34px;
-  width: 92px;
-  height: 58px;
-  background: var(--kiss) center/contain no-repeat;
-  opacity: .48;
-  mix-blend-mode: multiply;
+  bottom: 25px;
+  left: 40px;
+  width: 90px;
+  opacity: 0.6;
 }
 
-.open-right h3 {
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 2px;
-  font-weight: 500;
-  font-size: 1.65rem;
-  margin-bottom: 34px;
-}
-
-.stamp-on-card {
+.wax {
   position: absolute;
-  top: 32px;
-  right: 42px;
-  width: 64px;
-  height: 80px;
-  background: var(--stamp1) center/cover no-repeat;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
 }
 
-.postmark {
-  position: absolute;
-  top: 82px;
-  right: 92px;
-  width: 102px;
-  height: 52px;
-  border: 2px solid rgba(60,40,30,.45);
-  border-radius: 50%;
-  transform: rotate(12deg);
-  opacity: .55;
-}
-
-.postmark::after {
-  content: "22 MAY 2025";
-  position: absolute;
-  top: 17px;
-  left: 12px;
-  font-family: 'Special Elite', monospace;
-  font-size: .62rem;
-}
-
-.address {
-  margin-top: 88px;
-  font-family: 'Special Elite', monospace;
-  font-size: .92rem;
-}
-
-.line {
-  border-bottom: 1px solid rgba(70,45,30,.45);
-  padding: 10px 0 5px;
-}
-
-.opened-stamp {
-  position: absolute;
-  right: 45px;
-  bottom: 42px;
-  border: 1px solid rgba(95,45,35,.5);
-  padding: 10px 14px;
-  font-family: 'Special Elite', monospace;
-  font-size: .7rem;
-  text-align: center;
-}
-
-@media(max-width: 850px) {
-  .header {
-    grid-template-columns: 1fr;
-  }
-
-  .postcard-top {
-    display: none;
-  }
-
-  .content-wrap {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .title h1 {
-    font-size: 3.1rem;
-  }
-
-  .title span {
-    font-size: 2.4rem;
-  }
-
-  .header-kiss {
-    left: auto;
-    right: 20px;
-    top: 20px;
-    width: 84px;
-  }
-
-  #letter::before {
-    display: none;
-  }
-
-  .open-left,
-  .open-right {
-    float: none;
-    width: 100%;
-    min-height: auto;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<div class="page">
-  <div class="archive-sheet">
+<div class="top-banner">
+  <h1>Echoes in Envelopes 💌</h1>
+  <p>Some feelings are meant to be written, not forgotten.</p>
+</div>
 
-    <div class="header">
-      <div class="back">‹</div>
+<div class="main-panel">
 
-      <div class="title">
-        <h1>Echoes</h1>
-        <span>in Envelopes</span>
-        <div class="tagline">“Some feelings are meant<br>to be written, not forgotten.”</div>
-      </div>
+  <div class="grid">
 
-      <div class="header-kiss"></div>
-
-      <div class="postcard-top">
-        <h2>CARTE POSTALE</h2>
-        <p>♡ Letters sent to the future,<br>preserved in the present. ♡</p>
-        <div class="big-wax">Every<br>22nd<br>Matters</div>
-      </div>
+    <div class="card" onclick="showLetter('may22')">
+      <div class="date">22 May 2025</div>
+      <div class="sub">Delivered to future ♡</div>
+      <img src="stamp1.png" class="stamp">
     </div>
 
-    <div class="content-wrap">
+    <div class="card" onclick="showLetter('apr22')">
+      <div class="date">22 Apr 2025</div>
+      <div class="sub">Delivered to future ♡</div>
+      <img src="stamp2.png" class="stamp">
+    </div>
 
-      <aside class="sidebar">
-        <div class="archive-tab">ARCHIVE ♥</div>
-        <div class="menu-item">✉ All Letters</div>
-        <div class="menu-item">▣ This Year</div>
-        <div class="menu-item">★ Favorites</div>
-        <div class="menu-item">◷ Timeline</div>
-
-        <div class="note-card">
-          Since <b>22</b> Letters<br>and counting...<br><br>
-          Each 22nd,<br>a piece of us. ♡
-        </div>
-      </aside>
-
-      <main class="main-panel">
-        <div class="panel-head">
-          <h2>Your Letters</h2>
-          <div>☷ Newest First ▾</div>
-        </div>
-
-        <div class="grid">
-          <div class="card" onclick="showLetter('may22', '22 May 2025')">
-            <small>No.22</small>
-            <h3>22 May 2025</h3>
-            <p>Delivered to future ♡</p>
-            <div class="seal"></div>
-          </div>
-
-          <div class="card" onclick="showLetter('april22', '22 Apr 2025')">
-            <small>No.21</small>
-            <h3>22 Apr 2025</h3>
-            <p>Delivered to future ♡</p>
-            <div class="seal"></div>
-          </div>
-
-          <div class="card" onclick="showLetter('march22', '22 Mar 2025')">
-            <small>No.20</small>
-            <h3>22 Mar 2025</h3>
-            <p>Delivered to future ♡</p>
-            <div class="seal"></div>
-          </div>
-
-          <div class="card" onclick="showLetter('feb22', '22 Feb 2025')">
-            <small>No.19</small>
-            <h3>22 Feb 2025</h3>
-            <p>Delivered to future ♡</p>
-            <div class="seal"></div>
-          </div>
-
-          <div class="card" onclick="showLetter('jan22', '22 Jan 2025')">
-            <small>No.18</small>
-            <h3>22 Jan 2025</h3>
-            <p>Delivered to future ♡</p>
-            <div class="seal"></div>
-          </div>
-
-          <div class="card" onclick="showLetter('dec22', '22 Dec 2024')">
-            <small>No.17</small>
-            <h3>22 Dec 2024</h3>
-            <p>Delivered to future ♡</p>
-            <div class="seal"></div>
-          </div>
-        </div>
-
-        <div id="letter"></div>
-
-      </main>
+    <div class="card" onclick="showLetter('mar22')">
+      <div class="date">22 Mar 2025</div>
+      <div class="sub">Delivered to future ♡</div>
+      <img src="stamp1.png" class="stamp">
     </div>
 
   </div>
+
+  <!-- LETTER VIEW -->
+  <div id="letter">
+    <div id="letter-content"></div>
+
+    <img src="kiss.png" class="kiss">
+    <img src="wax.png" class="wax">
+  </div>
+
 </div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+<script>
+function showLetter(id) {
+  const box = document.getElementById("letter");
+  const content = document.getElementById("letter-content");
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
-  authDomain: "dhruv-s-little-lobby.firebaseapp.com",
-  databaseURL: "https://dhruv-s-little-lobby-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "dhruv-s-little-lobby",
-  storageBucket: "dhruv-s-little-lobby.firebasestorage.app",
-  messagingSenderId: "129807376775",
-  appId: "1:129807376775:web:4e8d8d227772c0f115b322"
-};
+  // TEMP CONTENT (replace later with Firebase)
+  content.innerHTML = `
+    <h2>22 May 2025</h2>
+    <p>
+    Another 22nd, another piece of my heart I give to you.<br><br>
+    Some days are heavier than others, but knowing you're mine makes everything feel a little lighter.<br><br>
+    Forever yours, always.
+    </p>
+  `;
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-window.showLetter = function(id, dateText) {
-  const letterRef = ref(db, "letters/" + id);
-
-  get(letterRef).then((snap) => {
-    let text = snap.exists() ? snap.val().text : "No letter yet.";
-
-    const box = document.getElementById("letter");
-    box.style.display = "block";
-
-    box.innerHTML = `
-      <div class="open-left">
-        <h3>${dateText}</h3>
-        <div class="day">Thursday</div>
-        <div class="letter-text">${text}</div>
-        <div class="signoff">Forever yours, as always.</div>
-        <div class="kiss"></div>
-      </div>
-
-      <div class="open-right">
-        <h3>POST CARD</h3>
-        <div class="stamp-on-card"></div>
-        <div class="postmark"></div>
-
-        <div class="address">
-          <div class="line">To: Future Us ♡</div>
-          <div class="line">Somewhere in our beautiful</div>
-          <div class="line">life together</div>
-          <div class="line">&nbsp;</div>
-        </div>
-
-        <div class="opened-stamp">OPENED WITH LOVE<br>ON ${dateText} ♡</div>
-      </div>
-    `;
-
-    box.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
-};
+  box.style.display = "block";
+  box.scrollIntoView({ behavior: "smooth" });
+}
 </script>
 
 </body>
