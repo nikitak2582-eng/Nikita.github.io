@@ -1,94 +1,657 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Echoes in Envelopes 💌</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
+
 <style>
-html, body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+:root {
+  --desk: url("desk.jpg");
+  --paper: url("paper.jpg");
+  --postcard: url("postcard.png");
+  --envelope: url("envelope.png");
+  --kiss: url("kiss.png");
+  --wax: url("wax.png");
+  --stamp1: url("stamp1.png");
+  --stamp2: url("stamp2.png");
+
+  --ink: #3b241c;
+  --deep-red: #7A070C;
+  --brown: #8b4a2f;
+}
+
+html, body {
   min-height: 100%;
-  background: #070e22; /* 🔥 base layer to kill white flash */
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink);
 }
 
-/* keep your existing body gradient EXACTLY */
 body {
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
   background:
-    linear-gradient(to bottom, #ffb7a5, #ff8fab, #7a6c9d, #3a3d5c);
-  background-attachment: fixed; /* smooth + no break */
+    linear-gradient(rgba(55, 30, 14, 0.18), rgba(55, 30, 14, 0.35)),
+    var(--desk) center/cover fixed no-repeat;
+  overflow-x: hidden;
 }
 
-h1 { margin-top: 40px; }
-p { opacity: 0.8; }
+/* warm vintage light */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(255, 230, 185, 0.32), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(40, 18, 8, 0.36), transparent 48%),
+    inset 0 0 130px rgba(45, 20, 8, 0.52);
+  z-index: 0;
+}
 
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: auto;
+  padding: 34px 18px 70px;
+}
+
+.archive-sheet {
+  position: relative;
   padding: 30px;
+  border-radius: 14px;
+  background:
+    linear-gradient(rgba(250, 235, 210, 0.88), rgba(232, 204, 168, 0.92)),
+    var(--paper) center/cover;
+  box-shadow: 0 28px 75px rgba(0,0,0,0.42);
+  overflow: hidden;
 }
 
-.box {
-  width: 150px;
-  height: 100px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 15px;
+/* stacked paper illusion */
+.archive-sheet::before,
+.archive-sheet::after {
+  content: "";
+  position: absolute;
+  background:
+    linear-gradient(rgba(248, 230, 198, 0.72), rgba(220, 190, 148, 0.78)),
+    var(--paper) center/cover;
+  border-radius: 10px;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.22);
+  z-index: -1;
+}
+
+.archive-sheet::before {
+  width: 72%;
+  height: 220px;
+  top: -36px;
+  right: 32px;
+  transform: rotate(2deg);
+}
+
+.archive-sheet::after {
+  width: 62%;
+  height: 250px;
+  left: -32px;
+  bottom: 155px;
+  transform: rotate(-2deg);
+}
+
+/* HEADER */
+.header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  min-height: 215px;
+}
+
+.back {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(60,35,25,.55);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+}
+
+.title {
+  padding-left: 56px;
+}
+
+.title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.2rem;
+  line-height: .9;
+  color: #4b2118;
+}
+
+.title span {
+  display: block;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  margin-top: -2px;
+  color: #3a221b;
+}
+
+.tagline {
+  margin-top: 24px;
+  font-family: 'Special Elite', monospace;
+  font-size: .9rem;
+  line-height: 1.6;
+}
+
+.header-kiss {
+  position: absolute;
+  top: 8px;
+  left: 335px;
+  width: 118px;
+  height: 75px;
+  background: var(--kiss) center/contain no-repeat;
+  opacity: .52;
+  mix-blend-mode: multiply;
+  transform: rotate(-5deg);
+}
+
+.postcard-top {
+  position: relative;
+  min-height: 180px;
+  padding: 24px 22px;
+  background:
+    linear-gradient(rgba(238,212,175,.68), rgba(229,198,157,.74)),
+    var(--postcard) center/cover no-repeat;
+  border: 1px solid rgba(80,45,25,.25);
+  box-shadow: 0 12px 30px rgba(0,0,0,.20);
+  transform: rotate(1.5deg);
+}
+
+.postcard-top h2 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  letter-spacing: 2px;
+  opacity: .65;
+}
+
+.postcard-top p {
+  position: absolute;
+  bottom: 28px;
+  left: 28px;
+  font-family: 'Special Elite', monospace;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.big-wax {
+  position: absolute;
+  top: 30px;
+  right: 26px;
+  width: 98px;
+  height: 98px;
+  background: var(--wax) center/contain no-repeat;
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,.38));
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+  text-align: center;
+  color: #fff6e8;
+  font-size: .95rem;
+  line-height: 1.15;
+  padding: 18px;
 }
 
+/* layout */
+.content-wrap {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: 24px;
+}
+
+.sidebar {
+  padding-top: 12px;
+  font-size: 1.08rem;
+}
+
+.archive-tab {
+  margin-left: -30px;
+  padding: 10px 18px;
+  background: #4a2b1d;
+  color: #fff5e4;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0 8px 16px rgba(0,0,0,.22);
+}
+
+.menu-item {
+  margin: 22px 0;
+  display: flex;
+  gap: 10px;
+  color: #4d3025;
+}
+
+.note-card {
+  margin-top: 36px;
+  padding: 18px 14px;
+  border: 1px solid rgba(80,45,25,.28);
+  background: rgba(244,222,188,.45);
+  font-family: 'Special Elite', monospace;
+  font-size: .78rem;
+  line-height: 1.7;
+}
+
+.note-card b {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  color: #4d251c;
+}
+
+.main-panel {
+  padding: 22px 20px 28px;
+  background: rgba(238,215,184,.64);
+  border: 1px solid rgba(90,55,30,.18);
+  box-shadow: inset 0 0 35px rgba(255,244,220,.28);
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.panel-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+/* ENVELOPE CARDS */
+.card {
+  position: relative;
+  min-height: 152px;
+  padding: 18px;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(240,214,178,.82), rgba(222,190,146,.88)),
+    var(--envelope) center/cover no-repeat;
+  border: 1px solid rgba(99,55,30,.32);
+  box-shadow: 0 10px 20px rgba(0,0,0,.26);
+  transition: .25s ease;
+}
+
+.card:hover {
+  transform: translateY(-7px) rotate(-.5deg);
+  box-shadow: 0 16px 28px rgba(0,0,0,.32);
+}
+
+.card:nth-child(2n) {
+  transform: rotate(.4deg);
+}
+
+.card:nth-child(3n) {
+  transform: rotate(-.35deg);
+}
+
+.card small {
+  font-family: 'Special Elite', monospace;
+  font-size: .72rem;
+  opacity: .7;
+}
+
+.card h3 {
+  margin-top: 26px;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: #8b2f2b;
+}
+
+.card p {
+  margin-top: 6px;
+  text-align: center;
+  font-family: 'Special Elite', monospace;
+  font-size: .72rem;
+  color: #5b3b2d;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 42px;
+  height: 54px;
+  background: var(--stamp1) center/cover no-repeat;
+  filter: sepia(.2) saturate(.85);
+}
+
+.card:nth-child(even)::after {
+  background-image: var(--stamp2);
+}
+
+.card .seal {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  width: 56px;
+  height: 56px;
+  background: var(--wax) center/contain no-repeat;
+  filter: drop-shadow(0 5px 7px rgba(0,0,0,.38));
+}
+
+/* OPEN LETTER */
 #letter {
   display: none;
-  margin: 20px auto;
-  padding: 20px;
-  width: 80%;
-  max-width: 400px;
-  background: white;
-  color: black;
-  border-radius: 15px;
+  margin: 34px auto 0;
+  max-width: 940px;
+  min-height: 390px;
+  position: relative;
+  border-radius: 9px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(248,229,198,.78), rgba(231,201,158,.84)),
+    var(--postcard) center/cover no-repeat;
+  border: 1px solid rgba(80,45,25,.28);
+  box-shadow: 0 20px 55px rgba(0,0,0,.38);
 }
 
-.top-banner {
-  width: 100%;
-  background: linear-gradient(to right, rgba(122,108,157,0.85), rgba(255,143,171,0.75));
-  padding: 35px 10px 25px;
+#letter::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(93,57,37,.25);
+}
+
+#letter::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -20px;
+  transform: translateX(-50%);
+  width: 108px;
+  height: 108px;
+  background: var(--wax) center/contain no-repeat;
+  filter: drop-shadow(0 9px 12px rgba(0,0,0,.42));
+}
+
+.open-left,
+.open-right {
+  position: relative;
+  width: 50%;
+  min-height: 390px;
+  padding: 38px 46px;
+  float: left;
+}
+
+.open-left h3 {
+  font-family: 'Great Vibes', cursive;
+  color: #8b2f2b;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.day {
+  font-family: 'Special Elite', monospace;
+  font-size: .85rem;
+  margin-bottom: 28px;
+}
+
+.letter-text {
+  font-family: 'Special Elite', monospace;
+  font-size: .9rem;
+  line-height: 1.7;
+  max-width: 330px;
+  white-space: pre-wrap;
+}
+
+.signoff {
+  margin-top: 22px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.6rem;
+  color: #8b2f2b;
+}
+
+.kiss {
+  position: absolute;
+  left: 72px;
+  bottom: 34px;
+  width: 92px;
+  height: 58px;
+  background: var(--kiss) center/contain no-repeat;
+  opacity: .48;
+  mix-blend-mode: multiply;
+}
+
+.open-right h3 {
   text-align: center;
-  backdrop-filter: blur(12px);
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 1.65rem;
+  margin-bottom: 34px;
 }
 
-.top-banner h1 {
-  margin: 0;
-  font-size: 2.5rem;
+.stamp-on-card {
+  position: absolute;
+  top: 32px;
+  right: 42px;
+  width: 64px;
+  height: 80px;
+  background: var(--stamp1) center/cover no-repeat;
 }
 
-.top-banner p {
-  margin-top: 8px;
-  opacity: 0.9;
+.postmark {
+  position: absolute;
+  top: 82px;
+  right: 92px;
+  width: 102px;
+  height: 52px;
+  border: 2px solid rgba(60,40,30,.45);
+  border-radius: 50%;
+  transform: rotate(12deg);
+  opacity: .55;
+}
+
+.postmark::after {
+  content: "22 MAY 2025";
+  position: absolute;
+  top: 17px;
+  left: 12px;
+  font-family: 'Special Elite', monospace;
+  font-size: .62rem;
+}
+
+.address {
+  margin-top: 88px;
+  font-family: 'Special Elite', monospace;
+  font-size: .92rem;
+}
+
+.line {
+  border-bottom: 1px solid rgba(70,45,30,.45);
+  padding: 10px 0 5px;
+}
+
+.opened-stamp {
+  position: absolute;
+  right: 45px;
+  bottom: 42px;
+  border: 1px solid rgba(95,45,35,.5);
+  padding: 10px 14px;
+  font-family: 'Special Elite', monospace;
+  font-size: .7rem;
+  text-align: center;
+}
+
+@media(max-width: 850px) {
+  .header {
+    grid-template-columns: 1fr;
+  }
+
+  .postcard-top {
+    display: none;
+  }
+
+  .content-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title h1 {
+    font-size: 3.1rem;
+  }
+
+  .title span {
+    font-size: 2.4rem;
+  }
+
+  .header-kiss {
+    left: auto;
+    right: 20px;
+    top: 20px;
+    width: 84px;
+  }
+
+  #letter::before {
+    display: none;
+  }
+
+  .open-left,
+  .open-right {
+    float: none;
+    width: 100%;
+    min-height: auto;
+  }
 }
 </style>
-
 </head>
 
 <body>
 
-<div class="top-banner">
-  <h1>Echoes in Envelopes 💌</h1>
-  <p>Remember once you told me how we haven't given enough attention to the date on which we met? 22nd september 2021..but how can i not? it's literally something 
-  that changed everything around me as i met you! someone who turned into my home</p>
-</div>
+<div class="page">
+  <div class="archive-sheet">
 
-<div class="grid">
-  <div class="box" onclick="showLetter('april22')">April 22</div>
-  <div class="box" onclick="showLetter('may22')">May 22</div>
-  <div class="box" onclick="showLetter('june22')">June 22</div>
-</div>
+    <div class="header">
+      <div class="back">‹</div>
 
-<div id="letter"></div>
+      <div class="title">
+        <h1>Echoes</h1>
+        <span>in Envelopes</span>
+        <div class="tagline">“Some feelings are meant<br>to be written, not forgotten.”</div>
+      </div>
+
+      <div class="header-kiss"></div>
+
+      <div class="postcard-top">
+        <h2>CARTE POSTALE</h2>
+        <p>♡ Letters sent to the future,<br>preserved in the present. ♡</p>
+        <div class="big-wax">Every<br>22nd<br>Matters</div>
+      </div>
+    </div>
+
+    <div class="content-wrap">
+
+      <aside class="sidebar">
+        <div class="archive-tab">ARCHIVE ♥</div>
+        <div class="menu-item">✉ All Letters</div>
+        <div class="menu-item">▣ This Year</div>
+        <div class="menu-item">★ Favorites</div>
+        <div class="menu-item">◷ Timeline</div>
+
+        <div class="note-card">
+          Since <b>22</b> Letters<br>and counting...<br><br>
+          Each 22nd,<br>a piece of us. ♡
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <div class="panel-head">
+          <h2>Your Letters</h2>
+          <div>☷ Newest First ▾</div>
+        </div>
+
+        <div class="grid">
+          <div class="card" onclick="showLetter('may22', '22 May 2025')">
+            <small>No.22</small>
+            <h3>22 May 2025</h3>
+            <p>Delivered to future ♡</p>
+            <div class="seal"></div>
+          </div>
+
+          <div class="card" onclick="showLetter('april22', '22 Apr 2025')">
+            <small>No.21</small>
+            <h3>22 Apr 2025</h3>
+            <p>Delivered to future ♡</p>
+            <div class="seal"></div>
+          </div>
+
+          <div class="card" onclick="showLetter('march22', '22 Mar 2025')">
+            <small>No.20</small>
+            <h3>22 Mar 2025</h3>
+            <p>Delivered to future ♡</p>
+            <div class="seal"></div>
+          </div>
+
+          <div class="card" onclick="showLetter('feb22', '22 Feb 2025')">
+            <small>No.19</small>
+            <h3>22 Feb 2025</h3>
+            <p>Delivered to future ♡</p>
+            <div class="seal"></div>
+          </div>
+
+          <div class="card" onclick="showLetter('jan22', '22 Jan 2025')">
+            <small>No.18</small>
+            <h3>22 Jan 2025</h3>
+            <p>Delivered to future ♡</p>
+            <div class="seal"></div>
+          </div>
+
+          <div class="card" onclick="showLetter('dec22', '22 Dec 2024')">
+            <small>No.17</small>
+            <h3>22 Dec 2024</h3>
+            <p>Delivered to future ♡</p>
+            <div class="seal"></div>
+          </div>
+        </div>
+
+        <div id="letter"></div>
+
+      </main>
+    </div>
+
+  </div>
+</div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
@@ -107,18 +670,43 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-/* SHOW LETTER */
-window.showLetter = function(id){
+window.showLetter = function(id, dateText) {
   const letterRef = ref(db, "letters/" + id);
 
-  get(letterRef).then((snap)=>{
-    let text = snap.exists() ? snap.val().text : "💭 nothing written yet...";
+  get(letterRef).then((snap) => {
+    let text = snap.exists() ? snap.val().text : "No letter yet.";
 
-    let box = document.getElementById("letter");
+    const box = document.getElementById("letter");
     box.style.display = "block";
-    box.innerHTML = text;
+
+    box.innerHTML = `
+      <div class="open-left">
+        <h3>${dateText}</h3>
+        <div class="day">Thursday</div>
+        <div class="letter-text">${text}</div>
+        <div class="signoff">Forever yours, as always.</div>
+        <div class="kiss"></div>
+      </div>
+
+      <div class="open-right">
+        <h3>POST CARD</h3>
+        <div class="stamp-on-card"></div>
+        <div class="postmark"></div>
+
+        <div class="address">
+          <div class="line">To: Future Us ♡</div>
+          <div class="line">Somewhere in our beautiful</div>
+          <div class="line">life together</div>
+          <div class="line">&nbsp;</div>
+        </div>
+
+        <div class="opened-stamp">OPENED WITH LOVE<br>ON ${dateText} ♡</div>
+      </div>
+    `;
+
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
   });
-}
+};
 </script>
 
 </body>
