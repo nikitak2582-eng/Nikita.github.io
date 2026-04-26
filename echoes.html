@@ -1,208 +1,697 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Echoes in Envelopes 💌</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echoes in Envelopes 💌</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
 
 <style>
-
-html, body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* 🌿 DESK BACKGROUND */
+:root {
+  --desk: url("desk.jpg");
+  --paper: url("paper.jpg");
+  --envelope: url("envelope.png");
+  --stamp1: url("stamp1.png");
+  --stamp2: url("stamp2.png");
+
+  --ink: #3b241c;
+  --red: #7a070c;
+  --brown: #5a2f22;
+  --cream: #eed6ad;
+}
+
+html, body {
+  min-height: 100%;
+}
+
 body {
-  font-family: 'Georgia', serif;
-  color: #4a2c1f;
-
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--ink);
   background:
-    linear-gradient(rgba(30,15,8,0.2), rgba(30,15,8,0.3)),
-    url("desk.jpg") center/cover fixed no-repeat;
+    linear-gradient(rgba(35, 18, 8, 0.18), rgba(35, 18, 8, 0.30)),
+    var(--desk) center/cover fixed no-repeat;
+  overflow-x: hidden;
 }
 
-/* 🌿 HEADER */
-.top-banner {
-  padding: 50px 20px 30px;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
   background:
-    linear-gradient(rgba(245,224,190,0.75), rgba(225,190,145,0.75)),
-    url("paper.jpg") center/cover;
-  border-bottom: 1px solid rgba(90,50,30,0.2);
+    radial-gradient(circle at top left, rgba(255,230,190,0.26), transparent 36%),
+    radial-gradient(circle at bottom right, rgba(45,20,8,0.35), transparent 45%),
+    inset 0 0 120px rgba(45,20,8,0.42);
+  z-index: 0;
 }
 
-.top-banner h1 {
-  font-size: 3rem;
-  margin: 0;
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
+  margin: auto;
+  padding: 32px 18px 70px;
+}
+
+.archive-sheet {
+  position: relative;
+  padding: 30px;
+  border-radius: 14px;
+  background:
+    linear-gradient(rgba(246,225,194,0.74), rgba(228,195,154,0.78)),
+    var(--paper) center/cover;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.42);
+}
+
+/* header */
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 28px;
+}
+
+.title h1 {
   font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: #4b2118;
+  line-height: 0.9;
 }
 
-.top-banner p {
-  max-width: 600px;
-  margin-top: 10px;
-  font-size: 0.95rem;
+.title span {
+  display: block;
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  margin-top: -2px;
 }
 
-/* 🌿 MAIN PANEL (NO GREY BG) */
+.tagline {
+  margin-top: 18px;
+  font-family: 'Special Elite', monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.header-card {
+  position: relative;
+  width: 310px;
+  min-height: 170px;
+  padding: 24px;
+  background:
+    linear-gradient(rgba(248,228,195,.85), rgba(226,192,150,.9)),
+    var(--paper) center/cover;
+  border: 1px solid rgba(90,55,30,.25);
+  box-shadow: 0 12px 30px rgba(0,0,0,.2);
+  transform: rotate(1.3deg);
+}
+
+.header-card h2 {
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  letter-spacing: 2px;
+  opacity: .7;
+}
+
+.header-card p {
+  position: absolute;
+  left: 26px;
+  bottom: 24px;
+  font-family: 'Special Elite', monospace;
+  font-size: .78rem;
+  line-height: 1.5;
+}
+
+.wax-coded {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 25%, #b43b32, #7a070c 58%, #4b0307);
+  color: #fff2dc;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: .9rem;
+  line-height: 1.1;
+  box-shadow:
+    inset 0 4px 8px rgba(255,255,255,.22),
+    inset 0 -8px 12px rgba(0,0,0,.35),
+    0 8px 16px rgba(0,0,0,.35);
+}
+
+.wax-coded::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 43% 57% 47% 53% / 51% 43% 57% 49%;
+  background: #8b0c10;
+  z-index: -1;
+}
+
+/* layout */
+.content-wrap {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+}
+
+.sidebar {
+  padding-top: 12px;
+}
+
+.archive-tab {
+  margin-left: -30px;
+  padding: 10px 18px;
+  background: #4a2b1d;
+  color: #fff5e4;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0 8px 16px rgba(0,0,0,.25);
+}
+
+.menu-item {
+  margin: 20px 0;
+  cursor: pointer;
+  font-size: 1.05rem;
+  color: #4d3025;
+  transition: .2s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  color: var(--red);
+  transform: translateX(4px);
+}
+
+.note-card {
+  margin-top: 36px;
+  padding: 18px 14px;
+  border: 1px solid rgba(80,45,25,.28);
+  background: rgba(244,222,188,.48);
+  font-family: 'Special Elite', monospace;
+  font-size: .78rem;
+  line-height: 1.7;
+}
+
+.note-card b {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.45rem;
+  color: #4d251c;
+}
+
 .main-panel {
-  max-width: 1150px;
-  margin: 30px auto;
-  padding: 20px;
+  padding: 22px 20px 28px;
+  background: rgba(245, 225, 190, 0.28);
+  border: 1px solid rgba(90,55,30,.18);
+  backdrop-filter: blur(1px);
 }
 
-/* 🌿 LETTER GRID */
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.panel-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+}
+
+.sort-btn {
+  cursor: pointer;
+  font-size: .95rem;
+}
+
+/* envelopes */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
 
-/* 🌿 ENVELOPE CARDS */
 .card {
   position: relative;
-  min-height: 180px;
-  padding: 18px;
+  min-height: 190px;
+  padding: 20px;
   cursor: pointer;
-  border-radius: 10px;
-
+  overflow: hidden;
+  border-radius: 12px;
   background:
-    linear-gradient(rgba(240,214,178,.15), rgba(222,190,146,.2)),
-    url("envelope.png") center/140% no-repeat;
-
+    linear-gradient(rgba(240,214,178,.08), rgba(222,190,146,.10)),
+    var(--envelope) center/145% no-repeat;
   border: 1px solid rgba(99,55,30,.25);
-  box-shadow: 0 12px 25px rgba(0,0,0,.35);
-  transition: 0.25s;
+  box-shadow: 0 14px 26px rgba(0,0,0,.32);
+  transition: .25s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.02);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 18px 32px rgba(0,0,0,.38);
 }
 
-/* TEXT */
-.card .date {
-  font-size: 1.3rem;
-  font-family: 'Dancing Script', cursive;
-  color: #8a3d2f;
+.card small {
+  font-family: 'Special Elite', monospace;
+  opacity: .72;
 }
 
-.card .sub {
-  font-size: 0.8rem;
-  margin-top: 5px;
+.card h3 {
+  margin-top: 34px;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #8b2f2b;
 }
 
-/* STAMPS */
-.stamp {
+.card p {
+  margin-top: 8px;
+  text-align: center;
+  font-family: 'Special Elite', monospace;
+  font-size: .76rem;
+}
+
+.card::after {
+  content: "";
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 38px;
-  opacity: 0.9;
+  top: 14px;
+  right: 16px;
+  width: 46px;
+  height: 58px;
+  background: var(--stamp1) center/cover no-repeat;
 }
 
-/* 🌿 LETTER VIEW */
+.card:nth-child(even)::after {
+  background-image: var(--stamp2);
+}
+
+.fav {
+  position: absolute;
+  right: 18px;
+  bottom: 12px;
+  border: none;
+  background: transparent;
+  font-size: 1.15rem;
+  cursor: pointer;
+  color: #7a070c;
+  z-index: 3;
+}
+
+/* coded postcard */
 #letter {
   display: none;
   margin: 40px auto 0;
-  max-width: 950px;
-  min-height: 420px;
-  border-radius: 10px;
-  overflow: hidden;
-
-  background:
-    linear-gradient(rgba(255,236,200,0.45), rgba(232,200,160,0.5)),
-    url("postcard.png") center/cover no-repeat;
-
-  box-shadow: 0 25px 60px rgba(0,0,0,0.45);
-  border: 1px solid rgba(80,45,25,0.3);
-
+  max-width: 960px;
+  min-height: 430px;
   position: relative;
-  padding: 40px;
+  overflow: hidden;
+  border-radius: 12px;
+  background:
+    linear-gradient(rgba(255,239,210,.86), rgba(230,196,150,.9)),
+    var(--paper) center/cover;
+  border: 1px solid rgba(80,45,25,.28);
+  box-shadow: 0 24px 65px rgba(0,0,0,.45);
 }
 
-/* TEXT INSIDE LETTER */
-#letter-content {
-  max-width: 60%;
-  line-height: 1.6;
-}
-
-/* DECOR */
-.kiss {
+#letter::before {
+  content: "";
   position: absolute;
-  bottom: 25px;
-  left: 40px;
-  width: 90px;
-  opacity: 0.6;
-}
-
-.wax {
-  position: absolute;
-  bottom: -20px;
+  top: 0;
+  bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
+  width: 1px;
+  background: rgba(80,45,25,.32);
 }
 
+.open-left,
+.open-right {
+  width: 50%;
+  min-height: 430px;
+  float: left;
+  position: relative;
+  padding: 42px 50px;
+}
+
+.open-left h3 {
+  font-family: 'Great Vibes', cursive;
+  color: #8b2f2b;
+  font-size: 2.1rem;
+  font-weight: 400;
+}
+
+.day,
+.letter-text,
+.address,
+.opened-stamp {
+  font-family: 'Special Elite', monospace;
+}
+
+.day {
+  margin: 8px 0 30px;
+  font-size: .85rem;
+}
+
+.letter-text {
+  white-space: pre-wrap;
+  font-size: .9rem;
+  line-height: 1.75;
+  max-width: 350px;
+}
+
+.signoff {
+  margin-top: 26px;
+  font-family: 'Great Vibes', cursive;
+  color: #8b2f2b;
+  font-size: 1.6rem;
+}
+
+.open-right h3 {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.stamp-on-card {
+  position: absolute;
+  top: 34px;
+  right: 42px;
+  width: 68px;
+  height: 82px;
+  background: var(--stamp1) center/cover no-repeat;
+}
+
+.postmark {
+  position: absolute;
+  top: 86px;
+  right: 94px;
+  width: 108px;
+  height: 54px;
+  border: 2px solid rgba(60,40,30,.45);
+  border-radius: 50%;
+  transform: rotate(12deg);
+  opacity: .6;
+}
+
+.postmark::after {
+  content: "22 MAY 2025";
+  position: absolute;
+  top: 18px;
+  left: 12px;
+  font-family: 'Special Elite', monospace;
+  font-size: .62rem;
+}
+
+.address {
+  margin-top: 105px;
+}
+
+.line {
+  border-bottom: 1px solid rgba(70,45,30,.45);
+  padding: 11px 0 5px;
+}
+
+.opened-stamp {
+  position: absolute;
+  right: 48px;
+  bottom: 44px;
+  border: 1px solid rgba(95,45,35,.55);
+  padding: 10px 14px;
+  font-size: .72rem;
+  text-align: center;
+}
+
+/* timeline */
+.timeline-list {
+  display: none;
+  font-family: 'Special Elite', monospace;
+  line-height: 2;
+}
+
+.timeline-list div {
+  border-left: 2px solid var(--red);
+  padding-left: 16px;
+  margin: 14px 0;
+}
+
+@media(max-width: 850px) {
+  .header {
+    display: block;
+  }
+
+  .header-card {
+    display: none;
+  }
+
+  .content-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title h1 {
+    font-size: 3.2rem;
+  }
+
+  .title span {
+    font-size: 2.4rem;
+  }
+
+  #letter::before {
+    display: none;
+  }
+
+  .open-left,
+  .open-right {
+    float: none;
+    width: 100%;
+    min-height: auto;
+  }
+}
 </style>
 </head>
 
 <body>
 
-<div class="top-banner">
-  <h1>Echoes in Envelopes 💌</h1>
-  <p>Some feelings are meant to be written, not forgotten.</p>
+<div class="page">
+  <div class="archive-sheet">
+
+    <div class="header">
+      <div class="title">
+        <h1>Echoes</h1>
+        <span>in Envelopes</span>
+        <div class="tagline">“Some feelings are meant<br>to be written, not forgotten.”</div>
+      </div>
+
+      <div class="header-card">
+        <h2>CARTE POSTALE</h2>
+        <p>♡ Letters sent to the future,<br>preserved in the present. ♡</p>
+        <div class="wax-coded">Every<br>22nd<br>Matters</div>
+      </div>
+    </div>
+
+    <div class="content-wrap">
+
+      <aside class="sidebar">
+        <div class="archive-tab">ARCHIVE ♥</div>
+        <div class="menu-item active" onclick="filterLetters('all', this)">✉ All Letters</div>
+        <div class="menu-item" onclick="filterLetters('year', this)">▣ This Year</div>
+        <div class="menu-item" onclick="filterLetters('fav', this)">★ Favorites</div>
+        <div class="menu-item" onclick="showTimeline(this)">◷ Timeline</div>
+
+        <div class="note-card">
+          Since <b>22</b> Letters<br>and counting...<br><br>
+          Each 22nd,<br>a piece of us. ♡
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <div class="panel-head">
+          <h2 id="panelTitle">Your Letters</h2>
+          <div class="sort-btn" onclick="toggleSort()">☷ Newest First ▾</div>
+        </div>
+
+        <div class="grid" id="letterGrid"></div>
+        <div class="timeline-list" id="timelineList"></div>
+        <div id="letter"></div>
+      </main>
+
+    </div>
+  </div>
 </div>
 
-<div class="main-panel">
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
 
-  <div class="grid">
+const firebaseConfig = {
+  apiKey: "AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
+  authDomain: "dhruv-s-little-lobby.firebaseapp.com",
+  databaseURL: "https://dhruv-s-little-lobby-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dhruv-s-little-lobby",
+  storageBucket: "dhruv-s-little-lobby.firebasestorage.app",
+  messagingSenderId: "129807376775",
+  appId: "1:129807376775:web:4e8d8d227772c0f115b322"
+};
 
-    <div class="card" onclick="showLetter('may22')">
-      <div class="date">22 May 2025</div>
-      <div class="sub">Delivered to future ♡</div>
-      <img src="stamp1.png" class="stamp">
-    </div>
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-    <div class="card" onclick="showLetter('apr22')">
-      <div class="date">22 Apr 2025</div>
-      <div class="sub">Delivered to future ♡</div>
-      <img src="stamp2.png" class="stamp">
-    </div>
+const letters = [
+  { id: "may22", date: "22 May 2025", no: "No.22", year: "2025" },
+  { id: "april22", date: "22 Apr 2025", no: "No.21", year: "2025" },
+  { id: "march22", date: "22 Mar 2025", no: "No.20", year: "2025" },
+  { id: "feb22", date: "22 Feb 2025", no: "No.19", year: "2025" },
+  { id: "jan22", date: "22 Jan 2025", no: "No.18", year: "2025" },
+  { id: "dec22", date: "22 Dec 2024", no: "No.17", year: "2024" }
+];
 
-    <div class="card" onclick="showLetter('mar22')">
-      <div class="date">22 Mar 2025</div>
-      <div class="sub">Delivered to future ♡</div>
-      <img src="stamp1.png" class="stamp">
-    </div>
+let currentFilter = "all";
+let newestFirst = true;
 
-  </div>
-
-  <!-- LETTER VIEW -->
-  <div id="letter">
-    <div id="letter-content"></div>
-
-    <img src="kiss.png" class="kiss">
-    <img src="wax.png" class="wax">
-  </div>
-
-</div>
-
-<script>
-function showLetter(id) {
-  const box = document.getElementById("letter");
-  const content = document.getElementById("letter-content");
-
-  // TEMP CONTENT (replace later with Firebase)
-  content.innerHTML = `
-    <h2>22 May 2025</h2>
-    <p>
-    Another 22nd, another piece of my heart I give to you.<br><br>
-    Some days are heavier than others, but knowing you're mine makes everything feel a little lighter.<br><br>
-    Forever yours, always.
-    </p>
-  `;
-
-  box.style.display = "block";
-  box.scrollIntoView({ behavior: "smooth" });
+function getFavs() {
+  return JSON.parse(localStorage.getItem("echoesFavs") || "[]");
 }
+
+function saveFavs(favs) {
+  localStorage.setItem("echoesFavs", JSON.stringify(favs));
+}
+
+function renderLetters() {
+  const grid = document.getElementById("letterGrid");
+  const timeline = document.getElementById("timelineList");
+  const favs = getFavs();
+
+  timeline.style.display = "none";
+  grid.style.display = "grid";
+
+  let shown = [...letters];
+
+  if (currentFilter === "year") {
+    shown = shown.filter(l => l.year === "2025");
+    document.getElementById("panelTitle").innerText = "This Year";
+  } else if (currentFilter === "fav") {
+    shown = shown.filter(l => favs.includes(l.id));
+    document.getElementById("panelTitle").innerText = "Favorite Letters";
+  } else {
+    document.getElementById("panelTitle").innerText = "Your Letters";
+  }
+
+  if (!newestFirst) shown.reverse();
+
+  grid.innerHTML = shown.map((l, index) => `
+    <div class="card" onclick="showLetter('${l.id}', '${l.date}')">
+      <small>${l.no}</small>
+      <h3>${l.date}</h3>
+      <p>Delivered to future ♡</p>
+      <button class="fav" onclick="toggleFav(event, '${l.id}')">
+        ${favs.includes(l.id) ? "★" : "☆"}
+      </button>
+    </div>
+  `).join("");
+}
+
+window.toggleFav = function(event, id) {
+  event.stopPropagation();
+
+  let favs = getFavs();
+  if (favs.includes(id)) {
+    favs = favs.filter(x => x !== id);
+  } else {
+    favs.push(id);
+  }
+
+  saveFavs(favs);
+  renderLetters();
+};
+
+window.filterLetters = function(type, el) {
+  currentFilter = type;
+  document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("letter").style.display = "none";
+  renderLetters();
+};
+
+window.showTimeline = function(el) {
+  document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+  el.classList.add("active");
+
+  const grid = document.getElementById("letterGrid");
+  const timeline = document.getElementById("timelineList");
+
+  grid.style.display = "none";
+  document.getElementById("letter").style.display = "none";
+  document.getElementById("panelTitle").innerText = "Timeline";
+
+  timeline.style.display = "block";
+  timeline.innerHTML = letters.map(l => `
+    <div><b>${l.date}</b> — ${l.no} — Delivered to future ♡</div>
+  `).join("");
+};
+
+window.toggleSort = function() {
+  newestFirst = !newestFirst;
+  document.querySelector(".sort-btn").innerText = newestFirst ? "☷ Newest First ▾" : "☷ Oldest First ▴";
+  renderLetters();
+};
+
+window.showLetter = function(id, dateText) {
+  const letterRef = ref(db, "letters/" + id);
+
+  get(letterRef).then((snap) => {
+    let text = snap.exists() ? snap.val().text : "No letter yet.";
+
+    const box = document.getElementById("letter");
+    box.style.display = "block";
+
+    box.innerHTML = `
+      <div class="open-left">
+        <h3>${dateText}</h3>
+        <div class="day">Thursday</div>
+        <div class="letter-text">${text}</div>
+        <div class="signoff">Forever yours, as always.</div>
+      </div>
+
+      <div class="open-right">
+        <h3>POST CARD</h3>
+        <div class="stamp-on-card"></div>
+        <div class="postmark"></div>
+
+        <div class="address">
+          <div class="line">To: Future Us ♡</div>
+          <div class="line">Somewhere in our beautiful</div>
+          <div class="line">life together</div>
+          <div class="line">&nbsp;</div>
+        </div>
+
+        <div class="opened-stamp">OPENED WITH LOVE<br>ON ${dateText} ♡</div>
+      </div>
+    `;
+
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+};
+
+renderLetters();
 </script>
 
 </body>
