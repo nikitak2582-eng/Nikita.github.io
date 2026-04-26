@@ -24,7 +24,6 @@
   --ink: #3b241c;
   --red: #7a070c;
   --brown: #5a2f22;
-  --cream: #eed6ad;
 }
 
 html, body {
@@ -35,7 +34,7 @@ body {
   font-family: 'Cormorant Garamond', serif;
   color: var(--ink);
   background:
-    linear-gradient(rgba(35, 18, 8, 0.18), rgba(35, 18, 8, 0.30)),
+    linear-gradient(rgba(35,18,8,0.18), rgba(35,18,8,0.30)),
     var(--desk) center/cover fixed no-repeat;
   overflow-x: hidden;
 }
@@ -68,9 +67,56 @@ body::before {
     linear-gradient(rgba(246,225,194,0.74), rgba(228,195,154,0.78)),
     var(--paper) center/cover;
   box-shadow: 0 25px 70px rgba(0,0,0,0.42);
+  overflow: hidden;
 }
 
-/* header */
+/* soft parchment flower stains */
+.archive-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 87% 16%, rgba(130,60,45,.12), transparent 18%),
+    radial-gradient(circle at 91% 20%, rgba(160,80,65,.09), transparent 15%),
+    radial-gradient(circle at 9% 82%, rgba(120,65,45,.10), transparent 20%),
+    radial-gradient(circle at 14% 78%, rgba(155,90,70,.08), transparent 16%);
+  opacity: .9;
+}
+
+/* coded kiss imprints */
+.kiss-mark {
+  position: absolute;
+  width: 92px;
+  height: 52px;
+  opacity: .32;
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.kiss-mark::before,
+.kiss-mark::after {
+  content: "";
+  position: absolute;
+  width: 58px;
+  height: 22px;
+  background: rgba(120, 0, 12, .45);
+  border-radius: 60% 40% 55% 45%;
+  filter: blur(.7px);
+}
+
+.kiss-mark::before {
+  transform: rotate(8deg);
+  top: 12px;
+  left: 6px;
+}
+
+.kiss-mark::after {
+  transform: rotate(-10deg);
+  top: 18px;
+  left: 32px;
+}
+
 .header {
   position: relative;
   display: flex;
@@ -84,7 +130,7 @@ body::before {
   font-family: 'Playfair Display', serif;
   font-size: 4rem;
   color: #4b2118;
-  line-height: 0.9;
+  line-height: .9;
 }
 
 .title span {
@@ -97,7 +143,7 @@ body::before {
 .tagline {
   margin-top: 18px;
   font-family: 'Special Elite', monospace;
-  font-size: 0.88rem;
+  font-size: .88rem;
   line-height: 1.6;
 }
 
@@ -130,6 +176,7 @@ body::before {
   line-height: 1.5;
 }
 
+/* coded wax badge, not image */
 .wax-coded {
   position: absolute;
   top: 22px;
@@ -160,7 +207,6 @@ body::before {
   z-index: -1;
 }
 
-/* layout */
 .content-wrap {
   display: grid;
   grid-template-columns: 160px 1fr;
@@ -169,6 +215,8 @@ body::before {
 
 .sidebar {
   padding-top: 12px;
+  position: relative;
+  z-index: 2;
 }
 
 .archive-tab {
@@ -211,9 +259,11 @@ body::before {
 }
 
 .main-panel {
+  position: relative;
+  z-index: 2;
   padding: 22px 20px 28px;
-  background: rgba(245, 225, 190, 0.28);
-  border: 1px solid rgba(90,55,30,.18);
+  background: rgba(245,225,190,0.24);
+  border: 1px solid rgba(90,55,30,.16);
   backdrop-filter: blur(1px);
 }
 
@@ -234,7 +284,6 @@ body::before {
   font-size: .95rem;
 }
 
-/* envelopes */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -249,16 +298,31 @@ body::before {
   overflow: hidden;
   border-radius: 12px;
   background:
-    linear-gradient(rgba(240,214,178,.08), rgba(222,190,146,.10)),
-    var(--envelope) center/145% no-repeat;
-  border: 1px solid rgba(99,55,30,.25);
-  box-shadow: 0 14px 26px rgba(0,0,0,.32);
+    linear-gradient(rgba(255,248,235,.78), rgba(235,205,168,.80)),
+    var(--envelope) center/132% no-repeat;
+  border: 1px solid rgba(99,55,30,.22);
+  box-shadow: 0 14px 26px rgba(0,0,0,.28);
   transition: .25s ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,248,235,.34);
+  pointer-events: none;
 }
 
 .card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 18px 32px rgba(0,0,0,.38);
+  box-shadow: 0 18px 32px rgba(0,0,0,.34);
+}
+
+.card small,
+.card h3,
+.card p {
+  position: relative;
+  z-index: 2;
 }
 
 .card small {
@@ -273,6 +337,7 @@ body::before {
   font-size: 2rem;
   font-weight: 400;
   color: #8b2f2b;
+  text-shadow: 0 1px 0 rgba(255,245,230,.8);
 }
 
 .card p {
@@ -290,6 +355,7 @@ body::before {
   width: 46px;
   height: 58px;
   background: var(--stamp1) center/cover no-repeat;
+  z-index: 2;
 }
 
 .card:nth-child(even)::after {
@@ -298,14 +364,23 @@ body::before {
 
 .fav {
   position: absolute;
-  right: 18px;
+  right: 16px;
   bottom: 12px;
-  border: none;
-  background: transparent;
-  font-size: 1.15rem;
+  width: 25px;
+  height: 25px;
+  border: 1px solid rgba(122,7,12,.35);
+  border-radius: 50%;
+  background: rgba(255,245,230,.72);
+  font-size: .9rem;
   cursor: pointer;
-  color: #7a070c;
-  z-index: 3;
+  color: var(--red);
+  z-index: 5;
+  display: grid;
+  place-items: center;
+}
+
+.fav:hover {
+  transform: scale(1.12);
 }
 
 /* coded postcard */
@@ -332,6 +407,13 @@ body::before {
   left: 50%;
   width: 1px;
   background: rgba(80,45,25,.32);
+}
+
+#letter .kiss-mark {
+  right: 48px;
+  bottom: 32px;
+  left: auto;
+  top: auto;
 }
 
 .open-left,
@@ -406,7 +488,7 @@ body::before {
 }
 
 .postmark::after {
-  content: "22 MAY 2025";
+  content: "22 APR 2026";
   position: absolute;
   top: 18px;
   left: 12px;
@@ -433,7 +515,6 @@ body::before {
   text-align: center;
 }
 
-/* timeline */
 .timeline-list {
   display: none;
   font-family: 'Special Elite', monospace;
@@ -494,6 +575,8 @@ body::before {
 <div class="page">
   <div class="archive-sheet">
 
+    <div class="kiss-mark" style="top: 28px; left: 335px;"></div>
+
     <div class="header">
       <div class="title">
         <h1>Echoes</h1>
@@ -514,7 +597,7 @@ body::before {
         <div class="archive-tab">ARCHIVE ♥</div>
         <div class="menu-item active" onclick="filterLetters('all', this)">✉ All Letters</div>
         <div class="menu-item" onclick="filterLetters('year', this)">▣ This Year</div>
-        <div class="menu-item" onclick="filterLetters('fav', this)">★ Favorites</div>
+        <div class="menu-item" onclick="filterLetters('fav', this)">♥ Favorites</div>
         <div class="menu-item" onclick="showTimeline(this)">◷ Timeline</div>
 
         <div class="note-card">
@@ -556,16 +639,19 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const letters = [
-  { id: "may22", date: "22 May 2025", no: "No.22", year: "2025" },
-  { id: "april22", date: "22 Apr 2025", no: "No.21", year: "2025" },
-  { id: "march22", date: "22 Mar 2025", no: "No.20", year: "2025" },
-  { id: "feb22", date: "22 Feb 2025", no: "No.19", year: "2025" },
-  { id: "jan22", date: "22 Jan 2025", no: "No.18", year: "2025" },
-  { id: "dec22", date: "22 Dec 2024", no: "No.17", year: "2024" }
+  { id: "april22", date: "22 April 2026", short: "22 APR 2026", no: "No.01", year: "2026" },
+  { id: "may22", date: "22 May 2026", short: "22 MAY 2026", no: "No.02", year: "2026" },
+  { id: "june22", date: "22 June 2026", short: "22 JUN 2026", no: "No.03", year: "2026" },
+  { id: "july22", date: "22 July 2026", short: "22 JUL 2026", no: "No.04", year: "2026" },
+  { id: "august22", date: "22 August 2026", short: "22 AUG 2026", no: "No.05", year: "2026" },
+  { id: "september22", date: "22 September 2026", short: "22 SEP 2026", no: "No.06", year: "2026" },
+  { id: "october22", date: "22 October 2026", short: "22 OCT 2026", no: "No.07", year: "2026" },
+  { id: "november22", date: "22 November 2026", short: "22 NOV 2026", no: "No.08", year: "2026" },
+  { id: "december22", date: "22 December 2026", short: "22 DEC 2026", no: "No.09", year: "2026" }
 ];
 
 let currentFilter = "all";
-let newestFirst = true;
+let newestFirst = false;
 
 function getFavs() {
   return JSON.parse(localStorage.getItem("echoesFavs") || "[]");
@@ -586,7 +672,7 @@ function renderLetters() {
   let shown = [...letters];
 
   if (currentFilter === "year") {
-    shown = shown.filter(l => l.year === "2025");
+    shown = shown.filter(l => l.year === "2026");
     document.getElementById("panelTitle").innerText = "This Year";
   } else if (currentFilter === "fav") {
     shown = shown.filter(l => favs.includes(l.id));
@@ -595,15 +681,15 @@ function renderLetters() {
     document.getElementById("panelTitle").innerText = "Your Letters";
   }
 
-  if (!newestFirst) shown.reverse();
+  if (newestFirst) shown.reverse();
 
-  grid.innerHTML = shown.map((l, index) => `
-    <div class="card" onclick="showLetter('${l.id}', '${l.date}')">
+  grid.innerHTML = shown.map((l) => `
+    <div class="card" onclick="showLetter('${l.id}', '${l.date}', '${l.short}')">
       <small>${l.no}</small>
       <h3>${l.date}</h3>
       <p>Delivered to future ♡</p>
       <button class="fav" onclick="toggleFav(event, '${l.id}')">
-        ${favs.includes(l.id) ? "★" : "☆"}
+        ${favs.includes(l.id) ? "♥" : "♡"}
       </button>
     </div>
   `).join("");
@@ -613,6 +699,7 @@ window.toggleFav = function(event, id) {
   event.stopPropagation();
 
   let favs = getFavs();
+
   if (favs.includes(id)) {
     favs = favs.filter(x => x !== id);
   } else {
@@ -625,8 +712,10 @@ window.toggleFav = function(event, id) {
 
 window.filterLetters = function(type, el) {
   currentFilter = type;
+
   document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
   el.classList.add("active");
+
   document.getElementById("letter").style.display = "none";
   renderLetters();
 };
@@ -654,7 +743,7 @@ window.toggleSort = function() {
   renderLetters();
 };
 
-window.showLetter = function(id, dateText) {
+window.showLetter = function(id, dateText, shortDate) {
   const letterRef = ref(db, "letters/" + id);
 
   get(letterRef).then((snap) => {
@@ -666,7 +755,7 @@ window.showLetter = function(id, dateText) {
     box.innerHTML = `
       <div class="open-left">
         <h3>${dateText}</h3>
-        <div class="day">Thursday</div>
+        <div class="day">Written on the 22nd</div>
         <div class="letter-text">${text}</div>
         <div class="signoff">Forever yours, as always.</div>
       </div>
@@ -676,6 +765,10 @@ window.showLetter = function(id, dateText) {
         <div class="stamp-on-card"></div>
         <div class="postmark"></div>
 
+        <style>
+          .postmark::after { content: "${shortDate}"; }
+        </style>
+
         <div class="address">
           <div class="line">To: Future Us ♡</div>
           <div class="line">Somewhere in our beautiful</div>
@@ -684,6 +777,7 @@ window.showLetter = function(id, dateText) {
         </div>
 
         <div class="opened-stamp">OPENED WITH LOVE<br>ON ${dateText} ♡</div>
+        <div class="kiss-mark"></div>
       </div>
     `;
 
