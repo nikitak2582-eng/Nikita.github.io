@@ -866,7 +866,9 @@ function renderLetters(){
     shown=shown.filter(l=>favs.includes(l.id));
     document.getElementById("panelTitle").innerText="Favorite Letters";
   }else{
-  document.getElementById("panelTitle").innerText="Love Library <3";
+    document.getElementById("panelTitle").innerText="Love Library <3";
+  }
+
   if(newestFirst) shown.reverse();
 
   grid.innerHTML=shown.map((l,i)=>`
@@ -881,7 +883,6 @@ function renderLetters(){
     </div>
   `).join("");
 }
-
 window.toggleFav=function(event,id){
   event.stopPropagation();
   let favs=getFavs();
