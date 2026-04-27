@@ -13,7 +13,6 @@
 :root{
   --desk:url("desk.jpg");
   --paper:url("paper.jpg");
-  --envelope:url("envelope.png");
   --stamp1:url("stamp1.png");
   --stamp2:url("stamp2.png");
   --kiss:url("kissmark.png");
@@ -126,10 +125,10 @@ body::before{
 
 .kiss-mark{
   position:absolute;
-  width:92px;
-  height:58px;
+  width:82px;
+  height:52px;
   background:var(--kiss) center/contain no-repeat;
-  opacity:.38;
+  opacity:.34;
   mix-blend-mode:multiply;
   pointer-events:none;
   z-index:3;
@@ -290,6 +289,7 @@ body::before{
   gap:28px;
 }
 
+/* FIXED: no envelope PNG, so no white/checkered boxes */
 .card{
   position:relative;
   min-height:205px;
@@ -297,39 +297,28 @@ body::before{
   cursor:pointer;
   overflow:hidden;
   border-radius:12px;
-  background-color:#d8b98c;
-  background-image:
-    linear-gradient(rgba(238,211,172,.42),rgba(205,168,126,.52)),
-    var(--envelope);
-  background-size:137%;
-  background-position:center;
-  background-repeat:no-repeat;
+  background:
+    linear-gradient(145deg,#c99a63 0%,#e2bf8f 42%,#f0d8ae 50%,#bd8654 100%);
   border:1px solid rgba(80,45,25,.30);
   box-shadow:0 14px 26px rgba(0,0,0,.32);
   transition:.25s ease;
 }
 
+/* coded envelope folds */
 .card::before{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(255,246,230,.14);
+  background:
+    linear-gradient(145deg,transparent 49%,rgba(85,46,28,.34) 50%,transparent 51%),
+    linear-gradient(215deg,transparent 49%,rgba(85,46,28,.34) 50%,transparent 51%),
+    linear-gradient(to bottom,rgba(255,246,225,.28),transparent 62%);
   pointer-events:none;
 }
 
 .card:hover{
   transform:translateY(-8px) scale(1.02);
   box-shadow:0 18px 32px rgba(0,0,0,.36);
-}
-
-.card.breaking .envelope-seal{
-  animation:sealBreak .55s ease forwards;
-}
-
-@keyframes sealBreak{
-  0%{transform:scale(1) rotate(0);opacity:1}
-  45%{transform:scale(.78) rotate(-14deg);opacity:.75}
-  100%{transform:scale(1) rotate(0);opacity:1}
 }
 
 .card small,.card h3,.card p,.card .envelope-seal,.card .fav{
@@ -343,11 +332,11 @@ body::before{
 }
 
 .envelope-seal{
-  width:56px;
-  height:56px;
-  margin:58px auto 4px;
+  width:58px;
+  height:58px;
+  margin:66px auto 4px;
   background:var(--wax) center/contain no-repeat;
-  filter:drop-shadow(0 6px 8px rgba(0,0,0,.40));
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.42));
 }
 
 .card h3{
@@ -412,6 +401,17 @@ body::before{
   animation:postcardOpen .6s ease;
 }
 
+#letter.soft-opening{
+  animation:softSealOpen .7s ease;
+}
+
+@keyframes softSealOpen{
+  0%{transform:scale(1);filter:brightness(1)}
+  35%{transform:scale(.985) rotate(-.25deg);filter:brightness(.92)}
+  60%{transform:scale(1.015) rotate(.25deg);filter:brightness(1.04)}
+  100%{transform:scale(1);filter:brightness(1)}
+}
+
 @keyframes postcardOpen{
   from{opacity:0;transform:translateY(36px) scale(.97)}
   to{opacity:1;transform:translateY(0) scale(1)}
@@ -473,6 +473,26 @@ body::before{
   color:var(--red);
   cursor:pointer;
   font-size:.75rem;
+  position:relative;
+  overflow:hidden;
+}
+
+.open-full-btn::after{
+  content:"";
+  position:absolute;
+  width:18px;
+  height:18px;
+  right:8px;
+  top:50%;
+  transform:translateY(-50%);
+  background:var(--wax) center/contain no-repeat;
+  opacity:.9;
+  transition:.35s ease;
+}
+
+.open-full-btn.crack::after{
+  transform:translateY(-50%) scale(.6) rotate(-25deg);
+  opacity:.25;
 }
 
 .open-full-btn:hover{background:rgba(255,235,200,.85)}
@@ -643,11 +663,17 @@ body::before{
 <div class="page">
   <div class="archive-sheet">
 
-    <div class="kiss-mark" style="top:28px;left:335px;"></div>
-    <div class="kiss-mark" style="right:36px;bottom:34px;transform:rotate(7deg);opacity:.28;"></div>
-    <div class="kiss-mark" style="top:140px;right:160px;transform:rotate(15deg);opacity:.30;"></div>
-    <div class="kiss-mark" style="bottom:120px;left:280px;transform:rotate(-10deg);opacity:.25;"></div>
-    <div class="kiss-mark" style="top:60%;left:10%;transform:rotate(5deg);opacity:.22;"></div>
+    <div class="kiss-mark" style="top:16px;left:42px;transform:rotate(-9deg);opacity:.34;"></div>
+    <div class="kiss-mark" style="top:28px;left:180px;transform:rotate(6deg);opacity:.28;"></div>
+    <div class="kiss-mark" style="top:36px;left:335px;transform:rotate(-5deg);opacity:.36;"></div>
+    <div class="kiss-mark" style="top:92px;left:72px;transform:rotate(14deg);opacity:.25;"></div>
+    <div class="kiss-mark" style="top:128px;left:248px;transform:rotate(-12deg);opacity:.30;"></div>
+    <div class="kiss-mark" style="top:170px;left:24px;transform:rotate(8deg);opacity:.22;"></div>
+    <div class="kiss-mark" style="top:210px;left:150px;transform:rotate(-4deg);opacity:.24;"></div>
+    <div class="kiss-mark" style="top:140px;right:160px;transform:rotate(15deg);opacity:.25;"></div>
+    <div class="kiss-mark" style="right:36px;bottom:34px;transform:rotate(7deg);opacity:.24;"></div>
+    <div class="kiss-mark" style="bottom:120px;left:280px;transform:rotate(-10deg);opacity:.22;"></div>
+    <div class="kiss-mark" style="top:60%;left:10%;transform:rotate(5deg);opacity:.20;"></div>
 
     <div class="header">
       <div class="title">
@@ -774,7 +800,7 @@ function renderLetters(){
   if(newestFirst) shown.reverse();
 
   grid.innerHTML=shown.map(l=>`
-    <div class="card" onclick="showLetter('${l.id}','${l.date}','${l.short}', this)">
+    <div class="card" onclick="showLetter('${l.id}','${l.date}','${l.short}')">
       <small>${l.no}</small>
       <div class="envelope-seal"></div>
       <h3>${l.date}</h3>
@@ -831,12 +857,7 @@ window.toggleSort=function(){
   renderLetters();
 };
 
-window.showLetter=function(id,dateText,shortDate,cardEl){
-  if(cardEl){
-    cardEl.classList.add("breaking");
-    setTimeout(()=>cardEl.classList.remove("breaking"),600);
-  }
-
+window.showLetter=function(id,dateText,shortDate){
   const letterRef=ref(db,"letters/"+id);
 
   get(letterRef).then(snap=>{
@@ -856,7 +877,7 @@ window.showLetter=function(id,dateText,shortDate,cardEl){
         <div class="day">Written on the 22nd</div>
         <div class="letter-text">${intro}</div>
         <div class="signoff">Forever yours, as always.</div>
-        <button class="open-full-btn" onclick="openFullLetter()">read me softly ♡</button>
+        <button class="open-full-btn" onclick="openFullLetter(this)">read me softly ♡</button>
       </div>
 
       <div class="open-right">
@@ -880,10 +901,18 @@ window.showLetter=function(id,dateText,shortDate,cardEl){
   });
 };
 
-window.openFullLetter=function(){
-  document.getElementById("fullLetterDate").innerText=currentFullDate;
-  document.getElementById("fullLetterText").innerHTML=currentFullLetter;
-  document.getElementById("fullLetterOverlay").classList.add("show");
+window.openFullLetter=function(btn){
+  const postcard=document.getElementById("letter");
+  btn.classList.add("crack");
+  postcard.classList.add("soft-opening");
+
+  setTimeout(()=>{
+    document.getElementById("fullLetterDate").innerText=currentFullDate;
+    document.getElementById("fullLetterText").innerHTML=currentFullLetter;
+    document.getElementById("fullLetterOverlay").classList.add("show");
+    postcard.classList.remove("soft-opening");
+    btn.classList.remove("crack");
+  },520);
 };
 
 window.closeFullLetter=function(){
