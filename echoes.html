@@ -126,12 +126,13 @@ body::before{
 
 .kiss-mark{
   position:absolute;
-  width:85px;
-  height:55px;
+  width:92px;
+  height:58px;
   background:var(--kiss) center/contain no-repeat;
-  opacity:.35;
+  opacity:.38;
+  mix-blend-mode:multiply;
   pointer-events:none;
-  z-index:2; /* was 10 — too aggressive */
+  z-index:3;
 }
   
 .header{
@@ -306,16 +307,24 @@ body::before{
 .card::before{
   content:"";
   position:absolute;
-  inset:0;
+  inset:8px;
   background:var(--envelope) center/contain no-repeat;
   z-index:1;
-  filter:drop-shadow(0 14px 18px rgba(0,0,0,.32));
+  filter:drop-shadow(0 16px 20px rgba(0,0,0,.34));
   pointer-events:none;
 }
 
-.card:hover{
-  transform:translateY(-7px) scale(1.015);
-}
+.card::after{
+  content:"";
+  position:absolute;
+  top:36px;
+  right:42px;
+  width:46px;
+  height:58px;
+  background:var(--stamp1) center/cover no-repeat;
+  z-index:4;
+} 
+  
 .card small,.card h3,.card p,.card .envelope-seal,.card .fav{
   position:relative;
   z-index:3;
@@ -327,14 +336,14 @@ body::before{
 }
 
 .envelope-seal{
-  width:56px;
-  height:56px;
-  margin:72px auto 4px;
+  width:58px;
+  height:58px;
+  margin:78px auto 4px;
   background:var(--wax) center/contain no-repeat;
   filter:drop-shadow(0 6px 8px rgba(0,0,0,.40));
   z-index:4;
 }
-
+  
 .card h3{
   text-align:center;
   font-family:'Great Vibes',cursive;
@@ -661,17 +670,19 @@ body::before{
 <div class="page">
   <div class="archive-sheet">
 
-  <!-- TOP SPREAD -->
-<img src="kissmark.png" class="kiss" style="top:20px; left:120px;">
-<img src="kissmark.png" class="kiss" style="top:40px; left:300px; transform:rotate(12deg);">
-<img src="kissmark.png" class="kiss" style="top:60px; left:520px; transform:rotate(-8deg);">
+ <div class="kiss-mark" style="top:18px; left:30px; transform:rotate(-8deg);"></div>
+<div class="kiss-mark" style="top:60px; left:240px; transform:rotate(10deg); opacity:.34;"></div>
+<div class="kiss-mark" style="top:35px; left:500px; transform:rotate(-7deg); opacity:.32;"></div>
+<div class="kiss-mark" style="top:70px; right:250px; transform:rotate(8deg); opacity:.30;"></div>
 
-<!-- LEFT SIDE VERTICAL (THIS IS WHAT YOU WANTED) -->
-<img src="kissmark.png" class="kiss" style="top:160px; left:40px; transform:rotate(-10deg);">
-<img src="kissmark.png" class="kiss" style="top:300px; left:55px; transform:rotate(8deg);">
-<img src="kissmark.png" class="kiss" style="top:460px; left:35px; transform:rotate(-6deg);">
-<img src="kissmark.png" class="kiss" style="top:620px; left:50px; transform:rotate(10deg);">
-<img src="kissmark.png" class="kiss" style="top:780px; left:30px; transform:rotate(-12deg);">
+<div class="kiss-mark" style="top:190px; left:45px; transform:rotate(-12deg); opacity:.34;"></div>
+<div class="kiss-mark" style="top:330px; left:70px; transform:rotate(8deg); opacity:.32;"></div>
+<div class="kiss-mark" style="top:470px; left:38px; transform:rotate(-6deg); opacity:.30;"></div>
+<div class="kiss-mark" style="top:610px; left:80px; transform:rotate(10deg); opacity:.28;"></div>
+<div class="kiss-mark" style="top:760px; left:42px; transform:rotate(-11deg); opacity:.26;"></div>
+<div class="kiss-mark" style="top:900px; left:95px; transform:rotate(7deg); opacity:.24;"></div>
+<div class="kiss-mark" style="top:1040px; left:50px; transform:rotate(-9deg); opacity:.22;"></div>
+<div class="kiss-mark" style="top:1180px; left:120px; transform:rotate(12deg); opacity:.20;"></div>
 
 <!-- BOTTOM LEFT EXTRA -->
 <img src="kissmark.png" class="kiss" style="bottom:120px; left:80px; transform:rotate(6deg);">
