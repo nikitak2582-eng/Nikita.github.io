@@ -126,13 +126,12 @@ body::before{
 
 .kiss-mark{
   position:absolute;
-  width:82px;
-  height:52px;
+  width:95px;
+  height:62px;
   background:var(--kiss) center/contain no-repeat;
-  opacity:.30;
-  mix-blend-mode:multiply;
+  opacity:.55;
   pointer-events:none;
-  z-index:3;
+  z-index:10;
 }
 
 .header{
@@ -290,36 +289,32 @@ body::before{
   gap:28px;
 }
 
+/* envelope area — no box behind image */
 .card{
   position:relative;
   min-height:205px;
   padding:20px;
   cursor:pointer;
-  overflow:hidden;
+  overflow:visible;
   border-radius:12px;
-  background-color:#d8b98c;
-  background-image:
-    linear-gradient(rgba(238,211,172,.20),rgba(205,168,126,.25)),
-    var(--envelope);
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-  border:1px solid rgba(80,45,25,.30);
-  box-shadow:0 14px 26px rgba(0,0,0,.32);
+  background:transparent;
+  border:none;
+  box-shadow:none;
   transition:.22s ease;
 }
 
 .card::before{
   content:"";
   position:absolute;
-  inset:0;
-  background:rgba(255,246,230,.08);
+  inset:20px;
+  background:var(--envelope) center/contain no-repeat;
+  z-index:1;
+  filter:drop-shadow(0 14px 18px rgba(0,0,0,.32));
   pointer-events:none;
 }
 
 .card:hover{
   transform:translateY(-7px) scale(1.015);
-  box-shadow:0 18px 32px rgba(0,0,0,.34);
 }
 
 .card small,.card h3,.card p,.card .envelope-seal,.card .fav{
@@ -335,9 +330,10 @@ body::before{
 .envelope-seal{
   width:56px;
   height:56px;
-  margin:62px auto 4px;
+  margin:72px auto 4px;
   background:var(--wax) center/contain no-repeat;
   filter:drop-shadow(0 6px 8px rgba(0,0,0,.40));
+  z-index:4;
 }
 
 .card h3{
@@ -359,15 +355,17 @@ body::before{
 .card::after{
   content:"";
   position:absolute;
-  top:14px;
-  right:16px;
+  top:30px;
+  right:36px;
   width:46px;
   height:58px;
   background:var(--stamp1) center/cover no-repeat;
-  z-index:2;
+  z-index:4;
 }
 
-.card:nth-child(even)::after{background-image:var(--stamp2)}
+.card:nth-child(even)::after{
+  background-image:var(--stamp2);
+}
 
 .fav{
   position:absolute;
@@ -664,20 +662,17 @@ body::before{
 <div class="page">
   <div class="archive-sheet">
 
-    <div class="kiss-mark" style="top:18px;left:38px;transform:rotate(-9deg);opacity:.34;"></div>
-    <div class="kiss-mark" style="top:52px;left:175px;transform:rotate(7deg);opacity:.26;"></div>
-    <div class="kiss-mark" style="top:34px;left:335px;transform:rotate(-5deg);opacity:.34;"></div>
-    <div class="kiss-mark" style="top:92px;left:70px;transform:rotate(15deg);opacity:.25;"></div>
-    <div class="kiss-mark" style="top:126px;left:245px;transform:rotate(-12deg);opacity:.28;"></div>
-    <div class="kiss-mark" style="top:175px;left:28px;transform:rotate(8deg);opacity:.22;"></div>
-    <div class="kiss-mark" style="top:230px;left:145px;transform:rotate(-4deg);opacity:.23;"></div>
-    <div class="kiss-mark" style="top:310px;left:56px;transform:rotate(11deg);opacity:.21;"></div>
-    <div class="kiss-mark" style="top:410px;left:170px;transform:rotate(-10deg);opacity:.20;"></div>
-    <div class="kiss-mark" style="top:520px;left:40px;transform:rotate(6deg);opacity:.18;"></div>
-    <div class="kiss-mark" style="top:38px;right:250px;transform:rotate(-8deg);opacity:.22;"></div>
-    <div class="kiss-mark" style="top:88px;right:95px;transform:rotate(12deg);opacity:.24;"></div>
-    <div class="kiss-mark" style="top:150px;right:180px;transform:rotate(16deg);opacity:.22;"></div>
-    <div class="kiss-mark" style="right:36px;bottom:34px;transform:rotate(7deg);opacity:.22;"></div>
+    <div class="kiss-mark" style="top:18px;left:30px;transform:rotate(-8deg);"></div>
+    <div class="kiss-mark" style="top:70px;left:150px;transform:rotate(10deg);opacity:.45;"></div>
+    <div class="kiss-mark" style="top:130px;left:45px;transform:rotate(-12deg);opacity:.4;"></div>
+    <div class="kiss-mark" style="top:210px;left:160px;transform:rotate(8deg);opacity:.38;"></div>
+    <div class="kiss-mark" style="top:320px;left:55px;transform:rotate(-6deg);opacity:.35;"></div>
+    <div class="kiss-mark" style="top:440px;left:145px;transform:rotate(13deg);opacity:.32;"></div>
+
+    <div class="kiss-mark" style="top:20px;left:330px;transform:rotate(-5deg);opacity:.5;"></div>
+    <div class="kiss-mark" style="top:35px;left:520px;transform:rotate(9deg);opacity:.42;"></div>
+    <div class="kiss-mark" style="top:55px;left:720px;transform:rotate(-10deg);opacity:.36;"></div>
+    <div class="kiss-mark" style="top:32px;right:260px;transform:rotate(8deg);opacity:.34;"></div>
 
     <div class="header">
       <div class="title">
