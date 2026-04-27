@@ -294,8 +294,8 @@ body::before{
 /* ENVELOPE CARD — medium height, no box behind image */
 .card{
   position:relative;
-  height:240px;
-  padding:14px 16px;
+  height:260px;
+  padding:16px 18px;
   cursor:pointer;
   overflow:visible;
   background:none !important;
@@ -303,7 +303,7 @@ body::before{
   box-shadow:none !important;
   transition:.22s ease;
 }
-
+  
 /* envelope image as background */
 .card::before{
   content:"";
@@ -318,13 +318,15 @@ body::before{
 /* STAMP — real div inside card, positioned top-right ON the envelope */
 .card-stamp{
   position:absolute;
-  top:22px;
-  right:28px;
-  width:44px;
-  height:54px;
-  background:var(--stamp1) center/cover no-repeat;
+  top:30px;
+  right:36px;
+  width:50px;
+  height:60px;
+  background:var(--stamp1) center/contain no-repeat;
   z-index:4;
   pointer-events:none;
+  opacity:.88;
+  filter:sepia(.12) brightness(1.08) saturate(.92);
 }
 
 /* all text/interactive content above envelope layer */
@@ -347,7 +349,7 @@ body::before{
 .envelope-seal{
   width:56px;
   height:56px;
-  margin:72px auto 4px;
+  margin:84px auto 4px;
   background:var(--wax) center/contain no-repeat;
   filter:drop-shadow(0 6px 8px rgba(0,0,0,.40));
   display:block;
@@ -699,6 +701,11 @@ body::before{
     <div class="kiss-mark" style="top:450px;right:55px;transform:rotate(-6deg);opacity:.20;"></div>
     <div class="kiss-mark" style="top:620px;right:28px;transform:rotate(13deg);opacity:.18;"></div>
     <div class="kiss-mark" style="top:800px;right:70px;transform:rotate(-10deg);opacity:.16;"></div>
+    <div class="kiss-mark" style="top:95px;left:95px;transform:rotate(6deg);opacity:.26;"></div>
+    <div class="kiss-mark" style="top:140px;left:360px;transform:rotate(-9deg);opacity:.24;"></div>
+    <div class="kiss-mark" style="top:165px;left:600px;transform:rotate(11deg);opacity:.22;"></div>
+    <div class="kiss-mark" style="top:250px;left:120px;transform:rotate(7deg);opacity:.23;"></div>
+    <div class="kiss-mark" style="top:430px;left:18px;transform:rotate(-10deg);opacity:.22;"></div>
 
     <div class="header">
       <div class="title">
