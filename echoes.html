@@ -729,16 +729,19 @@ body::before{
 }
 
 /* 👇 DATE BELOW ENVELOPE */
-.env-date::before,
-.env-date::after{
-  content:"";
-  display:inline-block;
-  width:40px;
-  height:1px;
-  background:#4d3025;
-  opacity:.5;
-  margin:0 10px;
-  vertical-align:middle;
+.env-date{
+  position:absolute;
+  bottom:-34px; /* 👈 increased space */
+  left:50%;
+  transform:translateX(-50%);
+
+  font-family:'Playfair Display', serif;
+  font-size:1.05rem;
+  letter-spacing:1px;
+
+  color:#4d3025;
+  opacity:.9;
+  white-space:nowrap;
 }
   
 </style>
@@ -906,7 +909,6 @@ function renderLetters(){
       <div class="card-stamp" style="${i%2===1?'background-image:var(--stamp2)':''}"></div>
       <div class="envelope-seal"></div>
       <h3 class="env-title">${l.title}</h3>
-      <p class="env-sub">Delivered to future ♡</p>
       <div class="env-date">${l.date}</div>
       <button class="fav" onclick="toggleFav(event,'${l.id}')">
         ${favs.includes(l.id)?"♥":"♡"}
