@@ -323,19 +323,17 @@ body::before{
 /* STAMP — real div inside card, positioned top-right ON the envelope */
 .card-stamp{
   position:absolute;
-  top:0;
-  right:0;
+  top:54px;
+  right:18px;
 
-  width:38px;   /* 👈 smaller */
-  height:48px;
+  width:36px;
+  height:46px;
 
   background:var(--stamp1) center/contain no-repeat;
   z-index:4;
   pointer-events:none;
 
-  /* 👇 push it to actual envelope corner (beyond flap line) */
-  transform:translate(-18px, 6px) rotate(-3deg);
-
+  transform:rotate(-3deg);
   opacity:.9;
   filter:brightness(1.05) sepia(.06);
 }
@@ -733,13 +731,14 @@ body::before{
 /* 👇 DATE BELOW ENVELOPE */
 .env-date{
   position:absolute;
-  bottom:-18px;
+  bottom:-26px;
   left:50%;
   transform:translateX(-50%);
-  font-family:'Special Elite',monospace;
-  font-size:.75rem;
-  color:#4d3025;
-  opacity:.85;
+  font-family:'Great Vibes',cursive;
+  font-size:1.45rem;
+  color:var(--red);
+  opacity:.9;
+  white-space:nowrap;
 }
   
 </style>
