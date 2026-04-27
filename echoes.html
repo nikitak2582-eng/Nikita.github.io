@@ -1,278 +1,906 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Echoes in Envelopes 💌</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Echoes in Envelopes 💌</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&family=Special+Elite&display=swap" rel="stylesheet">
 
 <style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-/* ---------- PRELOADER ---------- */
-#loader {
-  position: fixed;
-  inset: 0;
-  background: #2f1f14;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff3e6;
-  font-family: Georgia;
-  z-index: 9999;
+:root{
+  --desk:url("desk.jpg");
+  --paper:url("paper.jpg");
+  --envelope:url("envelope.png");
+  --stamp1:url("stamp1.png");
+  --stamp2:url("stamp2.png");
+  --kiss:url("kissmark.png");
+  --wax:url("waxseal.png");
+
+  --ink:#3b241c;
+  --red:#5f0307;
+  --brown:#5a2f22;
 }
-body.loaded #loader { display:none; }
 
-/* ---------- BASE ---------- */
+#loader{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  background:
+    linear-gradient(rgba(45,20,8,.28),rgba(45,20,8,.42)),
+    var(--desk) center/cover no-repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:opacity .7s ease;
+}
+
+.loader-card{
+  width:240px;
+  height:145px;
+  background:
+    linear-gradient(rgba(255,239,210,.88),rgba(220,185,140,.9)),
+    var(--paper) center/cover;
+  border-radius:12px;
+  box-shadow:0 18px 45px rgba(0,0,0,.45);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-family:'Special Elite',monospace;
+  color:var(--ink);
+}
+
+.loader-seal{
+  width:48px;
+  height:48px;
+  background:var(--wax) center/contain no-repeat;
+  margin-bottom:12px;
+  animation:pulse 1.4s infinite ease-in-out;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1);opacity:.75}
+  50%{transform:scale(1.15);opacity:1}
+}
+
 html,body{
-  margin:0;
-  padding:0;
-  background:#2f1f14;
+  min-height:100%;
+  background:#2a1408;
 }
 
 body{
-  font-family: Georgia, serif;
-  color:#3e2a1f;
-
+  font-family:'Cormorant Garamond',serif;
+  color:var(--ink);
   background:
-    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
-    url("desk.jpg");
-
-  background-size: cover;
-  background-attachment: fixed;
+    linear-gradient(rgba(35,18,8,.18),rgba(35,18,8,.30)),
+    var(--desk) center/cover fixed no-repeat;
+  overflow-x:hidden;
 }
 
-/* ---------- SHEET ---------- */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at top left,rgba(255,230,190,.26),transparent 36%),
+    radial-gradient(circle at bottom right,rgba(45,20,8,.35),transparent 45%),
+    inset 0 0 120px rgba(45,20,8,.42);
+  z-index:0;
+}
+
+.page{
+  position:relative;
+  z-index:1;
+  max-width:1180px;
+  margin:auto;
+  padding:32px 18px 70px;
+  min-height:100vh;
+}
+
 .archive-sheet{
   position:relative;
-  margin:30px;
   padding:30px;
-  border-radius:20px;
-
+  border-radius:14px;
   background:
-    linear-gradient(rgba(255,245,230,.88), rgba(255,245,230,.88)),
-    url("paper.jpg");
-
-  background-size:cover;
-
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
-}
-
-/* ---------- TITLE ---------- */
-h1{
-  font-size:42px;
-  margin-bottom:20px;
-}
-
-/* ---------- GRID ---------- */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-  gap:25px;
-}
-
-/* ---------- ENVELOPE ---------- */
-.envelope{
-  position:relative;
-  height:170px;
-  border-radius:16px;
-  cursor:pointer;
-
-  background:
-    linear-gradient(rgba(255,240,220,.78), rgba(255,240,220,.78)),
-    url("paper.jpg");
-
-  box-shadow:0 12px 30px rgba(0,0,0,.25);
+    linear-gradient(rgba(246,225,194,.74),rgba(228,195,154,.78)),
+    var(--paper) center/cover;
+  box-shadow:0 25px 70px rgba(0,0,0,.42);
   overflow:hidden;
-  transition:.4s;
 }
 
-.envelope:hover{
-  transform:translateY(-6px) scale(1.02);
-}
-
-/* flap */
-.envelope::before{
+.archive-sheet::before{
   content:"";
   position:absolute;
-  width:100%;
-  height:100%;
-  background:linear-gradient(135deg,#e6d2b8,#cdb296);
-  clip-path:polygon(0 0,100% 0,50% 60%);
+  inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg,rgba(70,40,25,.045) 0px,rgba(70,40,25,.045) 1px,transparent 1px,transparent 5px),
+    radial-gradient(circle at 87% 16%,rgba(130,60,45,.12),transparent 18%),
+    radial-gradient(circle at 9% 82%,rgba(120,65,45,.10),transparent 20%);
+  opacity:.9;
+}
+
+.kiss-mark{
+  position:absolute;
+  width:92px;
+  height:58px;
+  background:var(--kiss) center/contain no-repeat;
+  opacity:.38;
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:3;
+}
+
+.header{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  gap:24px;
+  align-items:flex-start;
+  margin-bottom:28px;
+  z-index:2;
+}
+
+.title h1{
+  font-family:'Playfair Display',serif;
+  font-size:4rem;
+  color:#4b2118;
+  line-height:.9;
+}
+
+.title span{
+  display:block;
+  font-family:'Great Vibes',cursive;
+  font-size:3rem;
+  margin-top:-2px;
+}
+
+.tagline{
+  margin-top:18px;
+  font-family:'Special Elite',monospace;
+  font-size:.88rem;
+  line-height:1.6;
+}
+
+.header-card{
+  position:relative;
+  width:310px;
+  min-height:170px;
+  padding:24px;
+  background:
+    linear-gradient(rgba(248,228,195,.85),rgba(226,192,150,.9)),
+    var(--paper) center/cover;
+  border:1px solid rgba(90,55,30,.25);
+  box-shadow:0 12px 30px rgba(0,0,0,.2);
+  transform:rotate(1.3deg);
+}
+
+.header-card h2{
+  font-family:'Playfair Display',serif;
+  text-align:center;
+  letter-spacing:2px;
   opacity:.7;
 }
 
-/* wax seal */
-.seal{
+.header-card p{
   position:absolute;
-  top:68px;
-  left:50%;
-  transform:translateX(-50%);
-  width:55px;
+  left:26px;
+  bottom:24px;
+  font-family:'Special Elite',monospace;
+  font-size:.78rem;
+  line-height:1.5;
 }
 
-/* date */
-.date{
+.wax-coded{
   position:absolute;
-  bottom:30px;
-  width:100%;
+  top:18px;
+  right:18px;
+  width:96px;
+  height:96px;
+  background:var(--wax) center/contain no-repeat;
+  filter:drop-shadow(0 8px 12px rgba(0,0,0,.42));
+  color:#fff2dc;
+  display:grid;
+  place-items:center;
   text-align:center;
-  font-size:20px;
-  color:#7a1f1f;
-  font-weight:bold;
+  font-size:.82rem;
+  line-height:1.08;
+  padding:22px;
 }
 
-/* ---------- KISS MARKS ---------- */
-.kiss-mark{
+.content-wrap{
+  display:grid;
+  grid-template-columns:160px 1fr;
+  gap:24px;
+  position:relative;
+  z-index:2;
+}
+
+.sidebar{padding-top:12px}
+
+.archive-tab{
+  margin-left:-30px;
+  padding:10px 18px;
+  background:#4a2b1d;
+  color:#fff5e4;
+  font-family:'Playfair Display',serif;
+  box-shadow:0 8px 16px rgba(0,0,0,.25);
+}
+
+.menu-item{
+  margin:20px 0;
+  cursor:pointer;
+  font-size:1.05rem;
+  color:#4d3025;
+  transition:.2s;
+}
+
+.menu-item:hover,.menu-item.active{
+  color:var(--red);
+  transform:translateX(4px);
+}
+
+.note-card{
+  margin-top:36px;
+  padding:18px 14px;
+  border:1px solid rgba(80,45,25,.28);
+  background:rgba(244,222,188,.48);
+  font-family:'Special Elite',monospace;
+  font-size:.78rem;
+  line-height:1.7;
+}
+
+.note-card b{
+  font-family:'Playfair Display',serif;
+  font-size:1.45rem;
+  color:#4d251c;
+}
+
+.main-panel{
+  padding:22px 20px 28px;
+  background:rgba(245,225,190,.24);
+  border:1px solid rgba(90,55,30,.16);
+  backdrop-filter:blur(1px);
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+
+.panel-head h2{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;
+}
+
+.sort-btn{
+  cursor:pointer;
+  font-size:.95rem;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:28px;
+}
+
+.card{
+  position:relative;
+  min-height:205px;
+  padding:20px;
+  cursor:pointer;
+  overflow:hidden;
+  border-radius:12px;
+  background-color:#d8b98c;
+  background-image:
+    linear-gradient(rgba(238,211,172,.42),rgba(205,168,126,.52)),
+    var(--envelope);
+  background-size:137%;
+  background-position:center;
+  background-repeat:no-repeat;
+  border:1px solid rgba(80,45,25,.30);
+  box-shadow:0 14px 26px rgba(0,0,0,.32);
+  transition:.25s ease;
+}
+
+.card::before{
+  content:"";
   position:absolute;
-  width:90px;
-  height:90px;
-  background:url("kissmark.png") center/contain no-repeat;
-  opacity:.35;
+  inset:0;
+  background:rgba(255,246,230,.14);
   pointer-events:none;
 }
 
-/* ---------- POSTCARD ---------- */
-#postcard{
-  display:none;
-  margin-top:40px;
-
-  background:
-    linear-gradient(rgba(255,245,230,.95), rgba(255,245,230,.95)),
-    url("paper.jpg");
-
-  border-radius:20px;
-  padding:25px;
-  box-shadow:0 20px 60px rgba(0,0,0,.4);
+.card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 18px 32px rgba(0,0,0,.36);
 }
 
-/* ---------- LETTER POPUP ---------- */
-#letterPopup{
+.card.breaking .envelope-seal{
+  animation:sealBreak .55s ease forwards;
+}
+
+@keyframes sealBreak{
+  0%{transform:scale(1) rotate(0);opacity:1}
+  45%{transform:scale(.78) rotate(-14deg);opacity:.75}
+  100%{transform:scale(1) rotate(0);opacity:1}
+}
+
+.card small,.card h3,.card p,.card .envelope-seal,.card .fav{
+  position:relative;
+  z-index:3;
+}
+
+.card small{
+  font-family:'Special Elite',monospace;
+  opacity:.72;
+}
+
+.envelope-seal{
+  width:56px;
+  height:56px;
+  margin:58px auto 4px;
+  background:var(--wax) center/contain no-repeat;
+  filter:drop-shadow(0 6px 8px rgba(0,0,0,.40));
+}
+
+.card h3{
+  text-align:center;
+  font-family:'Great Vibes',cursive;
+  font-size:1.85rem;
+  font-weight:400;
+  color:var(--red);
+  text-shadow:0 1px 0 rgba(255,245,230,.8);
+}
+
+.card p{
+  margin-top:6px;
+  text-align:center;
+  font-family:'Special Elite',monospace;
+  font-size:.73rem;
+}
+
+.card::after{
+  content:"";
+  position:absolute;
+  top:14px;
+  right:16px;
+  width:46px;
+  height:58px;
+  background:var(--stamp1) center/cover no-repeat;
+  z-index:2;
+}
+
+.card:nth-child(even)::after{background-image:var(--stamp2)}
+
+.fav{
+  position:absolute;
+  right:16px;
+  bottom:12px;
+  width:24px;
+  height:24px;
+  border:1px solid rgba(122,7,12,.35);
+  border-radius:50%;
+  background:rgba(255,245,230,.72);
+  font-size:.88rem;
+  cursor:pointer;
+  color:var(--red);
+  display:grid;
+  place-items:center;
+}
+
+#letter{
+  display:none;
+  margin:40px auto 0;
+  max-width:960px;
+  min-height:430px;
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  background:
+    repeating-linear-gradient(0deg,rgba(80,45,25,.035) 0px,rgba(80,45,25,.035) 1px,transparent 1px,transparent 7px),
+    linear-gradient(rgba(255,239,210,.86),rgba(230,196,150,.9)),
+    var(--paper) center/cover;
+  border:1px solid rgba(80,45,25,.28);
+  box-shadow:0 24px 65px rgba(0,0,0,.45);
+  animation:postcardOpen .6s ease;
+}
+
+@keyframes postcardOpen{
+  from{opacity:0;transform:translateY(36px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+#letter::before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:1px;
+  background:rgba(80,45,25,.32);
+}
+
+.open-left,.open-right{
+  width:50%;
+  min-height:430px;
+  float:left;
+  position:relative;
+  padding:42px 50px;
+}
+
+.open-left h3{
+  font-family:'Great Vibes',cursive;
+  color:var(--red);
+  font-size:2.1rem;
+  font-weight:400;
+}
+
+.day,.letter-text,.address,.opened-stamp,.open-full-btn{
+  font-family:'Special Elite',monospace;
+}
+
+.day{
+  margin:8px 0 30px;
+  font-size:.85rem;
+}
+
+.letter-text{
+  white-space:pre-wrap;
+  font-size:.9rem;
+  line-height:1.75;
+  max-width:350px;
+}
+
+.signoff{
+  margin-top:26px;
+  font-family:'Great Vibes',cursive;
+  color:var(--red);
+  font-size:1.6rem;
+}
+
+.open-full-btn{
+  margin-top:24px;
+  padding:9px 14px;
+  border:1px solid rgba(95,45,35,.55);
+  background:rgba(255,245,226,.55);
+  color:var(--red);
+  cursor:pointer;
+  font-size:.75rem;
+}
+
+.open-full-btn:hover{background:rgba(255,235,200,.85)}
+
+.open-right h3{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  letter-spacing:2px;
+  font-size:1.8rem;
+  font-weight:500;
+}
+
+.stamp-on-card{
+  position:absolute;
+  top:34px;
+  right:42px;
+  width:68px;
+  height:82px;
+  background:var(--stamp1) center/cover no-repeat;
+}
+
+.postmark{
+  position:absolute;
+  top:86px;
+  right:94px;
+  width:108px;
+  height:54px;
+  border:2px solid rgba(60,40,30,.45);
+  border-radius:50%;
+  transform:rotate(12deg);
+  opacity:.6;
+}
+
+.postmark span{
+  position:absolute;
+  top:18px;
+  left:12px;
+  font-family:'Special Elite',monospace;
+  font-size:.62rem;
+}
+
+.address{margin-top:105px}
+
+.line{
+  border-bottom:1px solid rgba(70,45,30,.45);
+  padding:11px 0 5px;
+}
+
+.opened-stamp{
+  position:absolute;
+  right:48px;
+  bottom:44px;
+  border:1px solid rgba(95,45,35,.55);
+  padding:10px 14px;
+  font-size:.72rem;
+  text-align:center;
+}
+
+.preview-kiss{
+  right:42px;
+  bottom:24px;
+  transform:rotate(-8deg);
+}
+
+.full-letter-overlay{
+  display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.5);
-  display:none;
-  justify-content:center;
+  z-index:9999;
+  background:rgba(30,15,8,.62);
+  backdrop-filter:blur(3px);
   align-items:center;
-  z-index:999;
+  justify-content:center;
+  padding:24px;
 }
 
-.letter-box{
-  width:500px;
-  padding:30px;
-  border-radius:18px;
+.full-letter-overlay.show{display:flex}
 
+.vintage-letter{
+  position:relative;
+  width:min(760px,92vw);
+  max-height:86vh;
+  overflow-y:auto;
+  padding:48px 54px;
   background:
-    linear-gradient(rgba(255,245,230,.95), rgba(255,245,230,.95)),
-    url("paper.jpg");
-
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
-  animation:openLetter .5s ease;
+    repeating-linear-gradient(0deg,rgba(90,55,35,.045) 0px,rgba(90,55,35,.045) 1px,transparent 1px,transparent 8px),
+    linear-gradient(rgba(255,241,215,.93),rgba(226,194,150,.96)),
+    var(--paper) center/cover;
+  border:1px solid rgba(90,50,30,.38);
+  box-shadow:0 28px 80px rgba(0,0,0,.65);
+  animation:tearOpen .75s ease forwards;
+  transform-origin:top center;
 }
 
-@keyframes openLetter{
-  from{ transform:scale(.7) rotate(-5deg); opacity:0; }
-  to{ transform:scale(1) rotate(0); opacity:1; }
+@keyframes tearOpen{
+  from{transform:scale(.82) rotate(-2deg);opacity:0}
+  to{transform:scale(1) rotate(0);opacity:1}
 }
 
-.close{
-  float:right;
+.vintage-letter h2{
+  font-family:'Great Vibes',cursive;
+  font-size:2.6rem;
+  color:var(--red);
+  margin-bottom:18px;
+}
+
+.vintage-letter-text{
+  font-family:'Special Elite',monospace;
+  font-size:.95rem;
+  line-height:1.9;
+  white-space:pre-wrap;
+}
+
+.close-letter{
+  position:absolute;
+  top:14px;
+  right:16px;
+  border:1px solid rgba(95,45,35,.45);
+  background:rgba(255,238,205,.7);
+  color:var(--red);
+  width:32px;
+  height:32px;
   cursor:pointer;
 }
 
-/* ---------- BUTTON ---------- */
-.open-btn{
-  margin-top:15px;
-  display:inline-block;
-  padding:8px 16px;
-  background:#7a1f1f;
-  color:white;
-  border-radius:20px;
-  cursor:pointer;
+.full-letter-kiss{
+  right:40px;
+  bottom:28px;
+  transform:rotate(8deg);
 }
 
+.timeline-list{
+  display:none;
+  font-family:'Special Elite',monospace;
+  line-height:2;
+}
+
+.timeline-list div{
+  border-left:2px solid var(--red);
+  padding-left:16px;
+  margin:14px 0;
+}
+
+@media(max-width:850px){
+  body{background-attachment:scroll}
+  .header{display:block}
+  .header-card{display:none}
+  .content-wrap{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .grid{grid-template-columns:1fr}
+  .title h1{font-size:3.2rem}
+  .title span{font-size:2.4rem}
+  #letter::before{display:none}
+  .open-left,.open-right{float:none;width:100%;min-height:auto}
+}
 </style>
 </head>
 
 <body>
 
-<div id="loader">opening your letters… 💌</div>
-
-<div class="archive-sheet">
-
-<h1>Echoes in Envelopes</h1>
-
-<div class="grid">
-
-<div class="envelope" onclick="openLetter('22 April 2026')">
-  <img src="waxseal.png" class="seal">
-  <div class="date">22 April 2026</div>
-</div>
-
-<div class="envelope" onclick="openLetter('22 May 2026')">
-  <img src="waxseal.png" class="seal">
-  <div class="date">22 May 2026</div>
-</div>
-
-<div class="envelope" onclick="openLetter('22 June 2026')">
-  <img src="waxseal.png" class="seal">
-  <div class="date">22 June 2026</div>
-</div>
-
-</div>
-
-<!-- 💋 kisses -->
-<div class="kiss-mark" style="top: 28px; left: 335px;"></div>
-<div class="kiss-mark" style="right: 36px; bottom: 34px; transform: rotate(7deg); opacity:.28;"></div>
-<div class="kiss-mark" style="top: 140px; right: 160px; transform: rotate(15deg);"></div>
-<div class="kiss-mark" style="bottom: 120px; left: 280px; transform: rotate(-10deg); opacity:.3;"></div>
-<div class="kiss-mark" style="top: 60%; left: 10%; transform: rotate(5deg); opacity:.25;"></div>
-
-<!-- POSTCARD -->
-<div id="postcard">
-  <h2 id="postcardDate"></h2>
-  <p>Delivered to future ♡</p>
-  <div class="open-btn" onclick="showFullLetter()">read it softly ♡</div>
-  <p style="margin-top:20px; color:#7a1f1f;">forever & always.</p>
-</div>
-
-</div>
-
-<!-- FULL LETTER -->
-<div id="letterPopup">
-  <div class="letter-box">
-    <div class="close" onclick="closeLetter()">✕</div>
-    <h3 id="fullDate"></h3>
-    <p>
-      Another 22nd… another piece of my heart I leave for you.
-      <br><br>
-      If you're reading this someday,
-      I hope you feel me here.
-    </p>
+<div id="loader">
+  <div class="loader-card">
+    <div class="loader-seal"></div>
+    <p>opening letters...</p>
   </div>
 </div>
 
+<div class="page">
+  <div class="archive-sheet">
+
+    <div class="kiss-mark" style="top:28px;left:335px;"></div>
+    <div class="kiss-mark" style="right:36px;bottom:34px;transform:rotate(7deg);opacity:.28;"></div>
+    <div class="kiss-mark" style="top:140px;right:160px;transform:rotate(15deg);opacity:.30;"></div>
+    <div class="kiss-mark" style="bottom:120px;left:280px;transform:rotate(-10deg);opacity:.25;"></div>
+    <div class="kiss-mark" style="top:60%;left:10%;transform:rotate(5deg);opacity:.22;"></div>
+
+    <div class="header">
+      <div class="title">
+        <h1>Echoes</h1>
+        <span>in Envelopes</span>
+        <div class="tagline">“Some feelings are meant<br>to be written, not forgotten.”</div>
+      </div>
+
+      <div class="header-card">
+        <h2>CARTE POSTALE</h2>
+        <p>♡ Letters sent to the future,<br>preserved in the present. ♡</p>
+        <div class="wax-coded">Every<br>22nd<br>Matters</div>
+      </div>
+    </div>
+
+    <div class="content-wrap">
+
+      <aside class="sidebar">
+        <div class="archive-tab">ARCHIVE ♥</div>
+        <div class="menu-item active" onclick="filterLetters('all', this)">✉ All Letters</div>
+        <div class="menu-item" onclick="filterLetters('year', this)">▣ This Year</div>
+        <div class="menu-item" onclick="filterLetters('fav', this)">♥ Favorites</div>
+        <div class="menu-item" onclick="showTimeline(this)">◷ Timeline</div>
+
+        <div class="note-card">
+          Since <b>22</b> Letters<br>and counting...<br><br>
+          Each 22nd,<br>a piece of us. ♡
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <div class="panel-head">
+          <h2 id="panelTitle">Your Letters</h2>
+          <div class="sort-btn" onclick="toggleSort()">☷ Oldest First ▴</div>
+        </div>
+
+        <div class="grid" id="letterGrid"></div>
+        <div class="timeline-list" id="timelineList"></div>
+        <div id="letter"></div>
+      </main>
+
+    </div>
+  </div>
+</div>
+
+<div class="full-letter-overlay" id="fullLetterOverlay">
+  <div class="vintage-letter">
+    <button class="close-letter" onclick="closeFullLetter()">×</button>
+    <h2 id="fullLetterDate"></h2>
+    <div class="vintage-letter-text" id="fullLetterText"></div>
+    <div class="kiss-mark full-letter-kiss"></div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-database.js";
+
+const firebaseConfig={
+  apiKey:"AIzaSyBeuP_d_C8Q8ou_egHFT2tDgpDrNLiYusk",
+  authDomain:"dhruv-s-little-lobby.firebaseapp.com",
+  databaseURL:"https://dhruv-s-little-lobby-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:"dhruv-s-little-lobby",
+  storageBucket:"dhruv-s-little-lobby.firebasestorage.app",
+  messagingSenderId:"129807376775",
+  appId:"1:129807376775:web:4e8d8d227772c0f115b322"
+};
+
+const app=initializeApp(firebaseConfig);
+const db=getDatabase(app);
+
+const letters=[
+  {id:"april22",date:"22 April 2026",short:"22 APR 2026",no:"No.01",year:"2026"},
+  {id:"may22",date:"22 May 2026",short:"22 MAY 2026",no:"No.02",year:"2026"},
+  {id:"june22",date:"22 June 2026",short:"22 JUN 2026",no:"No.03",year:"2026"},
+  {id:"july22",date:"22 July 2026",short:"22 JUL 2026",no:"No.04",year:"2026"},
+  {id:"august22",date:"22 August 2026",short:"22 AUG 2026",no:"No.05",year:"2026"},
+  {id:"september22",date:"22 September 2026",short:"22 SEP 2026",no:"No.06",year:"2026"},
+  {id:"october22",date:"22 October 2026",short:"22 OCT 2026",no:"No.07",year:"2026"},
+  {id:"november22",date:"22 November 2026",short:"22 NOV 2026",no:"No.08",year:"2026"},
+  {id:"december22",date:"22 December 2026",short:"22 DEC 2026",no:"No.09",year:"2026"}
+];
+
+let currentFilter="all";
+let newestFirst=false;
+let currentFullLetter="";
+let currentFullDate="";
+
+function escapeHTML(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
+
+function getFavs(){
+  return JSON.parse(localStorage.getItem("echoesFavs")||"[]");
+}
+
+function saveFavs(favs){
+  localStorage.setItem("echoesFavs",JSON.stringify(favs));
+}
+
+function renderLetters(){
+  const grid=document.getElementById("letterGrid");
+  const timeline=document.getElementById("timelineList");
+  const favs=getFavs();
+
+  timeline.style.display="none";
+  grid.style.display="grid";
+
+  let shown=[...letters];
+
+  if(currentFilter==="year"){
+    shown=shown.filter(l=>l.year==="2026");
+    document.getElementById("panelTitle").innerText="This Year";
+  }else if(currentFilter==="fav"){
+    shown=shown.filter(l=>favs.includes(l.id));
+    document.getElementById("panelTitle").innerText="Favorite Letters";
+  }else{
+    document.getElementById("panelTitle").innerText="Your Letters";
+  }
+
+  if(newestFirst) shown.reverse();
+
+  grid.innerHTML=shown.map(l=>`
+    <div class="card" onclick="showLetter('${l.id}','${l.date}','${l.short}', this)">
+      <small>${l.no}</small>
+      <div class="envelope-seal"></div>
+      <h3>${l.date}</h3>
+      <p>Delivered to future ♡</p>
+      <button class="fav" onclick="toggleFav(event,'${l.id}')">
+        ${favs.includes(l.id)?"♥":"♡"}
+      </button>
+    </div>
+  `).join("");
+}
+
+window.toggleFav=function(event,id){
+  event.stopPropagation();
+  let favs=getFavs();
+
+  if(favs.includes(id)){
+    favs=favs.filter(x=>x!==id);
+  }else{
+    favs.push(id);
+  }
+
+  saveFavs(favs);
+  renderLetters();
+};
+
+window.filterLetters=function(type,el){
+  currentFilter=type;
+  document.querySelectorAll(".menu-item").forEach(i=>i.classList.remove("active"));
+  el.classList.add("active");
+  document.getElementById("letter").style.display="none";
+  renderLetters();
+};
+
+window.showTimeline=function(el){
+  document.querySelectorAll(".menu-item").forEach(i=>i.classList.remove("active"));
+  el.classList.add("active");
+
+  const grid=document.getElementById("letterGrid");
+  const timeline=document.getElementById("timelineList");
+
+  grid.style.display="none";
+  document.getElementById("letter").style.display="none";
+  document.getElementById("panelTitle").innerText="Timeline";
+
+  timeline.style.display="block";
+  timeline.innerHTML=letters.map(l=>`
+    <div><b>${l.date}</b> — ${l.no} — Delivered to future ♡</div>
+  `).join("");
+};
+
+window.toggleSort=function(){
+  newestFirst=!newestFirst;
+  document.querySelector(".sort-btn").innerText=newestFirst?"☷ Newest First ▾":"☷ Oldest First ▴";
+  renderLetters();
+};
+
+window.showLetter=function(id,dateText,shortDate,cardEl){
+  if(cardEl){
+    cardEl.classList.add("breaking");
+    setTimeout(()=>cardEl.classList.remove("breaking"),600);
+  }
+
+  const letterRef=ref(db,"letters/"+id);
+
+  get(letterRef).then(snap=>{
+    let text=snap.exists()?snap.val().text:"No letter yet.";
+    let safeText=escapeHTML(text);
+    let intro=safeText.length>170?safeText.slice(0,170)+"...":safeText;
+
+    currentFullLetter=safeText;
+    currentFullDate=dateText;
+
+    const box=document.getElementById("letter");
+    box.style.display="block";
+
+    box.innerHTML=`
+      <div class="open-left">
+        <h3>${dateText}</h3>
+        <div class="day">Written on the 22nd</div>
+        <div class="letter-text">${intro}</div>
+        <div class="signoff">Forever yours, as always.</div>
+        <button class="open-full-btn" onclick="openFullLetter()">read me softly ♡</button>
+      </div>
+
+      <div class="open-right">
+        <h3>POST CARD</h3>
+        <div class="stamp-on-card"></div>
+        <div class="postmark"><span>${shortDate}</span></div>
+
+        <div class="address">
+          <div class="line">To: Future Us ♡</div>
+          <div class="line">Somewhere in our beautiful</div>
+          <div class="line">life together</div>
+          <div class="line">&nbsp;</div>
+        </div>
+
+        <div class="opened-stamp">OPENED WITH LOVE<br>ON ${dateText} ♡</div>
+        <div class="kiss-mark preview-kiss"></div>
+      </div>
+    `;
+
+    box.scrollIntoView({behavior:"smooth",block:"center"});
+  });
+};
+
+window.openFullLetter=function(){
+  document.getElementById("fullLetterDate").innerText=currentFullDate;
+  document.getElementById("fullLetterText").innerHTML=currentFullLetter;
+  document.getElementById("fullLetterOverlay").classList.add("show");
+};
+
+window.closeFullLetter=function(){
+  document.getElementById("fullLetterOverlay").classList.remove("show");
+};
+
+renderLetters();
+</script>
+
 <script>
-
-/* PRELOADER */
-window.onload = () => document.body.classList.add("loaded");
-
-/* OPEN ENVELOPE */
-function openLetter(date){
-  document.getElementById("postcard").style.display="block";
-  document.getElementById("postcardDate").innerText=date;
-  window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"});
-}
-
-/* SHOW FULL LETTER */
-function showFullLetter(){
-  document.getElementById("letterPopup").style.display="flex";
-  document.getElementById("fullDate").innerText=
-    document.getElementById("postcardDate").innerText;
-}
-
-/* CLOSE */
-function closeLetter(){
-  document.getElementById("letterPopup").style.display="none";
-}
-
+window.addEventListener("load",()=>{
+  const loader=document.getElementById("loader");
+  setTimeout(()=>{
+    loader.style.opacity="0";
+    setTimeout(()=>{loader.style.display="none"},700);
+  },400);
+});
 </script>
 
 </body>
