@@ -277,9 +277,14 @@ body::before{
 
 .panel-head h2{
   font-family:'Playfair Display',serif;
-  font-size:1.5rem;
+  font-size:1.55rem;
+  background:#4a2b1d;
+  color:#fff5e4;
+  padding:9px 22px;
+  box-shadow:0 8px 16px rgba(0,0,0,.25);
+  letter-spacing:.5px;
 }
-
+  
 .sort-btn{
   cursor:pointer;
   font-size:.95rem;
@@ -319,19 +324,17 @@ body::before{
 /* STAMP — real div inside card, positioned top-right ON the envelope */
 .card-stamp{
   position:absolute;
-  top:26%;
-  right:22%;
+  top:42px;
+  right:58px;
   width:52px;
   height:64px;
   background:var(--stamp1) center/contain no-repeat;
   z-index:4;
   pointer-events:none;
-
-  /* light faded raw look */
   opacity:.9;
   filter:brightness(1.06) sepia(.08);
 }
-
+  
 /* all text/interactive content above envelope layer */
 .card small,
 .card h3,
@@ -673,6 +676,40 @@ body::before{
   #letter::before{display:none}
   .open-left,.open-right{float:none;width:100%;min-height:auto}
 }
+  .grid{
+  position:relative;
+}
+
+.grid::before{
+  content:"";
+  position:absolute;
+  top:250px;
+  left:32%;
+  width:72px;
+  height:46px;
+  background:var(--kiss) center/contain no-repeat;
+  opacity:.22;
+  transform:rotate(-9deg);
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:1;
+}
+
+.grid::after{
+  content:"";
+  position:absolute;
+  top:250px;
+  right:32%;
+  width:72px;
+  height:46px;
+  background:var(--kiss) center/contain no-repeat;
+  opacity:.20;
+  transform:rotate(10deg);
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:1;
+}
+  
 </style>
 </head>
 
@@ -829,9 +866,7 @@ function renderLetters(){
     shown=shown.filter(l=>favs.includes(l.id));
     document.getElementById("panelTitle").innerText="Favorite Letters";
   }else{
-    document.getElementById("panelTitle").innerText="Your Letters";
-  }
-
+  document.getElementById("panelTitle").innerText="Love Library <3";
   if(newestFirst) shown.reverse();
 
   grid.innerHTML=shown.map((l,i)=>`
