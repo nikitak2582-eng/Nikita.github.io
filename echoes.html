@@ -20,14 +20,61 @@
   --envelope: url("envelope.png");
   --stamp1: url("stamp1.png");
   --stamp2: url("stamp2.png");
+  --kiss: url("kissmark.png");
+  --wax: url("waxseal.png");
 
   --ink: #3b241c;
-  --red: #7a070c;
+  --red: #5f0307;
   --brown: #5a2f22;
 }
 
+/* PRELOADER */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background:
+    linear-gradient(rgba(45,20,8,.28), rgba(45,20,8,.42)),
+    var(--desk) center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .7s ease;
+}
+
+.loader-card {
+  width: 240px;
+  height: 145px;
+  background:
+    linear-gradient(rgba(255,239,210,.88), rgba(220,185,140,.9)),
+    var(--paper) center/cover;
+  border-radius: 12px;
+  box-shadow: 0 18px 45px rgba(0,0,0,.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Special Elite', monospace;
+  color: var(--ink);
+}
+
+.loader-seal {
+  width: 48px;
+  height: 48px;
+  background: var(--wax) center/contain no-repeat;
+  margin-bottom: 12px;
+  animation: pulse 1.4s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); opacity: .75; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* FIX WHITE BG ON SCROLL */
 html, body {
   min-height: 100%;
+  background: #2a1408;
 }
 
 body {
@@ -57,6 +104,7 @@ body::before {
   max-width: 1180px;
   margin: auto;
   padding: 32px 18px 70px;
+  min-height: 100vh;
 }
 
 .archive-sheet {
@@ -70,53 +118,29 @@ body::before {
   overflow: hidden;
 }
 
-/* soft parchment flower stains */
 .archive-sheet::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   background:
+    repeating-linear-gradient(0deg, rgba(70,40,25,.045) 0px, rgba(70,40,25,.045) 1px, transparent 1px, transparent 5px),
     radial-gradient(circle at 87% 16%, rgba(130,60,45,.12), transparent 18%),
-    radial-gradient(circle at 91% 20%, rgba(160,80,65,.09), transparent 15%),
-    radial-gradient(circle at 9% 82%, rgba(120,65,45,.10), transparent 20%),
-    radial-gradient(circle at 14% 78%, rgba(155,90,70,.08), transparent 16%);
+    radial-gradient(circle at 9% 82%, rgba(120,65,45,.10), transparent 20%);
   opacity: .9;
 }
 
-/* coded kiss imprints */
 .kiss-mark {
   position: absolute;
   width: 92px;
-  height: 52px;
-  opacity: .32;
-  transform: rotate(-12deg);
+  height: 58px;
+  background: var(--kiss) center/contain no-repeat;
+  opacity: .46;
+  mix-blend-mode: multiply;
   pointer-events: none;
 }
 
-.kiss-mark::before,
-.kiss-mark::after {
-  content: "";
-  position: absolute;
-  width: 58px;
-  height: 22px;
-  background: rgba(120, 0, 12, .45);
-  border-radius: 60% 40% 55% 45%;
-  filter: blur(.7px);
-}
-
-.kiss-mark::before {
-  transform: rotate(8deg);
-  top: 12px;
-  left: 6px;
-}
-
-.kiss-mark::after {
-  transform: rotate(-10deg);
-  top: 18px;
-  left: 32px;
-}
-
+/* HEADER */
 .header {
   position: relative;
   display: flex;
@@ -124,6 +148,7 @@ body::before {
   gap: 24px;
   align-items: flex-start;
   margin-bottom: 28px;
+  z-index: 2;
 }
 
 .title h1 {
@@ -176,47 +201,33 @@ body::before {
   line-height: 1.5;
 }
 
-/* coded wax badge, not image */
 .wax-coded {
   position: absolute;
-  top: 22px;
-  right: 22px;
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 25%, #b43b32, #7a070c 58%, #4b0307);
+  top: 18px;
+  right: 18px;
+  width: 96px;
+  height: 96px;
+  background: var(--wax) center/contain no-repeat;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,.42));
   color: #fff2dc;
   display: grid;
   place-items: center;
   text-align: center;
-  font-size: .9rem;
-  line-height: 1.1;
-  box-shadow:
-    inset 0 4px 8px rgba(255,255,255,.22),
-    inset 0 -8px 12px rgba(0,0,0,.35),
-    0 8px 16px rgba(0,0,0,.35);
-}
-
-.wax-coded::before {
-  content: "";
-  position: absolute;
-  inset: -7px;
-  border-radius: 43% 57% 47% 53% / 51% 43% 57% 49%;
-  background: #8b0c10;
-  z-index: -1;
+  font-size: .82rem;
+  line-height: 1.08;
+  padding: 22px;
 }
 
 .content-wrap {
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: 24px;
+  position: relative;
+  z-index: 2;
 }
 
 .sidebar {
   padding-top: 12px;
-  position: relative;
-  z-index: 2;
 }
 
 .archive-tab {
@@ -259,8 +270,6 @@ body::before {
 }
 
 .main-panel {
-  position: relative;
-  z-index: 2;
   padding: 22px 20px 28px;
   background: rgba(245,225,190,0.24);
   border: 1px solid rgba(90,55,30,.16);
@@ -284,6 +293,7 @@ body::before {
   font-size: .95rem;
 }
 
+/* ENVELOPES */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -292,16 +302,16 @@ body::before {
 
 .card {
   position: relative;
-  min-height: 190px;
+  min-height: 205px;
   padding: 20px;
   cursor: pointer;
   overflow: hidden;
   border-radius: 12px;
   background:
-    linear-gradient(rgba(255,248,235,.78), rgba(235,205,168,.80)),
-    var(--envelope) center/132% no-repeat;
-  border: 1px solid rgba(99,55,30,.22);
-  box-shadow: 0 14px 26px rgba(0,0,0,.28);
+    linear-gradient(rgba(238,211,172,.48), rgba(205,168,126,.58)),
+    var(--envelope) center/137% no-repeat;
+  border: 1px solid rgba(80,45,25,.30);
+  box-shadow: 0 14px 26px rgba(0,0,0,.32);
   transition: .25s ease;
 }
 
@@ -309,20 +319,22 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,248,235,.34);
+  background: rgba(255,246,230,.20);
   pointer-events: none;
 }
 
 .card:hover {
   transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 18px 32px rgba(0,0,0,.34);
+  box-shadow: 0 18px 32px rgba(0,0,0,.36);
 }
 
 .card small,
 .card h3,
-.card p {
+.card p,
+.card .envelope-seal,
+.card .fav {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 .card small {
@@ -330,21 +342,28 @@ body::before {
   opacity: .72;
 }
 
+.envelope-seal {
+  width: 54px;
+  height: 54px;
+  margin: 40px auto 4px;
+  background: var(--wax) center/contain no-repeat;
+  filter: drop-shadow(0 5px 7px rgba(0,0,0,.36));
+}
+
 .card h3 {
-  margin-top: 34px;
   text-align: center;
   font-family: 'Great Vibes', cursive;
-  font-size: 2rem;
+  font-size: 1.85rem;
   font-weight: 400;
-  color: #8b2f2b;
+  color: var(--red);
   text-shadow: 0 1px 0 rgba(255,245,230,.8);
 }
 
 .card p {
-  margin-top: 8px;
+  margin-top: 6px;
   text-align: center;
   font-family: 'Special Elite', monospace;
-  font-size: .76rem;
+  font-size: .73rem;
 }
 
 .card::after {
@@ -366,24 +385,19 @@ body::before {
   position: absolute;
   right: 16px;
   bottom: 12px;
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   border: 1px solid rgba(122,7,12,.35);
   border-radius: 50%;
   background: rgba(255,245,230,.72);
-  font-size: .9rem;
+  font-size: .88rem;
   cursor: pointer;
   color: var(--red);
-  z-index: 5;
   display: grid;
   place-items: center;
 }
 
-.fav:hover {
-  transform: scale(1.12);
-}
-
-/* coded postcard */
+/* POSTCARD PREVIEW */
 #letter {
   display: none;
   margin: 40px auto 0;
@@ -393,6 +407,7 @@ body::before {
   overflow: hidden;
   border-radius: 12px;
   background:
+    repeating-linear-gradient(0deg, rgba(80,45,25,.035) 0px, rgba(80,45,25,.035) 1px, transparent 1px, transparent 7px),
     linear-gradient(rgba(255,239,210,.86), rgba(230,196,150,.9)),
     var(--paper) center/cover;
   border: 1px solid rgba(80,45,25,.28);
@@ -409,13 +424,6 @@ body::before {
   background: rgba(80,45,25,.32);
 }
 
-#letter .kiss-mark {
-  right: 48px;
-  bottom: 32px;
-  left: auto;
-  top: auto;
-}
-
 .open-left,
 .open-right {
   width: 50%;
@@ -427,7 +435,7 @@ body::before {
 
 .open-left h3 {
   font-family: 'Great Vibes', cursive;
-  color: #8b2f2b;
+  color: var(--red);
   font-size: 2.1rem;
   font-weight: 400;
 }
@@ -435,7 +443,8 @@ body::before {
 .day,
 .letter-text,
 .address,
-.opened-stamp {
+.opened-stamp,
+.open-full-btn {
   font-family: 'Special Elite', monospace;
 }
 
@@ -454,8 +463,22 @@ body::before {
 .signoff {
   margin-top: 26px;
   font-family: 'Great Vibes', cursive;
-  color: #8b2f2b;
+  color: var(--red);
   font-size: 1.6rem;
+}
+
+.open-full-btn {
+  margin-top: 24px;
+  padding: 9px 14px;
+  border: 1px solid rgba(95,45,35,.55);
+  background: rgba(255,245,226,.55);
+  color: var(--red);
+  cursor: pointer;
+  font-size: .75rem;
+}
+
+.open-full-btn:hover {
+  background: rgba(255,235,200,.85);
 }
 
 .open-right h3 {
@@ -487,8 +510,7 @@ body::before {
   opacity: .6;
 }
 
-.postmark::after {
-  content: "22 APR 2026";
+.postmark span {
   position: absolute;
   top: 18px;
   left: 12px;
@@ -515,6 +537,90 @@ body::before {
   text-align: center;
 }
 
+.preview-kiss {
+  right: 42px;
+  bottom: 24px;
+  transform: rotate(-8deg);
+}
+
+/* FULL LETTER OVERLAY */
+.full-letter-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(30,15,8,.62);
+  backdrop-filter: blur(3px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.full-letter-overlay.show {
+  display: flex;
+}
+
+.vintage-letter {
+  position: relative;
+  width: min(760px, 92vw);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 48px 54px;
+  background:
+    repeating-linear-gradient(0deg, rgba(90,55,35,.045) 0px, rgba(90,55,35,.045) 1px, transparent 1px, transparent 8px),
+    linear-gradient(rgba(255,241,215,.93), rgba(226,194,150,.96)),
+    var(--paper) center/cover;
+  border: 1px solid rgba(90,50,30,.38);
+  box-shadow: 0 28px 80px rgba(0,0,0,.65);
+  animation: tearOpen .75s ease forwards;
+  transform-origin: top center;
+}
+
+@keyframes tearOpen {
+  from {
+    transform: scale(.82) rotate(-2deg);
+    opacity: 0;
+    clip-path: polygon(0 0, 100% 0, 96% 20%, 100% 40%, 94% 58%, 100% 78%, 96% 100%, 0 100%, 4% 78%, 0 57%, 5% 38%, 0 18%);
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+.vintage-letter h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.6rem;
+  color: var(--red);
+  margin-bottom: 18px;
+}
+
+.vintage-letter-text {
+  font-family: 'Special Elite', monospace;
+  font-size: .95rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+}
+
+.close-letter {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  border: 1px solid rgba(95,45,35,.45);
+  background: rgba(255,238,205,.7);
+  color: var(--red);
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.full-letter-kiss {
+  right: 40px;
+  bottom: 28px;
+  transform: rotate(8deg);
+}
+
 .timeline-list {
   display: none;
   font-family: 'Special Elite', monospace;
@@ -528,37 +634,18 @@ body::before {
 }
 
 @media(max-width: 850px) {
-  .header {
-    display: block;
-  }
+  body { background-attachment: scroll; }
 
-  .header-card {
-    display: none;
-  }
+  .header { display: block; }
+  .header-card { display: none; }
+  .content-wrap { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .grid { grid-template-columns: 1fr; }
 
-  .content-wrap {
-    grid-template-columns: 1fr;
-  }
+  .title h1 { font-size: 3.2rem; }
+  .title span { font-size: 2.4rem; }
 
-  .sidebar {
-    display: none;
-  }
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .title h1 {
-    font-size: 3.2rem;
-  }
-
-  .title span {
-    font-size: 2.4rem;
-  }
-
-  #letter::before {
-    display: none;
-  }
+  #letter::before { display: none; }
 
   .open-left,
   .open-right {
@@ -572,10 +659,18 @@ body::before {
 
 <body>
 
+<div id="loader">
+  <div class="loader-card">
+    <div class="loader-seal"></div>
+    <p>opening letters...</p>
+  </div>
+</div>
+
 <div class="page">
   <div class="archive-sheet">
 
     <div class="kiss-mark" style="top: 28px; left: 335px;"></div>
+    <div class="kiss-mark" style="right: 36px; bottom: 34px; transform: rotate(7deg); opacity:.28;"></div>
 
     <div class="header">
       <div class="title">
@@ -609,7 +704,7 @@ body::before {
       <main class="main-panel">
         <div class="panel-head">
           <h2 id="panelTitle">Your Letters</h2>
-          <div class="sort-btn" onclick="toggleSort()">☷ Newest First ▾</div>
+          <div class="sort-btn" onclick="toggleSort()">☷ Oldest First ▴</div>
         </div>
 
         <div class="grid" id="letterGrid"></div>
@@ -618,6 +713,15 @@ body::before {
       </main>
 
     </div>
+  </div>
+</div>
+
+<div class="full-letter-overlay" id="fullLetterOverlay">
+  <div class="vintage-letter">
+    <button class="close-letter" onclick="closeFullLetter()">×</button>
+    <h2 id="fullLetterDate"></h2>
+    <div class="vintage-letter-text" id="fullLetterText"></div>
+    <div class="kiss-mark full-letter-kiss"></div>
   </div>
 </div>
 
@@ -652,6 +756,15 @@ const letters = [
 
 let currentFilter = "all";
 let newestFirst = false;
+let currentFullLetter = "";
+let currentFullDate = "";
+
+function escapeHTML(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
 
 function getFavs() {
   return JSON.parse(localStorage.getItem("echoesFavs") || "[]");
@@ -686,6 +799,7 @@ function renderLetters() {
   grid.innerHTML = shown.map((l) => `
     <div class="card" onclick="showLetter('${l.id}', '${l.date}', '${l.short}')">
       <small>${l.no}</small>
+      <div class="envelope-seal"></div>
       <h3>${l.date}</h3>
       <p>Delivered to future ♡</p>
       <button class="fav" onclick="toggleFav(event, '${l.id}')">
@@ -712,10 +826,8 @@ window.toggleFav = function(event, id) {
 
 window.filterLetters = function(type, el) {
   currentFilter = type;
-
   document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
   el.classList.add("active");
-
   document.getElementById("letter").style.display = "none";
   renderLetters();
 };
@@ -748,6 +860,11 @@ window.showLetter = function(id, dateText, shortDate) {
 
   get(letterRef).then((snap) => {
     let text = snap.exists() ? snap.val().text : "No letter yet.";
+    let safeText = escapeHTML(text);
+    let intro = safeText.length > 170 ? safeText.slice(0, 170) + "..." : safeText;
+
+    currentFullLetter = safeText;
+    currentFullDate = dateText;
 
     const box = document.getElementById("letter");
     box.style.display = "block";
@@ -756,18 +873,14 @@ window.showLetter = function(id, dateText, shortDate) {
       <div class="open-left">
         <h3>${dateText}</h3>
         <div class="day">Written on the 22nd</div>
-        <div class="letter-text">${text}</div>
-        <div class="signoff">Forever yours, as always.</div>
+        <div class="letter-text">${intro}</div>
+        <button class="open-full-btn" onclick="openFullLetter()">break seal & read full letter</button>
       </div>
 
       <div class="open-right">
         <h3>POST CARD</h3>
         <div class="stamp-on-card"></div>
-        <div class="postmark"></div>
-
-        <style>
-          .postmark::after { content: "${shortDate}"; }
-        </style>
+        <div class="postmark"><span>${shortDate}</span></div>
 
         <div class="address">
           <div class="line">To: Future Us ♡</div>
@@ -777,7 +890,7 @@ window.showLetter = function(id, dateText, shortDate) {
         </div>
 
         <div class="opened-stamp">OPENED WITH LOVE<br>ON ${dateText} ♡</div>
-        <div class="kiss-mark"></div>
+        <div class="kiss-mark preview-kiss"></div>
       </div>
     `;
 
@@ -785,7 +898,29 @@ window.showLetter = function(id, dateText, shortDate) {
   });
 };
 
+window.openFullLetter = function() {
+  document.getElementById("fullLetterDate").innerText = currentFullDate;
+  document.getElementById("fullLetterText").innerHTML = currentFullLetter;
+  document.getElementById("fullLetterOverlay").classList.add("show");
+};
+
+window.closeFullLetter = function() {
+  document.getElementById("fullLetterOverlay").classList.remove("show");
+};
+
 renderLetters();
+</script>
+
+<script>
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  setTimeout(() => {
+    loader.style.opacity = "0";
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 700);
+  }, 400);
+});
 </script>
 
 </body>
