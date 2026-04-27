@@ -124,17 +124,18 @@ body::before{
   opacity:.85;
 }
 
+/* KISS MARKS — fixed explicit size so they never stretch */
 .kiss-mark{
   position:absolute;
-  width:92px;
-  height:58px;
+  width:72px;
+  height:46px;
   background:var(--kiss) center/contain no-repeat;
   opacity:.38;
   mix-blend-mode:multiply;
   pointer-events:none;
   z-index:3;
 }
-  
+
 .header{
   position:relative;
   display:flex;
@@ -290,42 +291,48 @@ body::before{
   gap:28px;
 }
 
-/* envelope area — no box behind image */
+/* ENVELOPE CARD — medium height, no box behind image */
 .card{
   position:relative;
-  min-height:205px;
-  padding:20px;
+  height:240px;
+  padding:14px 16px;
   cursor:pointer;
   overflow:visible;
-  border-radius:0;
   background:none !important;
   border:none !important;
   box-shadow:none !important;
   transition:.22s ease;
 }
 
+/* envelope image as background */
 .card::before{
   content:"";
   position:absolute;
-  inset:8px;
+  inset:0;
   background:var(--envelope) center/contain no-repeat;
   z-index:1;
   filter:drop-shadow(0 16px 20px rgba(0,0,0,.34));
   pointer-events:none;
 }
 
-.card::after{
-  content:"";
+/* STAMP — real div inside card, positioned top-right ON the envelope */
+.card-stamp{
   position:absolute;
-  top:36px;
-  right:42px;
-  width:46px;
-  height:58px;
+  top:22px;
+  right:28px;
+  width:44px;
+  height:54px;
   background:var(--stamp1) center/cover no-repeat;
   z-index:4;
-} 
-  
-.card small,.card h3,.card p,.card .envelope-seal,.card .fav{
+  pointer-events:none;
+}
+
+/* all text/interactive content above envelope layer */
+.card small,
+.card h3,
+.card p,
+.card .envelope-seal,
+.card .fav{
   position:relative;
   z-index:3;
 }
@@ -333,17 +340,19 @@ body::before{
 .card small{
   font-family:'Special Elite',monospace;
   opacity:.72;
+  display:block;
+  padding-top:4px;
 }
 
 .envelope-seal{
-  width:58px;
-  height:58px;
-  margin:78px auto 4px;
+  width:56px;
+  height:56px;
+  margin:72px auto 4px;
   background:var(--wax) center/contain no-repeat;
   filter:drop-shadow(0 6px 8px rgba(0,0,0,.40));
-  z-index:4;
+  display:block;
 }
-  
+
 .card h3{
   text-align:center;
   font-family:'Great Vibes',cursive;
@@ -354,25 +363,10 @@ body::before{
 }
 
 .card p{
-  margin-top:6px;
+  margin-top:4px;
   text-align:center;
   font-family:'Special Elite',monospace;
   font-size:.73rem;
-}
-
-.card::after{
-  content:"";
-  position:absolute;
-  top:30px;
-  right:36px;
-  width:46px;
-  height:58px;
-  background:var(--stamp1) center/cover no-repeat;
-  z-index:4;
-}
-
-.card:nth-child(even)::after{
-  background-image:var(--stamp2);
 }
 
 .fav{
@@ -389,6 +383,7 @@ body::before{
   color:var(--red);
   display:grid;
   place-items:center;
+  z-index:5;
 }
 
 #letter{
@@ -482,6 +477,7 @@ body::before{
   font-size:.75rem;
   position:relative;
   overflow:hidden;
+  font-family:'Special Elite',monospace;
 }
 
 .open-full-btn::after{
@@ -546,6 +542,7 @@ body::before{
 .line{
   border-bottom:1px solid rgba(70,45,30,.45);
   padding:11px 0 5px;
+  font-family:'Special Elite',monospace;
 }
 
 .opened-stamp{
@@ -556,12 +553,20 @@ body::before{
   padding:10px 14px;
   font-size:.72rem;
   text-align:center;
+  font-family:'Special Elite',monospace;
 }
 
 .preview-kiss{
+  position:absolute;
   right:42px;
   bottom:24px;
+  width:72px;
+  height:46px;
+  background:var(--kiss) center/contain no-repeat;
   transform:rotate(-8deg);
+  opacity:.38;
+  mix-blend-mode:multiply;
+  pointer-events:none;
 }
 
 .full-letter-overlay{
@@ -623,12 +628,20 @@ body::before{
   width:32px;
   height:32px;
   cursor:pointer;
+  font-size:1.1rem;
 }
 
 .full-letter-kiss{
+  position:absolute;
   right:40px;
   bottom:28px;
+  width:72px;
+  height:46px;
+  background:var(--kiss) center/contain no-repeat;
   transform:rotate(8deg);
+  opacity:.38;
+  mix-blend-mode:multiply;
+  pointer-events:none;
 }
 
 .timeline-list{
@@ -670,29 +683,28 @@ body::before{
 <div class="page">
   <div class="archive-sheet">
 
- <div class="kiss-mark" style="top:18px; left:30px; transform:rotate(-8deg);"></div>
-<div class="kiss-mark" style="top:60px; left:240px; transform:rotate(10deg); opacity:.34;"></div>
-<div class="kiss-mark" style="top:35px; left:500px; transform:rotate(-7deg); opacity:.32;"></div>
-<div class="kiss-mark" style="top:70px; right:250px; transform:rotate(8deg); opacity:.30;"></div>
-
-<div class="kiss-mark" style="top:190px; left:45px; transform:rotate(-12deg); opacity:.34;"></div>
-<div class="kiss-mark" style="top:330px; left:70px; transform:rotate(8deg); opacity:.32;"></div>
-<div class="kiss-mark" style="top:470px; left:38px; transform:rotate(-6deg); opacity:.30;"></div>
-<div class="kiss-mark" style="top:610px; left:80px; transform:rotate(10deg); opacity:.28;"></div>
-<div class="kiss-mark" style="top:760px; left:42px; transform:rotate(-11deg); opacity:.26;"></div>
-<div class="kiss-mark" style="top:900px; left:95px; transform:rotate(7deg); opacity:.24;"></div>
-<div class="kiss-mark" style="top:1040px; left:50px; transform:rotate(-9deg); opacity:.22;"></div>
-<div class="kiss-mark" style="top:1180px; left:120px; transform:rotate(12deg); opacity:.20;"></div>
-
-<!-- BOTTOM LEFT EXTRA -->
-<img src="kissmark.png" class="kiss" style="bottom:120px; left:80px; transform:rotate(6deg);">
-<img src="kissmark.png" class="kiss" style="bottom:40px; left:200px; transform:rotate(-8deg);">
+    <!-- kiss marks scattered across page — all use .kiss-mark class which now has fixed 72x46px size -->
+    <div class="kiss-mark" style="top:18px;left:30px;transform:rotate(-8deg);"></div>
+    <div class="kiss-mark" style="top:60px;left:240px;transform:rotate(10deg);opacity:.28;"></div>
+    <div class="kiss-mark" style="top:35px;left:500px;transform:rotate(-7deg);opacity:.26;"></div>
+    <div class="kiss-mark" style="top:70px;right:250px;transform:rotate(8deg);opacity:.24;"></div>
+    <div class="kiss-mark" style="top:200px;left:45px;transform:rotate(-12deg);opacity:.28;"></div>
+    <div class="kiss-mark" style="top:360px;left:70px;transform:rotate(8deg);opacity:.26;"></div>
+    <div class="kiss-mark" style="top:520px;left:38px;transform:rotate(-6deg);opacity:.24;"></div>
+    <div class="kiss-mark" style="top:680px;left:80px;transform:rotate(10deg);opacity:.22;"></div>
+    <div class="kiss-mark" style="top:840px;left:42px;transform:rotate(-11deg);opacity:.20;"></div>
+    <div class="kiss-mark" style="top:1000px;left:95px;transform:rotate(7deg);opacity:.18;"></div>
+    <div class="kiss-mark" style="top:1160px;left:50px;transform:rotate(-9deg);opacity:.16;"></div>
+    <div class="kiss-mark" style="top:280px;right:30px;transform:rotate(9deg);opacity:.22;"></div>
+    <div class="kiss-mark" style="top:450px;right:55px;transform:rotate(-6deg);opacity:.20;"></div>
+    <div class="kiss-mark" style="top:620px;right:28px;transform:rotate(13deg);opacity:.18;"></div>
+    <div class="kiss-mark" style="top:800px;right:70px;transform:rotate(-10deg);opacity:.16;"></div>
 
     <div class="header">
       <div class="title">
         <h1>Echoes</h1>
         <span>in Envelopes</span>
-        <div class="tagline">“Some feelings are meant<br>to be written, not forgotten.”</div>
+        <div class="tagline">"Some feelings are meant<br>to be written, not forgotten."</div>
       </div>
 
       <div class="header-card">
@@ -737,7 +749,7 @@ body::before{
     <button class="close-letter" onclick="closeFullLetter()">×</button>
     <h2 id="fullLetterDate"></h2>
     <div class="vintage-letter-text" id="fullLetterText"></div>
-    <div class="kiss-mark full-letter-kiss"></div>
+    <div class="full-letter-kiss"></div>
   </div>
 </div>
 
@@ -812,9 +824,10 @@ function renderLetters(){
 
   if(newestFirst) shown.reverse();
 
-  grid.innerHTML=shown.map(l=>`
+  grid.innerHTML=shown.map((l,i)=>`
     <div class="card" onclick="showLetter('${l.id}','${l.date}','${l.short}')">
       <small>${l.no}</small>
+      <div class="card-stamp" style="${i%2===1?'background-image:var(--stamp2)':''}"></div>
       <div class="envelope-seal"></div>
       <h3>${l.date}</h3>
       <p>Delivered to future ♡</p>
@@ -828,13 +841,11 @@ function renderLetters(){
 window.toggleFav=function(event,id){
   event.stopPropagation();
   let favs=getFavs();
-
   if(favs.includes(id)){
     favs=favs.filter(x=>x!==id);
   }else{
     favs.push(id);
   }
-
   saveFavs(favs);
   renderLetters();
 };
@@ -906,7 +917,7 @@ window.showLetter=function(id,dateText,shortDate){
         </div>
 
         <div class="opened-stamp">OPENED WITH LOVE<br>ON ${dateText} ♡</div>
-        <div class="kiss-mark preview-kiss"></div>
+        <div class="preview-kiss"></div>
       </div>
     `;
 
