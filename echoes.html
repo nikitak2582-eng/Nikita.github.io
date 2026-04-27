@@ -325,17 +325,18 @@ body::before{
   position:absolute;
   top:0;
   right:0;
-  width:48px;
-  height:60px;
+
+  width:38px;   /* 👈 smaller */
+  height:48px;
+
   background:var(--stamp1) center/contain no-repeat;
   z-index:4;
   pointer-events:none;
 
-  /* 🔧 precise placement */
-  transform:translate(-28px, 18px) rotate(-2deg);
+  /* 👇 push it to actual envelope corner (beyond flap line) */
+  transform:translate(-18px, 6px) rotate(-3deg);
 
-  /* keep raw but slightly lighter */
-  opacity:.92;
+  opacity:.9;
   filter:brightness(1.05) sepia(.06);
 }
   
@@ -713,6 +714,33 @@ body::before{
   pointer-events:none;
   z-index:1;
 }
+
+  .env-title{
+  text-align:center;
+  font-family:'Great Vibes',cursive;
+  font-size:1.9rem;
+  color:var(--red);
+  margin-top:8px;
+}
+
+.env-sub{
+  text-align:center;
+  font-family:'Special Elite',monospace;
+  font-size:.72rem;
+  margin-top:2px;
+}
+
+/* 👇 DATE BELOW ENVELOPE */
+.env-date{
+  position:absolute;
+  bottom:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:'Special Elite',monospace;
+  font-size:.75rem;
+  color:#4d3025;
+  opacity:.85;
+}
   
 </style>
 </head>
@@ -822,17 +850,16 @@ const app=initializeApp(firebaseConfig);
 const db=getDatabase(app);
 
 const letters=[
-  {id:"april22",date:"22 April 2026",short:"22 APR 2026",no:"No.01",year:"2026"},
-  {id:"may22",date:"22 May 2026",short:"22 MAY 2026",no:"No.02",year:"2026"},
-  {id:"june22",date:"22 June 2026",short:"22 JUN 2026",no:"No.03",year:"2026"},
-  {id:"july22",date:"22 July 2026",short:"22 JUL 2026",no:"No.04",year:"2026"},
-  {id:"august22",date:"22 August 2026",short:"22 AUG 2026",no:"No.05",year:"2026"},
-  {id:"september22",date:"22 September 2026",short:"22 SEP 2026",no:"No.06",year:"2026"},
-  {id:"october22",date:"22 October 2026",short:"22 OCT 2026",no:"No.07",year:"2026"},
-  {id:"november22",date:"22 November 2026",short:"22 NOV 2026",no:"No.08",year:"2026"},
-  {id:"december22",date:"22 December 2026",short:"22 DEC 2026",no:"No.09",year:"2026"}
+  {id:"april22",title:"To the beginning",date:"22 April 2026",short:"22 APR 2026",year:"2026"},
+  {id:"may22",title:"To us",date:"22 May 2026",short:"22 MAY 2026",year:"2026"},
+  {id:"june22",title:"To the chaos",date:"22 June 2026",short:"22 JUN 2026",year:"2026"},
+  {id:"july22",title:"To the comfort",date:"22 July 2026",short:"22 JUL 2026",year:"2026"},
+  {id:"august22",title:"To the distance",date:"22 August 2026",short:"22 AUG 2026",year:"2026"},
+  {id:"september22",title:"To the silence",date:"22 September 2026",short:"22 SEP 2026",year:"2026"},
+  {id:"october22",title:"To the memories",date:"22 October 2026",short:"22 OCT 2026",year:"2026"},
+  {id:"november22",title:"To the longing",date:"22 November 2026",short:"22 NOV 2026",year:"2026"},
+  {id:"december22",title:"To forever",date:"22 December 2026",short:"22 DEC 2026",year:"2026"}
 ];
-
 let currentFilter="all";
 let newestFirst=false;
 let currentFullLetter="";
@@ -879,8 +906,9 @@ function renderLetters(){
     <div class="card" onclick="showLetter('${l.id}','${l.date}','${l.short}')">
       <div class="card-stamp" style="${i%2===1?'background-image:var(--stamp2)':''}"></div>
       <div class="envelope-seal"></div>
-      <h3>${l.date}</h3>
-      <p>Delivered to future ♡</p>
+      <h3 class="env-title">${l.title}</h3>
+      <p class="env-sub">Delivered to future ♡</p>
+      <div class="env-date">${l.date}</div>
       <button class="fav" onclick="toggleFav(event,'${l.id}')">
         ${favs.includes(l.id)?"♥":"♡"}
       </button>
