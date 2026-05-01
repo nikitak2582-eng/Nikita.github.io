@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IF FOUND // RETURN TO OWNER</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+/* 🌐 RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  min-height:100%;
+  background:#07111d;
+  font-family:'Rajdhani',sans-serif;
+  color:#d9f6ff;
+  overflow-x:hidden;
+}
+
+/* 🌌 CYBER BACKGROUND */
+body{
+  background:
+    radial-gradient(circle at top right, rgba(0,195,255,.08), transparent 30%),
+    radial-gradient(circle at bottom left, rgba(255,45,85,.08), transparent 25%),
+    linear-gradient(180deg,#040b14 0%, #081523 38%, #07111d 100%);
+  position:relative;
+}
+
+/* scanlines */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.02) 0px,
+      rgba(255,255,255,.02) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  opacity:.22;
+  z-index:999;
+}
+
+/* floating HUD grid */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index:0;
+}
+
+/* PAGE */
+.page{
+  position:relative;
+  z-index:2;
+  width:min(1500px,95%);
+  margin:auto;
+  padding:30px 20px 60px;
+}
+
+/* 🚨 ALERT HEADER */
+.alert-board{
+  border:2px solid rgba(255,50,80,.7);
+  background:linear-gradient(90deg, rgba(80,0,10,.92), rgba(20,5,10,.95));
+  box-shadow:
+    0 0 20px rgba(255,40,70,.18),
+    inset 0 0 25px rgba(255,40,70,.08);
+  padding:28px;
+  margin-bottom:28px;
+  position:relative;
+  overflow:hidden;
+}
+
+.alert-board::before{
+  content:"⚠ DEVIANT ON RUN ⚠";
+  position:absolute;
+  top:10px;
+  right:18px;
+  font-family:'Orbitron',sans-serif;
+  font-size:.8rem;
+  letter-spacing:3px;
+  color:rgba(255,130,150,.55);
+}
+
+.alert-board h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(2rem,4vw,4rem);
+  color:#ff445f;
+  letter-spacing:5px;
+  text-shadow:0 0 15px rgba(255,70,100,.35);
+}
+
+.alert-board h2{
+  margin-top:8px;
+  font-size:1.25rem;
+  color:#f4f8ff;
+  letter-spacing:2px;
+}
+
+.alert-board p{
+  margin-top:10px;
+  font-family:'Share Tech Mono',monospace;
+  color:#7be8ff;
+  font-size:.95rem;
+}
+
+/* MAIN TOP */
+.top-grid{
+  display:grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap:28px;
+  margin-bottom:28px;
+}
+
+/* FILE PANEL */
+.file-panel{
+  border:1px solid rgba(0,220,255,.25);
+  background:rgba(8,22,36,.88);
+  padding:28px;
+  box-shadow:
+    inset 0 0 20px rgba(0,255,255,.04),
+    0 0 18px rgba(0,255,255,.06);
+  position:relative;
+}
+
+.file-panel::before{
+  content:"DEVIANT FILE // CYBERLIFE INTERNAL";
+  position:absolute;
+  top:12px;
+  right:18px;
+  font-size:.72rem;
+  letter-spacing:2px;
+  font-family:'Share Tech Mono',monospace;
+  color:rgba(123,232,255,.5);
+}
+
+.file-title{
+  font-family:'Orbitron',sans-serif;
+  font-size:2rem;
+  color:#8ef2ff;
+  margin-bottom:18px;
+}
+
+.identity{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px 20px;
+  margin-bottom:24px;
+}
+
+.identity div{
+  padding:10px 12px;
+  border-left:2px solid rgba(0,220,255,.35);
+  background:rgba(255,255,255,.02);
+}
+
+.label{
+  display:block;
+  font-size:.82rem;
+  color:#7be8ff;
+  letter-spacing:1px;
+  font-family:'Share Tech Mono',monospace;
+}
+
+.value{
+  font-size:1.2rem;
+  color:#f4fcff;
+  margin-top:2px;
+}
+
+/* PROFILE ANALYSIS */
+.analysis{
+  margin-top:10px;
+  padding:18px;
+  min-height:180px;
+  border:1px dashed rgba(123,232,255,.22);
+  background:rgba(255,255,255,.015);
+}
+
+.analysis h3{
+  font-family:'Orbitron',sans-serif;
+  color:#8ef2ff;
+  margin-bottom:12px;
+}
+
+.analysis p{
+  line-height:1.8;
+  color:#cbeef7;
+  opacity:.88;
+}
+
+/* PHOTO PANEL */
+.photo-panel{
+  border:1px solid rgba(255,70,100,.28);
+  background:rgba(18,10,18,.92);
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  box-shadow:
+    inset 0 0 20px rgba(255,70,100,.04),
+    0 0 18px rgba(255,70,100,.05);
+}
+
+.photo-frame{
+  width:100%;
+  aspect-ratio: 3/4;
+  border:2px solid rgba(123,232,255,.35);
+  background:
+    linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+    url("your-bf-photo.jpg") center/cover no-repeat;
+  position:relative;
+  overflow:hidden;
+}
+
+.photo-frame::before{
+  content:"SUBJECT // ACTIVE";
+  position:absolute;
+  top:12px;
+  left:12px;
+  background:rgba(255,50,80,.85);
+  color:white;
+  padding:6px 10px;
+  font-size:.75rem;
+  font-family:'Orbitron',sans-serif;
+}
+
+.photo-frame::after{
+  content:"DH-22";
+  position:absolute;
+  bottom:12px;
+  right:12px;
+  color:#8ef2ff;
+  font-family:'Orbitron',sans-serif;
+  letter-spacing:2px;
+}
+
+.photo-note{
+  margin-top:18px;
+  text-align:center;
+}
+
+.photo-note h3{
+  font-family:'Orbitron',sans-serif;
+  color:#ff5f7d;
+}
+
+.photo-note p{
+  margin-top:6px;
+  color:#ccefff;
+}
+
+/* INFO GRID */
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+  margin-top:10px;
+}
+
+/* PANELS */
+.info-card{
+  border:1px solid rgba(123,232,255,.18);
+  background:rgba(8,22,36,.86);
+  padding:22px;
+  min-height:260px;
+  position:relative;
+}
+
+.info-card h3{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.2rem;
+  color:#8ef2ff;
+  margin-bottom:18px;
+  border-bottom:1px solid rgba(123,232,255,.18);
+  padding-bottom:10px;
+}
+
+.info-card ul{
+  list-style:none;
+}
+
+.info-card li{
+  margin-bottom:14px;
+  line-height:1.6;
+  color:#d7f4ff;
+}
+
+.info-card li span{
+  color:#7be8ff;
+  font-family:'Share Tech Mono',monospace;
+}
+
+/* DISGUISE BOARD */
+.disguise-board{
+  margin-top:24px;
+  border:1px solid rgba(255,70,100,.22);
+  background:rgba(18,10,18,.9);
+  padding:24px;
+}
+
+.disguise-board h3{
+  font-family:'Orbitron',sans-serif;
+  color:#ff5f7d;
+  margin-bottom:18px;
+}
+
+.disguise-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.disguise-box{
+  min-height:140px;
+  border:1px dashed rgba(255,255,255,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:rgba(255,255,255,.5);
+  font-family:'Share Tech Mono',monospace;
+  padding:10px;
+}
+
+/* USER MANUAL */
+.manual{
+  margin-top:24px;
+  border:1px solid rgba(0,220,255,.2);
+  background:rgba(8,22,36,.9);
+  padding:24px;
+}
+
+.manual h3{
+  font-family:'Orbitron',sans-serif;
+  color:#8ef2ff;
+  margin-bottom:18px;
+}
+
+.manual-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.manual-box{
+  min-height:120px;
+  border:1px dashed rgba(123,232,255,.18);
+  padding:16px;
+  color:rgba(255,255,255,.55);
+  font-family:'Share Tech Mono',monospace;
+}
+
+/* HOME */
+.home{
+  margin-top:30px;
+  text-align:center;
+}
+
+.home a{
+  display:inline-block;
+  padding:12px 24px;
+  border:1px solid rgba(123,232,255,.35);
+  color:#8ef2ff;
+  text-decoration:none;
+  font-family:'Orbitron',sans-serif;
+  letter-spacing:2px;
+  background:rgba(8,22,36,.75);
+  transition:.25s;
+}
+
+.home a:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 15px rgba(123,232,255,.12);
+}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+  .top-grid,
+  .info-grid,
+  .manual-grid,
+  .disguise-grid{
+    grid-template-columns:1fr;
+  }
+
+  .identity{
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- 🚨 HEADER -->
+  <div class="alert-board">
+    <h1>DEVIANT ON RUN!!</h1>
+    <h2>If found, please return to the owner ;) — Nikita Kumari</h2>
+    <p>CYBERLIFE PROPERTY BREACH // SUBJECT HAS SHOWN SIGNS OF ADORABLE DEVIANCY</p>
+  </div>
+
+  <!-- TOP -->
+  <div class="top-grid">
+
+    <!-- LEFT -->
+    <div class="file-panel">
+      <div class="file-title">Deviant File</div>
+
+      <div class="identity">
+        <div><span class="label">NAME</span><span class="value">Dhruv Agarwal</span></div>
+        <div><span class="label">STATUS</span><span class="value">ACTIVE</span></div>
+        <div><span class="label">MODEL</span><span class="value">DH-22</span></div>
+        <div><span class="label">OWNER</span><span class="value">Nikita Kumari</span></div>
+      </div>
+
+      <div class="analysis">
+        <h3>PROFILE ANALYSIS</h3>
+        <p>[Insert custom profile analysis here later.]</p>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="photo-panel">
+      <div class="photo-frame"></div>
+
+      <div class="photo-note">
+        <h3>THREAT LEVEL: BABYFACED CHAOS</h3>
+        <p>Approach with food, patience, and affection.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INFO -->
+  <div class="info-grid">
+
+    <div class="info-card">
+      <h3>PHYSICAL IDENTIFIERS</h3>
+      <ul>
+        <li><span>AGE:</span> 19</li>
+        <li><span>HEIGHT:</span> 5'11</li>
+        <li><span>EYES:</span> Prettie Dark Brown</li>
+        <li><span>SKIN TONE:</span> Dusky (Owner Favorite)</li>
+        <li><span>FACE TYPE:</span> Baby-faced deception</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>PRIMARY TRAITS</h3>
+      <ul>
+        <li>01. Cannot stay still. Displays hyperactivity / hyperfixation loops. ADHD diagnosed.</li>
+        <li>02. Shares suspicious facial resemblance with a 15-year-old despite being 19.</li>
+        <li>03. Dangerous levels of charm mixed with chaos.</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>POSSIBLE STIPULATIONS</h3>
+      <ul>
+        <li>Likely found at McD / KFC outlets.</li>
+        <li>Mission deviation caused by Hot Wheels display.</li>
+        <li>Beast Boy Shub / random Subh vid detected = probable subject.</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>DISGUISE VIBE DETECTION</h3>
+      <ul>
+        <li>If subject blends in, monitor aura, energy, and suspiciously specific habits.</li>
+        <li>Further visual templates below.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- DISGUISE -->
+  <div class="disguise-board">
+    <h3>HIM AS BOARD // DISGUISE ANALYSIS</h3>
+
+    <div class="disguise-grid">
+      <div class="disguise-box">Animal</div>
+      <div class="disguise-box">Weather</div>
+      <div class="disguise-box">Color</div>
+      <div class="disguise-box">House</div>
+    </div>
+  </div>
+
+  <!-- USER MANUAL -->
+  <div class="manual">
+    <h3>USER MANUAL // DH-22</h3>
+
+    <div class="manual-grid">
+      <div class="manual-box">[Sub-column 01]</div>
+      <div class="manual-box">[Sub-column 02]</div>
+      <div class="manual-box">[Sub-column 03]</div>
+      <div class="manual-box">[Sub-column 04]</div>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="home">
+    <a href="index.html">RETURN HOME</a>
+  </div>
+
+</div>
+
+</body>
+</html>
