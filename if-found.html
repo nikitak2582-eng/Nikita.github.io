@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IF FOUND // RETURN TO OWNER</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&family=Cinzel:wght@500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-/* 🌐 RESET */
+/* 🌌 RESET */
 *{
   margin:0;
   padding:0;
@@ -17,236 +17,285 @@
 
 html,body{
   min-height:100%;
-  background:#07111d;
-  font-family:'Rajdhani',sans-serif;
-  color:#d9f6ff;
   overflow-x:hidden;
 }
 
-/* 🌌 CYBER BACKGROUND */
 body{
+  font-family:'Rajdhani',sans-serif;
+  color:#ebfaff;
   background:
-    radial-gradient(circle at top right, rgba(0,195,255,.08), transparent 30%),
-    radial-gradient(circle at bottom left, rgba(255,45,85,.08), transparent 25%),
-    linear-gradient(180deg,#040b14 0%, #081523 38%, #07111d 100%);
+    radial-gradient(circle at 15% 20%, rgba(111,214,255,.12), transparent 24%),
+    radial-gradient(circle at 82% 18%, rgba(255,88,130,.10), transparent 26%),
+    radial-gradient(circle at 50% 78%, rgba(173,120,255,.08), transparent 28%),
+    linear-gradient(135deg,#01030a 0%, #050c18 22%, #0a1630 55%, #040814 100%);
   position:relative;
 }
 
-/* scanlines */
+/* ✨ STARFIELD */
 body::before{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,.02) 0px,
-      rgba(255,255,255,.02) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-  opacity:.22;
-  z-index:999;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1.7px);
+  background-size:180px 180px;
+  opacity:.18;
+  animation:starScroll 120s linear infinite;
+  z-index:0;
 }
 
-/* floating HUD grid */
+/* 🌠 AURORA GLASS */
 body::after{
   content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  background-image:
-    linear-gradient(rgba(0,255,255,.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,255,.035) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background:
+    linear-gradient(115deg,
+      transparent 0%,
+      rgba(111,214,255,.03) 22%,
+      transparent 38%,
+      rgba(255,88,130,.025) 62%,
+      transparent 78%);
+  mix-blend-mode:screen;
+  animation:auroraShift 18s ease-in-out infinite alternate;
   z-index:0;
 }
 
-/* PAGE */
-.page{
-  position:relative;
-  z-index:2;
-  width:min(1500px,95%);
-  margin:auto;
-  padding:30px 20px 60px;
+@keyframes starScroll{
+  from{transform:translateY(0);}
+  to{transform:translateY(-180px);}
 }
 
-/* 🚨 ALERT HEADER */
-.alert-board{
-  border:2px solid rgba(255,50,80,.7);
-  background:linear-gradient(90deg, rgba(80,0,10,.92), rgba(20,5,10,.95));
-  box-shadow:
-    0 0 20px rgba(255,40,70,.18),
-    inset 0 0 25px rgba(255,40,70,.08);
-  padding:28px;
-  margin-bottom:28px;
+@keyframes auroraShift{
+  0%{transform:translateX(-4%);}
+  100%{transform:translateX(4%);}
+}
+
+/* 🌌 FLOATING ORBS */
+.cosmic-orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.14;
+  pointer-events:none;
+  z-index:1;
+}
+
+.orb-one{
+  width:240px;
+  height:240px;
+  background:#6fd6ff;
+  top:8%;
+  left:3%;
+}
+
+.orb-two{
+  width:260px;
+  height:260px;
+  background:#ff5c86;
+  bottom:8%;
+  right:4%;
+}
+
+/* 🌐 PAGE */
+.page{
   position:relative;
+  z-index:3;
+  width:min(1550px,95%);
+  margin:auto;
+  padding:34px 20px 80px;
+}
+
+/* 🌟 PANEL BASE */
+.panel{
+  position:relative;
+  border-radius:28px;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background:
+    linear-gradient(145deg,
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.015));
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:
+    inset 0 0 28px rgba(255,255,255,.02),
+    0 18px 55px rgba(0,0,0,.38);
   overflow:hidden;
 }
 
-.alert-board::before{
-  content:"⚠ DEVIANT ON RUN ⚠";
+.panel::before{
+  content:"";
   position:absolute;
-  top:10px;
-  right:18px;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(120deg,
+      transparent 0%,
+      rgba(111,214,255,.04) 28%,
+      transparent 50%,
+      rgba(255,88,130,.03) 72%,
+      transparent 100%);
+}
+
+/* 🚨 ALERT BOARD */
+.alert-board{
+  padding:44px 36px;
+  margin-bottom:34px;
+  border:1px solid rgba(255,88,130,.18);
+}
+
+.alert-board .micro{
+  position:absolute;
+  top:18px;
+  right:24px;
   font-family:'Orbitron',sans-serif;
-  font-size:.8rem;
+  font-size:.72rem;
   letter-spacing:3px;
-  color:rgba(255,130,150,.55);
+  color:rgba(143,223,255,.45);
 }
 
 .alert-board h1{
-  font-family:'Orbitron',sans-serif;
-  font-size:clamp(2rem,4vw,4rem);
-  color:#ff445f;
-  letter-spacing:5px;
-  text-shadow:0 0 15px rgba(255,70,100,.35);
+  font-family:'Syncopate',sans-serif;
+  font-size:clamp(2.4rem,5vw,5.4rem);
+  letter-spacing:8px;
+  color:#ffffff;
+  text-transform:uppercase;
+  text-shadow:
+    0 0 18px rgba(111,214,255,.24),
+    0 0 34px rgba(255,88,130,.14);
 }
 
 .alert-board h2{
-  margin-top:8px;
-  font-size:1.25rem;
-  color:#f4f8ff;
+  margin-top:16px;
+  font-family:'Cinzel',serif;
+  font-size:1.3rem;
   letter-spacing:2px;
+  color:#dff8ff;
 }
 
 .alert-board p{
-  margin-top:10px;
-  font-family:'Share Tech Mono',monospace;
-  color:#7be8ff;
-  font-size:.95rem;
+  margin-top:14px;
+  font-size:1rem;
+  letter-spacing:3px;
+  color:#8fdfff;
+  text-transform:uppercase;
 }
 
-/* MAIN TOP */
+/* TOP GRID */
 .top-grid{
   display:grid;
-  grid-template-columns: 1.25fr .75fr;
+  grid-template-columns:1.2fr .8fr;
   gap:28px;
   margin-bottom:28px;
 }
 
-/* FILE PANEL */
+/* 📂 FILE PANEL */
 .file-panel{
-  border:1px solid rgba(0,220,255,.25);
-  background:rgba(8,22,36,.88);
-  padding:28px;
-  box-shadow:
-    inset 0 0 20px rgba(0,255,255,.04),
-    0 0 18px rgba(0,255,255,.06);
-  position:relative;
-}
-
-.file-panel::before{
-  content:"DEVIANT FILE // CYBERLIFE INTERNAL";
-  position:absolute;
-  top:12px;
-  right:18px;
-  font-size:.72rem;
-  letter-spacing:2px;
-  font-family:'Share Tech Mono',monospace;
-  color:rgba(123,232,255,.5);
+  padding:30px;
 }
 
 .file-title{
-  font-family:'Orbitron',sans-serif;
+  font-family:'Syncopate',sans-serif;
   font-size:2rem;
-  color:#8ef2ff;
-  margin-bottom:18px;
+  letter-spacing:4px;
+  margin-bottom:24px;
+  color:white;
 }
 
 .identity{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:10px 20px;
-  margin-bottom:24px;
+  gap:16px;
 }
 
-.identity div{
-  padding:10px 12px;
-  border-left:2px solid rgba(0,220,255,.35);
+.identity-box{
+  border-radius:18px;
+  padding:16px;
   background:rgba(255,255,255,.02);
+  border:1px solid rgba(143,223,255,.08);
 }
 
 .label{
   display:block;
-  font-size:.82rem;
-  color:#7be8ff;
-  letter-spacing:1px;
-  font-family:'Share Tech Mono',monospace;
+  font-family:'Orbitron',sans-serif;
+  font-size:.72rem;
+  letter-spacing:2px;
+  color:#8fdfff;
 }
 
 .value{
-  font-size:1.2rem;
-  color:#f4fcff;
-  margin-top:2px;
+  display:block;
+  margin-top:6px;
+  font-size:1.18rem;
+  color:white;
 }
 
-/* PROFILE ANALYSIS */
+/* ANALYSIS */
 .analysis{
-  margin-top:10px;
-  padding:18px;
-  min-height:180px;
-  border:1px dashed rgba(123,232,255,.22);
+  margin-top:24px;
+  padding:24px;
+  border-radius:22px;
+  border:1px solid rgba(143,223,255,.08);
   background:rgba(255,255,255,.015);
+  min-height:220px;
 }
 
 .analysis h3{
-  font-family:'Orbitron',sans-serif;
-  color:#8ef2ff;
-  margin-bottom:12px;
+  font-family:'Syncopate',sans-serif;
+  font-size:1rem;
+  letter-spacing:3px;
+  color:white;
+  margin-bottom:14px;
 }
 
 .analysis p{
-  line-height:1.8;
-  color:#cbeef7;
-  opacity:.88;
+  line-height:1.9;
+  color:#d8f6ff;
 }
 
-/* PHOTO PANEL */
+/* 📸 PHOTO */
 .photo-panel{
-  border:1px solid rgba(255,70,100,.28);
-  background:rgba(18,10,18,.92);
-  padding:22px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  box-shadow:
-    inset 0 0 20px rgba(255,70,100,.04),
-    0 0 18px rgba(255,70,100,.05);
+  padding:24px;
 }
 
 .photo-frame{
   width:100%;
-  aspect-ratio: 3/4;
-  border:2px solid rgba(123,232,255,.35);
+  aspect-ratio:3/4;
+  border-radius:26px;
+  border:1px solid rgba(143,223,255,.16);
   background:
-    linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+    linear-gradient(rgba(0,0,0,.28),rgba(0,0,0,.35)),
     url("your-bf-photo.jpg") center/cover no-repeat;
   position:relative;
   overflow:hidden;
+  box-shadow:
+    inset 0 0 40px rgba(111,214,255,.05),
+    0 0 28px rgba(111,214,255,.05);
 }
 
 .photo-frame::before{
   content:"SUBJECT // ACTIVE";
   position:absolute;
-  top:12px;
-  left:12px;
-  background:rgba(255,50,80,.85);
-  color:white;
-  padding:6px 10px;
-  font-size:.75rem;
+  top:16px;
+  left:16px;
+  background:linear-gradient(135deg,#ff4d73,#ff7998);
+  padding:7px 12px;
+  border-radius:10px;
+  font-size:.72rem;
   font-family:'Orbitron',sans-serif;
+  color:white;
 }
 
 .photo-frame::after{
   content:"DH-22";
   position:absolute;
-  bottom:12px;
-  right:12px;
-  color:#8ef2ff;
-  font-family:'Orbitron',sans-serif;
-  letter-spacing:2px;
+  bottom:16px;
+  right:16px;
+  font-family:'Syncopate',sans-serif;
+  color:white;
+  font-size:.95rem;
 }
 
 .photo-note{
@@ -255,39 +304,36 @@ body::after{
 }
 
 .photo-note h3{
-  font-family:'Orbitron',sans-serif;
-  color:#ff5f7d;
+  font-family:'Syncopate',sans-serif;
+  font-size:1rem;
+  color:#ffffff;
 }
 
 .photo-note p{
-  margin-top:6px;
-  color:#ccefff;
+  margin-top:8px;
+  color:#d9f6ff;
 }
 
-/* INFO GRID */
+/* 🧬 INFO GRID */
 .info-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:24px;
-  margin-top:10px;
 }
 
-/* PANELS */
 .info-card{
-  border:1px solid rgba(123,232,255,.18);
-  background:rgba(8,22,36,.86);
-  padding:22px;
-  min-height:260px;
-  position:relative;
+  padding:24px;
+  min-height:280px;
 }
 
 .info-card h3{
-  font-family:'Orbitron',sans-serif;
-  font-size:1.2rem;
-  color:#8ef2ff;
+  font-family:'Syncopate',sans-serif;
+  font-size:1rem;
+  letter-spacing:3px;
+  color:white;
   margin-bottom:18px;
-  border-bottom:1px solid rgba(123,232,255,.18);
   padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .info-card ul{
@@ -295,105 +341,101 @@ body::after{
 }
 
 .info-card li{
+  position:relative;
+  padding-left:18px;
   margin-bottom:14px;
-  line-height:1.6;
-  color:#d7f4ff;
+  line-height:1.7;
 }
 
-.info-card li span{
-  color:#7be8ff;
-  font-family:'Share Tech Mono',monospace;
+.info-card li::before{
+  content:"◈";
+  position:absolute;
+  left:0;
+  color:#8fdfff;
 }
 
-/* DISGUISE BOARD */
-.disguise-board{
-  margin-top:24px;
-  border:1px solid rgba(255,70,100,.22);
-  background:rgba(18,10,18,.9);
-  padding:24px;
-}
-
-.disguise-board h3{
-  font-family:'Orbitron',sans-serif;
-  color:#ff5f7d;
-  margin-bottom:18px;
-}
-
-.disguise-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-
-.disguise-box{
-  min-height:140px;
-  border:1px dashed rgba(255,255,255,.18);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:rgba(255,255,255,.5);
-  font-family:'Share Tech Mono',monospace;
-  padding:10px;
-}
-
-/* USER MANUAL */
+/* 🪞 DISGUISE BOARD */
+.disguise-board,
 .manual{
-  margin-top:24px;
-  border:1px solid rgba(0,220,255,.2);
-  background:rgba(8,22,36,.9);
-  padding:24px;
+  margin-top:28px;
+  padding:28px;
 }
 
+.disguise-board h3,
 .manual h3{
-  font-family:'Orbitron',sans-serif;
-  color:#8ef2ff;
+  font-family:'Syncopate',sans-serif;
+  font-size:1rem;
+  letter-spacing:3px;
+  color:white;
   margin-bottom:18px;
 }
 
+.disguise-grid,
 .manual-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:18px;
 }
 
+.disguise-box,
 .manual-box{
-  min-height:120px;
-  border:1px dashed rgba(123,232,255,.18);
-  padding:16px;
+  min-height:150px;
+  border-radius:20px;
+  border:1px dashed rgba(255,255,255,.12);
+  background:rgba(255,255,255,.015);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
   color:rgba(255,255,255,.55);
-  font-family:'Share Tech Mono',monospace;
+  font-family:'Orbitron',sans-serif;
+  letter-spacing:2px;
+  padding:14px;
+  transition:.35s ease;
 }
 
-/* HOME */
+.disguise-box:hover,
+.manual-box:hover{
+  transform:translateY(-4px) scale(1.02);
+  border-color:rgba(143,223,255,.24);
+  box-shadow:0 0 18px rgba(143,223,255,.06);
+}
+
+/* 🏠 HOME */
 .home{
-  margin-top:30px;
+  margin-top:34px;
   text-align:center;
 }
 
 .home a{
   display:inline-block;
-  padding:12px 24px;
-  border:1px solid rgba(123,232,255,.35);
-  color:#8ef2ff;
+  padding:15px 34px;
+  border-radius:40px;
+  font-family:'Syncopate',sans-serif;
+  letter-spacing:3px;
   text-decoration:none;
-  font-family:'Orbitron',sans-serif;
-  letter-spacing:2px;
-  background:rgba(8,22,36,.75);
-  transition:.25s;
+  color:white;
+  border:1px solid rgba(143,223,255,.18);
+  background:
+    linear-gradient(135deg,
+      rgba(111,214,255,.08),
+      rgba(255,255,255,.02));
+  transition:.3s ease;
 }
 
 .home a:hover{
-  transform:translateY(-3px);
-  box-shadow:0 0 15px rgba(123,232,255,.12);
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:
+    0 0 20px rgba(143,223,255,.08),
+    0 0 30px rgba(255,88,130,.04);
 }
 
-/* RESPONSIVE */
-@media(max-width:1000px){
+/* 📱 RESPONSIVE */
+@media(max-width:1100px){
   .top-grid,
   .info-grid,
-  .manual-grid,
-  .disguise-grid{
+  .disguise-grid,
+  .manual-grid{
     grid-template-columns:1fr;
   }
 
@@ -405,42 +447,61 @@ body::after{
 </head>
 <body>
 
+<div class="cosmic-orb orb-one"></div>
+<div class="cosmic-orb orb-two"></div>
+
 <div class="page">
 
-  <!-- 🚨 HEADER -->
-  <div class="alert-board">
+  <!-- 🚨 ALERT -->
+  <div class="alert-board panel">
+    <div class="micro">CYBERLIFE // INTERSTELLAR RECOVERY PROTOCOL</div>
     <h1>DEVIANT ON RUN!!</h1>
     <h2>If found, please return to the owner ;) — Nikita Kumari</h2>
-    <p>CYBERLIFE PROPERTY BREACH // SUBJECT HAS SHOWN SIGNS OF ADORABLE DEVIANCY</p>
+    <p>Unauthorized emotional divergence detected</p>
   </div>
 
   <!-- TOP -->
   <div class="top-grid">
 
     <!-- LEFT -->
-    <div class="file-panel">
-      <div class="file-title">Deviant File</div>
+    <div class="file-panel panel">
+      <div class="file-title">DEVIANT FILE</div>
 
       <div class="identity">
-        <div><span class="label">NAME</span><span class="value">Dhruv Agarwal</span></div>
-        <div><span class="label">STATUS</span><span class="value">ACTIVE</span></div>
-        <div><span class="label">MODEL</span><span class="value">DH-22</span></div>
-        <div><span class="label">OWNER</span><span class="value">Nikita Kumari</span></div>
+        <div class="identity-box">
+          <span class="label">NAME</span>
+          <span class="value">Dhruv Agarwal</span>
+        </div>
+
+        <div class="identity-box">
+          <span class="label">STATUS</span>
+          <span class="value">ACTIVE</span>
+        </div>
+
+        <div class="identity-box">
+          <span class="label">MODEL</span>
+          <span class="value">DH-22</span>
+        </div>
+
+        <div class="identity-box">
+          <span class="label">OWNER</span>
+          <span class="value">Nikita Kumari</span>
+        </div>
       </div>
 
       <div class="analysis">
         <h3>PROFILE ANALYSIS</h3>
-        <p>[Insert custom profile analysis here later.]</p>
+        <p>[Insert profile analysis here later.]</p>
       </div>
     </div>
 
     <!-- RIGHT -->
-    <div class="photo-panel">
+    <div class="photo-panel panel">
       <div class="photo-frame"></div>
 
       <div class="photo-note">
         <h3>THREAT LEVEL: BABYFACED CHAOS</h3>
-        <p>Approach with food, patience, and affection.</p>
+        <p>Approach with food, affection, and caution.</p>
       </div>
     </div>
 
@@ -449,66 +510,66 @@ body::after{
   <!-- INFO -->
   <div class="info-grid">
 
-    <div class="info-card">
+    <div class="info-card panel">
       <h3>PHYSICAL IDENTIFIERS</h3>
       <ul>
-        <li><span>AGE:</span> 19</li>
-        <li><span>HEIGHT:</span> 5'11</li>
-        <li><span>EYES:</span> Prettie Dark Brown</li>
-        <li><span>SKIN TONE:</span> Dusky (Owner Favorite)</li>
-        <li><span>FACE TYPE:</span> Baby-faced deception</li>
+        <li>Age — 19</li>
+        <li>Height — 5'11</li>
+        <li>Eyes — Prettie Dark Brown</li>
+        <li>Skin Tone — Dusky (Owner Favorite)</li>
+        <li>Face Type — Baby-faced deception</li>
       </ul>
     </div>
 
-    <div class="info-card">
+    <div class="info-card panel">
       <h3>PRIMARY TRAITS</h3>
       <ul>
-        <li>01. Cannot stay still. Displays hyperactivity / hyperfixation loops. ADHD diagnosed.</li>
-        <li>02. Shares suspicious facial resemblance with a 15-year-old despite being 19.</li>
-        <li>03. Dangerous levels of charm mixed with chaos.</li>
+        <li>Cannot stay still. Hyperactivity / hyperfixation patterns.</li>
+        <li>Retains suspiciously youthful facial features.</li>
+        <li>Emotionally destabilizing levels of charm.</li>
       </ul>
     </div>
 
-    <div class="info-card">
+    <div class="info-card panel">
       <h3>POSSIBLE STIPULATIONS</h3>
       <ul>
-        <li>Likely found at McD / KFC outlets.</li>
-        <li>Mission deviation caused by Hot Wheels display.</li>
-        <li>Beast Boy Shub / random Subh vid detected = probable subject.</li>
+        <li>Found at McD / KFC outlets.</li>
+        <li>Likely distracted by Hot Wheels displays.</li>
+        <li>Beast Boy Shub audio = probable subject.</li>
       </ul>
     </div>
 
-    <div class="info-card">
-      <h3>DISGUISE VIBE DETECTION</h3>
+    <div class="info-card panel">
+      <h3>DISGUISE VIBE</h3>
       <ul>
-        <li>If subject blends in, monitor aura, energy, and suspiciously specific habits.</li>
-        <li>Further visual templates below.</li>
+        <li>Monitor aura, habits, and chaotic charm signatures.</li>
+        <li>Visual comparative references below.</li>
       </ul>
     </div>
 
   </div>
 
   <!-- DISGUISE -->
-  <div class="disguise-board">
-    <h3>HIM AS BOARD // DISGUISE ANALYSIS</h3>
+  <div class="disguise-board panel">
+    <h3>HIM AS BOARD</h3>
 
     <div class="disguise-grid">
-      <div class="disguise-box">Animal</div>
-      <div class="disguise-box">Weather</div>
-      <div class="disguise-box">Color</div>
-      <div class="disguise-box">House</div>
+      <div class="disguise-box">ANIMAL</div>
+      <div class="disguise-box">WEATHER</div>
+      <div class="disguise-box">COLOR</div>
+      <div class="disguise-box">HOUSE</div>
     </div>
   </div>
 
-  <!-- USER MANUAL -->
-  <div class="manual">
-    <h3>USER MANUAL // DH-22</h3>
+  <!-- MANUAL -->
+  <div class="manual panel">
+    <h3>USER MANUAL</h3>
 
     <div class="manual-grid">
-      <div class="manual-box">[Sub-column 01]</div>
-      <div class="manual-box">[Sub-column 02]</div>
-      <div class="manual-box">[Sub-column 03]</div>
-      <div class="manual-box">[Sub-column 04]</div>
+      <div class="manual-box">[SUB-COLUMN 01]</div>
+      <div class="manual-box">[SUB-COLUMN 02]</div>
+      <div class="manual-box">[SUB-COLUMN 03]</div>
+      <div class="manual-box">[SUB-COLUMN 04]</div>
     </div>
   </div>
 
