@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Vault 🍿</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --netflix-red:#e50914;
+  --deep-red:#8b0007;
+  --black:#050505;
+  --soft-white:#f6f6f6;
+  --muted:#b8b8b8;
+}
+
+html,body{
+  min-height:100%;
+  background:#000;
+  color:var(--soft-white);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+
+body{
+  background:
+    radial-gradient(circle at 18% 16%, rgba(229,9,20,.28), transparent 28%),
+    radial-gradient(circle at 84% 10%, rgba(255,255,255,.08), transparent 18%),
+    linear-gradient(180deg, #120003 0%, #050505 42%, #000 100%);
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,.025) 1px, transparent 1px);
+  background-size:54px 54px;
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), transparent 75%);
+  z-index:0;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at center, transparent 0 45%, rgba(0,0,0,.72) 100%);
+  z-index:1;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.page{
+  position:relative;
+  z-index:2;
+  min-height:100vh;
+}
+
+.nav{
+  position:sticky;
+  top:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  padding:22px clamp(18px,4vw,62px);
+  background:linear-gradient(to bottom, rgba(0,0,0,.92), rgba(0,0,0,.55), transparent);
+  backdrop-filter:blur(8px);
+}
+
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.2rem,5vw,4rem);
+  letter-spacing:3px;
+  color:var(--netflix-red);
+  text-shadow:0 0 18px rgba(229,9,20,.35);
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  font-weight:700;
+  color:#ededed;
+}
+
+.nav-pill{
+  padding:10px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.13);
+  transition:.25s ease;
+}
+
+.nav-pill:hover{
+  background:rgba(229,9,20,.82);
+  transform:translateY(-2px);
+}
+
+.hero{
+  min-height:72vh;
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);
+  align-items:center;
+  gap:38px;
+  padding:38px clamp(18px,5vw,78px) 64px;
+}
+
+.hero-copy{
+  max-width:720px;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:16px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(229,9,20,.18);
+  border:1px solid rgba(229,9,20,.4);
+  color:#ffd6d8;
+  font-size:.8rem;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4.5rem,13vw,10.5rem);
+  line-height:.78;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  text-shadow:0 18px 45px rgba(0,0,0,.7);
+}
+
+.hero h1 span{
+  color:var(--netflix-red);
+  display:block;
+}
+
+.synopsis{
+  margin-top:24px;
+  max-width:620px;
+  color:#ececec;
+  font-size:clamp(1rem,2vw,1.25rem);
+  line-height:1.75;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:22px;
+  color:#d8d8d8;
+  font-weight:700;
+}
+
+.meta span{
+  padding:8px 11px;
+  border-radius:8px;
+  background:rgba(255,255,255,.09);
+  border:1px solid rgba(255,255,255,.1);
+}
+
+.cta-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:28px;
+}
+
+.cta{
+  border:0;
+  border-radius:8px;
+  padding:14px 22px;
+  font-size:1rem;
+  font-weight:900;
+  cursor:pointer;
+  transition:.22s ease;
+}
+
+.cta.play{
+  background:#fff;
+  color:#111;
+}
+
+.cta.more{
+  background:rgba(109,109,110,.72);
+  color:#fff;
+}
+
+.cta:hover{
+  transform:scale(1.05);
+  filter:brightness(1.08);
+}
+
+.feature-card{
+  position:relative;
+  min-height:530px;
+  border-radius:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(145deg, rgba(229,9,20,.9), rgba(20,0,0,.98) 42%, rgba(0,0,0,.95)),
+    repeating-linear-gradient(90deg, transparent 0 18px, rgba(255,255,255,.08) 18px 22px);
+  border:1px solid rgba(255,255,255,.13);
+  box-shadow:0 28px 90px rgba(0,0,0,.75), 0 0 60px rgba(229,9,20,.24);
+}
+
+.feature-card::before{
+  content:"";
+  position:absolute;
+  inset:18px;
+  border:3px solid rgba(255,255,255,.9);
+  border-left:16px solid rgba(255,255,255,.9);
+  border-right:16px solid rgba(255,255,255,.9);
+  border-radius:18px;
+  opacity:.14;
+}
+
+.feature-card::after{
+  content:"▶";
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:96px;
+  height:96px;
+  display:grid;
+  place-items:center;
+  padding-left:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,.92);
+  color:#080808;
+  font-size:2.6rem;
+  box-shadow:0 0 34px rgba(255,255,255,.22);
+}
+
+.poster-text{
+  position:absolute;
+  left:30px;
+  right:30px;
+  bottom:30px;
+}
+
+.poster-text small{
+  color:#ffb7bb;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.poster-text h2{
+  margin-top:8px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:4.2rem;
+  line-height:.86;
+  letter-spacing:2px;
+}
+
+.poster-text p{
+  margin-top:12px;
+  color:#ddd;
+  line-height:1.55;
+}
+
+.section{
+  padding:10px clamp(18px,4vw,62px) 42px;
+}
+
+.section-title{
+  margin-bottom:18px;
+  font-size:clamp(1.25rem,2.4vw,2rem);
+  font-weight:900;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(210px, 1fr));
+  gap:18px;
+}
+
+.memory-card{
+  position:relative;
+  min-height:190px;
+  border-radius:16px;
+  overflow:hidden;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:linear-gradient(145deg, rgba(35,35,35,.95), rgba(7,7,7,.94));
+  border:1px solid rgba(255,255,255,.11);
+  box-shadow:0 14px 38px rgba(0,0,0,.45);
+  transition:.28s ease;
+}
+
+.memory-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--accent);
+  opacity:.72;
+  mix-blend-mode:screen;
+}
+
+.memory-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.9), rgba(0,0,0,.18), transparent);
+}
+
+.memory-card:hover{
+  transform:translateY(-10px) scale(1.035);
+  box-shadow:0 22px 52px rgba(0,0,0,.62), 0 0 26px rgba(229,9,20,.2);
+}
+
+.card-content{
+  position:relative;
+  z-index:2;
+}
+
+.rank{
+  position:absolute;
+  top:10px;
+  left:14px;
+  z-index:2;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:3.6rem;
+  color:rgba(255,255,255,.16);
+  -webkit-text-stroke:1px rgba(255,255,255,.24);
+}
+
+.memory-card h3{
+  font-size:1.15rem;
+  margin-bottom:8px;
+}
+
+.memory-card p{
+  color:#d2d2d2;
+  font-size:.92rem;
+  line-height:1.45;
+}
+
+.vault-strip{
+  margin:18px clamp(18px,4vw,62px) 62px;
+  padding:28px;
+  border-radius:24px;
+  background:linear-gradient(90deg, rgba(229,9,20,.22), rgba(255,255,255,.07), rgba(229,9,20,.14));
+  border:1px solid rgba(255,255,255,.12);
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:20px;
+  align-items:center;
+}
+
+.vault-strip h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.1rem,5vw,4.3rem);
+  letter-spacing:2px;
+}
+
+.vault-strip p{
+  color:#d8d8d8;
+  line-height:1.6;
+}
+
+.heart-lock{
+  width:94px;
+  height:94px;
+  border-radius:22px;
+  display:grid;
+  place-items:center;
+  background:#fff;
+  color:var(--netflix-red);
+  font-size:3rem;
+  box-shadow:0 18px 34px rgba(0,0,0,.35);
+}
+
+@media (max-width:960px){
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .feature-card{
+    min-height:430px;
+  }
+
+  .row{
+    grid-template-columns:repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width:620px){
+  .nav{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .nav-links{
+    width:100%;
+    justify-content:space-between;
+    gap:10px;
+    font-size:.9rem;
+  }
+
+  .hero{
+    padding-top:20px;
+  }
+
+  .feature-card{
+    min-height:360px;
+  }
+
+  .row,
+  .vault-strip{
+    grid-template-columns:1fr;
+  }
+
+  .heart-lock{
+    width:76px;
+    height:76px;
+    font-size:2.4rem;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="page">
+  <header class="nav">
+    <a class="logo" href="memory-vault.html">MEMORY VAULT</a>
+    <nav class="nav-links" aria-label="Memory Vault navigation">
+      <a href="index.html">Home</a>
+      <a href="dear-you.html">Dear You</a>
+      <a class="nav-pill" href="#episodes">Episodes</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="vault-title">
+      <div class="hero-copy">
+        <div class="eyebrow">N Original • Now Streaming Forever</div>
+        <h1 id="vault-title">Our<br><span>Memory Vault</span></h1>
+        <p class="synopsis">A Netflix-inspired archive for the little moments, inside jokes, soft screenshots, favorite days, and scenes that deserve to be replayed whenever the heart misses them.</p>
+        <div class="meta" aria-label="Memory Vault details">
+          <span>98% Match</span>
+          <span>Forever</span>
+          <span>Romance</span>
+          <span>Comfort Watch</span>
+        </div>
+        <div class="cta-row">
+          <button class="cta play" onclick="document.getElementById('episodes').scrollIntoView({behavior:'smooth'})">▶ Play Memories</button>
+          <button class="cta more" onclick="document.getElementById('about-vault').scrollIntoView({behavior:'smooth'})">ⓘ More Info</button>
+        </div>
+      </div>
+
+      <aside class="feature-card" aria-label="Featured memory poster">
+        <div class="poster-text">
+          <small>Featured Collection</small>
+          <h2>The Best Us</h2>
+          <p>Every sweet scene saved in one cinematic place.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="episodes" aria-labelledby="episode-title">
+      <h2 class="section-title" id="episode-title">Continue Watching</h2>
+      <div class="row">
+        <article class="memory-card" style="--accent:linear-gradient(135deg,#e50914,#ff6b75);">
+          <div class="rank">01</div>
+          <div class="card-content">
+            <h3>First Favorite Scene</h3>
+            <p>The memory that starts the whole season and makes everything feel warm again.</p>
+          </div>
+        </article>
+
+        <article class="memory-card" style="--accent:linear-gradient(135deg,#511,#d4145a);">
+          <div class="rank">02</div>
+          <div class="card-content">
+            <h3>Laugh Track</h3>
+            <p>Inside jokes, chaotic screenshots, and the tiny things only you two understand.</p>
+          </div>
+        </article>
+
+        <article class="memory-card" style="--accent:linear-gradient(135deg,#170707,#e50914);">
+          <div class="rank">03</div>
+          <div class="card-content">
+            <h3>Soft Replays</h3>
+            <p>Messages, moments, and comfort clips for days that need a little extra love.</p>
+          </div>
+        </article>
+
+        <article class="memory-card" style="--accent:linear-gradient(135deg,#2b0000,#ff3131);">
+          <div class="rank">04</div>
+          <div class="card-content">
+            <h3>Coming Soon</h3>
+            <p>A blank episode slot for every future adventure still waiting to be filmed.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="top-picks-title">
+      <h2 class="section-title" id="top-picks-title">Top Picks For Dhruv</h2>
+      <div class="row">
+        <article class="memory-card" style="--accent:linear-gradient(135deg,#1b1b1b,#7a0007);">
+          <div class="rank">♥</div>
+          <div class="card-content">
+            <h3>Favorite Smile</h3>
+            <p>A collection reserved for the smiles that deserve their own red carpet.</p>
+          </div>
+        </article>
+
+        <article class="memory-card" style="--accent:linear-gradient(135deg,#3b0208,#ff9aa2);">
+          <div class="rank">★</div>
+          <div class="card-content">
+            <h3>Certified Comfort</h3>
+            <p>The kind of memories that feel like a blanket, a hug, and home.</p>
+          </div>
+        </article>
+
+        <article class="memory-card" style="--accent:linear-gradient(135deg,#090909,#b40009);">
+          <div class="rank">∞</div>
+          <div class="card-content">
+            <h3>Replay Forever</h3>
+            <p>Moments with unlimited rewatches and absolutely no expiration date.</p>
+          </div>
+        </article>
+
+        <article class="memory-card" style="--accent:linear-gradient(135deg,#450000,#111);">
+          <div class="rank">N</div>
+          <div class="card-content">
+            <h3>New Episode Soon</h3>
+            <p>A promise that the best episodes of this love story are still ahead.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="vault-strip" id="about-vault" aria-labelledby="about-title">
+      <div>
+        <h2 id="about-title">Locked With Love</h2>
+        <p>This page is ready to become a real vault: replace the placeholder cards with your photos, videos, notes, dates, and favorite captions whenever you want to add the actual memories.</p>
+      </div>
+      <div class="heart-lock" aria-hidden="true">♥</div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
