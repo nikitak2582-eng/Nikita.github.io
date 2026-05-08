@@ -442,20 +442,6 @@ body::after{
   border-radius:24px;
 }
 
-.tap-hint{
-  position:absolute;
-  left:50%;
-  bottom:48px;
-  z-index:2;
-  transform:translateX(-50%);
-  white-space:nowrap;
-  padding:8px 13px;
-  border-radius:999px;
-  background:rgba(255,250,239,.88);
-  color:#8f5261;
-  font-weight:800;
-  box-shadow:0 8px 22px rgba(184,116,79,.16);
-}
 
 .sparkle-pop{
   --x:0px;
@@ -499,27 +485,6 @@ body::after{
     linear-gradient(145deg, rgba(255,253,247,.9), rgba(255,235,246,.76));
 }
 
-.info-card::before{
-  content:attr(data-tag);
-  position:absolute;
-  top:14px;
-  right:16px;
-  z-index:2;
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(255,250,239,.8);
-  color:#8f5261;
-  font-family:'Baloo 2',cursive;
-  font-size:.72rem;
-  font-weight:800;
-  box-shadow:0 8px 16px rgba(184,116,79,.12);
-}
-
-.info-card.is-popping::before,
-.info-card:hover::before{
-  content:"pop! " attr(data-pop);
-  background:linear-gradient(135deg, rgba(255,226,122,.62), rgba(255,182,202,.72));
-}
 
 .info-card ul{
   list-style:none;
@@ -547,28 +512,46 @@ body::after{
 }
 
 .mood-grid,
-.manual-grid{
+.manual-grid,
+.mode-grid,
+.warning-grid{
   display:grid;
   gap:16px;
 }
 
 .mood-grid{
-  grid-template-columns:repeat(auto-fit,minmax(138px,1fr));
-}
-
-.default-mood-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
-  gap:12px;
-  margin-top:12px;
+  width:min(560px,100%);
+  margin:0 auto;
+  grid-template-columns:repeat(3,minmax(0,1fr));
 }
 
 .manual-grid{
   grid-template-columns:repeat(4,minmax(0,1fr));
 }
 
+.mode-grid,
+.warning-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.manual-section{
+  padding:22px;
+  border:2px dashed rgba(255,182,202,.6);
+  border-radius:28px;
+  background:rgba(255,250,239,.54);
+}
+
+.manual-section h4{
+  margin-bottom:14px;
+  color:#6d3f62;
+  font-family:'Baloo 2',cursive;
+  font-size:1.12rem;
+}
+
 .mood-box,
-.manual-box{
+.manual-box,
+.mode-card,
+.warning-card{
   min-height:112px;
   display:flex;
   align-items:center;
@@ -588,12 +571,51 @@ body::after{
   transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, filter .18s ease;
 }
 
+.mood-box{
+  aspect-ratio:1 / 1;
+  font-size:clamp(2.1rem,6vw,3.3rem);
+}
+
+.mode-card,
+.warning-card,
+.manual-box{
+  align-items:flex-start;
+  justify-content:flex-start;
+  text-align:left;
+  text-transform:none;
+}
+
+.mode-card .emoji,
+.warning-card .emoji{
+  font-size:1.9rem;
+  line-height:1;
+  margin-bottom:8px;
+}
+
+.mode-card span,
+.warning-card span,
+.manual-box span{
+  display:block;
+  margin-top:7px;
+  color:#7a6071;
+  font-family:'Fredoka',Arial,sans-serif;
+  font-size:.9rem;
+  font-weight:600;
+  line-height:1.45;
+}
+
 .mood-box:nth-child(2),
-.manual-box:nth-child(2){background:linear-gradient(135deg, rgba(174,238,209,.58), rgba(158,219,255,.4));}
+.manual-box:nth-child(2),
+.mode-card:nth-child(2),
+.warning-card:nth-child(2){background:linear-gradient(135deg, rgba(174,238,209,.58), rgba(158,219,255,.4));}
 .mood-box:nth-child(3),
-.manual-box:nth-child(3){background:linear-gradient(135deg, rgba(205,187,255,.54), rgba(255,182,202,.44));}
+.manual-box:nth-child(3),
+.mode-card:nth-child(3),
+.warning-card:nth-child(3){background:linear-gradient(135deg, rgba(205,187,255,.54), rgba(255,182,202,.44));}
 .mood-box:nth-child(4),
-.manual-box:nth-child(4){background:linear-gradient(135deg, rgba(255,226,122,.52), rgba(255,192,140,.44));}
+.manual-box:nth-child(4),
+.mode-card:nth-child(4),
+.warning-card:nth-child(4){background:linear-gradient(135deg, rgba(255,226,122,.52), rgba(255,192,140,.44));}
 .mood-box:nth-child(5){background:linear-gradient(135deg, rgba(255,111,166,.36), rgba(174,238,209,.46));}
 .mood-box:nth-child(6){background:linear-gradient(135deg, rgba(158,219,255,.5), rgba(255,226,122,.36));}
 .mood-box:nth-child(7){background:linear-gradient(135deg, rgba(255,192,140,.48), rgba(205,187,255,.42));}
@@ -604,6 +626,10 @@ body::after{
 .mood-box:focus-visible,
 .manual-box:hover,
 .manual-box:focus-visible,
+.mode-card:hover,
+.mode-card:focus-visible,
+.warning-card:hover,
+.warning-card:focus-visible,
 .mood-choice:hover,
 .mood-choice:focus-visible{
   outline:0;
@@ -611,6 +637,74 @@ body::after{
   border-color:rgba(255,111,166,.58);
   filter:saturate(1.08);
   box-shadow:0 18px 30px rgba(184,116,79,.18);
+}
+
+.energy-readout{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:14px;
+  color:#56546d;
+  font-family:'Baloo 2',cursive;
+}
+
+.energy-face{font-size:2.25rem;}
+.energy-level{font-size:1.16rem; color:#6d3f62;}
+.energy-meter input[type=range]{width:100%; accent-color:var(--berry); cursor:pointer;}
+
+.energy-bar{
+  height:18px;
+  margin:14px 0 12px;
+  border:1px solid rgba(158,219,255,.32);
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,.62);
+}
+
+.energy-fill{
+  width:65%;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg, var(--mint), var(--butter), var(--berry));
+  transition:width .18s ease;
+}
+
+.energy-note{
+  color:#66536b;
+  line-height:1.55;
+}
+
+.energy-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+
+.energy-chip{
+  border:0;
+  border-radius:999px;
+  padding:10px 14px;
+  background:linear-gradient(135deg, rgba(255,111,166,.72), rgba(255,226,122,.66));
+  color:#6d3f62;
+  cursor:pointer;
+  font-family:'Baloo 2',cursive;
+  font-weight:800;
+  box-shadow:0 10px 20px rgba(184,116,79,.14);
+  transition:transform .18s ease, filter .18s ease;
+}
+
+.energy-chip:hover,
+.energy-chip:focus-visible{
+  outline:0;
+  transform:translateY(-3px) scale(1.04);
+  filter:saturate(1.14);
+}
+
+
+.manual-section .manual-grid{
+  grid-template-columns:1fr;
 }
 
 .mood-choice{
@@ -640,7 +734,7 @@ body::after{
 }
 
 .mood-summary{
-  margin-top:16px;
+  margin-bottom:14px;
   padding:14px 16px;
   border:2px dashed rgba(255,182,202,.72);
   border-radius:22px;
@@ -648,6 +742,10 @@ body::after{
   color:#6e5870;
   font-weight:700;
   line-height:1.5;
+}
+
+.manual-section.fact-panel{
+  margin-top:0;
 }
 
 .fact-panel{
@@ -696,27 +794,6 @@ body::after{
   font-size:1.12rem;
   font-weight:700;
   line-height:1.6;
-}
-
-.warning-label{
-  display:inline-flex;
-  margin-bottom:12px;
-  padding:7px 12px;
-  border-radius:999px;
-  background:linear-gradient(135deg, rgba(255,226,122,.7), rgba(255,182,202,.64));
-  color:#7a4b3b;
-  font-family:'Baloo 2',cursive;
-  font-size:.82rem;
-  font-weight:800;
-}
-
-.mood-box span{
-  display:block;
-  margin-top:7px;
-  color:#8f5261;
-  font-size:.9rem;
-  font-weight:600;
-  line-height:1.25;
 }
 
 .home{
@@ -779,7 +856,9 @@ body::after{
 @media(max-width:980px){
   .top-grid,
   .info-grid,
-  .manual-grid{
+  .manual-grid,
+  .mode-grid,
+  .warning-grid{
     grid-template-columns:1fr;
   }
 
@@ -816,16 +895,6 @@ body::after{
 
   .identity-grid{
     grid-template-columns:1fr;
-  }
-
-  .mood-grid,
-  .default-mood-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-
-  .tap-hint{
-    bottom:48px;
-    font-size:.9rem;
   }
 }
 </style>
@@ -888,21 +957,19 @@ body::after{
     </div>
 
     <aside class="photo-panel panel" aria-label="Interactive photo card">
-      <div class="photo-frame" role="button" tabindex="0" aria-label="Tap Dhruv's photo for sparkles">
+      <div class="photo-frame" role="button" tabindex="0" aria-label="Dhruv's photo card">
         <div class="photo-border" aria-hidden="true"></div>
-        <span class="tap-hint">tap for sparkles ✨</span>
       </div>
 
       <div class="photo-note">
         <h3>Cute level: baby-faced chaos</h3>
-        <p>The picture is smaller, softer, and tappable now — try clicking it.</p>
+        <p>Approach with snacks, tiny cars, and affection.</p>
       </div>
     </aside>
   </section>
 
   <section class="info-grid" aria-label="Information cards">
-    <div class="info-card panel pop-panel" data-tag="verified tiny file" data-pop="details unlocked" role="button" tabindex="0">
-      <span class="warning-label">warning: may cause smiling</span>
+    <div class="info-card panel pop-panel" role="button" tabindex="0">
       <h3>Sweet little details</h3>
       <ul>
         <li>Age — 19</li>
@@ -913,8 +980,7 @@ body::after{
       </ul>
     </div>
 
-    <div class="info-card panel pop-panel" data-tag="trait alert" data-pop="extra cute" role="button" tabindex="0">
-      <span class="warning-label">warning: charm overload</span>
+    <div class="info-card panel pop-panel" role="button" tabindex="0">
       <h3>Favorite traits</h3>
       <ul>
         <li>Cannot stay still; tiny hyperactive chaos energy.</li>
@@ -923,8 +989,7 @@ body::after{
       </ul>
     </div>
 
-    <div class="info-card panel pop-panel" data-tag="search zone" data-pop="location ping" role="button" tabindex="0">
-      <span class="warning-label">warning: food trail likely</span>
+    <div class="info-card panel pop-panel" role="button" tabindex="0">
       <h3>Likely found near</h3>
       <ul>
         <li>McD / KFC outlets.</li>
@@ -933,8 +998,7 @@ body::after{
       </ul>
     </div>
 
-    <div class="info-card panel pop-panel" data-tag="aura scan" data-pop="cozy confirmed" role="button" tabindex="0">
-      <span class="warning-label">warning: hug magnet</span>
+    <div class="info-card panel pop-panel" role="button" tabindex="0">
       <h3>Comfort vibe</h3>
       <ul>
         <li>Soft aura, cozy habits, and chaotic charm signatures.</li>
@@ -944,44 +1008,85 @@ body::after{
   </section>
 
   <section class="mood-board panel pop-panel" aria-labelledby="mood-title" role="button" tabindex="0">
-    <h3 id="mood-title">Him as a cozy board</h3>
+    <h3 id="mood-title">Him as a board</h3>
 
-    <div class="mood-grid">
-      <div class="mood-box" tabindex="0">movie<span>comfort rom-com</span></div>
-      <div class="mood-box" tabindex="0">hobby<span>hot wheels hunt</span></div>
-      <div class="mood-box" tabindex="0">animal<span>sleepy puppy</span></div>
-      <div class="mood-box" tabindex="0">character<span>sweet chaos hero</span></div>
-      <div class="mood-box" tabindex="0">color<span>warm cocoa pink</span></div>
-      <div class="mood-box" tabindex="0">place<span>food court corner</span></div>
-      <div class="mood-box" tabindex="0">season<span>golden monsoon</span></div>
-      <div class="mood-box" tabindex="0">song/album<span>soft loop forever</span></div>
-      <div class="mood-box" tabindex="0">food<span>KFC + McD date</span></div>
-      <div class="mood-box" tabindex="0">tiny object<span>pocket-sized plushie</span></div>
-      <div class="mood-box" tabindex="0">weather<span>soft rain + hoodie</span></div>
-      <div class="mood-box" tabindex="0">warning label<span>handle with snacks</span></div>
+    <div class="mood-grid" aria-label="3 by 3 mood board">
+      <div class="mood-box" tabindex="0">1</div>
+      <div class="mood-box" tabindex="0">2</div>
+      <div class="mood-box" tabindex="0">3</div>
+      <div class="mood-box" tabindex="0">4</div>
+      <div class="mood-box" tabindex="0">5</div>
+      <div class="mood-box" tabindex="0">6</div>
+      <div class="mood-box" tabindex="0">7</div>
+      <div class="mood-box" tabindex="0">8</div>
+      <div class="mood-box" tabindex="0">9</div>
     </div>
   </section>
 
   <section class="care-manual panel" aria-labelledby="manual-title">
-    <h3 id="manual-title">Default mood modes</h3>
-    <p class="mood-summary" id="mood-summary">Pick his current mode — mood tracker is ready at 0 taps.</p>
+    <h3 id="manual-title">User Manual // System Diagnostics</h3>
 
-    <div class="default-mood-grid" aria-label="Select Dhruv's current mood">
-      <button class="mood-choice" type="button" data-mood="Happy">😊 Happy<span>sunshine smile</span></button>
-      <button class="mood-choice" type="button" data-mood="Sad">🥺 Sad<span>needs soft care</span></button>
-      <button class="mood-choice" type="button" data-mood="Grumpy">😤 Grumpy<span>feed immediately</span></button>
-      <button class="mood-choice" type="button" data-mood="Sleepy">😴 Sleepy<span>blanket mode</span></button>
-      <button class="mood-choice" type="button" data-mood="Hungry">🍟 Hungry<span>McD/KFC radar</span></button>
-      <button class="mood-choice" type="button" data-mood="Silly">🤪 Silly<span>chaos unlocked</span></button>
-      <button class="mood-choice" type="button" data-mood="Shy">🫣 Shy<span>secretly smiling</span></button>
-      <button class="mood-choice" type="button" data-mood="Nonchalant">😎 Nonchalant<span>pretends calm</span></button>
+    <div class="manual-grid">
+      <div class="manual-section">
+        <h4>Default Modes</h4>
+        <p class="mood-summary" id="mood-summary">Mood tracker: 0 selections logged 💗</p>
+        <div class="mode-grid" aria-label="Select Dhruv's current mood">
+          <button class="mood-choice" type="button" data-mood="Happy">😊 Happy<span>sunshine smile</span></button>
+          <button class="mood-choice" type="button" data-mood="Sad">🥺 Sad<span>needs soft care</span></button>
+          <button class="mood-choice" type="button" data-mood="Grumpy">😤 Grumpy<span>feed immediately</span></button>
+          <button class="mood-choice" type="button" data-mood="Sleepy">😴 Sleepy<span>blanket mode</span></button>
+          <button class="mood-choice" type="button" data-mood="Hungry">🍟 Hungry<span>McD/KFC radar</span></button>
+          <button class="mood-choice" type="button" data-mood="Silly">🤪 Silly<span>chaos unlocked</span></button>
+          <button class="mood-choice" type="button" data-mood="Shy">🫣 Shy<span>secretly smiling</span></button>
+          <button class="mood-choice" type="button" data-mood="Nonchalant">😎 Nonchalant<span>pretends calm</span></button>
+        </div>
+      </div>
+
+      <div class="manual-section">
+        <h4>Energy Meter</h4>
+        <div class="energy-meter">
+          <div class="energy-readout">
+            <span class="energy-face" id="energyFace" aria-hidden="true">⚡</span>
+            <span class="energy-level" id="energyLevel">65% cozy chaos</span>
+          </div>
+          <input id="energySlider" type="range" min="0" max="100" value="65" aria-label="Adjust Dhruv's energy meter">
+          <div class="energy-bar" aria-hidden="true"><div class="energy-fill" id="energyFill"></div></div>
+          <p class="energy-note" id="energyNote">Balanced setting: give snacks, hugs, and let him yap about his latest fixation.</p>
+          <div class="energy-actions" aria-label="Energy presets">
+            <button class="energy-chip" type="button" data-energy="20">sleepy cuddle</button>
+            <button class="energy-chip" type="button" data-energy="50">soft reset</button>
+            <button class="energy-chip" type="button" data-energy="78">sparkle charge</button>
+            <button class="energy-chip" type="button" data-energy="95">zoomies</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="manual-section">
+        <h4>Care Manual</h4>
+        <div class="manual-grid">
+          <div class="manual-box" tabindex="0">Feed<span>McD / KFC fixes most system errors.</span></div>
+          <div class="manual-box" tabindex="0">Boop<span>Apply affection gently and repeatedly.</span></div>
+          <div class="manual-box" tabindex="0">Distract<span>Hot Wheels displays work instantly.</span></div>
+          <div class="manual-box" tabindex="0">Reset<span>Hugs, soft voice, and forehead kisses.</span></div>
+        </div>
+      </div>
+
+      <div class="manual-section">
+        <h4>Warning Labels</h4>
+        <div class="warning-grid">
+          <div class="warning-card" tabindex="0"><span class="emoji">👻</span>Ghost alert<span>Acts brave, but scary stuff needs hand-holding.</span></div>
+          <div class="warning-card" tabindex="0"><span class="emoji">🏎️</span>Hot Wheels magnet<span>May stop walking near tiny car displays.</span></div>
+          <div class="warning-card" tabindex="0"><span class="emoji">🍟</span>Snack powered<span>Best performance after fries and attention.</span></div>
+          <div class="warning-card" tabindex="0"><span class="emoji">💗</span>Affection leak<span>Pretends chill while secretly melting.</span></div>
+        </div>
+      </div>
+
+      <div class="manual-section fact-panel pop-panel" aria-labelledby="facts-title" role="button" tabindex="0">
+        <h4 id="facts-title">Random Dhruv Facts</h4>
+        <button class="fact-button" type="button">Dhruv fact ✨</button>
+        <p class="fact-output" aria-live="polite">Classified cutie information.</p>
+      </div>
     </div>
-  </section>
-
-  <section class="fact-panel panel pop-panel" aria-labelledby="facts-title" role="button" tabindex="0">
-    <h3 id="facts-title">Random Dhruv facts</h3>
-    <button class="fact-button" type="button">tap for a personalized fact ✨</button>
-    <p class="fact-output" aria-live="polite">Tap the button to reveal one tiny secret about him.</p>
   </section>
 
   <div class="home">
@@ -1028,7 +1133,7 @@ if (photoFrame) {
   });
 }
 
-document.querySelectorAll('.pop-panel, .mood-box, .manual-box').forEach((element) => {
+document.querySelectorAll('.pop-panel, .mood-box, .manual-box, .mode-card, .warning-card').forEach((element) => {
   element.addEventListener('click', () => popElement(element));
   element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -1050,11 +1155,11 @@ function updateMoodSummary(selectedMood) {
   }
 
   if (!selectedMood) {
-    moodSummary.textContent = `Mood tracker has ${moodTapTotal} saved check${moodTapTotal === 1 ? '' : 's'} — pick a mode to add one more.`;
+    moodSummary.textContent = `Mood tracker: ${moodTapTotal} selection${moodTapTotal === 1 ? '' : 's'} logged 💗`;
     return;
   }
 
-  moodSummary.textContent = `${selectedMood} mode selected ${moodCounts[selectedMood]} time${moodCounts[selectedMood] === 1 ? '' : 's'} — total saved mood checks: ${moodTapTotal}.`;
+  moodSummary.textContent = `Mood tracker: ${moodTapTotal} selection${moodTapTotal === 1 ? '' : 's'} logged · latest mood: ${selectedMood} 💗`;
 }
 
 moodChoices.forEach((button) => {
@@ -1071,6 +1176,54 @@ moodChoices.forEach((button) => {
 });
 
 updateMoodSummary();
+
+const energySlider = document.querySelector('#energySlider');
+const energyFill = document.querySelector('#energyFill');
+const energyLevel = document.querySelector('#energyLevel');
+const energyFace = document.querySelector('#energyFace');
+const energyNote = document.querySelector('#energyNote');
+const energyChips = document.querySelectorAll('.energy-chip');
+
+function updateEnergyMeter(value) {
+  const energy = Number(value);
+
+  if (!energyFill || !energyLevel || !energyFace || !energyNote) {
+    return;
+  }
+
+  energyFill.style.width = `${energy}%`;
+
+  if (energy < 35) {
+    energyFace.textContent = '😴';
+    energyLevel.textContent = `${energy}% sleepy cuddle`;
+    energyNote.textContent = 'Low battery: blanket, calm voice, and no scary videos.';
+  } else if (energy < 70) {
+    energyFace.textContent = '⚡';
+    energyLevel.textContent = `${energy}% cozy chaos`;
+    energyNote.textContent = 'Balanced setting: give snacks, hugs, and let him yap about his latest fixation.';
+  } else {
+    energyFace.textContent = '🚀';
+    energyLevel.textContent = `${energy}% zoomies mode`;
+    energyNote.textContent = 'High energy: clear runway for hyperfixations, reels, and happy chaos.';
+  }
+}
+
+if (energySlider) {
+  energySlider.addEventListener('input', (event) => updateEnergyMeter(event.target.value));
+  updateEnergyMeter(energySlider.value);
+}
+
+energyChips.forEach((chip) => {
+  chip.addEventListener('click', (event) => {
+    event.stopPropagation();
+    if (!energySlider) {
+      return;
+    }
+    energySlider.value = chip.dataset.energy;
+    updateEnergyMeter(chip.dataset.energy);
+    popElement(chip);
+  });
+});
 
 const factButton = document.querySelector('.fact-button');
 const factOutput = document.querySelector('.fact-output');
