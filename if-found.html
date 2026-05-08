@@ -73,9 +73,34 @@ body::after{
   z-index:1;
   background:
     repeating-linear-gradient(135deg, rgba(255,255,255,.24) 0 1px, transparent 1px 13px),
+    radial-gradient(circle at 25% 22%, rgba(255,255,255,.78) 0 1px, transparent 3px),
+    radial-gradient(circle at 74% 18%, rgba(255,226,122,.55) 0 2px, transparent 5px),
+    radial-gradient(circle at 80% 86%, rgba(255,111,166,.42) 0 2px, transparent 5px),
     linear-gradient(90deg, rgba(255,226,122,.13), transparent 24%, transparent 76%, rgba(255,111,166,.12));
-  opacity:.42;
+  background-size:auto, 120px 120px, 156px 156px, 132px 132px, auto;
+  opacity:.5;
 }
+
+.cute-confetti{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.cute-confetti span{
+  position:absolute;
+  opacity:.58;
+  font-size:clamp(1rem,2vw,1.8rem);
+  filter:drop-shadow(0 8px 10px rgba(184,116,79,.16));
+}
+
+.cute-confetti span:nth-child(1){left:8%; top:18%; color:var(--berry);}
+.cute-confetti span:nth-child(2){right:12%; top:34%; color:var(--butter);}
+.cute-confetti span:nth-child(3){left:18%; bottom:22%; color:var(--mint);}
+.cute-confetti span:nth-child(4){right:22%; bottom:16%; color:var(--lavender);}
+.cute-confetti span:nth-child(5){left:50%; top:10%; color:var(--sky);}
 
 .floaty{
   position:fixed;
@@ -142,6 +167,23 @@ body::after{
   top:0;
   height:7px;
   background:linear-gradient(90deg,var(--berry),var(--butter),var(--mint),var(--lavender),var(--sky));
+}
+
+.pop-panel{
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.pop-panel:hover,
+.pop-panel:focus-visible{
+  outline:0;
+  transform:translateY(-7px) rotate(-.45deg);
+  filter:saturate(1.1);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 30px 56px rgba(184,116,79,.22);
+}
+
+.pop-panel.is-popping{
+  animation:panelPop .34s ease;
 }
 
 .hero{
@@ -225,7 +267,8 @@ body::after{
 .photo-panel,
 .info-card,
 .mood-board,
-.care-manual{
+.care-manual,
+.fact-panel{
   padding:26px;
 }
 
@@ -266,6 +309,20 @@ body::after{
   border-radius:24px;
   background:linear-gradient(135deg, rgba(255,226,122,.25), rgba(255,255,255,.54));
   box-shadow:0 12px 22px rgba(184,116,79,.08);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+.identity-card:hover{
+  transform:translateY(-4px) scale(1.02);
+  box-shadow:0 16px 28px rgba(184,116,79,.13);
+}
+
+.identity-card::after{
+  content:"✦";
+  position:absolute;
+  right:15px;
+  top:12px;
+  color:rgba(255,111,166,.68);
 }
 
 .identity-card:nth-child(2){background:linear-gradient(135deg, rgba(174,238,209,.34), rgba(255,255,255,.56));}
@@ -301,7 +358,8 @@ body::after{
 .note-box h3,
 .info-card h3,
 .mood-board h3,
-.care-manual h3{
+.care-manual h3,
+.fact-panel h3{
   margin-bottom:12px;
   color:#67405f;
   font-family:'Baloo 2',cursive;
@@ -346,10 +404,12 @@ body::after{
 }
 
 .photo-frame::before{
-  content:"official cutie card";
+  content:"cozy claim: Nikita's";
   position:absolute;
   top:15px;
-  left:15px;
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
   z-index:2;
   padding:7px 12px;
   border-radius:999px;
@@ -385,7 +445,7 @@ body::after{
 .tap-hint{
   position:absolute;
   left:50%;
-  bottom:56px;
+  bottom:48px;
   z-index:2;
   transform:translateX(-50%);
   white-space:nowrap;
@@ -439,6 +499,28 @@ body::after{
     linear-gradient(145deg, rgba(255,253,247,.9), rgba(255,235,246,.76));
 }
 
+.info-card::before{
+  content:attr(data-tag);
+  position:absolute;
+  top:14px;
+  right:16px;
+  z-index:2;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,250,239,.8);
+  color:#8f5261;
+  font-family:'Baloo 2',cursive;
+  font-size:.72rem;
+  font-weight:800;
+  box-shadow:0 8px 16px rgba(184,116,79,.12);
+}
+
+.info-card.is-popping::before,
+.info-card:hover::before{
+  content:"pop! " attr(data-pop);
+  background:linear-gradient(135deg, rgba(255,226,122,.62), rgba(255,182,202,.72));
+}
+
 .info-card ul{
   list-style:none;
 }
@@ -459,7 +541,8 @@ body::after{
 }
 
 .mood-board,
-.care-manual{
+.care-manual,
+.fact-panel{
   margin-top:24px;
 }
 
@@ -470,7 +553,14 @@ body::after{
 }
 
 .mood-grid{
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(138px,1fr));
+}
+
+.default-mood-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
+  gap:12px;
+  margin-top:12px;
 }
 
 .manual-grid{
@@ -479,14 +569,14 @@ body::after{
 
 .mood-box,
 .manual-box{
-  min-height:132px;
+  min-height:112px;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  padding:18px;
+  padding:15px;
   border:2px solid rgba(255,255,255,.76);
-  border-radius:28px;
+  border-radius:24px;
   background:linear-gradient(135deg, rgba(255,182,202,.52), rgba(255,226,122,.36));
   color:#6d3f62;
   text-align:center;
@@ -511,11 +601,113 @@ body::after{
 .mood-box:nth-child(9){background:linear-gradient(135deg, rgba(255,226,122,.5), rgba(255,111,166,.35));}
 
 .mood-box:hover,
-.manual-box:hover{
+.mood-box:focus-visible,
+.manual-box:hover,
+.manual-box:focus-visible,
+.mood-choice:hover,
+.mood-choice:focus-visible{
+  outline:0;
   transform:translateY(-5px) rotate(-1deg);
   border-color:rgba(255,111,166,.58);
   filter:saturate(1.08);
   box-shadow:0 18px 30px rgba(184,116,79,.18);
+}
+
+.mood-choice{
+  border:2px solid rgba(255,255,255,.76);
+  border-radius:22px;
+  padding:12px 10px;
+  background:linear-gradient(135deg, rgba(255,250,239,.78), rgba(255,182,202,.42));
+  color:#6d3f62;
+  cursor:pointer;
+  font-family:'Baloo 2',cursive;
+  font-size:1rem;
+  font-weight:800;
+  box-shadow:0 12px 20px rgba(184,116,79,.1);
+  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.mood-choice span{
+  display:block;
+  margin-top:3px;
+  color:#8f5261;
+  font-size:.8rem;
+}
+
+.mood-choice.is-selected{
+  background:linear-gradient(135deg, rgba(255,226,122,.72), rgba(174,238,209,.54));
+  border-color:rgba(255,111,166,.66);
+}
+
+.mood-summary{
+  margin-top:16px;
+  padding:14px 16px;
+  border:2px dashed rgba(255,182,202,.72);
+  border-radius:22px;
+  background:rgba(255,250,239,.64);
+  color:#6e5870;
+  font-weight:700;
+  line-height:1.5;
+}
+
+.fact-panel{
+  text-align:center;
+  background:
+    radial-gradient(circle at 14% 12%, rgba(255,226,122,.32), transparent 9rem),
+    radial-gradient(circle at 86% 78%, rgba(174,238,209,.3), transparent 10rem),
+    linear-gradient(145deg, rgba(255,253,247,.92), rgba(255,235,246,.78));
+}
+
+.fact-button{
+  margin:8px auto 18px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  border:0;
+  border-radius:999px;
+  padding:13px 24px;
+  background:linear-gradient(135deg, var(--berry), var(--butter));
+  color:#654159;
+  cursor:pointer;
+  font-family:'Baloo 2',cursive;
+  font-size:1.05rem;
+  font-weight:800;
+  box-shadow:0 16px 26px rgba(184,116,79,.2);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+.fact-button:hover,
+.fact-button:focus-visible{
+  outline:0;
+  transform:translateY(-4px) scale(1.03);
+  box-shadow:0 20px 34px rgba(184,116,79,.24);
+}
+
+.fact-output{
+  width:min(680px,100%);
+  min-height:82px;
+  margin:0 auto;
+  padding:20px;
+  border:2px solid rgba(255,255,255,.72);
+  border-radius:28px;
+  background:rgba(255,250,239,.72);
+  color:#60495e;
+  font-size:1.12rem;
+  font-weight:700;
+  line-height:1.6;
+}
+
+.warning-label{
+  display:inline-flex;
+  margin-bottom:12px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:linear-gradient(135deg, rgba(255,226,122,.7), rgba(255,182,202,.64));
+  color:#7a4b3b;
+  font-family:'Baloo 2',cursive;
+  font-size:.82rem;
+  font-weight:800;
 }
 
 .mood-box span{
@@ -556,6 +748,11 @@ body::after{
   box-shadow:0 20px 34px rgba(184,116,79,.18);
 }
 
+@keyframes panelPop{
+  0%,100%{transform:translateY(0) scale(1);}
+  45%{transform:translateY(-8px) scale(1.025) rotate(.5deg);}
+}
+
 @keyframes sparklePop{
   0%{opacity:1; transform:translate(-50%,-50%) scale(.2) rotate(0deg);}
   100%{opacity:0; transform:translate(var(--x), var(--y)) scale(1.65) rotate(90deg);}
@@ -565,6 +762,8 @@ body::after{
   .pill-dot{animation:pulse 1.8s ease-in-out infinite;}
   .floaty.one{animation:floaty 7s ease-in-out infinite;}
   .floaty.two{animation:floaty 8s ease-in-out infinite reverse;}
+  .cute-confetti span{animation:floaty 5.5s ease-in-out infinite;}
+  .cute-confetti span:nth-child(even){animation-direction:reverse;}
 }
 
 @keyframes pulse{
@@ -600,7 +799,8 @@ body::after{
   .photo-panel,
   .info-card,
   .mood-board,
-  .care-manual{
+  .care-manual,
+  .fact-panel{
     padding:20px;
   }
 
@@ -614,9 +814,13 @@ body::after{
     text-align:left;
   }
 
-  .identity-grid,
-  .mood-grid{
+  .identity-grid{
     grid-template-columns:1fr;
+  }
+
+  .mood-grid,
+  .default-mood-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
   .tap-hint{
@@ -630,6 +834,13 @@ body::after{
 
 <div class="floaty one" aria-hidden="true"></div>
 <div class="floaty two" aria-hidden="true"></div>
+<div class="cute-confetti" aria-hidden="true">
+  <span>♡</span>
+  <span>✦</span>
+  <span>☁</span>
+  <span>✿</span>
+  <span>★</span>
+</div>
 
 <main class="page">
   <section class="hero panel" aria-labelledby="page-title">
@@ -645,7 +856,7 @@ body::after{
   </section>
 
   <section class="top-grid" aria-label="Dhruv details and photo">
-    <div class="details-panel panel">
+    <div class="details-panel panel pop-panel" role="button" tabindex="0" aria-label="Pop Dhruv's cozy dossier">
       <h2 class="section-title">Dhruv's Cozy Dossier</h2>
 
       <div class="identity-grid">
@@ -690,7 +901,8 @@ body::after{
   </section>
 
   <section class="info-grid" aria-label="Information cards">
-    <div class="info-card panel">
+    <div class="info-card panel pop-panel" data-tag="verified tiny file" data-pop="details unlocked" role="button" tabindex="0">
+      <span class="warning-label">warning: may cause smiling</span>
       <h3>Sweet little details</h3>
       <ul>
         <li>Age — 19</li>
@@ -701,7 +913,8 @@ body::after{
       </ul>
     </div>
 
-    <div class="info-card panel">
+    <div class="info-card panel pop-panel" data-tag="trait alert" data-pop="extra cute" role="button" tabindex="0">
+      <span class="warning-label">warning: charm overload</span>
       <h3>Favorite traits</h3>
       <ul>
         <li>Cannot stay still; tiny hyperactive chaos energy.</li>
@@ -710,7 +923,8 @@ body::after{
       </ul>
     </div>
 
-    <div class="info-card panel">
+    <div class="info-card panel pop-panel" data-tag="search zone" data-pop="location ping" role="button" tabindex="0">
+      <span class="warning-label">warning: food trail likely</span>
       <h3>Likely found near</h3>
       <ul>
         <li>McD / KFC outlets.</li>
@@ -719,7 +933,8 @@ body::after{
       </ul>
     </div>
 
-    <div class="info-card panel">
+    <div class="info-card panel pop-panel" data-tag="aura scan" data-pop="cozy confirmed" role="button" tabindex="0">
+      <span class="warning-label">warning: hug magnet</span>
       <h3>Comfort vibe</h3>
       <ul>
         <li>Soft aura, cozy habits, and chaotic charm signatures.</li>
@@ -728,31 +943,45 @@ body::after{
     </div>
   </section>
 
-  <section class="mood-board panel" aria-labelledby="mood-title">
+  <section class="mood-board panel pop-panel" aria-labelledby="mood-title" role="button" tabindex="0">
     <h3 id="mood-title">Him as a cozy board</h3>
 
     <div class="mood-grid">
-      <div class="mood-box">movie<span>comfort rom-com</span></div>
-      <div class="mood-box">hobby<span>hot wheels hunt</span></div>
-      <div class="mood-box">animal<span>sleepy puppy</span></div>
-      <div class="mood-box">character<span>sweet chaos hero</span></div>
-      <div class="mood-box">color<span>warm cocoa pink</span></div>
-      <div class="mood-box">place<span>food court corner</span></div>
-      <div class="mood-box">season<span>golden monsoon</span></div>
-      <div class="mood-box">song/album<span>soft loop forever</span></div>
-      <div class="mood-box">food<span>KFC + McD date</span></div>
+      <div class="mood-box" tabindex="0">movie<span>comfort rom-com</span></div>
+      <div class="mood-box" tabindex="0">hobby<span>hot wheels hunt</span></div>
+      <div class="mood-box" tabindex="0">animal<span>sleepy puppy</span></div>
+      <div class="mood-box" tabindex="0">character<span>sweet chaos hero</span></div>
+      <div class="mood-box" tabindex="0">color<span>warm cocoa pink</span></div>
+      <div class="mood-box" tabindex="0">place<span>food court corner</span></div>
+      <div class="mood-box" tabindex="0">season<span>golden monsoon</span></div>
+      <div class="mood-box" tabindex="0">song/album<span>soft loop forever</span></div>
+      <div class="mood-box" tabindex="0">food<span>KFC + McD date</span></div>
+      <div class="mood-box" tabindex="0">tiny object<span>pocket-sized plushie</span></div>
+      <div class="mood-box" tabindex="0">weather<span>soft rain + hoodie</span></div>
+      <div class="mood-box" tabindex="0">warning label<span>handle with snacks</span></div>
     </div>
   </section>
 
   <section class="care-manual panel" aria-labelledby="manual-title">
-    <h3 id="manual-title">Tiny care manual</h3>
+    <h3 id="manual-title">Default mood modes</h3>
+    <p class="mood-summary" id="mood-summary">Pick his current mode — mood tracker is ready at 0 taps.</p>
 
-    <div class="manual-grid">
-      <div class="manual-box">feed snacks</div>
-      <div class="manual-box">send reels</div>
-      <div class="manual-box">give cuddles</div>
-      <div class="manual-box">protect smile</div>
+    <div class="default-mood-grid" aria-label="Select Dhruv's current mood">
+      <button class="mood-choice" type="button" data-mood="Happy">😊 Happy<span>sunshine smile</span></button>
+      <button class="mood-choice" type="button" data-mood="Sad">🥺 Sad<span>needs soft care</span></button>
+      <button class="mood-choice" type="button" data-mood="Grumpy">😤 Grumpy<span>feed immediately</span></button>
+      <button class="mood-choice" type="button" data-mood="Sleepy">😴 Sleepy<span>blanket mode</span></button>
+      <button class="mood-choice" type="button" data-mood="Hungry">🍟 Hungry<span>McD/KFC radar</span></button>
+      <button class="mood-choice" type="button" data-mood="Silly">🤪 Silly<span>chaos unlocked</span></button>
+      <button class="mood-choice" type="button" data-mood="Shy">🫣 Shy<span>secretly smiling</span></button>
+      <button class="mood-choice" type="button" data-mood="Nonchalant">😎 Nonchalant<span>pretends calm</span></button>
     </div>
+  </section>
+
+  <section class="fact-panel panel pop-panel" aria-labelledby="facts-title" role="button" tabindex="0">
+    <h3 id="facts-title">Random Dhruv facts</h3>
+    <button class="fact-button" type="button">tap for a personalized fact ✨</button>
+    <p class="fact-output" aria-live="polite">Tap the button to reveal one tiny secret about him.</p>
   </section>
 
   <div class="home">
@@ -771,17 +1000,22 @@ function sprinklePhoto() {
   photoFrame.classList.add('is-loved');
   window.setTimeout(() => photoFrame.classList.remove('is-loved'), 220);
 
-  for (let index = 0; index < 14; index += 1) {
+  for (let index = 0; index < 26; index += 1) {
     const sparkle = document.createElement('span');
     sparkle.className = 'sparkle-pop';
-    sparkle.textContent = index % 2 === 0 ? '♡' : '✦';
+    sparkle.textContent = ['♡', '✦', '✨', '★', '💗'][index % 5];
     sparkle.style.left = `${33 + Math.random() * 34}%`;
     sparkle.style.top = `${34 + Math.random() * 32}%`;
     sparkle.style.setProperty('--x', `${-100 + Math.random() * 200}px`);
-    sparkle.style.setProperty('--y', `${-130 + Math.random() * 82}px`);
+    sparkle.style.setProperty('--y', `${-160 + Math.random() * 110}px`);
     photoFrame.appendChild(sparkle);
     sparkle.addEventListener('animationend', () => sparkle.remove());
   }
+}
+
+function popElement(element) {
+  element.classList.add('is-popping');
+  window.setTimeout(() => element.classList.remove('is-popping'), 360);
 }
 
 if (photoFrame) {
@@ -791,6 +1025,72 @@ if (photoFrame) {
       event.preventDefault();
       sprinklePhoto();
     }
+  });
+}
+
+document.querySelectorAll('.pop-panel, .mood-box, .manual-box').forEach((element) => {
+  element.addEventListener('click', () => popElement(element));
+  element.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      popElement(element);
+    }
+  });
+});
+
+const moodChoices = document.querySelectorAll('.mood-choice');
+const moodSummary = document.querySelector('#mood-summary');
+const storedMoodTracker = JSON.parse(localStorage.getItem('dhruvMoodTracker') || '{"counts":{},"total":0}');
+const moodCounts = storedMoodTracker.counts || {};
+let moodTapTotal = storedMoodTracker.total || 0;
+
+function updateMoodSummary(selectedMood) {
+  if (!moodSummary) {
+    return;
+  }
+
+  if (!selectedMood) {
+    moodSummary.textContent = `Mood tracker has ${moodTapTotal} saved check${moodTapTotal === 1 ? '' : 's'} — pick a mode to add one more.`;
+    return;
+  }
+
+  moodSummary.textContent = `${selectedMood} mode selected ${moodCounts[selectedMood]} time${moodCounts[selectedMood] === 1 ? '' : 's'} — total saved mood checks: ${moodTapTotal}.`;
+}
+
+moodChoices.forEach((button) => {
+  moodCounts[button.dataset.mood] = moodCounts[button.dataset.mood] || 0;
+  button.addEventListener('click', () => {
+    moodTapTotal += 1;
+    moodCounts[button.dataset.mood] += 1;
+    localStorage.setItem('dhruvMoodTracker', JSON.stringify({counts:moodCounts, total:moodTapTotal}));
+    moodChoices.forEach((choice) => choice.classList.remove('is-selected'));
+    button.classList.add('is-selected');
+    updateMoodSummary(button.dataset.mood);
+    sprinklePhoto();
+  });
+});
+
+updateMoodSummary();
+
+const factButton = document.querySelector('.fact-button');
+const factOutput = document.querySelector('.fact-output');
+const personalizedFacts = [
+  'Will act nonchalant but is absolutely scared of ghosts.',
+  'Claims he is normal, then becomes tiny hyperactive chaos in 0.2 seconds.',
+  'Has a dangerous softboy face that should come with a warning label.',
+  'Can be located faster by following the McD/KFC snack signal.',
+  'Secretly gets cuter when he tries to look serious.',
+  'Hot Wheels displays may temporarily override his navigation system.',
+  'Needs affection refills even when pretending he does not.',
+];
+
+if (factButton && factOutput) {
+  factButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const fact = personalizedFacts[Math.floor(Math.random() * personalizedFacts.length)];
+    factOutput.textContent = fact;
+    popElement(factOutput);
+    sprinklePhoto();
   });
 }
 </script>
