@@ -62,23 +62,20 @@ body::after{
 body::before{
   z-index:0;
   background-image:
-    radial-gradient(circle, rgba(255,111,166,.18) 0 3px, transparent 4px),
-    radial-gradient(circle, rgba(255,226,122,.18) 0 2px, transparent 3px),
-    linear-gradient(90deg, rgba(255,255,255,.28) 1px, transparent 1px);
-  background-size:74px 74px,46px 46px,96px 96px;
-  opacity:.72;
+    radial-gradient(circle, rgba(255,111,166,.1) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(255,226,122,.08) 0 1px, transparent 2px);
+  background-size:180px 180px,240px 240px;
+  opacity:.28;
 }
 
 body::after{
   z-index:1;
   background:
-    repeating-linear-gradient(135deg, rgba(255,255,255,.24) 0 1px, transparent 1px 13px),
-    radial-gradient(circle at 25% 22%, rgba(255,255,255,.78) 0 1px, transparent 3px),
-    radial-gradient(circle at 74% 18%, rgba(255,226,122,.55) 0 2px, transparent 5px),
-    radial-gradient(circle at 80% 86%, rgba(255,111,166,.42) 0 2px, transparent 5px),
-    linear-gradient(90deg, rgba(255,226,122,.13), transparent 24%, transparent 76%, rgba(255,111,166,.12));
-  background-size:auto, 120px 120px, 156px 156px, 132px 132px, auto;
-  opacity:.5;
+    radial-gradient(circle at 25% 22%, rgba(255,255,255,.52) 0 1px, transparent 3px),
+    radial-gradient(circle at 80% 86%, rgba(255,111,166,.22) 0 1px, transparent 4px),
+    linear-gradient(90deg, rgba(255,226,122,.08), transparent 26%, transparent 74%, rgba(255,111,166,.08));
+  background-size:220px 220px, 260px 260px, auto;
+  opacity:.24;
 }
 
 .cute-confetti{
@@ -92,7 +89,7 @@ body::after{
 .cute-confetti span{
   position:absolute;
   opacity:.58;
-  font-size:clamp(1rem,2vw,1.8rem);
+  font-size:clamp(.72rem,1.1vw,1.05rem);
   filter:drop-shadow(0 8px 10px rgba(184,116,79,.16));
 }
 
@@ -445,13 +442,13 @@ body::after{
 
 .sparkle-pop{
   --x:0px;
-  --y:-90px;
+  --y:-70px;
   position:absolute;
   z-index:3;
   pointer-events:none;
   color:var(--berry);
-  font-size:1.25rem;
-  text-shadow:0 0 10px rgba(255,255,255,.9);
+  font-size:.78rem;
+  text-shadow:0 0 8px rgba(255,255,255,.9);
   animation:sparklePop .8s ease forwards;
 }
 
@@ -519,14 +516,50 @@ body::after{
   gap:16px;
 }
 
+.board-layout{
+  display:grid;
+  grid-template-columns:minmax(0,560px) minmax(220px,.55fr);
+  gap:22px;
+  align-items:stretch;
+}
+
 .mood-grid{
-  width:min(560px,100%);
-  margin:0 auto;
+  width:100%;
+  margin:0;
   grid-template-columns:repeat(3,minmax(0,1fr));
 }
 
+.board-note{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:100%;
+  padding:24px;
+  border:2px dashed rgba(255,182,202,.68);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(255,226,122,.34), transparent 6rem),
+    linear-gradient(135deg, rgba(255,250,239,.78), rgba(174,238,209,.3));
+  color:#6d3f62;
+  box-shadow:0 14px 24px rgba(184,116,79,.1);
+}
+
+.board-note strong{
+  display:block;
+  margin-bottom:10px;
+  font-family:'Pacifico',cursive;
+  font-size:1.45rem;
+  font-weight:400;
+}
+
+.board-note span{
+  font-size:1rem;
+  font-weight:700;
+  line-height:1.55;
+}
+
 .manual-grid{
-  grid-template-columns:repeat(4,minmax(0,1fr));
+  grid-template-columns:1fr;
 }
 
 .mode-grid,
@@ -675,34 +708,6 @@ body::after{
   line-height:1.55;
 }
 
-.energy-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:16px;
-}
-
-.energy-chip{
-  border:0;
-  border-radius:999px;
-  padding:10px 14px;
-  background:linear-gradient(135deg, rgba(255,111,166,.72), rgba(255,226,122,.66));
-  color:#6d3f62;
-  cursor:pointer;
-  font-family:'Baloo 2',cursive;
-  font-weight:800;
-  box-shadow:0 10px 20px rgba(184,116,79,.14);
-  transition:transform .18s ease, filter .18s ease;
-}
-
-.energy-chip:hover,
-.energy-chip:focus-visible{
-  outline:0;
-  transform:translateY(-3px) scale(1.04);
-  filter:saturate(1.14);
-}
-
-
 .manual-section .manual-grid{
   grid-template-columns:1fr;
 }
@@ -728,6 +733,20 @@ body::after{
   font-size:.8rem;
 }
 
+.mood-choice .mood-count{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:30px;
+  height:30px;
+  margin:7px auto 5px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  color:var(--berry);
+  font-size:1rem;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 8px 14px rgba(184,116,79,.12);
+}
+
 .mood-choice.is-selected{
   background:linear-gradient(135deg, rgba(255,226,122,.72), rgba(174,238,209,.54));
   border-color:rgba(255,111,166,.66);
@@ -744,7 +763,33 @@ body::after{
   line-height:1.5;
 }
 
-.manual-section.fact-panel{
+.manual-section.fact-panel,
+.manual-section.energy-section{
+  margin-top:0;
+}
+
+.energy-section .energy-meter{
+  display:grid;
+  grid-template-columns:minmax(170px,.38fr) minmax(240px,1fr);
+  gap:16px 22px;
+  align-items:center;
+}
+
+.energy-section .energy-readout{
+  margin-bottom:0;
+}
+
+.energy-section input[type=range],
+.energy-section .energy-bar,
+.energy-section .energy-note{
+  grid-column:2;
+}
+
+.energy-section .energy-bar{
+  margin:0;
+}
+
+.energy-section .energy-note{
   margin-top:0;
 }
 
@@ -782,10 +827,17 @@ body::after{
   box-shadow:0 20px 34px rgba(184,116,79,.24);
 }
 
+.fact-panel .fact-row{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  justify-content:center;
+}
+
 .fact-output{
-  width:min(680px,100%);
+  flex:1;
   min-height:82px;
-  margin:0 auto;
+  margin:0;
   padding:20px;
   border:2px solid rgba(255,255,255,.72);
   border-radius:28px;
@@ -832,7 +884,7 @@ body::after{
 
 @keyframes sparklePop{
   0%{opacity:1; transform:translate(-50%,-50%) scale(.2) rotate(0deg);}
-  100%{opacity:0; transform:translate(var(--x), var(--y)) scale(1.65) rotate(90deg);}
+  100%{opacity:0; transform:translate(var(--x), var(--y)) scale(1.05) rotate(90deg);}
 }
 
 @media (prefers-reduced-motion:no-preference){
@@ -858,12 +910,25 @@ body::after{
   .info-grid,
   .manual-grid,
   .mode-grid,
-  .warning-grid{
+  .warning-grid,
+  .board-layout,
+  .energy-section .energy-meter{
     grid-template-columns:1fr;
+  }
+
+  .energy-section input[type=range],
+  .energy-section .energy-bar,
+  .energy-section .energy-note{
+    grid-column:1;
   }
 
   .mood-grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .fact-panel .fact-row{
+    flex-direction:column;
+    align-items:stretch;
   }
 }
 
@@ -1010,16 +1075,23 @@ body::after{
   <section class="mood-board panel pop-panel" aria-labelledby="mood-title" role="button" tabindex="0">
     <h3 id="mood-title">Him as a board</h3>
 
-    <div class="mood-grid" aria-label="3 by 3 mood board">
-      <div class="mood-box" tabindex="0">1</div>
-      <div class="mood-box" tabindex="0">2</div>
-      <div class="mood-box" tabindex="0">3</div>
-      <div class="mood-box" tabindex="0">4</div>
-      <div class="mood-box" tabindex="0">5</div>
-      <div class="mood-box" tabindex="0">6</div>
-      <div class="mood-box" tabindex="0">7</div>
-      <div class="mood-box" tabindex="0">8</div>
-      <div class="mood-box" tabindex="0">9</div>
+    <div class="board-layout">
+      <div class="mood-grid" aria-label="3 by 3 mood board">
+        <div class="mood-box" tabindex="0">1</div>
+        <div class="mood-box" tabindex="0">2</div>
+        <div class="mood-box" tabindex="0">3</div>
+        <div class="mood-box" tabindex="0">4</div>
+        <div class="mood-box" tabindex="0">5</div>
+        <div class="mood-box" tabindex="0">6</div>
+        <div class="mood-box" tabindex="0">7</div>
+        <div class="mood-box" tabindex="0">8</div>
+        <div class="mood-box" tabindex="0">9</div>
+      </div>
+
+      <div class="board-note" aria-label="Cute board note">
+        <strong>tiny chaos, big heart ♡</strong>
+        <span>Certified snack goblin, Hot Wheels admirer, and Nikita's favorite cozy human.</span>
+      </div>
     </div>
   </section>
 
@@ -1031,43 +1103,14 @@ body::after{
         <h4>Default Modes</h4>
         <p class="mood-summary" id="mood-summary">Mood tracker: 0 selections logged 💗</p>
         <div class="mode-grid" aria-label="Select Dhruv's current mood">
-          <button class="mood-choice" type="button" data-mood="Happy">😊 Happy<span>sunshine smile</span></button>
-          <button class="mood-choice" type="button" data-mood="Sad">🥺 Sad<span>needs soft care</span></button>
-          <button class="mood-choice" type="button" data-mood="Grumpy">😤 Grumpy<span>feed immediately</span></button>
-          <button class="mood-choice" type="button" data-mood="Sleepy">😴 Sleepy<span>blanket mode</span></button>
-          <button class="mood-choice" type="button" data-mood="Hungry">🍟 Hungry<span>McD/KFC radar</span></button>
-          <button class="mood-choice" type="button" data-mood="Silly">🤪 Silly<span>chaos unlocked</span></button>
-          <button class="mood-choice" type="button" data-mood="Shy">🫣 Shy<span>secretly smiling</span></button>
-          <button class="mood-choice" type="button" data-mood="Nonchalant">😎 Nonchalant<span>pretends calm</span></button>
-        </div>
-      </div>
-
-      <div class="manual-section">
-        <h4>Energy Meter</h4>
-        <div class="energy-meter">
-          <div class="energy-readout">
-            <span class="energy-face" id="energyFace" aria-hidden="true">⚡</span>
-            <span class="energy-level" id="energyLevel">65% cozy chaos</span>
-          </div>
-          <input id="energySlider" type="range" min="0" max="100" value="65" aria-label="Adjust Dhruv's energy meter">
-          <div class="energy-bar" aria-hidden="true"><div class="energy-fill" id="energyFill"></div></div>
-          <p class="energy-note" id="energyNote">Balanced setting: give snacks, hugs, and let him yap about his latest fixation.</p>
-          <div class="energy-actions" aria-label="Energy presets">
-            <button class="energy-chip" type="button" data-energy="20">sleepy cuddle</button>
-            <button class="energy-chip" type="button" data-energy="50">soft reset</button>
-            <button class="energy-chip" type="button" data-energy="78">sparkle charge</button>
-            <button class="energy-chip" type="button" data-energy="95">zoomies</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="manual-section">
-        <h4>Care Manual</h4>
-        <div class="manual-grid">
-          <div class="manual-box" tabindex="0">Feed<span>McD / KFC fixes most system errors.</span></div>
-          <div class="manual-box" tabindex="0">Boop<span>Apply affection gently and repeatedly.</span></div>
-          <div class="manual-box" tabindex="0">Distract<span>Hot Wheels displays work instantly.</span></div>
-          <div class="manual-box" tabindex="0">Reset<span>Hugs, soft voice, and forehead kisses.</span></div>
+          <button class="mood-choice" type="button" data-mood="Happy">😊 Happy<span class="mood-count">0</span><span>sunshine smile</span></button>
+          <button class="mood-choice" type="button" data-mood="Sad">🥺 Sad<span class="mood-count">0</span><span>needs soft care</span></button>
+          <button class="mood-choice" type="button" data-mood="Grumpy">😤 Grumpy<span class="mood-count">0</span><span>feed immediately</span></button>
+          <button class="mood-choice" type="button" data-mood="Sleepy">😴 Sleepy<span class="mood-count">0</span><span>blanket mode</span></button>
+          <button class="mood-choice" type="button" data-mood="Hungry">🍟 Hungry<span class="mood-count">0</span><span>McD/KFC radar</span></button>
+          <button class="mood-choice" type="button" data-mood="Silly">🤪 Silly<span class="mood-count">0</span><span>chaos unlocked</span></button>
+          <button class="mood-choice" type="button" data-mood="Shy">🫣 Shy<span class="mood-count">0</span><span>secretly smiling</span></button>
+          <button class="mood-choice" type="button" data-mood="Nonchalant">😎 Nonchalant<span class="mood-count">0</span><span>pretends calm</span></button>
         </div>
       </div>
 
@@ -1081,10 +1124,35 @@ body::after{
         </div>
       </div>
 
+      <div class="manual-section energy-section">
+        <h4>Energy Meter</h4>
+        <div class="energy-meter">
+          <div class="energy-readout">
+            <span class="energy-face" id="energyFace" aria-hidden="true">⚡</span>
+            <span class="energy-level" id="energyLevel">65% cozy chaos</span>
+          </div>
+          <input id="energySlider" type="range" min="0" max="100" value="65" aria-label="Adjust Dhruv's energy meter">
+          <div class="energy-bar" aria-hidden="true"><div class="energy-fill" id="energyFill"></div></div>
+          <p class="energy-note" id="energyNote">Balanced setting: give snacks, hugs, and let him yap about his latest fixation.</p>
+        </div>
+      </div>
+
+      <div class="manual-section">
+        <h4>Care Manual</h4>
+        <div class="manual-grid">
+          <div class="manual-box" tabindex="0">Feed<span>McD / KFC fixes most system errors.</span></div>
+          <div class="manual-box" tabindex="0">Boop<span>Apply affection gently and repeatedly.</span></div>
+          <div class="manual-box" tabindex="0">Distract<span>Hot Wheels displays work instantly.</span></div>
+          <div class="manual-box" tabindex="0">Reset<span>Hugs, soft voice, and forehead kisses.</span></div>
+        </div>
+      </div>
+
       <div class="manual-section fact-panel pop-panel" aria-labelledby="facts-title" role="button" tabindex="0">
         <h4 id="facts-title">Random Dhruv Facts</h4>
-        <button class="fact-button" type="button">Dhruv fact ✨</button>
-        <p class="fact-output" aria-live="polite">Classified cutie information.</p>
+        <div class="fact-row">
+          <button class="fact-button" type="button">Dhruv fact ✨</button>
+          <p class="fact-output" aria-live="polite">Classified cutie information.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1105,14 +1173,14 @@ function sprinklePhoto() {
   photoFrame.classList.add('is-loved');
   window.setTimeout(() => photoFrame.classList.remove('is-loved'), 220);
 
-  for (let index = 0; index < 26; index += 1) {
+  for (let index = 0; index < 14; index += 1) {
     const sparkle = document.createElement('span');
     sparkle.className = 'sparkle-pop';
     sparkle.textContent = ['♡', '✦', '✨', '★', '💗'][index % 5];
     sparkle.style.left = `${33 + Math.random() * 34}%`;
     sparkle.style.top = `${34 + Math.random() * 32}%`;
-    sparkle.style.setProperty('--x', `${-100 + Math.random() * 200}px`);
-    sparkle.style.setProperty('--y', `${-160 + Math.random() * 110}px`);
+    sparkle.style.setProperty('--x', `${-70 + Math.random() * 140}px`);
+    sparkle.style.setProperty('--y', `${-110 + Math.random() * 80}px`);
     photoFrame.appendChild(sparkle);
     sparkle.addEventListener('animationend', () => sparkle.remove());
   }
@@ -1149,6 +1217,15 @@ const storedMoodTracker = JSON.parse(localStorage.getItem('dhruvMoodTracker') ||
 const moodCounts = storedMoodTracker.counts || {};
 let moodTapTotal = storedMoodTracker.total || 0;
 
+function updateMoodButtons() {
+  moodChoices.forEach((button) => {
+    const counter = button.querySelector('.mood-count');
+    if (counter) {
+      counter.textContent = moodCounts[button.dataset.mood] || 0;
+    }
+  });
+}
+
 function updateMoodSummary(selectedMood) {
   if (!moodSummary) {
     return;
@@ -1170,11 +1247,13 @@ moodChoices.forEach((button) => {
     localStorage.setItem('dhruvMoodTracker', JSON.stringify({counts:moodCounts, total:moodTapTotal}));
     moodChoices.forEach((choice) => choice.classList.remove('is-selected'));
     button.classList.add('is-selected');
+    updateMoodButtons();
     updateMoodSummary(button.dataset.mood);
     sprinklePhoto();
   });
 });
 
+updateMoodButtons();
 updateMoodSummary();
 
 const energySlider = document.querySelector('#energySlider');
@@ -1182,7 +1261,6 @@ const energyFill = document.querySelector('#energyFill');
 const energyLevel = document.querySelector('#energyLevel');
 const energyFace = document.querySelector('#energyFace');
 const energyNote = document.querySelector('#energyNote');
-const energyChips = document.querySelectorAll('.energy-chip');
 
 function updateEnergyMeter(value) {
   const energy = Number(value);
@@ -1213,17 +1291,6 @@ if (energySlider) {
   updateEnergyMeter(energySlider.value);
 }
 
-energyChips.forEach((chip) => {
-  chip.addEventListener('click', (event) => {
-    event.stopPropagation();
-    if (!energySlider) {
-      return;
-    }
-    energySlider.value = chip.dataset.energy;
-    updateEnergyMeter(chip.dataset.energy);
-    popElement(chip);
-  });
-});
 
 const factButton = document.querySelector('.fact-button');
 const factOutput = document.querySelector('.fact-output');
