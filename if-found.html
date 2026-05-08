@@ -1,1 +1,797 @@
+<<<<<<< codex/enhance-visual-appeal-and-interactivity-yn683q
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>If Found — Return to Nikita 💌</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --berry:#ff6fa6;
+  --rose:#ffb6ca;
+  --peach:#ffc08c;
+  --cream:#fff1d7;
+  --butter:#ffe27a;
+  --mint:#aeeed1;
+  --sky:#9edbff;
+  --lavender:#cdbbff;
+  --cocoa:#6a4059;
+  --caramel:#b8744f;
+  --ink:#5d465c;
+  --paper:rgba(255,250,239,.86);
+  --paper-strong:rgba(255,253,247,.94);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  min-height:100%;
+  background:#fff2df;
+}
+
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  font-family:'Fredoka',Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 9% 7%, rgba(255,226,122,.74), transparent 18rem),
+    radial-gradient(circle at 88% 12%, rgba(255,111,166,.48), transparent 22rem),
+    radial-gradient(circle at 12% 86%, rgba(174,238,209,.58), transparent 24rem),
+    radial-gradient(circle at 86% 78%, rgba(205,187,255,.55), transparent 24rem),
+    linear-gradient(135deg,#fff1d7 0%,#fff8ef 43%,#ffe8f1 100%);
+  position:relative;
+}
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+}
+
+body::before{
+  z-index:0;
+  background-image:
+    radial-gradient(circle, rgba(255,111,166,.18) 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(255,226,122,.18) 0 2px, transparent 3px),
+    linear-gradient(90deg, rgba(255,255,255,.28) 1px, transparent 1px);
+  background-size:74px 74px,46px 46px,96px 96px;
+  opacity:.72;
+}
+
+body::after{
+  z-index:1;
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.24) 0 1px, transparent 1px 13px),
+    linear-gradient(90deg, rgba(255,226,122,.13), transparent 24%, transparent 76%, rgba(255,111,166,.12));
+  opacity:.42;
+}
+
+.floaty{
+  position:fixed;
+  z-index:1;
+  pointer-events:none;
+  filter:drop-shadow(0 14px 18px rgba(184,116,79,.14));
+  opacity:.78;
+}
+
+.floaty.one{
+  width:210px;
+  height:210px;
+  border-radius:50%;
+  border:2px dashed rgba(255,111,166,.32);
+  right:40px;
+  top:42px;
+  background:radial-gradient(circle, rgba(255,255,255,.45), transparent 60%);
+}
+
+.floaty.two{
+  width:210px;
+  height:210px;
+  left:28px;
+  bottom:40px;
+  border-radius:42% 58% 55% 45%;
+  background:linear-gradient(135deg, rgba(174,238,209,.32), rgba(205,187,255,.28));
+}
+
+.page{
+  position:relative;
+  z-index:2;
+  width:min(1160px,92vw);
+  margin:0 auto;
+  padding:34px 0 74px;
+}
+
+.panel{
+  position:relative;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,.78);
+  border-radius:34px;
+  background:
+    linear-gradient(145deg, var(--paper-strong), rgba(255,232,241,.78)),
+    linear-gradient(90deg, rgba(255,226,122,.18), rgba(174,238,209,.18), rgba(205,187,255,.18));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 24px 48px rgba(184,116,79,.18);
+}
+
+.panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:30px;
+  border:1px solid rgba(255,255,255,.7);
+}
+
+.panel::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  height:7px;
+  background:linear-gradient(90deg,var(--berry),var(--butter),var(--mint),var(--lavender),var(--sky));
+}
+
+.hero{
+  padding:48px 38px 42px;
+  margin-bottom:24px;
+  text-align:left;
+  background:
+    radial-gradient(circle at 9% 18%, rgba(255,226,122,.44), transparent 12rem),
+    radial-gradient(circle at 92% 28%, rgba(255,111,166,.3), transparent 13rem),
+    linear-gradient(145deg, rgba(255,253,247,.96), rgba(255,230,241,.88));
+}
+
+.hero-kicker{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 13px;
+  border:1px solid rgba(255,255,255,.82);
+  border-radius:999px;
+  background:rgba(255,250,239,.76);
+  color:#744c66;
+  font-family:'Baloo 2',cursive;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+
+.pill-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--berry);
+  box-shadow:0 0 12px rgba(255,111,166,.72);
+}
+
+.hero h1{
+  max-width:850px;
+  color:var(--cocoa);
+  font-family:'Baloo 2',cursive;
+  font-size:clamp(2.6rem,7vw,6rem);
+  line-height:.92;
+  letter-spacing:-1px;
+  text-shadow:0 8px 0 rgba(255,226,122,.4), 0 20px 34px rgba(255,111,166,.22);
+}
+
+.hero h2{
+  margin-top:18px;
+  max-width:760px;
+  color:#76556d;
+  font-size:clamp(1.1rem,2vw,1.45rem);
+  line-height:1.45;
+}
+
+.reward{
+  display:inline-flex;
+  margin-top:20px;
+  padding:10px 17px;
+  border-radius:999px;
+  background:linear-gradient(135deg, rgba(255,226,122,.48), rgba(255,182,202,.5));
+  color:#7a4b3b;
+  font-family:'Pacifico',cursive;
+  font-size:1.05rem;
+}
+
+.top-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);
+  gap:24px;
+  align-items:start;
+  margin-bottom:24px;
+}
+
+.details-panel,
+.photo-panel,
+.info-card,
+.mood-board,
+.care-manual{
+  padding:26px;
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:20px;
+  color:#62445d;
+  font-family:'Baloo 2',cursive;
+  font-size:clamp(1.35rem,2.5vw,2.05rem);
+  line-height:1;
+}
+
+.section-title::after{
+  content:"♡ cozy little details";
+  flex:1;
+  min-width:150px;
+  text-align:right;
+  color:rgba(184,116,79,.58);
+  font-family:'Pacifico',cursive;
+  font-size:1rem;
+  font-weight:400;
+}
+
+.identity-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.identity-card{
+  position:relative;
+  min-height:96px;
+  padding:17px;
+  border:2px solid rgba(255,255,255,.66);
+  border-radius:24px;
+  background:linear-gradient(135deg, rgba(255,226,122,.25), rgba(255,255,255,.54));
+  box-shadow:0 12px 22px rgba(184,116,79,.08);
+}
+
+.identity-card:nth-child(2){background:linear-gradient(135deg, rgba(174,238,209,.34), rgba(255,255,255,.56));}
+.identity-card:nth-child(3){background:linear-gradient(135deg, rgba(205,187,255,.34), rgba(255,255,255,.56));}
+.identity-card:nth-child(4){background:linear-gradient(135deg, rgba(255,182,202,.36), rgba(255,255,255,.56));}
+
+.label{
+  display:block;
+  color:var(--berry);
+  font-family:'Baloo 2',cursive;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.3px;
+  text-transform:uppercase;
+}
+
+.value{
+  display:block;
+  margin-top:8px;
+  color:#60495e;
+  font-size:1.18rem;
+  font-weight:700;
+}
+
+.note-box{
+  margin-top:18px;
+  padding:22px;
+  border:2px dashed rgba(255,182,202,.72);
+  border-radius:26px;
+  background:rgba(255,250,239,.58);
+}
+
+.note-box h3,
+.info-card h3,
+.mood-board h3,
+.care-manual h3{
+  margin-bottom:12px;
+  color:#67405f;
+  font-family:'Baloo 2',cursive;
+  font-size:1.12rem;
+  line-height:1.1;
+}
+
+.note-box p{
+  color:#6e5870;
+  font-size:1.08rem;
+  line-height:1.75;
+}
+
+.photo-frame{
+  width:min(100%, 315px);
+  margin:0 auto;
+  aspect-ratio:3/4;
+  position:relative;
+  overflow:hidden;
+  border:10px solid #fffaf0;
+  border-radius:32px;
+  background:
+    linear-gradient(rgba(255,255,255,.12),rgba(255,238,247,.28)),
+    url("your-bf-photo.jpg") center/cover no-repeat,
+    linear-gradient(135deg, rgba(158,219,255,.55), rgba(255,111,166,.32), rgba(255,226,122,.32));
+  box-shadow:0 10px 0 rgba(255,226,122,.48), 0 24px 42px rgba(184,116,79,.24);
+  cursor:pointer;
+  transform:rotate(-1.5deg);
+  transition:transform .22s ease, box-shadow .22s ease, filter .22s ease;
+}
+
+.photo-frame:hover,
+.photo-frame:focus-visible{
+  outline:0;
+  filter:saturate(1.13) brightness(1.02);
+  transform:rotate(1deg) translateY(-5px) scale(1.025);
+  box-shadow:0 12px 0 rgba(174,238,209,.5), 0 30px 52px rgba(184,116,79,.28);
+}
+
+.photo-frame.is-loved{
+  transform:rotate(0deg) scale(.97);
+}
+
+.photo-frame::before{
+  content:"official cutie card";
+  position:absolute;
+  top:15px;
+  left:15px;
+  z-index:2;
+  padding:7px 12px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--berry),#ffc4d5);
+  color:#654159;
+  font-family:'Baloo 2',cursive;
+  font-size:.74rem;
+  font-weight:800;
+  box-shadow:0 8px 16px rgba(184,116,79,.16);
+}
+
+.photo-frame::after{
+  content:"♡ DH ♡";
+  position:absolute;
+  right:16px;
+  bottom:16px;
+  z-index:2;
+  color:#654159;
+  font-family:'Baloo 2',cursive;
+  font-size:1.05rem;
+  font-weight:800;
+  text-shadow:0 0 12px rgba(158,219,255,.86);
+}
+
+.photo-border{
+  position:absolute;
+  inset:9%;
+  z-index:1;
+  border:2px dashed rgba(255,255,255,.74);
+  border-radius:24px;
+}
+
+.tap-hint{
+  position:absolute;
+  left:50%;
+  bottom:56px;
+  z-index:2;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  padding:8px 13px;
+  border-radius:999px;
+  background:rgba(255,250,239,.88);
+  color:#8f5261;
+  font-weight:800;
+  box-shadow:0 8px 22px rgba(184,116,79,.16);
+}
+
+.sparkle-pop{
+  --x:0px;
+  --y:-90px;
+  position:absolute;
+  z-index:3;
+  pointer-events:none;
+  color:var(--berry);
+  font-size:1.25rem;
+  text-shadow:0 0 10px rgba(255,255,255,.9);
+  animation:sparklePop .8s ease forwards;
+}
+
+.photo-note{
+  margin-top:18px;
+  text-align:center;
+}
+
+.photo-note h3{
+  color:#67405f;
+  font-family:'Baloo 2',cursive;
+  font-size:1.1rem;
+}
+
+.photo-note p{
+  margin-top:7px;
+  color:#725b71;
+  line-height:1.55;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:22px;
+}
+
+.info-card{
+  min-height:220px;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(255,226,122,.24), transparent 8rem),
+    linear-gradient(145deg, rgba(255,253,247,.9), rgba(255,235,246,.76));
+}
+
+.info-card ul{
+  list-style:none;
+}
+
+.info-card li{
+  position:relative;
+  margin-bottom:12px;
+  padding-left:24px;
+  color:#66536b;
+  line-height:1.65;
+}
+
+.info-card li::before{
+  content:"♥";
+  position:absolute;
+  left:0;
+  color:var(--berry);
+}
+
+.mood-board,
+.care-manual{
+  margin-top:24px;
+}
+
+.mood-grid,
+.manual-grid{
+  display:grid;
+  gap:16px;
+}
+
+.mood-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.manual-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+.mood-box,
+.manual-box{
+  min-height:132px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:18px;
+  border:2px solid rgba(255,255,255,.76);
+  border-radius:28px;
+  background:linear-gradient(135deg, rgba(255,182,202,.52), rgba(255,226,122,.36));
+  color:#6d3f62;
+  text-align:center;
+  font-family:'Baloo 2',cursive;
+  font-size:1.18rem;
+  font-weight:800;
+  line-height:1.15;
+  box-shadow:0 14px 24px rgba(184,116,79,.12);
+  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.mood-box:nth-child(2),
+.manual-box:nth-child(2){background:linear-gradient(135deg, rgba(174,238,209,.58), rgba(158,219,255,.4));}
+.mood-box:nth-child(3),
+.manual-box:nth-child(3){background:linear-gradient(135deg, rgba(205,187,255,.54), rgba(255,182,202,.44));}
+.mood-box:nth-child(4),
+.manual-box:nth-child(4){background:linear-gradient(135deg, rgba(255,226,122,.52), rgba(255,192,140,.44));}
+.mood-box:nth-child(5){background:linear-gradient(135deg, rgba(255,111,166,.36), rgba(174,238,209,.46));}
+.mood-box:nth-child(6){background:linear-gradient(135deg, rgba(158,219,255,.5), rgba(255,226,122,.36));}
+.mood-box:nth-child(7){background:linear-gradient(135deg, rgba(255,192,140,.48), rgba(205,187,255,.42));}
+.mood-box:nth-child(8){background:linear-gradient(135deg, rgba(174,238,209,.5), rgba(255,182,202,.42));}
+.mood-box:nth-child(9){background:linear-gradient(135deg, rgba(255,226,122,.5), rgba(255,111,166,.35));}
+
+.mood-box:hover,
+.manual-box:hover{
+  transform:translateY(-5px) rotate(-1deg);
+  border-color:rgba(255,111,166,.58);
+  filter:saturate(1.08);
+  box-shadow:0 18px 30px rgba(184,116,79,.18);
+}
+
+.mood-box span{
+  display:block;
+  margin-top:7px;
+  color:#8f5261;
+  font-size:.9rem;
+  font-weight:600;
+  line-height:1.25;
+}
+
+.home{
+  margin-top:34px;
+  text-align:center;
+}
+
+.home a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:15px 34px;
+  border:2px solid rgba(255,255,255,.76);
+  border-radius:999px;
+  background:linear-gradient(135deg, rgba(158,219,255,.34), rgba(255,250,239,.78));
+  color:#60495e;
+  font-family:'Baloo 2',cursive;
+  font-size:1rem;
+  font-weight:800;
+  text-decoration:none;
+  box-shadow:0 16px 28px rgba(184,116,79,.12);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+.home a:hover,
+.home a:focus-visible{
+  outline:0;
+  transform:translateY(-3px);
+  box-shadow:0 20px 34px rgba(184,116,79,.18);
+}
+
+@keyframes sparklePop{
+  0%{opacity:1; transform:translate(-50%,-50%) scale(.2) rotate(0deg);}
+  100%{opacity:0; transform:translate(var(--x), var(--y)) scale(1.65) rotate(90deg);}
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .pill-dot{animation:pulse 1.8s ease-in-out infinite;}
+  .floaty.one{animation:floaty 7s ease-in-out infinite;}
+  .floaty.two{animation:floaty 8s ease-in-out infinite reverse;}
+}
+
+@keyframes pulse{
+  0%,100%{opacity:.72; transform:scale(.94);}
+  50%{opacity:1; transform:scale(1.08);}
+}
+
+@keyframes floaty{
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  50%{transform:translateY(-12px) rotate(3deg);}
+}
+
+@media(max-width:980px){
+  .top-grid,
+  .info-grid,
+  .manual-grid{
+    grid-template-columns:1fr;
+  }
+
+  .mood-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:640px){
+  .page{
+    width:min(92vw,640px);
+    padding-top:22px;
+  }
+
+  .hero,
+  .details-panel,
+  .photo-panel,
+  .info-card,
+  .mood-board,
+  .care-manual{
+    padding:20px;
+  }
+
+  .section-title{
+    display:block;
+  }
+
+  .section-title::after{
+    display:block;
+    margin-top:8px;
+    text-align:left;
+  }
+
+  .identity-grid,
+  .mood-grid{
+    grid-template-columns:1fr;
+  }
+
+  .tap-hint{
+    bottom:48px;
+    font-size:.9rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="floaty one" aria-hidden="true"></div>
+<div class="floaty two" aria-hidden="true"></div>
+
+<main class="page">
+  <section class="hero panel" aria-labelledby="page-title">
+    <div class="hero-kicker" aria-hidden="true">
+      <span class="pill"><span class="pill-dot"></span>cuteness detected</span>
+      <span class="pill">mood: snuggly</span>
+      <span class="pill">if found card</span>
+    </div>
+
+    <h1 id="page-title">Lost cutie on the loose!!</h1>
+    <h2>If found, please return this adorable human to Nikita Kumari 💌</h2>
+    <p class="reward">Reward: hugs, food, and unlimited affection</p>
+  </section>
+
+  <section class="top-grid" aria-label="Dhruv details and photo">
+    <div class="details-panel panel">
+      <h2 class="section-title">Dhruv's Cozy Dossier</h2>
+
+      <div class="identity-grid">
+        <div class="identity-card">
+          <span class="label">Name</span>
+          <span class="value">Dhruv Agarwal</span>
+        </div>
+
+        <div class="identity-card">
+          <span class="label">Status</span>
+          <span class="value">Loved & Cozy</span>
+        </div>
+
+        <div class="identity-card">
+          <span class="label">Model</span>
+          <span class="value">Softboy-22</span>
+        </div>
+
+        <div class="identity-card">
+          <span class="label">Owner</span>
+          <span class="value">Nikita Kumari</span>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <h3>Why he stands out</h3>
+        <p>A certified comfort person with baby-faced sweetness, chaotic little habits, and a smile that makes the whole page warmer.</p>
+      </div>
+    </div>
+
+    <aside class="photo-panel panel" aria-label="Interactive photo card">
+      <div class="photo-frame" role="button" tabindex="0" aria-label="Tap Dhruv's photo for sparkles">
+        <div class="photo-border" aria-hidden="true"></div>
+        <span class="tap-hint">tap for sparkles ✨</span>
+      </div>
+
+      <div class="photo-note">
+        <h3>Cute level: baby-faced chaos</h3>
+        <p>The picture is smaller, softer, and tappable now — try clicking it.</p>
+      </div>
+    </aside>
+  </section>
+
+  <section class="info-grid" aria-label="Information cards">
+    <div class="info-card panel">
+      <h3>Sweet little details</h3>
+      <ul>
+        <li>Age — 19</li>
+        <li>Height — 5'11</li>
+        <li>Eyes — Pretty dark brown</li>
+        <li>Skin tone — Dusky (owner favorite)</li>
+        <li>Face type — Baby-faced sweetness</li>
+      </ul>
+    </div>
+
+    <div class="info-card panel">
+      <h3>Favorite traits</h3>
+      <ul>
+        <li>Cannot stay still; tiny hyperactive chaos energy.</li>
+        <li>Keeps the most unfairly youthful, squishy-cute face.</li>
+        <li>Emotionally dangerous levels of charm and warmth.</li>
+      </ul>
+    </div>
+
+    <div class="info-card panel">
+      <h3>Likely found near</h3>
+      <ul>
+        <li>McD / KFC outlets.</li>
+        <li>Hot Wheels displays.</li>
+        <li>Somewhere Beast Boy Shub audio is playing.</li>
+      </ul>
+    </div>
+
+    <div class="info-card panel">
+      <h3>Comfort vibe</h3>
+      <ul>
+        <li>Soft aura, cozy habits, and chaotic charm signatures.</li>
+        <li>Colorful personality board below — no disguise energy here.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="mood-board panel" aria-labelledby="mood-title">
+    <h3 id="mood-title">Him as a cozy board</h3>
+
+    <div class="mood-grid">
+      <div class="mood-box">movie<span>comfort rom-com</span></div>
+      <div class="mood-box">hobby<span>hot wheels hunt</span></div>
+      <div class="mood-box">animal<span>sleepy puppy</span></div>
+      <div class="mood-box">character<span>sweet chaos hero</span></div>
+      <div class="mood-box">color<span>warm cocoa pink</span></div>
+      <div class="mood-box">place<span>food court corner</span></div>
+      <div class="mood-box">season<span>golden monsoon</span></div>
+      <div class="mood-box">song/album<span>soft loop forever</span></div>
+      <div class="mood-box">food<span>KFC + McD date</span></div>
+    </div>
+  </section>
+
+  <section class="care-manual panel" aria-labelledby="manual-title">
+    <h3 id="manual-title">Tiny care manual</h3>
+
+    <div class="manual-grid">
+      <div class="manual-box">feed snacks</div>
+      <div class="manual-box">send reels</div>
+      <div class="manual-box">give cuddles</div>
+      <div class="manual-box">protect smile</div>
+    </div>
+  </section>
+
+  <div class="home">
+    <a href="index.html">back to lobby</a>
+  </div>
+</main>
+
+<script>
+const photoFrame = document.querySelector('.photo-frame');
+
+function sprinklePhoto() {
+  photoFrame.classList.add('is-loved');
+  window.setTimeout(() => photoFrame.classList.remove('is-loved'), 220);
+
+  for (let index = 0; index < 14; index += 1) {
+    const sparkle = document.createElement('span');
+    sparkle.className = 'sparkle-pop';
+    sparkle.textContent = index % 2 === 0 ? '♡' : '✦';
+    sparkle.style.left = `${33 + Math.random() * 34}%`;
+    sparkle.style.top = `${34 + Math.random() * 32}%`;
+    sparkle.style.setProperty('--x', `${-100 + Math.random() * 200}px`);
+    sparkle.style.setProperty('--y', `${-130 + Math.random() * 82}px`);
+    photoFrame.appendChild(sparkle);
+    sparkle.addEventListener('animationend', () => sparkle.remove());
+  }
+}
+
+photoFrame.addEventListener('click', sprinklePhoto);
+photoFrame.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    sprinklePhoto();
+  }
+});
+</script>
+
+</body>
+</html>
+=======
+
+>>>>>>> main
