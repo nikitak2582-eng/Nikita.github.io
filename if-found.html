@@ -3,29 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IF FOUND // RETURN TO OWNER</title>
+<title>Cozy If Found Card</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;600;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Fredoka:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --ink:#4f5367;
-  --muted:#8d8ca3;
-  --cyber:#8fc8ff;
-  --cyber-soft:rgba(143,200,255,.22);
-  --cyber-line:rgba(143,200,255,.36);
-  --warning:#ff9ab3;
-  --warning-soft:rgba(255,154,179,.2);
-  --gold:#ffd98e;
-  --glass:rgba(255,255,255,.78);
-  --glass-2:rgba(255,250,253,.7);
-  --deep:#fff8fd;
-  --lavender:#d9ccff;
-  --mint:#bdeedc;
-  --peach:#ffd5bf;
+  --ink:#5a4056;
+  --muted:#9f7891;
+  --berry:#ff7aa8;
+  --berry-soft:rgba(255,122,168,.24);
+  --sun:#ffd36e;
+  --cream:#fff1d8;
+  --tea:#b57a54;
+  --rose:#ffb4c8;
+  --glass:rgba(255,247,238,.82);
+  --glass-2:rgba(255,239,226,.76);
+  --deep:#fff4e8;
+  --lavender:#cab8ff;
+  --mint:#a8ead0;
+  --peach:#ffbe91;
+  --skyblue:#9ed8ff;
+  --sky-line:rgba(158,216,255,.36);
 }
+
 
 *{
   margin:0;
@@ -41,15 +44,17 @@ html{
 body{
   min-height:100vh;
   overflow-x:hidden;
-  font-family:'Rajdhani',Arial,sans-serif;
+  font-family:'Fredoka',Arial,sans-serif;
   color:var(--ink);
   background:
-    radial-gradient(circle at 14% 10%, rgba(255,213,191,.72), transparent 26rem),
-    radial-gradient(circle at 82% 18%, rgba(217,204,255,.65), transparent 25rem),
-    radial-gradient(circle at 50% 88%, rgba(189,238,220,.58), transparent 30rem),
-    linear-gradient(135deg,#fff8fd 0%,#f6fbff 42%,#fff6ed 100%);
+    radial-gradient(circle at 10% 8%, rgba(255,211,110,.62), transparent 22rem),
+    radial-gradient(circle at 86% 14%, rgba(255,122,168,.48), transparent 24rem),
+    radial-gradient(circle at 18% 84%, rgba(168,234,208,.5), transparent 26rem),
+    radial-gradient(circle at 82% 78%, rgba(202,184,255,.48), transparent 25rem),
+    linear-gradient(135deg,#fff1d8 0%,#fff7ef 44%,#ffe7f0 100%);
   position:relative;
 }
+
 
 body::before,
 body::after{
@@ -61,21 +66,21 @@ body::after{
 
 body::before{
   z-index:0;
-  opacity:.5;
+  opacity:.6;
   background-image:
-    linear-gradient(rgba(143,200,255,.16) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(217,204,255,.14) 1px, transparent 1px),
-    linear-gradient(60deg, transparent 0 48%, rgba(255,154,179,.10) 49% 51%, transparent 52% 100%);
-  background-size:64px 64px,64px 64px,120px 120px;
-  mask-image:linear-gradient(to bottom, rgba(0,0,0,.72), rgba(0,0,0,.25) 62%, rgba(0,0,0,.55));
+    radial-gradient(circle, rgba(255,122,168,.18) 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(255,211,110,.2) 0 2px, transparent 3px),
+    linear-gradient(90deg, rgba(255,255,255,.28) 1px, transparent 1px);
+  background-size:72px 72px,46px 46px,96px 96px;
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,.65), rgba(0,0,0,.22) 62%, rgba(0,0,0,.5));
 }
 
 body::after{
   z-index:1;
   background:
-    repeating-linear-gradient(to bottom, rgba(255,255,255,.26) 0 1px, transparent 1px 7px),
-    linear-gradient(90deg, rgba(143,200,255,.14), transparent 18%, transparent 82%, rgba(255,154,179,.12));
-  opacity:.24;
+    repeating-linear-gradient(135deg, rgba(255,255,255,.22) 0 1px, transparent 1px 14px),
+    linear-gradient(90deg, rgba(255,211,110,.16), transparent 18%, transparent 82%, rgba(255,122,168,.12));
+  opacity:.34;
 }
 
 .hud-ring,
@@ -88,11 +93,11 @@ body::after{
 .hud-ring{
   width:240px;
   height:240px;
-  border:1px solid var(--cyber-line);
+  border:1px solid var(--sky-line);
   border-radius:50%;
   top:42px;
   right:42px;
-  box-shadow:inset 0 0 0 16px rgba(255,255,255,.42), 0 0 34px rgba(143,200,255,.18);
+  box-shadow:inset 0 0 0 16px rgba(255,255,255,.42), 0 0 34px rgba(158,216,255,.18);
 }
 
 .hud-ring::before,
@@ -101,13 +106,13 @@ body::after{
   position:absolute;
   inset:28px;
   border-radius:50%;
-  border:1px dashed rgba(143,200,255,.35);
+  border:1px dashed rgba(158,216,255,.35);
 }
 
 .hud-ring::after{
   inset:78px;
   border-style:solid;
-  background:radial-gradient(circle, rgba(255,154,179,.42) 0 5px, transparent 6px);
+  background:radial-gradient(circle, rgba(255,122,168,.42) 0 5px, transparent 6px);
 }
 
 .hud-triangle{
@@ -118,7 +123,7 @@ body::after{
   border-bottom:226px solid rgba(217,204,255,.25);
   left:28px;
   bottom:30px;
-  filter:drop-shadow(0 0 18px rgba(143,200,255,.22));
+  filter:drop-shadow(0 0 18px rgba(158,216,255,.22));
 }
 
 .page{
@@ -132,15 +137,15 @@ body::after{
 .panel{
   position:relative;
   overflow:hidden;
-  border:1px solid rgba(143,200,255,.38);
-  border-radius:24px;
+  border:2px solid rgba(255,255,255,.76);
+  border-radius:32px;
   background:
-    linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,248,253,.74)),
-    linear-gradient(90deg, rgba(143,200,255,.16), transparent 50%, rgba(255,154,179,.12));
+    linear-gradient(145deg, rgba(255,251,244,.92), rgba(255,233,244,.78)),
+    linear-gradient(90deg, rgba(255,211,110,.18), rgba(168,234,208,.18), rgba(202,184,255,.18));
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.8),
-    inset 0 0 44px rgba(217,204,255,.14),
-    0 22px 46px rgba(151,133,170,.16);
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 0 44px rgba(255,211,110,.12),
+    0 24px 48px rgba(181,122,84,.18);
 }
 
 .panel::before{
@@ -149,7 +154,7 @@ body::after{
   inset:0;
   pointer-events:none;
   border:1px solid rgba(255,255,255,.72);
-  clip-path:polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 28px 100%, 0 calc(100% - 28px));
+  border-radius:28px;
 }
 
 .panel::after{
@@ -158,27 +163,39 @@ body::after{
   left:0;
   right:0;
   top:0;
-  height:3px;
-  background:linear-gradient(90deg, var(--warning), var(--lavender) 38%, var(--cyber) 72%, transparent);
+  height:6px;
+  background:linear-gradient(90deg, var(--berry), var(--sun), var(--mint), var(--lavender), var(--skyblue));
   opacity:.9;
 }
 
 .alert-board{
-  padding:44px 36px 40px;
+  padding:48px 38px 42px;
   margin-bottom:28px;
-  border-color:rgba(255,154,179,.48);
+  border-color:rgba(255,255,255,.8);
   background:
-    linear-gradient(135deg, rgba(255,213,191,.42), transparent 24%),
-    linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,248,253,.84));
+    radial-gradient(circle at 8% 18%, rgba(255,211,110,.44), transparent 13rem),
+    radial-gradient(circle at 92% 24%, rgba(255,122,168,.34), transparent 15rem),
+    linear-gradient(145deg, rgba(255,250,239,.96), rgba(255,230,242,.86));
 }
+
+.alert-board::before{
+  content:"♡ ✦ cozy claim tag ✦ ♡";
+  position:absolute;
+  right:28px;
+  bottom:18px;
+  color:rgba(181,122,84,.36);
+  font-family:'Pacifico',cursive;
+  font-size:1.1rem;
+}
+
 
 .alert-board .micro{
   position:absolute;
   top:18px;
   right:24px;
-  font-family:'Orbitron',sans-serif;
+  font-family:'Baloo 2',cursive;
   font-size:.72rem;
-  letter-spacing:3px;
+  letter-spacing:1px;
   color:rgba(118,143,196,.82);
 }
 
@@ -193,18 +210,19 @@ body::after{
   display:inline-flex;
   align-items:center;
   gap:8px;
-  border:1px solid rgba(143,200,255,.42);
-  background:rgba(143,200,255,.16);
+  border:1px solid rgba(158,216,255,.42);
+  border-radius:999px;
+  background:rgba(255,250,240,.66);
   color:#52658e;
   padding:7px 11px;
-  font-family:'Orbitron',sans-serif;
+  font-family:'Baloo 2',cursive;
   font-size:.68rem;
-  letter-spacing:2px;
+  letter-spacing:.6px;
 }
 
 .status-pill.warning{
-  border-color:rgba(255,154,179,.5);
-  background:rgba(255,154,179,.18);
+  border-color:rgba(255,122,168,.5);
+  background:rgba(255,122,168,.18);
   color:#8f5261;
 }
 
@@ -212,44 +230,49 @@ body::after{
   width:9px;
   height:9px;
   border-radius:50%;
-  background:var(--cyber);
-  box-shadow:0 0 12px var(--cyber);
+  background:var(--skyblue);
+  box-shadow:0 0 12px var(--skyblue);
 }
 
 .led.red{
-  background:var(--warning);
-  box-shadow:0 0 12px var(--warning);
+  background:var(--berry);
+  box-shadow:0 0 12px var(--berry);
 }
 
 .alert-board h1{
-  font-family:'Syncopate',sans-serif;
+  font-family:'Baloo 2',cursive;
   font-size:clamp(2.15rem,5vw,5.35rem);
-  letter-spacing:8px;
-  color:#4f5367;
-  text-transform:uppercase;
-  text-shadow:0 6px 22px rgba(217,204,255,.55), 0 0 1px #fff;
+  letter-spacing:.6px;
+  color:#6d3f62;
+  text-transform:none;
+  line-height:1;
+  text-shadow:0 7px 0 rgba(255,211,110,.36), 0 18px 30px rgba(255,122,168,.22);
 }
 
 .alert-board h2{
   margin-top:16px;
   font-size:1.32rem;
-  letter-spacing:2px;
+  letter-spacing:.6px;
   color:#6f6b86;
   font-weight:700;
 }
 
 .alert-board p{
-  margin-top:14px;
-  font-family:'Orbitron',sans-serif;
-  font-size:.9rem;
-  letter-spacing:3px;
-  color:var(--cyber);
-  text-transform:uppercase;
+  display:inline-flex;
+  margin-top:18px;
+  padding:9px 16px;
+  border-radius:999px;
+  font-family:'Baloo 2',cursive;
+  font-size:1rem;
+  letter-spacing:.4px;
+  color:#7b4c3c;
+  background:linear-gradient(135deg, rgba(255,211,110,.46), rgba(255,180,200,.48));
 }
+
 
 .top-grid{
   display:grid;
-  grid-template-columns:minmax(0,1.24fr) minmax(320px,.76fr);
+  grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);
   gap:24px;
   margin-bottom:24px;
 }
@@ -257,7 +280,7 @@ body::after{
 .file-panel,
 .photo-panel,
 .info-card,
-.disguise-board,
+.mood-board,
 .manual{
   padding:26px;
 }
@@ -267,22 +290,22 @@ body::after{
   align-items:center;
   justify-content:space-between;
   gap:16px;
-  font-family:'Syncopate',sans-serif;
+  font-family:'Baloo 2',cursive;
   font-size:clamp(1.4rem,2.5vw,2rem);
-  letter-spacing:4px;
+  letter-spacing:1px;
   margin-bottom:22px;
   color:#56546d;
 }
 
 .file-title::after{
-  content:"RK800-STYLE CASE VIEW";
+  content:"warm little details";
   flex:1;
   min-width:170px;
   text-align:right;
   color:rgba(118,143,196,.68);
-  font-family:'Orbitron',sans-serif;
+  font-family:'Baloo 2',cursive;
   font-size:.66rem;
-  letter-spacing:2px;
+  letter-spacing:.6px;
 }
 
 .identity{
@@ -295,8 +318,8 @@ body::after{
   position:relative;
   min-height:92px;
   padding:16px 16px 14px;
-  background:linear-gradient(135deg, rgba(143,200,255,.18), rgba(255,255,255,.58));
-  border:1px solid rgba(143,200,255,.28);
+  background:linear-gradient(135deg, rgba(158,216,255,.18), rgba(255,255,255,.58));
+  border:1px solid rgba(158,216,255,.28);
   clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
 }
 
@@ -307,16 +330,16 @@ body::after{
   bottom:12px;
   width:24px;
   height:4px;
-  background:var(--cyber);
+  background:var(--skyblue);
   opacity:.54;
 }
 
 .label{
   display:block;
-  font-family:'Orbitron',sans-serif;
+  font-family:'Baloo 2',cursive;
   font-size:.72rem;
-  letter-spacing:2px;
-  color:var(--cyber);
+  letter-spacing:.6px;
+  color:var(--berry);
 }
 
 .value{
@@ -330,7 +353,7 @@ body::after{
 .analysis{
   margin-top:22px;
   padding:22px;
-  border:1px solid rgba(143,200,255,.24);
+  border:1px solid rgba(158,216,255,.24);
   background:
     linear-gradient(90deg, rgba(189,238,220,.22), transparent),
     rgba(255,255,255,.5);
@@ -339,11 +362,11 @@ body::after{
 
 .analysis h3,
 .info-card h3,
-.disguise-board h3,
+.mood-board h3,
 .manual h3{
-  font-family:'Syncopate',sans-serif;
+  font-family:'Baloo 2',cursive;
   font-size:.96rem;
-  letter-spacing:3px;
+  letter-spacing:1px;
   color:#56546d;
   margin-bottom:16px;
 }
@@ -355,48 +378,92 @@ body::after{
 }
 
 .photo-frame{
-  width:100%;
+  width:min(100%, 330px);
+  margin:0 auto;
   aspect-ratio:3/4;
-  border:1px solid rgba(143,200,255,.42);
+  border:10px solid #fffaf0;
   background:
     linear-gradient(rgba(255,255,255,.16),rgba(255,248,253,.34)),
     url("your-bf-photo.jpg") center/cover no-repeat,
-    linear-gradient(135deg, rgba(143,200,255,.34), rgba(255,154,179,.2));
+    linear-gradient(135deg, rgba(158,216,255,.34), rgba(255,122,168,.2));
   position:relative;
   overflow:hidden;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.58), 0 18px 34px rgba(151,133,170,.14);
+  border-radius:30px;
+  cursor:pointer;
+  transform:rotate(-1.25deg);
+  transition:transform .22s ease, box-shadow .22s ease, filter .22s ease;
+  box-shadow:0 10px 0 rgba(255,211,110,.45), 0 22px 40px rgba(181,122,84,.22);
+}
+
+
+.photo-frame:hover,
+.photo-frame:focus{
+  transform:rotate(1deg) translateY(-5px) scale(1.025);
+  outline:0;
+  filter:saturate(1.1);
+  box-shadow:0 12px 0 rgba(168,234,208,.42), 0 28px 48px rgba(181,122,84,.26);
+}
+
+.photo-frame.is-loved{
+  transform:rotate(0deg) scale(.97);
+}
+
+.photo-frame .tap-hint{
+  position:absolute;
+  left:50%;
+  bottom:56px;
+  transform:translateX(-50%);
+  padding:7px 13px;
+  border-radius:999px;
+  background:rgba(255,250,240,.86);
+  color:#8f5261;
+  font-weight:700;
+  box-shadow:0 8px 22px rgba(181,122,84,.16);
+}
+
+.sparkle-pop{
+  --x:0px;
+  --y:-80px;
+  position:absolute;
+  width:14px;
+  height:14px;
+  pointer-events:none;
+  color:var(--berry);
+  animation:sparklePop .8s ease forwards;
 }
 
 .photo-frame::before{
-  content:"SUBJECT // ACTIVE";
+  content:"official cutie card";
   position:absolute;
   top:16px;
   left:16px;
-  background:linear-gradient(135deg,var(--warning),#ffc0cf);
+  background:linear-gradient(135deg,var(--berry),#ffc0cf);
   padding:7px 12px;
   font-size:.72rem;
-  font-family:'Orbitron',sans-serif;
+  font-family:'Baloo 2',cursive;
   color:#56546d;
   letter-spacing:1px;
 }
 
 .photo-frame::after{
-  content:"DH-22";
+  content:"♡ DH ♡";
   position:absolute;
   bottom:16px;
   right:16px;
-  font-family:'Syncopate',sans-serif;
+  font-family:'Baloo 2',cursive;
   color:#56546d;
   font-size:.95rem;
-  text-shadow:0 0 12px var(--cyber);
+  text-shadow:0 0 12px var(--skyblue);
 }
 
 .scan-box{
   position:absolute;
-  inset:12%;
-  border:1px solid rgba(143,200,255,.38);
+  inset:9%;
+  border:2px dashed rgba(255,255,255,.66);
+  border-radius:24px;
   opacity:.72;
 }
+
 
 .scan-box::before,
 .scan-box::after{
@@ -404,7 +471,7 @@ body::after{
   position:absolute;
   width:28px;
   height:28px;
-  border-color:var(--cyber);
+  border-color:var(--berry);
   border-style:solid;
 }
 
@@ -426,7 +493,7 @@ body::after{
 }
 
 .photo-note h3{
-  font-family:'Syncopate',sans-serif;
+  font-family:'Baloo 2',cursive;
   font-size:.95rem;
   color:#56546d;
 }
@@ -443,12 +510,16 @@ body::after{
 }
 
 .info-card{
-  min-height:260px;
+  min-height:230px;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(255,211,110,.24), transparent 8rem),
+    linear-gradient(145deg, rgba(255,251,244,.9), rgba(255,235,246,.76));
 }
+
 
 .info-card h3{
   padding-bottom:12px;
-  border-bottom:1px solid rgba(143,200,255,.28);
+  border-bottom:1px solid rgba(158,216,255,.28);
 }
 
 .info-card ul{
@@ -464,50 +535,77 @@ body::after{
 }
 
 .info-card li::before{
-  content:"△";
+  content:"♥";
   position:absolute;
   left:0;
-  color:var(--cyber);
-  text-shadow:0 0 10px rgba(143,200,255,.42);
+  color:var(--berry);
+  text-shadow:0 0 10px rgba(158,216,255,.42);
 }
 
-.disguise-board,
+.mood-board,
 .manual{
   margin-top:24px;
 }
 
-.disguise-grid,
+.mood-grid,
 .manual-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:16px;
 }
 
-.disguise-box,
+.mood-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+
+.mood-box,
 .manual-box{
-  min-height:148px;
-  border:1px solid rgba(143,200,255,.3);
-  background:
-    linear-gradient(135deg, rgba(217,204,255,.2), rgba(255,255,255,.5)),
-    repeating-linear-gradient(90deg, transparent 0 16px, rgba(143,200,255,.08) 16px 17px);
+  min-height:132px;
+  border:2px solid rgba(255,255,255,.72);
+  background:linear-gradient(135deg, rgba(255,180,200,.5), rgba(255,211,110,.35));
   display:flex;
   align-items:center;
   justify-content:center;
+  flex-direction:column;
   text-align:center;
-  color:#70718a;
-  font-family:'Orbitron',sans-serif;
-  letter-spacing:2px;
-  padding:14px;
-  transition:transform .18s ease, border-color .18s ease, background-color .18s ease;
-  clip-path:polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+  color:#6d3f62;
+  font-family:'Baloo 2',cursive;
+  letter-spacing:.4px;
+  padding:18px;
+  border-radius:28px;
+  font-size:1.15rem;
+  font-weight:800;
+  text-transform:lowercase;
+  transition:transform .18s ease, border-color .18s ease, background-color .18s ease, box-shadow .18s ease;
+  box-shadow:0 14px 24px rgba(181,122,84,.12);
 }
 
-.disguise-box:hover,
+.mood-box:hover,
 .manual-box:hover{
-  transform:translateY(-3px);
-  border-color:rgba(255,154,179,.56);
+  transform:translateY(-5px) rotate(-1deg);
+  border-color:rgba(255,122,168,.56);
   background-color:rgba(255,213,191,.22);
+  box-shadow:0 18px 30px rgba(181,122,84,.18);
 }
+
+.mood-box:nth-child(2), .manual-box:nth-child(2){background:linear-gradient(135deg, rgba(168,234,208,.56), rgba(158,216,255,.38));}
+.mood-box:nth-child(3), .manual-box:nth-child(3){background:linear-gradient(135deg, rgba(202,184,255,.52), rgba(255,180,200,.42));}
+.mood-box:nth-child(4), .manual-box:nth-child(4){background:linear-gradient(135deg, rgba(255,211,110,.52), rgba(255,190,145,.42));}
+.mood-box:nth-child(5){background:linear-gradient(135deg, rgba(255,122,168,.36), rgba(168,234,208,.44));}
+.mood-box:nth-child(6){background:linear-gradient(135deg, rgba(158,216,255,.5), rgba(255,211,110,.36));}
+.mood-box:nth-child(7){background:linear-gradient(135deg, rgba(255,190,145,.48), rgba(202,184,255,.4));}
+.mood-box:nth-child(8){background:linear-gradient(135deg, rgba(168,234,208,.5), rgba(255,180,200,.4));}
+.mood-box:nth-child(9){background:linear-gradient(135deg, rgba(255,211,110,.5), rgba(255,122,168,.34));}
+
+.mood-box span{
+  display:block;
+  margin-top:6px;
+  color:#8f5261;
+  font-size:.9rem;
+  font-weight:600;
+}
+
 
 .home{
   margin-top:34px;
@@ -517,14 +615,14 @@ body::after{
 .home a{
   display:inline-block;
   padding:15px 34px;
-  font-family:'Syncopate',sans-serif;
-  letter-spacing:3px;
+  font-family:'Baloo 2',cursive;
+  letter-spacing:1px;
   text-decoration:none;
   color:#56546d;
-  border:1px solid rgba(143,200,255,.48);
-  background:linear-gradient(135deg, rgba(143,200,255,.24), rgba(255,255,255,.62));
+  border:1px solid rgba(158,216,255,.48);
+  background:linear-gradient(135deg, rgba(158,216,255,.24), rgba(255,255,255,.62));
   transition:transform .18s ease, box-shadow .18s ease;
-  clip-path:polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+  border-radius:999px;
 }
 
 .home a:hover{
@@ -547,12 +645,20 @@ body::after{
   50%{opacity:.84; transform:scale(1);}
 }
 
+@keyframes sparklePop{
+  0%{opacity:1; transform:translate(-50%,-50%) scale(.2) rotate(0deg);}
+  100%{opacity:0; transform:translate(var(--x), var(--y)) scale(1.6) rotate(90deg);}
+}
+
 @media(max-width:1100px){
   .top-grid,
   .info-grid,
-  .disguise-grid,
   .manual-grid{
     grid-template-columns:1fr;
+  }
+
+  .mood-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
   .identity{
@@ -576,7 +682,7 @@ body::after{
   .file-panel,
   .photo-panel,
   .info-card,
-  .disguise-board,
+  .mood-board,
   .manual{
     padding:20px;
   }
@@ -587,7 +693,7 @@ body::after{
   }
 
   .alert-board h1{
-    letter-spacing:4px;
+    letter-spacing:1px;
   }
 
   .file-title{
@@ -598,6 +704,10 @@ body::after{
     display:block;
     text-align:left;
     margin-top:10px;
+  }
+
+  .mood-grid{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -611,15 +721,15 @@ body::after{
 
   <!-- 🚨 ALERT -->
   <div class="alert-board panel">
-    <div class="micro">CYBERLIFE // INTERSTELLAR RECOVERY PROTOCOL</div>
+    <div class="micro">COZY RETURN NOTE // HANDLE WITH LOVE</div>
     <div class="status-strip" aria-hidden="true">
-      <span class="status-pill warning"><span class="led red"></span>DEVIANCY DETECTED</span>
-      <span class="status-pill"><span class="led"></span>LED BLUE // UNSTABLE</span>
-      <span class="status-pill">CASE FILE: IF-FOUND</span>
+      <span class="status-pill warning"><span class="led red"></span>CUTENESS DETECTED</span>
+      <span class="status-pill"><span class="led"></span>MOOD: SNUGGLY</span>
+      <span class="status-pill">IF FOUND CARD</span>
     </div>
-    <h1>DEVIANT ON RUN!!</h1>
-    <h2>If found, please return to the owner ;) — Nikita Kumari</h2>
-    <p>Unauthorized emotional divergence detected</p>
+    <h1>Lost cutie on the loose!!</h1>
+    <h2>If found, please return this adorable human to Nikita Kumari 💌</h2>
+    <p>Reward: hugs, food, and unlimited affection</p>
   </div>
 
   <!-- TOP -->
@@ -627,7 +737,7 @@ body::after{
 
     <!-- LEFT -->
     <div class="file-panel panel">
-      <div class="file-title">DEVIANT FILE</div>
+      <div class="file-title">Dhruv's Cozy Dossier</div>
 
       <div class="identity">
         <div class="identity-box">
@@ -637,12 +747,12 @@ body::after{
 
         <div class="identity-box">
           <span class="label">STATUS</span>
-          <span class="value">ACTIVE</span>
+          <span class="value">Loved & Cozy</span>
         </div>
 
         <div class="identity-box">
           <span class="label">MODEL</span>
-          <span class="value">DH-22</span>
+          <span class="value">Softboy-22</span>
         </div>
 
         <div class="identity-box">
@@ -652,18 +762,18 @@ body::after{
       </div>
 
       <div class="analysis">
-        <h3>PROFILE ANALYSIS</h3>
-        <p>[Insert profile analysis here later.]</p>
+        <h3>Why he stands out</h3>
+        <p>A certified comfort person with baby-faced sweetness, chaotic little habits, and a smile that makes the whole page warmer.</p>
       </div>
     </div>
 
     <!-- RIGHT -->
     <div class="photo-panel panel">
-      <div class="photo-frame"><div class="scan-box" aria-hidden="true"></div></div>
+      <div class="photo-frame" role="button" tabindex="0" aria-label="Tap Dhruv's photo for sparkles"><div class="scan-box" aria-hidden="true"></div><span class="tap-hint">tap for sparkles ✨</span></div>
 
       <div class="photo-note">
-        <h3>THREAT LEVEL: BABYFACED CHAOS</h3>
-        <p>Approach with food, affection, and caution.</p>
+        <h3>CUTE LEVEL: BABYFACED CHAOS</h3>
+        <p>Tap the picture for a tiny sparkle surprise — then approach with snacks and affection.</p>
       </div>
     </div>
 
@@ -673,27 +783,27 @@ body::after{
   <div class="info-grid">
 
     <div class="info-card panel">
-      <h3>PHYSICAL IDENTIFIERS</h3>
+      <h3>Sweet little details</h3>
       <ul>
         <li>Age — 19</li>
         <li>Height — 5'11</li>
-        <li>Eyes — Prettie Dark Brown</li>
+        <li>Eyes — Pretty Dark Brown</li>
         <li>Skin Tone — Dusky (Owner Favorite)</li>
-        <li>Face Type — Baby-faced deception</li>
+        <li>Face Type — Baby-faced sweetness</li>
       </ul>
     </div>
 
     <div class="info-card panel">
-      <h3>PRIMARY TRAITS</h3>
+      <h3>Favorite traits</h3>
       <ul>
         <li>Cannot stay still. Hyperactivity / hyperfixation patterns.</li>
-        <li>Retains suspiciously youthful facial features.</li>
-        <li>Emotionally destabilizing levels of charm.</li>
+        <li>Keeps the most unfairly youthful, squishy-cute face.</li>
+        <li>Emotionally dangerous levels of charm and warmth.</li>
       </ul>
     </div>
 
     <div class="info-card panel">
-      <h3>POSSIBLE STIPULATIONS</h3>
+      <h3>Likely found near</h3>
       <ul>
         <li>Found at McD / KFC outlets.</li>
         <li>Likely distracted by Hot Wheels displays.</li>
@@ -702,45 +812,79 @@ body::after{
     </div>
 
     <div class="info-card panel">
-      <h3>DISGUISE VIBE</h3>
+      <h3>Comfort vibe</h3>
       <ul>
-        <li>Monitor aura, habits, and chaotic charm signatures.</li>
-        <li>Visual comparative references below.</li>
+        <li>Soft aura, cozy habits, and chaotic charm signatures.</li>
+        <li>A colorful personality board lives below.</li>
       </ul>
     </div>
 
   </div>
 
-  <!-- DISGUISE -->
-  <div class="disguise-board panel">
-    <h3>HIM AS BOARD</h3>
+  <!-- MOOD BOARD -->
+  <div class="mood-board panel">
+    <h3>Him as a cozy board</h3>
 
-    <div class="disguise-grid">
-      <div class="disguise-box">ANIMAL</div>
-      <div class="disguise-box">WEATHER</div>
-      <div class="disguise-box">COLOR</div>
-      <div class="disguise-box">HOUSE</div>
+    <div class="mood-grid">
+      <div class="mood-box">movie<br><span>comfort rom-com</span></div>
+      <div class="mood-box">hobby<br><span>hot wheels hunt</span></div>
+      <div class="mood-box">animal<br><span>sleepy puppy</span></div>
+      <div class="mood-box">character<br><span>sweet chaos hero</span></div>
+      <div class="mood-box">color<br><span>warm cocoa pink</span></div>
+      <div class="mood-box">place<br><span>food court corner</span></div>
+      <div class="mood-box">season<br><span>golden monsoon</span></div>
+      <div class="mood-box">song/album<br><span>soft loop forever</span></div>
+      <div class="mood-box">food<br><span>KFC + McD date</span></div>
     </div>
   </div>
 
   <!-- MANUAL -->
   <div class="manual panel">
-    <h3>USER MANUAL</h3>
+    <h3>Care manual</h3>
 
     <div class="manual-grid">
-      <div class="manual-box">[SUB-COLUMN 01]</div>
-      <div class="manual-box">[SUB-COLUMN 02]</div>
-      <div class="manual-box">[SUB-COLUMN 03]</div>
-      <div class="manual-box">[SUB-COLUMN 04]</div>
+      <div class="manual-box">feed snacks</div>
+      <div class="manual-box">send reels</div>
+      <div class="manual-box">give cuddles</div>
+      <div class="manual-box">protect smile</div>
     </div>
   </div>
 
   <!-- HOME -->
   <div class="home">
-    <a href="index.html">RETURN HOME</a>
+    <a href="index.html">back to lobby</a>
   </div>
 
 </div>
+
+<script>
+const photoFrame = document.querySelector('.photo-frame');
+
+function sprinklePhoto() {
+  photoFrame.classList.add('is-loved');
+  window.setTimeout(() => photoFrame.classList.remove('is-loved'), 220);
+
+  for (let index = 0; index < 12; index += 1) {
+    const sparkle = document.createElement('span');
+    sparkle.className = 'sparkle-pop';
+    sparkle.textContent = index % 2 === 0 ? '♡' : '✦';
+    sparkle.style.left = `${35 + Math.random() * 30}%`;
+    sparkle.style.top = `${35 + Math.random() * 30}%`;
+    sparkle.style.setProperty('--x', `${-90 + Math.random() * 180}px`);
+    sparkle.style.setProperty('--y', `${-120 + Math.random() * 70}px`);
+    photoFrame.appendChild(sparkle);
+    sparkle.addEventListener('animationend', () => sparkle.remove());
+  }
+}
+
+photoFrame.addEventListener('click', sprinklePhoto);
+photoFrame.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    sprinklePhoto();
+  }
+});
+</script>
 
 </body>
 </html>
