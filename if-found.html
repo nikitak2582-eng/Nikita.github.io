@@ -196,7 +196,6 @@ body::after{
   content:"♡ ✦ cozy claim tag ✦ ♡";
   position:absolute;
 
-
 .alert-board .micro{
   position:absolute;
   top:18px;
@@ -574,18 +573,7 @@ body::after{
 }
 
 .info-card::before{
-  content:attr(data-pop);
-  position:absolute;
-  right:18px;
-  top:18px;
-  padding:5px 10px;
-  border-radius:999px;
-  color:#8f5261;
-  background:rgba(255,255,255,.66);
-  font-family:'Baloo 2',cursive;
-  font-size:.68rem;
-  letter-spacing:.6px;
-  opacity:.78;
+
 }
 
 .info-card::after{
@@ -629,9 +617,7 @@ body::after{
 }
 
 .mood-grid{
-  grid-template-columns:repeat(auto-fit,minmax(118px,1fr));
-  align-items:stretch;
-  max-width:760px;
+
   margin:0 auto;
 }
 
@@ -722,6 +708,7 @@ body::after{
 .mood-box{
   aspect-ratio:1 / 1;
 
+
 .manual-section{
   margin-top:22px;
   padding-top:18px;
@@ -773,6 +760,7 @@ body::after{
   position:relative;
   overflow:hidden;
   padding:24px;
+
 
 .energy-readout{
   display:flex;
@@ -862,6 +850,119 @@ body::after{
   color:#5f657a;
   font-size:1.08rem;
   line-height:1.7;
+}
+
+
+.mood-tracker{
+  margin-top:18px;
+  padding:20px;
+  border:2px dashed rgba(255,122,168,.32);
+  border-radius:28px;
+  background:linear-gradient(135deg, rgba(255,255,255,.62), rgba(255,180,200,.22));
+}
+
+.tracker-header{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-bottom:14px;
+  font-family:'Baloo 2',cursive;
+  color:#6d3f62;
+}
+
+.mood-count{
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(255,250,240,.8);
+  color:#8f5261;
+  font-size:.92rem;
+}
+
+.mood-selector{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(112px,1fr));
+  gap:12px;
+}
+
+.mood-option{
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:22px;
+  padding:12px 10px;
+  background:linear-gradient(135deg, rgba(255,211,110,.38), rgba(255,180,200,.4));
+  color:#6d3f62;
+  font-family:'Baloo 2',cursive;
+  font-weight:800;
+  cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.mood-option:hover,
+.mood-option:focus{
+  transform:translateY(-4px) scale(1.03);
+  filter:saturate(1.12);
+  box-shadow:0 14px 24px rgba(181,122,84,.15);
+  outline:0;
+}
+
+.mood-option.is-selected{
+  box-shadow:0 0 0 4px rgba(255,122,168,.18), 0 18px 28px rgba(181,122,84,.18);
+}
+
+.mood-option small{
+  display:block;
+  margin-top:3px;
+  color:#7a6071;
+  font-family:'Fredoka',Arial,sans-serif;
+}
+
+.random-facts{
+  margin-top:24px;
+  padding:26px;
+}
+
+.fact-box{
+  position:relative;
+  display:grid;
+  gap:14px;
+  justify-items:start;
+  padding:22px;
+  border-radius:28px;
+  border:2px dashed rgba(168,234,208,.55);
+  background:linear-gradient(135deg, rgba(255,255,255,.68), rgba(202,184,255,.22));
+}
+
+.fact-button{
+  border:0;
+  border-radius:999px;
+  padding:12px 20px;
+  color:#6d3f62;
+  background:linear-gradient(135deg, var(--sun), var(--rose));
+  font-family:'Baloo 2',cursive;
+  font-size:1rem;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 12px 22px rgba(181,122,84,.16);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+.fact-button:hover,
+.fact-button:focus{
+  transform:translateY(-3px) rotate(-1deg);
+  box-shadow:0 16px 28px rgba(181,122,84,.2);
+  outline:0;
+}
+
+.fact-output{
+  min-height:58px;
+  color:#5f657a;
+  font-size:1.08rem;
+  line-height:1.7;
+}
+
+.fact-output strong{
+  color:#8f5261;
 }
 
 
@@ -1073,7 +1174,7 @@ body::after{
 
   .alert-board::before{
     position:static;
-    
+
   .alert-board .micro{
     position:static;
     margin-bottom:16px;
@@ -1094,7 +1195,7 @@ body::after{
   }
 
   .mood-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 }
 </style>
@@ -1237,6 +1338,7 @@ body::after{
       <div class="mood-counter" id="moodCounter">Mood tracker: 0 selections logged 💗</div>
       <div class="diagnostic-grid">
 
+
     <div class="manual-section">
       <h4>Energy Meter</h4>
       <div class="energy-meter">
@@ -1259,12 +1361,14 @@ body::after{
     <div class="manual-section">
       <h4>Care Manual</h4>
       <div class="manual-grid">
+
       </div>
     </div>
 
     <div class="manual-section">
       <h4>Warning Labels</h4>
       <div class="diagnostic-grid">
+
       </div>
     </div>
 
@@ -1276,6 +1380,16 @@ body::after{
       </div>
     </div>
 
+  </div>
+
+
+  <!-- RANDOM FACTS -->
+  <div class="random-facts panel pop-card" tabindex="0">
+    <h3>Random Dhruv Facts</h3>
+    <div class="fact-box">
+      <button class="fact-button" id="factButton" type="button">tap for a personalized fact ✨</button>
+      <p class="fact-output" id="factOutput"><strong>Ready:</strong> tap to reveal a tiny Dhruv truth.</p>
+    </div>
   </div>
 
 
@@ -1302,6 +1416,11 @@ const energyFill = document.querySelector('#energyFill');
 const energyLevel = document.querySelector('#energyLevel');
 const energyNote = document.querySelector('#energyNote');
 const energyFace = document.querySelector('.energy-face');
+const popCards = document.querySelectorAll('.pop-card');
+const moodSelector = document.querySelector('#moodSelector');
+const moodCount = document.querySelector('#moodCount');
+const factButton = document.querySelector('#factButton');
+const factOutput = document.querySelector('#factOutput');
 
 function updateEnergyMeter(value) {
   const energy = Number(value);
@@ -1394,6 +1513,7 @@ factButton.addEventListener('click', () => {
 function sprinklePhoto() {
   photoFrame.classList.add('is-loved');
   window.setTimeout(() => photoFrame.classList.remove('is-loved'), 220);
+
 
     sparkle.style.left = `${35 + Math.random() * 30}%`;
     sparkle.style.top = `${35 + Math.random() * 30}%`;
