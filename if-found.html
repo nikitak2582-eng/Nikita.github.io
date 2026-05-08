@@ -1,4 +1,3 @@
-<<<<<<< codex/enhance-visual-appeal-and-interactivity-yn683q
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -765,6 +764,10 @@ body::after{
 const photoFrame = document.querySelector('.photo-frame');
 
 function sprinklePhoto() {
+  if (!photoFrame) {
+    return;
+  }
+
   photoFrame.classList.add('is-loved');
   window.setTimeout(() => photoFrame.classList.remove('is-loved'), 220);
 
@@ -781,17 +784,16 @@ function sprinklePhoto() {
   }
 }
 
-photoFrame.addEventListener('click', sprinklePhoto);
-photoFrame.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter' || event.key === ' ') {
-    event.preventDefault();
-    sprinklePhoto();
-  }
-});
+if (photoFrame) {
+  photoFrame.addEventListener('click', sprinklePhoto);
+  photoFrame.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      sprinklePhoto();
+    }
+  });
+}
 </script>
 
 </body>
 </html>
-=======
-
->>>>>>> main
