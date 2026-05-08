@@ -548,7 +548,8 @@ body::after{
 }
 
 .mood-grid,
-.manual-grid{
+.manual-grid,
+.diagnostic-grid{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   gap:16px;
@@ -556,11 +557,14 @@ body::after{
 
 .mood-grid{
   grid-template-columns:repeat(3,minmax(0,1fr));
+  align-items:stretch;
 }
 
 
 .mood-box,
-.manual-box{
+.manual-box,
+.mode-card,
+.warning-card{
   min-height:132px;
   border:2px solid rgba(255,255,255,.72);
   background:linear-gradient(135deg, rgba(255,180,200,.5), rgba(255,211,110,.35));
@@ -582,16 +586,18 @@ body::after{
 }
 
 .mood-box:hover,
-.manual-box:hover{
+.manual-box:hover,
+.mode-card:hover,
+.warning-card:hover{
   transform:translateY(-5px) rotate(-1deg);
   border-color:rgba(255,122,168,.56);
   background-color:rgba(255,213,191,.22);
   box-shadow:0 18px 30px rgba(181,122,84,.18);
 }
 
-.mood-box:nth-child(2), .manual-box:nth-child(2){background:linear-gradient(135deg, rgba(168,234,208,.56), rgba(158,216,255,.38));}
-.mood-box:nth-child(3), .manual-box:nth-child(3){background:linear-gradient(135deg, rgba(202,184,255,.52), rgba(255,180,200,.42));}
-.mood-box:nth-child(4), .manual-box:nth-child(4){background:linear-gradient(135deg, rgba(255,211,110,.52), rgba(255,190,145,.42));}
+.mood-box:nth-child(2), .manual-box:nth-child(2), .mode-card:nth-child(2), .warning-card:nth-child(2){background:linear-gradient(135deg, rgba(168,234,208,.56), rgba(158,216,255,.38));}
+.mood-box:nth-child(3), .manual-box:nth-child(3), .mode-card:nth-child(3), .warning-card:nth-child(3){background:linear-gradient(135deg, rgba(202,184,255,.52), rgba(255,180,200,.42));}
+.mood-box:nth-child(4), .manual-box:nth-child(4), .mode-card:nth-child(4), .warning-card:nth-child(4){background:linear-gradient(135deg, rgba(255,211,110,.52), rgba(255,190,145,.42));}
 .mood-box:nth-child(5){background:linear-gradient(135deg, rgba(255,122,168,.36), rgba(168,234,208,.44));}
 .mood-box:nth-child(6){background:linear-gradient(135deg, rgba(158,216,255,.5), rgba(255,211,110,.36));}
 .mood-box:nth-child(7){background:linear-gradient(135deg, rgba(255,190,145,.48), rgba(202,184,255,.4));}
@@ -604,6 +610,116 @@ body::after{
   color:#8f5261;
   font-size:.9rem;
   font-weight:600;
+}
+
+.mood-box{
+  aspect-ratio:1 / 1;
+  min-height:auto;
+  border-radius:22px;
+}
+
+.manual-section{
+  margin-top:22px;
+  padding-top:18px;
+  border-top:1px dashed rgba(158,216,255,.38);
+}
+
+.manual-section:first-of-type{
+  margin-top:0;
+  padding-top:0;
+  border-top:0;
+}
+
+.manual-section h4{
+  font-family:'Baloo 2',cursive;
+  color:#6d3f62;
+  font-size:1.18rem;
+  margin-bottom:14px;
+  letter-spacing:.5px;
+}
+
+.mode-card,
+.warning-card{
+  align-items:flex-start;
+  justify-content:flex-start;
+  text-align:left;
+  text-transform:none;
+}
+
+.mode-card .emoji,
+.warning-card .emoji{
+  font-size:2rem;
+  line-height:1;
+  margin-bottom:10px;
+}
+
+.mode-card span,
+.warning-card span,
+.manual-box span{
+  display:block;
+  margin-top:8px;
+  color:#7a6071;
+  font-family:'Fredoka',Arial,sans-serif;
+  font-size:.9rem;
+  font-weight:600;
+  line-height:1.45;
+}
+
+.energy-meter{
+  padding:22px;
+  border:2px solid rgba(255,255,255,.72);
+  border-radius:28px;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,211,110,.32), transparent 10rem),
+    linear-gradient(135deg, rgba(255,255,255,.62), rgba(158,216,255,.2));
+  box-shadow:0 14px 24px rgba(181,122,84,.12);
+}
+
+.energy-readout{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:16px;
+  font-family:'Baloo 2',cursive;
+  color:#56546d;
+}
+
+.energy-face{
+  font-size:2.35rem;
+}
+
+.energy-level{
+  font-size:1.25rem;
+  color:#6d3f62;
+}
+
+.energy-meter input[type=range]{
+  width:100%;
+  accent-color:var(--berry);
+  cursor:pointer;
+}
+
+.energy-bar{
+  height:18px;
+  margin:14px 0 12px;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(158,216,255,.32);
+}
+
+.energy-fill{
+  width:65%;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg, var(--mint), var(--sun), var(--berry));
+  transition:width .18s ease;
+}
+
+.energy-note{
+  color:#5f657a;
+  line-height:1.65;
 }
 
 
@@ -653,7 +769,8 @@ body::after{
 @media(max-width:1100px){
   .top-grid,
   .info-grid,
-  .manual-grid{
+  .manual-grid,
+  .diagnostic-grid{
     grid-template-columns:1fr;
   }
 
@@ -823,7 +940,7 @@ body::after{
 
   <!-- MOOD BOARD -->
   <div class="mood-board panel">
-    <h3>Him as a cozy board</h3>
+    <h3>Him as a square-shaped mood board</h3>
 
     <div class="mood-grid">
       <div class="mood-box">movie<br><span>comfort rom-com</span></div>
@@ -838,15 +955,51 @@ body::after{
     </div>
   </div>
 
-  <!-- MANUAL -->
+  <!-- USER MANUAL -->
   <div class="manual panel">
-    <h3>Care manual</h3>
+    <h3>User Manual // System Diagnostics</h3>
 
-    <div class="manual-grid">
-      <div class="manual-box">feed snacks</div>
-      <div class="manual-box">send reels</div>
-      <div class="manual-box">give cuddles</div>
-      <div class="manual-box">protect smile</div>
+    <div class="manual-section">
+      <h4>Default Modes</h4>
+      <div class="diagnostic-grid">
+        <div class="mode-card"><span class="emoji">🍟</span>Food Court Radar<span>auto-locks on McD / KFC signs</span></div>
+        <div class="mode-card"><span class="emoji">🏎️</span>Hot Wheels Hunter<span>instant focus boost near tiny cars</span></div>
+        <div class="mode-card"><span class="emoji">🧸</span>Softboy Cozy<span>baby-face charm set to maximum</span></div>
+        <div class="mode-card"><span class="emoji">⚡</span>Chaos Sprint<span>hyperactive tabs open in brain</span></div>
+      </div>
+    </div>
+
+    <div class="manual-section">
+      <h4>Energy Meter</h4>
+      <div class="energy-meter">
+        <div class="energy-readout">
+          <span class="energy-face" aria-hidden="true">⚡</span>
+          <span class="energy-level" id="energyLevel">65% cozy chaos</span>
+        </div>
+        <input id="energySlider" type="range" min="0" max="100" value="65" aria-label="Adjust Dhruv's energy meter">
+        <div class="energy-bar" aria-hidden="true"><div class="energy-fill" id="energyFill"></div></div>
+        <p class="energy-note" id="energyNote">Balanced setting: give snacks, hugs, and let him yap about his latest fixation.</p>
+      </div>
+    </div>
+
+    <div class="manual-section">
+      <h4>Care Manual</h4>
+      <div class="manual-grid">
+        <div class="manual-box">feed snacks<span>especially when battery drops below cuddly</span></div>
+        <div class="manual-box">send reels<span>recommended every few hours</span></div>
+        <div class="manual-box">give cuddles<span>restores comfort-person signal</span></div>
+        <div class="manual-box">protect smile<span>primary owner responsibility</span></div>
+      </div>
+    </div>
+
+    <div class="manual-section">
+      <h4>Warning Labels</h4>
+      <div class="diagnostic-grid">
+        <div class="warning-card"><span class="emoji">🚨</span>Cuteness overload<span>may cause uncontrollable smiling</span></div>
+        <div class="warning-card"><span class="emoji">🍔</span>Food beacon active<span>subject may drift toward fries</span></div>
+        <div class="warning-card"><span class="emoji">🎧</span>Audio trigger found<span>Beast Boy Shub may summon him</span></div>
+        <div class="warning-card"><span class="emoji">💌</span>Owner bonded<span>return to Nikita for safe reboot</span></div>
+      </div>
     </div>
   </div>
 
@@ -859,6 +1012,38 @@ body::after{
 
 <script>
 const photoFrame = document.querySelector('.photo-frame');
+const energySlider = document.querySelector('#energySlider');
+const energyFill = document.querySelector('#energyFill');
+const energyLevel = document.querySelector('#energyLevel');
+const energyNote = document.querySelector('#energyNote');
+const energyFace = document.querySelector('.energy-face');
+
+function updateEnergyMeter(value) {
+  const energy = Number(value);
+  energyFill.style.width = `${energy}%`;
+
+  if (energy < 25) {
+    energyFace.textContent = '🪫';
+    energyLevel.textContent = `${energy}% sleepy mode`;
+    energyNote.textContent = 'Low power: deploy cuddles, soft voice, and immediate snack support.';
+  } else if (energy < 55) {
+    energyFace.textContent = '🧸';
+    energyLevel.textContent = `${energy}% cozy mode`;
+    energyNote.textContent = 'Cozy setting: keep him warm, appreciated, and gently entertained.';
+  } else if (energy < 80) {
+    energyFace.textContent = '⚡';
+    energyLevel.textContent = `${energy}% cozy chaos`;
+    energyNote.textContent = 'Balanced setting: give snacks, hugs, and let him yap about his latest fixation.';
+  } else {
+    energyFace.textContent = '🚀';
+    energyLevel.textContent = `${energy}% zoomies mode`;
+    energyNote.textContent = 'High energy: clear runway, expect hyperfixations, reels, and happy chaos.';
+  }
+}
+
+energySlider.addEventListener('input', (event) => updateEnergyMeter(event.target.value));
+updateEnergyMeter(energySlider.value);
+
 
 function sprinklePhoto() {
   photoFrame.classList.add('is-loved');
