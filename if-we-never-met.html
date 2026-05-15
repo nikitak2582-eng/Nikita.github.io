@@ -463,163 +463,315 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 .reality-card h3{color:#dd527b; font-size:1.45rem;}
 .reality-card p{line-height:1.56; margin-bottom:0; color:#4b3765;}
 
-.love-drop-wrap{
+.pixel-postcard{
   display:grid;
-  grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
-  gap:24px;
-  align-items:center;
+  grid-template-columns:minmax(320px, .95fr) minmax(0, 1.05fr);
+  gap:26px;
+  align-items:stretch;
 }
 
-.drop-machine{
+.pixel-art-card{
   position:relative;
-  min-height:330px;
-  display:grid;
-  place-items:center;
-  border-radius:34px;
-  background:
-    radial-gradient(circle at 50% 32%, rgba(255,255,255,.35), rgba(255,143,171,.10)),
-    linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
-  border:1px solid rgba(255,255,255,.24);
+  min-height:410px;
+  margin:0;
   overflow:hidden;
+  border-radius:34px;
+  border:1px solid rgba(255,255,255,.34);
+  background:#7fc8ff;
+  box-shadow:0 24px 54px rgba(39,28,67,.24), inset 0 0 0 8px rgba(255,255,255,.12);
+  image-rendering:pixelated;
+  isolation:isolate;
 }
 
-.drop-machine::before,
-.drop-machine::after{
+.pixel-art-card::before{
   content:"";
   position:absolute;
-  width:190px;
-  height:245px;
-  border-radius:26px;
-  background:linear-gradient(160deg, rgba(255,250,252,.9), rgba(255,209,220,.76));
-  border:1px solid rgba(255,255,255,.72);
-  box-shadow:0 20px 44px rgba(39,28,67,.18);
-  transform:rotate(-13deg) translate(-34px, 8px);
+  inset:0;
+  z-index:3;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
+  background-size:16px 16px;
+  mix-blend-mode:soft-light;
 }
 
-.drop-machine::after{
-  background:linear-gradient(160deg, rgba(191,255,230,.86), rgba(255,240,168,.74));
-  transform:rotate(12deg) translate(34px, -3px);
+.pixel-art-card::after{
+  content:"";
+  position:absolute;
+  inset:14px;
+  z-index:4;
+  pointer-events:none;
+  border:4px solid rgba(255,250,252,.72);
+  border-radius:24px;
+  box-shadow:inset 0 0 0 4px rgba(37,39,70,.10);
 }
 
-.drop-button{
-  position:relative;
-  z-index:2;
-  border:0;
-  width:178px;
-  height:178px;
-  border-radius:38px;
+.pixel-sky{
+  position:absolute;
+  inset:0;
   background:
-    radial-gradient(circle at 30% 18%, rgba(255,255,255,.52), transparent 24%),
-    linear-gradient(135deg, var(--hot-pink), var(--peach) 52%, var(--lavender));
-  color:#fff;
-  font-family:'Space Grotesk', sans-serif;
-  font-size:1rem;
-  font-weight:900;
-  cursor:pointer;
-  box-shadow:0 24px 46px rgba(232,63,120,.38), inset 0 -12px 24px rgba(37,39,70,.22);
-  transition:transform .28s cubic-bezier(.2,1.5,.3,1), box-shadow .28s ease;
+    linear-gradient(#8dd4ff 0 46%, #ffc7dc 46% 62%, #ffdca8 62% 74%, #8fcf9b 74% 100%);
 }
 
-.drop-button span{display:block; font-size:2rem; margin-bottom:5px;}
-.drop-button:hover{transform:translateY(-8px) rotate(-5deg) scale(1.05); box-shadow:0 32px 58px rgba(232,63,120,.48), inset 0 -12px 24px rgba(37,39,70,.22);}
-.drop-button:active{transform:scale(.94) rotate(5deg);}
-.drop-machine.is-swapping::before{animation:swapLeft .55s cubic-bezier(.2,1.4,.3,1);}
-.drop-machine.is-swapping::after{animation:swapRight .55s cubic-bezier(.2,1.4,.3,1);}
+.pixel-sun,
+.pixel-cloud,
+.pixel-cloud::before,
+.pixel-cloud::after,
+.pixel-heart,
+.pixel-tree,
+.pixel-flower,
+.pixel-window,
+.pixel-flag,
+.pixel-tower,
+.pixel-path,
+.pixel-hill{
+  position:absolute;
+  image-rendering:pixelated;
+}
 
-@keyframes swapLeft{50%{transform:rotate(-25deg) translate(-90px,-28px) scale(1.05);}}
-@keyframes swapRight{50%{transform:rotate(24deg) translate(92px,26px) scale(1.05);}}
+.pixel-sun{
+  top:38px;
+  right:52px;
+  width:64px;
+  height:64px;
+  background:#fff0a8;
+  box-shadow:
+    0 0 0 8px rgba(255,240,168,.28),
+    0 0 34px rgba(255,240,168,.74);
+}
 
-.drop-note{
+.pixel-cloud{
+  top:56px;
+  left:44px;
+  width:96px;
+  height:32px;
+  background:#fffafc;
+  box-shadow:48px 0 #fffafc, 128px 36px rgba(255,250,252,.9), 176px 36px rgba(255,250,252,.9);
+}
+.pixel-cloud::before{content:""; left:24px; top:-16px; width:48px; height:16px; background:#fffafc; box-shadow:128px 36px rgba(255,250,252,.9);}
+.pixel-cloud::after{content:""; left:112px; top:52px; width:32px; height:16px; background:rgba(255,250,252,.9); box-shadow:48px 0 rgba(255,250,252,.9);}
+
+.pixel-hill{
+  left:-28px;
+  right:-28px;
+  bottom:42px;
+  height:118px;
+  background:
+    linear-gradient(135deg, transparent 0 22%, #77bd83 22% 40%, transparent 40%),
+    linear-gradient(225deg, transparent 0 20%, #6fb378 20% 43%, transparent 43%),
+    #8fd19a;
+  clip-path:polygon(0 42%, 14% 26%, 28% 46%, 42% 20%, 58% 44%, 76% 18%, 100% 39%, 100% 100%, 0 100%);
+}
+
+.pixel-path{
+  left:50%;
+  bottom:0;
+  width:168px;
+  height:102px;
+  transform:translateX(-50%);
+  background:#f7c78d;
+  clip-path:polygon(42% 0, 58% 0, 92% 100%, 8% 100%);
+  box-shadow:inset 0 0 0 8px rgba(150,93,76,.12);
+}
+
+.pixel-tower{
+  left:50%;
+  bottom:86px;
+  width:128px;
+  height:222px;
+  transform:translateX(-50%);
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.18) 0 18%, transparent 18% 100%),
+    repeating-linear-gradient(0deg, #ffd9e6 0 28px, #ffc0d6 28px 32px);
+  border:8px solid #7a6c9d;
+  box-shadow:16px 16px 0 rgba(37,39,70,.18);
+}
+.pixel-tower::before{
+  content:"";
+  position:absolute;
+  left:-24px;
+  right:-24px;
+  top:-56px;
+  height:56px;
+  background:
+    linear-gradient(135deg, transparent 0 28px, #e83f78 28px 58px, transparent 58px),
+    linear-gradient(225deg, transparent 0 28px, #e83f78 28px 58px, transparent 58px),
+    #ff8fab;
+  border:8px solid #7a6c9d;
+  border-bottom:0;
+}
+.pixel-tower::after{
+  content:"";
+  position:absolute;
+  left:22px;
+  right:22px;
+  bottom:-8px;
+  height:58px;
+  background:#6d4b6f;
+  border-radius:30px 30px 0 0;
+  box-shadow:inset 0 0 0 8px rgba(255,255,255,.08);
+}
+
+.pixel-window{
+  left:50%;
+  width:28px;
+  height:34px;
+  transform:translateX(-50%);
+  background:#7fe7ff;
+  border:6px solid #7a6c9d;
+  box-shadow:0 0 0 4px rgba(255,255,255,.24), inset 8px 0 rgba(255,255,255,.42);
+}
+.pixel-window.one{top:26px;}
+.pixel-window.two{top:88px;}
+.pixel-window.three{top:150px;}
+
+.pixel-flag{
+  left:50%;
+  bottom:308px;
+  width:8px;
+  height:52px;
+  transform:translateX(-50%);
+  background:#7a6c9d;
+}
+.pixel-flag::after{
+  content:"";
+  position:absolute;
+  left:8px;
+  top:0;
+  width:48px;
+  height:32px;
+  background:#fff0a8;
+  clip-path:polygon(0 0, 100% 0, 76% 50%, 100% 100%, 0 100%);
+}
+
+.pixel-heart{
+  width:16px;
+  height:16px;
+  background:#e83f78;
+  transform:rotate(45deg);
+  box-shadow:0 0 18px rgba(232,63,120,.45);
+}
+.pixel-heart::before,
+.pixel-heart::after{content:""; position:absolute; width:16px; height:16px; border-radius:50%; background:#e83f78;}
+.pixel-heart::before{left:-8px; top:0;}
+.pixel-heart::after{left:0; top:-8px;}
+.pixel-heart.one{left:82px; bottom:160px;}
+.pixel-heart.two{right:94px; bottom:216px; scale:.78;}
+
+.pixel-tree{
+  bottom:60px;
+  width:24px;
+  height:54px;
+  background:#8f5d4f;
+}
+.pixel-tree::before{
+  content:"";
+  position:absolute;
+  left:-20px;
+  top:-48px;
+  width:64px;
+  height:64px;
+  background:#5fac6d;
+  box-shadow:0 -18px #75c982, 18px 0 #75c982;
+}
+.pixel-tree.left{left:54px;}
+.pixel-tree.right{right:62px; scale:.86;}
+
+.pixel-flower{
+  bottom:42px;
+  width:12px;
+  height:12px;
+  background:#fff0a8;
+  box-shadow:16px -8px #ff8fab, 36px 4px #fffafc, 58px -4px #ff8fab, 78px 2px #fff0a8;
+}
+.pixel-flower.left{left:86px;}
+.pixel-flower.right{right:144px;}
+
+.pixel-caption{
+  position:absolute;
+  left:22px;
+  bottom:22px;
+  z-index:5;
+  max-width:210px;
+  padding:12px 14px;
+  border-radius:18px;
+  color:#3b2b52;
+  background:rgba(255,250,252,.88);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 12px 28px rgba(39,28,67,.18);
+  font-weight:900;
+  line-height:1.25;
+}
+
+.pixel-story{
+  display:grid;
+  gap:16px;
+}
+
+.pixel-story-card{
   position:relative;
   overflow:hidden;
-  min-height:260px;
-  padding:30px 30px 74px;
-  border-radius:34px;
-  background:linear-gradient(145deg, rgba(255,250,252,.98), rgba(255,240,248,.92));
+  padding:22px;
+  border-radius:28px;
   color:var(--card-ink);
-  border:1px solid rgba(255,255,255,.76);
-  box-shadow:0 24px 50px rgba(39,28,67,.2);
-  transform-style:preserve-3d;
+  background:linear-gradient(135deg, rgba(255,250,252,.95), rgba(255,232,190,.9));
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 18px 38px rgba(39,28,67,.16);
 }
 
-.drop-note::after{
-  content:"sealed with tiny stars";
+.pixel-story-card::before{
+  content:attr(data-tile);
   position:absolute;
-  right:22px;
-  bottom:22px;
-  padding:8px 12px;
-  border-radius:999px;
-  background:linear-gradient(135deg, rgba(255,240,168,.9), rgba(255,209,220,.86));
-  color:#7a4770;
-  font-size:.75rem;
+  right:18px;
+  top:14px;
+  color:rgba(122,108,157,.16);
+  font-family:'Space Grotesk', sans-serif;
+  font-size:3rem;
   font-weight:900;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  box-shadow:0 10px 22px rgba(39,28,67,.12);
+  line-height:1;
 }
 
-.drop-note::before{
-  content:"💌";
-  position:absolute;
-  top:-24px;
-  left:28px;
-  width:56px;
-  height:56px;
-  display:grid;
-  place-items:center;
-  border-radius:18px;
-  background:linear-gradient(135deg, #fff7fb, #ffc0d1);
-  box-shadow:0 12px 24px rgba(39,28,67,.14);
-}
-
-.drop-label{
-  margin:8px 0 18px;
+.pixel-story-card h3{
+  position:relative;
+  margin-bottom:8px;
   color:#dd527b;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  font-size:.82rem;
+  font-size:1.35rem;
 }
 
-.drop-text{
+.pixel-story-card p{
+  position:relative;
   margin:0;
-  font-size:clamp(1.35rem,3vw,2.1rem);
-  line-height:1.35;
-  font-weight:600;
+  color:#4b3765;
+  line-height:1.58;
+  font-weight:650;
 }
 
-.drop-note.pop{animation:popNote .5s cubic-bezier(.2,1.5,.3,1);}
-.drop-note.swap{animation:cardSwap .72s cubic-bezier(.2,1.2,.3,1);}
-.drop-note.swap::before{animation:stampBounce .72s cubic-bezier(.2,1.4,.3,1);}
-.drop-note.swap::after{animation:labelShine .72s ease;}
-@keyframes cardSwap{
-  0%{transform:translateY(10px) rotate(-2deg) scale(.96); opacity:.45;}
-  38%{transform:translateY(-12px) rotate(2deg) scale(1.03); opacity:1;}
-  70%{transform:translateY(4px) rotate(-.8deg) scale(.99);}
-  100%{transform:translateY(0) rotate(0) scale(1); opacity:1;}
-}
-@keyframes stampBounce{
-  0%{transform:translateY(12px) rotate(-14deg) scale(.72);}
-  55%{transform:translateY(-6px) rotate(8deg) scale(1.12);}
-  100%{transform:translateY(0) rotate(0) scale(1);}
-}
-@keyframes labelShine{
-  0%,100%{filter:none;}
-  45%{filter:brightness(1.16) saturate(1.2);}
-}
-@keyframes popNote{
-  0%{transform:translateY(16px) scale(.94); opacity:.45;}
-  70%{transform:translateY(-4px) scale(1.02);}
-  100%{transform:translateY(0) scale(1); opacity:1;}
+.pixel-palette{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:2px;
 }
 
-.burst-sparkle{
-  position:absolute;
-  pointer-events:none;
-  animation:spark .9s ease forwards;
+.pixel-swatch{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 11px;
+  border-radius:999px;
+  color:#3b2b52;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.78);
+  font-size:.84rem;
+  font-weight:900;
 }
-@keyframes spark{
-  to{transform:translate(var(--x), var(--y)) scale(.2) rotate(130deg); opacity:0;}
+.pixel-swatch::before{
+  content:"";
+  width:14px;
+  height:14px;
+  background:var(--swatch);
+  box-shadow:0 0 0 3px rgba(255,255,255,.62);
 }
 
 .achievement-grid{
@@ -697,7 +849,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 @media (max-width:860px){
   .nav{align-items:flex-start; flex-direction:column; border-radius:28px;}
   .hero,
-  .love-drop-wrap{grid-template-columns:1fr;}
+  .pixel-postcard{grid-template-columns:1fr;}
   .timeline-grid{grid-template-columns:1fr;}
   .reality-card,
   .reality-card:nth-child(2),
@@ -715,8 +867,8 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 @media (max-width:520px){
   .page{width:min(100% - 20px, 1180px); padding-top:14px;}
   .achievement-grid{grid-template-columns:1fr;}
-  .drop-button{width:138px; height:138px;}
-  .drop-note{padding:28px 22px 78px;}
+  .pixel-art-card{min-height:360px;}
+  .pixel-caption{max-width:180px; font-size:.86rem;}
   .portal-card{min-height:430px;}
   .locket-scene{min-height:360px;}
   .coordinate-card{bottom:0;}
@@ -747,7 +899,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
     <nav class="nav-links" aria-label="If We Never Met navigation">
       <a href="index.html">Home</a>
       <a href="dear-you.html">Dear You</a>
-      <a href="#love-drop">Random Love Drop</a>
+      <a href="#pixel-tower">Pixel Tower</a>
       <a href="#badge-garden">Badge Garden</a>
     </nav>
   </header>
@@ -820,22 +972,55 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
       </div>
     </section>
 
-    <section class="section-panel" id="love-drop" aria-labelledby="drop-title">
+    <section class="section-panel" id="pixel-tower" aria-labelledby="pixel-title">
       <div class="section-heading">
         <div>
-          <h2 id="drop-title">Random Love Drop</h2>
-          <p>Every visit opens with a fresh little note. Tap once and the message card bounces in like a tiny sealed love letter.</p>
+          <h2 id="pixel-title">Pixel Tower Daydream</h2>
+          <p>A tiny 8-bit place for the timeline where we did meet: pastel sky, soft hills, a cute tower, and one little path leading home.</p>
         </div>
-        <div class="section-kicker"><span>💌</span> surprise drawer</div>
+        <div class="section-kicker"><span>🏰</span> pocket postcard</div>
       </div>
-      <div class="love-drop-wrap">
-        <div class="drop-machine" id="dropMachine">
-          <button class="drop-button" id="newDropButton" type="button"><span>💌</span>open a<br>new note</button>
+      <div class="pixel-postcard">
+        <figure class="pixel-art-card" aria-label="Pixel art of a blush tower under a sunny pastel sky">
+          <div class="pixel-sky" aria-hidden="true"></div>
+          <div class="pixel-sun" aria-hidden="true"></div>
+          <div class="pixel-cloud" aria-hidden="true"></div>
+          <div class="pixel-hill" aria-hidden="true"></div>
+          <div class="pixel-path" aria-hidden="true"></div>
+          <div class="pixel-flag" aria-hidden="true"></div>
+          <div class="pixel-tower" aria-hidden="true">
+            <span class="pixel-window one"></span>
+            <span class="pixel-window two"></span>
+            <span class="pixel-window three"></span>
+          </div>
+          <div class="pixel-heart one" aria-hidden="true"></div>
+          <div class="pixel-heart two" aria-hidden="true"></div>
+          <div class="pixel-tree left" aria-hidden="true"></div>
+          <div class="pixel-tree right" aria-hidden="true"></div>
+          <div class="pixel-flower left" aria-hidden="true"></div>
+          <div class="pixel-flower right" aria-hidden="true"></div>
+          <figcaption class="pixel-caption">saved game: best timeline unlocked</figcaption>
+        </figure>
+        <div class="pixel-story" aria-label="Pixel tower story details">
+          <article class="pixel-story-card" data-tile="01">
+            <h3>The tower keeps the almosts out.</h3>
+            <p>Every square is built like a tiny promise: no clunky controls, no noisy effects, just a soft little landmark for us.</p>
+          </article>
+          <article class="pixel-story-card" data-tile="02">
+            <h3>The background is purposely cute.</h3>
+            <p>Warm sky, candy clouds, gentle grass, flowers, and hearts make it feel like a dreamy game level made only for this page.</p>
+          </article>
+          <article class="pixel-story-card" data-tile="03">
+            <h3>The path only has one direction.</h3>
+            <p>It leads straight to the tower, because every alternate route on this page is supposed to find you anyway.</p>
+          </article>
+          <div class="pixel-palette" aria-label="Pixel postcard palette">
+            <span class="pixel-swatch" style="--swatch:#8dd4ff;">sky blue</span>
+            <span class="pixel-swatch" style="--swatch:#ffc0d6;">blush brick</span>
+            <span class="pixel-swatch" style="--swatch:#fff0a8;">sun glow</span>
+            <span class="pixel-swatch" style="--swatch:#75c982;">soft grass</span>
+          </div>
         </div>
-        <article class="drop-note pop" id="dropNote" aria-live="polite">
-          <div class="drop-label" id="dropLabel">today's note</div>
-          <p class="drop-text" id="dropText"></p>
-        </article>
       </div>
     </section>
 
@@ -848,7 +1033,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
         <div class="section-kicker"><span>🌷</span> badge bouquet</div>
       </div>
       <div class="achievement-grid" id="achievementGrid"></div>
-      <p class="cycle-note">Structure note: this page keeps the achievements in one simple JavaScript array named <strong>achievementSeason</strong>, so you can swap the five badge names every 60 days without touching the layout.</p>
+      <p class="cycle-note">Structure note: this page keeps the achievements in one simple JavaScript array named <strong>achievementSeason</strong>, so you can update the five badge names every 60 days without touching the layout.</p>
     </section>
   </main>
 
@@ -858,15 +1043,6 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 </div>
 
 <script>
-const loveDrops = [
-  { label:"random note", text:"Reminder: even on an ordinary day, you are my favorite notification." },
-  { label:"comfort message", text:"If today feels heavy, pause here. Breathe. You are loved, wanted, and never alone in this little universe." },
-  { label:"tiny reminder", text:"You do not have to be perfect to be adored. You already have the softest permanent spot in my heart." },
-  { label:"silly truth", text:"Breaking news: local boy remains cute, annoying, and extremely mine-coded." },
-  { label:"emergency softness", text:"Here is a pocket hug, a forehead kiss, and a promise that I am cheering for you always." },
-  { label:"daily proof", text:"Somehow the universe made you, then let me know you. That is suspiciously perfect planning." }
-];
-
 const achievementSeason = [
   {
     icon:"🏆",
@@ -900,43 +1076,7 @@ const achievementSeason = [
   }
 ];
 
-const dropText = document.getElementById('dropText');
-const dropLabel = document.getElementById('dropLabel');
-const dropNote = document.getElementById('dropNote');
-const dropMachine = document.getElementById('dropMachine');
-const newDropButton = document.getElementById('newDropButton');
 const achievementGrid = document.getElementById('achievementGrid');
-
-function getRandomDrop(){
-  return loveDrops[Math.floor(Math.random() * loveDrops.length)];
-}
-
-function showDrop(){
-  const drop = getRandomDrop();
-  dropLabel.textContent = drop.label;
-  dropText.textContent = drop.text;
-  dropNote.classList.remove('pop', 'swap');
-  dropMachine.classList.remove('is-swapping');
-  void dropNote.offsetWidth;
-  dropNote.classList.add('pop', 'swap');
-  dropMachine.classList.add('is-swapping');
-  setTimeout(() => dropMachine.classList.remove('is-swapping'), 620);
-  burstSparkles();
-}
-
-function burstSparkles(){
-  for(let i = 0; i < 12; i++){
-    const sparkle = document.createElement('span');
-    sparkle.className = 'burst-sparkle';
-    sparkle.textContent = i % 3 === 0 ? '💖' : '✦';
-    sparkle.style.left = '50%';
-    sparkle.style.top = '50%';
-    sparkle.style.setProperty('--x', `${Math.cos(i) * (80 + i * 3)}px`);
-    sparkle.style.setProperty('--y', `${Math.sin(i) * (70 + i * 2)}px`);
-    dropNote.appendChild(sparkle);
-    setTimeout(() => sparkle.remove(), 900);
-  }
-}
 
 function renderAchievements(){
   achievementGrid.innerHTML = achievementSeason.map((badge) => `
@@ -949,9 +1089,7 @@ function renderAchievements(){
   `).join('');
 }
 
-newDropButton.addEventListener('click', showDrop);
 renderAchievements();
-showDrop();
 </script>
 </body>
 </html>
