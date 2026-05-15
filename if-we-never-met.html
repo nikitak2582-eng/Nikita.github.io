@@ -308,41 +308,124 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   z-index:-1;
 }
 
-.locket-scene{position:relative; height:100%; min-height:452px; display:grid; place-items:center;}
-
-.constellation-locket{
+.tower-scene{
   position:relative;
-  width:min(330px, 88%);
-  aspect-ratio:1;
+  height:100%;
+  min-height:452px;
   display:grid;
   place-items:center;
+}
+
+.tower-scene::before,
+.tower-scene::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+}
+
+.tower-scene::before{
+  inset:24px 28px auto auto;
+  width:112px;
+  aspect-ratio:1;
   border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, #fffaf0 0 16%, #ffe4a9 48%, #ffb06f 100%);
+  box-shadow:0 0 34px rgba(255,228,169,.72), 0 0 84px rgba(255,143,171,.34);
+}
+
+.tower-scene::after{
+  left:28px;
+  right:28px;
+  bottom:132px;
+  height:88px;
   background:
-    radial-gradient(circle at 38% 28%, rgba(255,255,255,.72), transparent 11%),
-    radial-gradient(circle at 64% 66%, rgba(255,240,168,.34), transparent 16%),
-    linear-gradient(145deg, rgba(255,250,252,.24), rgba(255,143,171,.18));
-  border:1px solid rgba(255,255,255,.34);
-  box-shadow:0 24px 58px rgba(39,28,67,.24), inset 0 0 56px rgba(255,255,255,.13);
+    linear-gradient(90deg, transparent 0 5%, rgba(65,44,97,.56) 5% 12%, transparent 12% 17%, rgba(65,44,97,.5) 17% 27%, transparent 27% 33%, rgba(65,44,97,.6) 33% 46%, transparent 46% 52%, rgba(65,44,97,.52) 52% 62%, transparent 62% 69%, rgba(65,44,97,.58) 69% 83%, transparent 83% 100%);
+  clip-path:polygon(0 50%, 9% 50%, 9% 24%, 14% 24%, 14% 50%, 22% 50%, 22% 10%, 29% 10%, 29% 50%, 39% 50%, 39% 28%, 45% 28%, 45% 50%, 56% 50%, 56% 16%, 63% 16%, 63% 50%, 74% 50%, 74% 8%, 82% 8%, 82% 50%, 100% 50%, 100% 100%, 0 100%);
+  opacity:.9;
 }
 
-.constellation-locket::before,
-.constellation-locket::after{content:""; position:absolute; border-radius:50%; border:1px solid rgba(255,255,255,.26);}
-.constellation-locket::before{inset:28px;}
-.constellation-locket::after{inset:58px; border-style:dashed; animation:slowSpin 16s linear infinite;}
-
-.heart-line{
+.tower-image-frame{
   position:relative;
-  width:132px;
-  height:118px;
-  transform:rotate(-45deg);
-  background:linear-gradient(135deg, #ff8fab, #ffe4a9);
-  box-shadow:0 0 34px rgba(255,228,169,.48);
-  animation:heartBeat 2.8s ease-in-out infinite;
+  z-index:1;
+  width:min(360px, 88%);
+  min-height:390px;
+  display:grid;
+  grid-template-rows:1fr auto;
+  overflow:hidden;
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 24% 20%, rgba(255,250,252,.7), transparent 10%),
+    radial-gradient(circle at 72% 18%, rgba(255,240,168,.55), transparent 13%),
+    linear-gradient(180deg, #ff9f75 0%, #ffb58a 26%, #ffc0d1 56%, #7a6c9d 100%);
+  border:2px solid rgba(255,250,252,.62);
+  box-shadow:0 26px 62px rgba(39,28,67,.28), inset 0 0 0 10px rgba(255,255,255,.1);
 }
-.heart-line::before,
-.heart-line::after{content:""; position:absolute; width:132px; height:132px; border-radius:50%; background:inherit;}
-.heart-line::before{top:-66px; left:0;}
-.heart-line::after{left:66px; top:0;}
+
+.tower-image-frame::before{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border:2px dashed rgba(255,250,252,.62);
+  border-radius:24px;
+  pointer-events:none;
+}
+
+.tower-image-frame::after{
+  content:"✦  ✧  ✦";
+  position:absolute;
+  top:30px;
+  left:32px;
+  color:rgba(255,250,252,.86);
+  font-size:1.15rem;
+  letter-spacing:12px;
+  text-shadow:0 0 18px rgba(255,240,168,.7);
+}
+
+.tower-image-slot{
+  position:relative;
+  z-index:1;
+  display:grid;
+  place-items:center;
+  margin:70px 28px 22px;
+  min-height:238px;
+  border-radius:26px;
+  background:rgba(255,250,252,.18);
+  border:1px solid rgba(255,250,252,.56);
+  box-shadow:inset 0 0 34px rgba(255,250,252,.16), 0 18px 34px rgba(65,44,97,.18);
+  text-align:center;
+}
+
+.tower-image-slot span{
+  display:grid;
+  gap:8px;
+  max-width:230px;
+  padding:18px;
+  color:#3b2b52;
+  border-radius:24px;
+  background:rgba(255,250,252,.86);
+  font-weight:900;
+  line-height:1.35;
+  box-shadow:0 14px 26px rgba(65,44,97,.16);
+}
+
+.tower-image-slot small{
+  color:#7a6c9d;
+  font-size:.78rem;
+  font-weight:800;
+}
+
+.tower-frame-caption{
+  position:relative;
+  z-index:1;
+  margin:0 28px 28px;
+  padding:13px 15px;
+  border-radius:18px;
+  color:#412c61;
+  background:rgba(255,250,252,.88);
+  border:1px solid rgba(255,255,255,.88);
+  font-weight:900;
+  line-height:1.3;
+  text-align:center;
+}
 
 .coordinate-card{
   position:absolute;
@@ -359,12 +442,10 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 .coordinate-card strong{display:block; margin-bottom:8px; color:#ffe4a9; letter-spacing:.08em; text-transform:uppercase; font-size:.82rem;}
 .coordinate-card p{margin:0; color:rgba(255,255,255,.86); line-height:1.6;}
 .star-dot{position:absolute; width:12px; height:12px; border-radius:50%; background:#fff7bf; box-shadow:0 0 18px #fff5ab; animation:twinkle 3.8s ease-in-out infinite;}
-.star-dot.one{top:24%; left:25%;}
-.star-dot.two{top:34%; right:22%; animation-delay:.7s;}
-.star-dot.three{bottom:34%; left:30%; animation-delay:1.2s;}
+.star-dot.one{top:18%; left:18%;}
+.star-dot.two{top:30%; right:18%; animation-delay:.7s;}
+.star-dot.three{bottom:28%; left:22%; animation-delay:1.2s;}
 
-@keyframes slowSpin{to{transform:rotate(360deg);}}
-@keyframes heartBeat{0%,100%{scale:.98;} 50%{scale:1.05;}}
 
 .reality-check-panel{
   display:grid;
@@ -870,7 +951,9 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   .pixel-art-card{min-height:360px;}
   .pixel-caption{max-width:180px; font-size:.86rem;}
   .portal-card{min-height:430px;}
-  .locket-scene{min-height:360px;}
+  .tower-scene{min-height:360px;}
+  .tower-image-frame{min-height:335px;}
+  .tower-image-slot{margin-top:58px; min-height:190px;}
   .coordinate-card{bottom:0;}
 }
 
@@ -911,17 +994,23 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
         <h1 id="never-met-title">A parallel universe <span>would still find <em>you</em>.</span></h1>
         <p>Somewhere, another sky probably tries to keep us as almosts. Still, every soft route, late-night thought, and little coincidence would bend back toward you.</p>
       </div>
-      <aside class="portal-card" aria-label="Heart constellation keepsake">
-        <div class="locket-scene">
-          <div class="constellation-locket" aria-hidden="true">
-            <span class="star-dot one"></span>
-            <span class="star-dot two"></span>
-            <span class="star-dot three"></span>
-            <div class="heart-line"></div>
+      <aside class="portal-card" aria-label="Japanese pixel tower image frame">
+        <div class="tower-scene">
+          <div class="tower-image-frame" aria-label="Cute sunset frame for adding a Japanese-style pixel city tower image">
+            <span class="star-dot one" aria-hidden="true"></span>
+            <span class="star-dot two" aria-hidden="true"></span>
+            <span class="star-dot three" aria-hidden="true"></span>
+            <div class="tower-image-slot">
+              <span>
+                add your pixel tower picture here
+                <small>orangey sunset · moon glow · tiny stars</small>
+              </span>
+            </div>
+            <p class="tower-frame-caption">inside joke landmark goes right here 🏯</p>
           </div>
           <div class="coordinate-card">
-            <strong>soft coordinates</strong>
-            <p>A tiny star-map locket for the universe where even the constellations keep spelling us.</p>
+            <strong>tower coordinates</strong>
+            <p>A cute little backdrop is ready for the Japanese city tower picture, with the same dreamy Parallel Heart warmth.</p>
           </div>
         </div>
       </aside>
