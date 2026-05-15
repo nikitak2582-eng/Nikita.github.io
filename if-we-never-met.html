@@ -237,6 +237,14 @@ h1,h2,h3,p{margin-top:0;}
   backdrop-filter:blur(20px);
 }
 
+.portal-card{
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.28), rgba(255,255,255,.08)),
+    radial-gradient(circle at top left, rgba(255,255,255,.42), transparent 40%);
+  border:1px solid rgba(255,255,255,.3);
+  box-shadow:var(--shadow);
+}
+
 .hero-copy{
   position:relative;
   padding:clamp(12px,3vw,24px) 0;
@@ -261,11 +269,21 @@ h1,h2,h3,p{margin-top:0;}
 h1{
   margin:0;
   max-width:760px;
-  font-family:inherit;
+  font-family:'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-size:clamp(3.4rem, 10vw, 8.6rem);
   line-height:.9;
   letter-spacing:-4px;
+  color:#fff7fb;
   text-shadow:0 18px 50px rgba(58,61,92,.42);
+}
+
+h1 .title-gradient{
+  display:inline-block;
+  padding:.03em .1em .08em;
+  margin-left:-.1em;
+  border-radius:.18em;
+  background:linear-gradient(105deg, rgba(255,250,252,.22), rgba(255,143,171,.56) 46%, rgba(255,209,220,.2));
+  box-shadow:0 18px 44px rgba(232,63,120,.18);
 }
 
 h1 span{display:block; color:#fff7fb;}
@@ -281,10 +299,10 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 
 .portal-card{
   position:relative;
-  min-height:520px;
+  min-height:560px;
   overflow:hidden;
   border-radius:42px;
-  padding:clamp(24px,4vw,36px);
+  padding:clamp(22px,4vw,34px);
   isolation:isolate;
 }
 
@@ -292,7 +310,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   content:"";
   position:absolute;
   inset:18px;
-  border:1px dashed rgba(255,255,255,.32);
+  border:1px dashed rgba(255,255,255,.36);
   border-radius:32px;
   z-index:-1;
 }
@@ -311,23 +329,29 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 .tower-scene{
   position:relative;
   height:100%;
-  min-height:452px;
-  display:grid;
-  place-items:center;
+  min-height:500px;
 }
 
-.tower-scene::before{
-  content:"";
-  position:absolute;
-  inset:20px;
-  border:1px dashed rgba(255,255,255,.36);
-  border-radius:32px;
-  pointer-events:none;
+.polaroid-description{
+  position:relative;
+  z-index:2;
+  width:min(82%, 390px);
+  margin:0 auto;
+  padding:16px 20px;
+  border-radius:24px;
+  color:#412c61;
+  background:rgba(255,250,252,.9);
+  border:1px solid rgba(255,255,255,.88);
+  box-shadow:0 18px 42px rgba(28,23,52,.18);
+  text-align:center;
 }
+
+.polaroid-description strong{display:block; margin-bottom:6px; color:#dd527b; letter-spacing:.08em; text-transform:uppercase; font-size:.82rem;}
+.polaroid-description p{margin:0; color:#5d4868; line-height:1.5; font-weight:750;}
 
 .tower-polaroid{
   position:absolute;
-  width:min(46%, 220px);
+  width:46%;
   min-width:180px;
   padding:12px 12px 38px;
   border-radius:10px;
@@ -338,18 +362,18 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 }
 
 .tower-polaroid.one{
-  top:42px;
-  left:36px;
+  top:128px;
+  left:32px;
 }
 
 .tower-polaroid.two{
-  right:34px;
-  bottom:92px;
+  right:28px;
+  bottom:36px;
   transform:rotate(8deg);
 }
 
 .tower-photo-gradient{
-  height:210px;
+  height:190px;
   border-radius:8px;
   display:grid;
   place-items:center;
@@ -384,23 +408,6 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   text-align:center;
 }
 
-.tower-note{
-  position:absolute;
-  left:50%;
-  bottom:26px;
-  width:min(78%, 330px);
-  padding:18px 20px;
-  border-radius:24px;
-  color:#412c61;
-  background:rgba(255,250,252,.9);
-  border:1px solid rgba(255,255,255,.88);
-  box-shadow:0 18px 42px rgba(28,23,52,.22);
-  transform:translateX(-50%) rotate(-1deg);
-  text-align:center;
-}
-.tower-note strong{display:block; margin-bottom:6px; color:#dd527b; letter-spacing:.08em; text-transform:uppercase; font-size:.82rem;}
-.tower-note p{margin:0; color:#5d4868; line-height:1.5; font-weight:750;}
-
 
 .reality-check-panel{
   display:grid;
@@ -410,11 +417,14 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   margin-top:8px;
   padding:22px 24px;
   border-radius:30px;
+  background:linear-gradient(135deg, rgba(48,34,78,.88), rgba(130,70,125,.78) 52%, rgba(255,143,171,.34));
+  border:1px solid rgba(255,250,252,.42);
+  box-shadow:0 24px 64px rgba(31,26,58,.34), inset 0 1px 0 rgba(255,255,255,.24);
 }
-.reality-check-icon{display:grid; place-items:center; width:58px; height:58px; border-radius:22px; background:linear-gradient(135deg, #fff7bf, #ffc0d1); color:#dd527b; font-size:1.7rem; box-shadow:0 14px 28px rgba(39,28,67,.18);}
-.reality-check-panel strong{display:block; margin-bottom:4px; color:#ffe4a9; font-family:'Space Grotesk', sans-serif; letter-spacing:.12em; text-transform:uppercase;}
-.reality-check-panel p{margin:0; color:rgba(255,250,252,.86); line-height:1.55;}
-.reality-pill{justify-self:end; padding:10px 14px; border-radius:999px; color:#412c61; background:rgba(255,250,252,.88); font-weight:900; box-shadow:0 12px 26px rgba(39,28,67,.16); white-space:nowrap;}
+.reality-check-icon{display:grid; place-items:center; width:58px; height:58px; border-radius:22px; background:linear-gradient(135deg, #fff7bf, #ffc0d1); color:#dd527b; font-size:1.7rem; box-shadow:0 14px 28px rgba(39,28,67,.26);}
+.reality-check-panel strong{display:block; margin-bottom:4px; color:#fff0a8; font-family:'Space Grotesk', sans-serif; letter-spacing:.12em; text-transform:uppercase;}
+.reality-check-panel p{margin:0; color:#fffafc; line-height:1.55; text-shadow:0 2px 10px rgba(37,39,70,.28);}
+.reality-pill{justify-self:end; padding:10px 14px; border-radius:999px; color:#412c61; background:rgba(255,250,252,.94); font-weight:900; box-shadow:0 12px 26px rgba(39,28,67,.2); white-space:nowrap;}
 
 .section-panel{
   position:relative;
@@ -475,6 +485,30 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 }
 
 .section-kicker span{font-size:1.25rem;}
+
+.section-extra-charm{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-top:14px;
+  padding:10px 14px;
+  border-radius:999px;
+  color:#412c61;
+  background:linear-gradient(135deg, rgba(255,250,252,.92), rgba(255,209,220,.9));
+  border:1px solid rgba(255,255,255,.78);
+  box-shadow:0 14px 28px rgba(39,28,67,.16);
+  font-size:.9rem;
+  font-weight:900;
+}
+
+.section-extra-charm span{
+  display:grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #fff7bf, #ff8fab);
+}
 
 .timeline-grid{
   display:grid;
@@ -597,13 +631,31 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 
 .love-drop-button{
   width:max-content;
+  cursor:pointer;
   padding:12px 16px;
   border-radius:999px;
   background:#fffafc;
   color:#dd527b;
   border:1px solid rgba(255,255,255,.88);
   box-shadow:0 14px 28px rgba(39,28,67,.14);
+  font:inherit;
   font-weight:900;
+  transition:transform .22s ease, box-shadow .22s ease, background .22s ease;
+}
+
+.love-drop-button:hover,
+.love-drop-button:focus-visible{
+  transform:translateY(-3px) scale(1.03);
+  background:#fff7bf;
+  box-shadow:0 18px 34px rgba(39,28,67,.2);
+}
+
+.love-drop-main.is-changing{animation:lovePop .32s ease;}
+
+@keyframes lovePop{
+  0%{transform:scale(.98); opacity:.78;}
+  60%{transform:scale(1.025);}
+  100%{transform:scale(1); opacity:1;}
 }
 
 .love-drop-list{
@@ -743,12 +795,12 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 @media (max-width:520px){
   .page{width:min(100% - 20px, 1180px); padding-top:14px;}
   .achievement-grid{grid-template-columns:1fr;}
-  .portal-card{min-height:460px;}
-  .tower-scene{min-height:390px;}
+  .portal-card{min-height:auto;}
+  .tower-scene{min-height:0; display:grid; gap:16px;}
+  .polaroid-description{width:100%;}
   .tower-polaroid{position:relative; width:82%; min-width:0;}
   .tower-polaroid.one{top:auto; left:auto; justify-self:start;}
   .tower-polaroid.two{right:auto; bottom:auto; justify-self:end; margin-top:-82px;}
-  .tower-note{bottom:10px;}
   .love-drop-card{min-height:360px;}
   .love-drop-item{padding-left:62px;}
 }
@@ -787,11 +839,15 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
     <section class="hero" aria-labelledby="never-met-title">
       <div class="hero-copy">
         <div class="eyebrow">🌙 If We Never Met</div>
-        <h1 id="never-met-title">A parallel universe <span>would still find <em>you</em>.</span></h1>
+        <h1 id="never-met-title">A <span class="title-gradient">parallel universe</span> <span>would still find <em>you</em>.</span></h1>
         <p>Somewhere, another sky probably tries to keep us as almosts. Still, every soft route, late-night thought, and little coincidence would bend back toward you.</p>
       </div>
       <aside class="portal-card" aria-label="Polaroid frames for the tower picture">
         <div class="tower-scene">
+          <div class="polaroid-description">
+            <strong>polaroid space</strong>
+            <p>A soft little photo corner with room for memories, captions, and the feeling without crowding the frame.</p>
+          </div>
           <div class="tower-polaroid one">
             <div class="tower-photo-gradient">
               <span>add your tower picture here</span>
@@ -803,10 +859,6 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
               <span>soft city glow</span>
             </div>
             <small>tiny tower moment</small>
-          </div>
-          <div class="tower-note">
-            <strong>tower corner</strong>
-            <p>Simple polaroid frames only — no busy skyline, just room for the picture and the feeling.</p>
           </div>
         </div>
       </aside>
@@ -826,6 +878,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
         <div>
           <h2 id="timeline-title">The Almost-Timeline</h2>
           <p>Six tiny pop-up scenes from a reality that simply did not pass quality control.</p>
+          <div class="section-extra-charm"><span>💫</span> almost-time quality stamp</div>
         </div>
         <div class="section-kicker"><span>🧃</span> cute audit mode</div>
       </div>
@@ -870,9 +923,9 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
           <div class="love-drop-heart" aria-hidden="true">💌</div>
           <div class="love-drop-main">
             <span class="love-drop-label">open when you need a tiny soft thing</span>
-            <blockquote class="love-drop-message">you are my favorite notification.</blockquote>
-            <p class="love-drop-note">A prettier drop box for tiny compliments, random reminders, and little us-coded lines that can change whenever you want.</p>
-            <span class="love-drop-button">tap for a love drop ✦</span>
+            <blockquote class="love-drop-message" id="loveDropMessage">you are my favorite notification.</blockquote>
+            <p class="love-drop-note" id="loveDropNote">A prettier drop box for tiny compliments, random reminders, and little us-coded lines that can change whenever you want.</p>
+            <button class="love-drop-button" type="button" id="loveDropButton">tap for a love drop ✦</button>
           </div>
         </figure>
         <div class="love-drop-list" aria-label="Love drop ideas">
@@ -897,6 +950,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
         <div>
           <h2 id="badge-title">The 60-Day Badge Garden</h2>
           <p>Five cutesy achievements per 60-day season, planted like tiny collectible flowers.</p>
+          <div class="section-extra-charm"><span>🪴</span> tiny bloom tracker</div>
         </div>
         <div class="section-kicker"><span>🌷</span> badge bouquet</div>
       </div>
@@ -911,6 +965,40 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 </div>
 
 <script>
+const loveDrops = [
+  {
+    message:"you are my favorite notification.",
+    note:"A prettier drop box for tiny compliments, random reminders, and little us-coded lines that can change whenever you want."
+  },
+  {
+    message:"Emergency love drop: your laugh is basically proof this timeline won.",
+    note:"Keep this one for any random Tuesday that needs a softer ending."
+  },
+  {
+    message:"Reminder delivery: I would pick your chaos, your comfort, and your heart every time.",
+    note:"Tap again whenever you want another tiny pocket-sized reassurance."
+  },
+  {
+    message:"Parallel universe report: every version of me is still embarrassingly fond of you.",
+    note:"This box is officially on standby for bad days, sleepy days, and miss-you days."
+  }
+];
+
+const loveDropButton = document.getElementById('loveDropButton');
+const loveDropMessage = document.getElementById('loveDropMessage');
+const loveDropNote = document.getElementById('loveDropNote');
+const loveDropMain = document.querySelector('.love-drop-main');
+let currentLoveDrop = 0;
+
+loveDropButton.addEventListener('click', () => {
+  currentLoveDrop = (currentLoveDrop + 1) % loveDrops.length;
+  loveDropMessage.textContent = loveDrops[currentLoveDrop].message;
+  loveDropNote.textContent = loveDrops[currentLoveDrop].note;
+  loveDropMain.classList.remove('is-changing');
+  void loveDropMain.offsetWidth;
+  loveDropMain.classList.add('is-changing');
+});
+
 const achievementSeason = [
   {
     icon:"🏆",
