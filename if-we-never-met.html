@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>If We Never Met 🌙</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Yeseva+One&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --night:#17112f;
+  --violet:#7a5cff;
+  --pink:#ff8fc7;
+  --peach:#ffc4a3;
+  --mint:#99f6d2;
+  --cream:#fff7e8;
+  --ink:#382446;
+  --glass:rgba(255,255,255,.16);
+  --glass-bright:rgba(255,255,255,.78);
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; background:var(--night);}
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  color:var(--cream);
+  font-family:'Fredoka', 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(255,143,199,.46), transparent 26%),
+    radial-gradient(circle at 78% 3%, rgba(153,246,210,.34), transparent 25%),
+    radial-gradient(circle at 50% 70%, rgba(122,92,255,.4), transparent 36%),
+    linear-gradient(160deg, #120d2b 0%, #251544 48%, #3d1d50 100%);
+}
+
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+}
+
+body::before{
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(255,196,163,.7) 0 1px, transparent 1.5px);
+  background-size:72px 72px, 118px 118px;
+  animation:twinkle 8s ease-in-out infinite alternate;
+}
+
+body::after{
+  background:linear-gradient(120deg, transparent 0 30%, rgba(255,255,255,.08) 48%, transparent 62% 100%);
+  transform:translateX(-60%);
+  animation:aurora 12s linear infinite;
+}
+
+@keyframes twinkle{
+  from{opacity:.38; transform:translateY(0);}
+  to{opacity:.82; transform:translateY(-18px);}
+}
+
+@keyframes aurora{
+  to{transform:translateX(70%);}
+}
+
+.floaty{
+  position:fixed;
+  width:16px;
+  height:16px;
+  border-radius:50% 50% 50% 0;
+  background:linear-gradient(135deg, var(--pink), var(--peach));
+  opacity:.7;
+  filter:drop-shadow(0 0 12px rgba(255,143,199,.65));
+  animation:drift var(--speed, 12s) linear infinite;
+  z-index:-1;
+}
+
+.floaty:nth-child(1){left:8%; bottom:-40px; --speed:14s; animation-delay:0s;}
+.floaty:nth-child(2){left:27%; bottom:-40px; --speed:18s; animation-delay:3s;}
+.floaty:nth-child(3){left:51%; bottom:-40px; --speed:13s; animation-delay:1s;}
+.floaty:nth-child(4){left:73%; bottom:-40px; --speed:16s; animation-delay:5s;}
+.floaty:nth-child(5){left:91%; bottom:-40px; --speed:20s; animation-delay:2s;}
+
+@keyframes drift{
+  0%{transform:translateY(0) rotate(45deg) scale(.8); opacity:0;}
+  12%{opacity:.72;}
+  100%{transform:translateY(-115vh) translateX(42px) rotate(405deg) scale(1.25); opacity:0;}
+}
+
+.page{
+  width:min(1120px, calc(100% - 32px));
+  margin:0 auto;
+  padding:22px 0 64px;
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 0 30px;
+}
+
+.logo{
+  color:var(--cream);
+  text-decoration:none;
+  font-family:'Space Grotesk', sans-serif;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.nav-links a,
+.home-chip{
+  color:var(--cream);
+  text-decoration:none;
+  padding:9px 14px;
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;
+  background:rgba(255,255,255,.1);
+  backdrop-filter:blur(12px);
+  transition:transform .2s ease, background .2s ease;
+}
+
+.nav-links a:hover,
+.home-chip:hover{transform:translateY(-2px); background:rgba(255,255,255,.18);}
+
+.hero{
+  display:grid;
+  grid-template-columns:minmax(0, 1.1fr) minmax(280px, .9fr);
+  gap:26px;
+  align-items:stretch;
+  min-height:420px;
+}
+
+.hero-copy,
+.portal-card,
+.section-panel{
+  border:1px solid rgba(255,255,255,.22);
+  background:linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.07));
+  box-shadow:0 30px 80px rgba(8,5,28,.32), inset 0 1px 0 rgba(255,255,255,.18);
+  backdrop-filter:blur(18px);
+  border-radius:34px;
+}
+
+.hero-copy{
+  padding:44px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-copy::after{
+  content:"alternate timeline detected";
+  position:absolute;
+  right:-28px;
+  top:36px;
+  transform:rotate(12deg);
+  padding:8px 18px;
+  border-radius:999px;
+  background:rgba(153,246,210,.18);
+  color:#ccffef;
+  border:1px dashed rgba(153,246,210,.7);
+  font-size:.78rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:18px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,143,199,.18);
+  color:#ffd8ea;
+  font-weight:700;
+}
+
+h1,h2,h3,p{margin-top:0;}
+h1{
+  margin-bottom:18px;
+  font-family:'Yeseva One', serif;
+  font-size:clamp(3rem, 8vw, 6.8rem);
+  line-height:.9;
+  text-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+h1 span{color:var(--mint);}
+.hero-copy p{
+  max-width:650px;
+  font-size:1.08rem;
+  line-height:1.7;
+  color:rgba(255,247,232,.86);
+}
+
+.portal-card{
+  position:relative;
+  display:grid;
+  place-items:center;
+  min-height:340px;
+  overflow:hidden;
+}
+
+.portal-ring{
+  position:absolute;
+  width:230px;
+  height:230px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.32);
+  box-shadow:0 0 34px rgba(255,143,199,.42), inset 0 0 42px rgba(153,246,210,.22);
+  animation:pulse 4s ease-in-out infinite;
+}
+
+.portal-ring:nth-child(2){width:300px; height:300px; animation-delay:.55s; opacity:.62;}
+.portal-ring:nth-child(3){width:370px; height:370px; animation-delay:1.1s; opacity:.36;}
+
+@keyframes pulse{
+  50%{transform:scale(1.08) rotate(16deg); border-color:rgba(153,246,210,.6);}
+}
+
+.portal-text{
+  position:relative;
+  width:min(260px, 82%);
+  padding:26px;
+  border-radius:28px;
+  color:var(--ink);
+  background:var(--glass-bright);
+  text-align:center;
+  box-shadow:0 16px 35px rgba(0,0,0,.18);
+}
+
+.portal-text strong{
+  display:block;
+  margin-bottom:8px;
+  font-size:1.3rem;
+  color:#6f3d97;
+}
+
+.section-panel{
+  margin-top:28px;
+  padding:32px;
+  position:relative;
+  overflow:hidden;
+}
+
+.section-heading{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:22px;
+}
+
+.section-heading h2{
+  margin-bottom:0;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:clamp(2rem, 5vw, 3.4rem);
+}
+
+.section-heading p{
+  max-width:380px;
+  margin-bottom:0;
+  color:rgba(255,247,232,.78);
+  line-height:1.55;
+}
+
+.timeline-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+}
+
+.reality-card{
+  min-height:210px;
+  padding:22px;
+  border-radius:28px;
+  background:rgba(255,247,232,.88);
+  color:var(--ink);
+  box-shadow:0 18px 38px rgba(0,0,0,.16);
+  transform:rotate(var(--tilt));
+}
+
+.reality-card:nth-child(2){margin-top:32px;}
+.reality-card h3{
+  color:#703db8;
+  font-size:1.45rem;
+}
+.reality-card p{line-height:1.55; margin-bottom:0;}
+
+.love-drop-wrap{
+  display:grid;
+  grid-template-columns:minmax(0, .8fr) minmax(0, 1.2fr);
+  gap:24px;
+  align-items:center;
+}
+
+.drop-machine{
+  position:relative;
+  min-height:310px;
+  display:grid;
+  place-items:center;
+  border-radius:32px;
+  background:radial-gradient(circle at 50% 32%, rgba(255,255,255,.22), rgba(255,143,199,.08));
+  border:1px solid rgba(255,255,255,.18);
+}
+
+.drop-button{
+  border:0;
+  width:160px;
+  height:160px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--pink), var(--peach));
+  color:#fff;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:1.05rem;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 20px 40px rgba(255,143,199,.35), inset 0 -10px 22px rgba(135,46,111,.24);
+  transition:transform .2s ease;
+}
+
+.drop-button:hover{transform:scale(1.06) rotate(-4deg);}
+.drop-button:active{transform:scale(.96);}
+
+.drop-note{
+  position:relative;
+  min-height:260px;
+  padding:30px;
+  border-radius:34px;
+  background:rgba(255,247,232,.92);
+  color:var(--ink);
+  box-shadow:0 24px 50px rgba(0,0,0,.18);
+}
+
+.drop-note::before{
+  content:"💌";
+  position:absolute;
+  top:-24px;
+  left:28px;
+  width:56px;
+  height:56px;
+  display:grid;
+  place-items:center;
+  border-radius:18px;
+  background:linear-gradient(135deg, var(--mint), #d9fff2);
+  box-shadow:0 12px 24px rgba(0,0,0,.14);
+}
+
+.drop-label{
+  margin:8px 0 18px;
+  color:#9b5bc6;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  font-size:.82rem;
+}
+
+.drop-text{
+  margin:0;
+  font-size:clamp(1.35rem, 3vw, 2.1rem);
+  line-height:1.35;
+  font-weight:600;
+}
+
+.drop-note.pop{animation:popNote .42s ease;}
+@keyframes popNote{
+  0%{transform:translateY(16px) scale(.94); opacity:.45;}
+  70%{transform:translateY(-4px) scale(1.02);}
+  100%{transform:translateY(0) scale(1); opacity:1;}
+}
+
+.sparkle{
+  position:absolute;
+  pointer-events:none;
+  animation:spark .9s ease forwards;
+}
+@keyframes spark{
+  to{transform:translate(var(--x), var(--y)) scale(.2) rotate(130deg); opacity:0;}
+}
+
+.achievement-grid{
+  display:grid;
+  grid-template-columns:repeat(5, minmax(140px, 1fr));
+  gap:14px;
+}
+
+.achievement-card{
+  position:relative;
+  min-height:205px;
+  padding:18px;
+  border-radius:26px;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(255,247,232,.92), rgba(255,226,243,.86));
+  color:var(--ink);
+  box-shadow:0 18px 40px rgba(0,0,0,.15);
+  border:2px solid rgba(255,255,255,.68);
+}
+
+.achievement-card::after{
+  content:"";
+  position:absolute;
+  inset:auto -25% -50% -25%;
+  height:82%;
+  border-radius:50%;
+  background:rgba(153,246,210,.35);
+}
+
+.achievement-icon{
+  position:relative;
+  z-index:1;
+  width:58px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  margin-bottom:14px;
+  border-radius:21px;
+  background:linear-gradient(135deg, #ffe27a, #ff94c9);
+  font-size:2rem;
+  box-shadow:0 12px 22px rgba(120,68,40,.18);
+}
+
+.achievement-card h3,
+.achievement-card p,
+.achievement-card small{position:relative; z-index:1;}
+.achievement-card h3{margin-bottom:8px; color:#6f3d97; font-size:1.08rem;}
+.achievement-card p{margin-bottom:16px; line-height:1.42; color:#5d4868;}
+.achievement-card small{
+  display:inline-flex;
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.64);
+  color:#af4c81;
+  font-weight:700;
+}
+
+.cycle-note{
+  margin-top:18px;
+  padding:16px 18px;
+  border-radius:22px;
+  background:rgba(255,255,255,.12);
+  color:rgba(255,247,232,.82);
+  line-height:1.6;
+}
+
+.footer-home{
+  text-align:center;
+  margin-top:32px;
+}
+
+@media (max-width:860px){
+  .nav{align-items:flex-start; flex-direction:column;}
+  .hero,
+  .love-drop-wrap{grid-template-columns:1fr;}
+  .timeline-grid{grid-template-columns:1fr;}
+  .reality-card,
+  .reality-card:nth-child(2){margin-top:0; transform:none;}
+  .achievement-grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
+  .hero-copy{padding:32px 24px;}
+  .section-panel{padding:24px;}
+  .section-heading{align-items:flex-start; flex-direction:column;}
+}
+
+@media (max-width:520px){
+  .page{width:min(100% - 20px, 1120px); padding-top:14px;}
+  .achievement-grid{grid-template-columns:1fr;}
+  .drop-button{width:138px; height:138px;}
+  .drop-note{padding:28px 22px;}
+}
+</style>
+</head>
+
+<body>
+<div class="floaty"></div>
+<div class="floaty"></div>
+<div class="floaty"></div>
+<div class="floaty"></div>
+<div class="floaty"></div>
+
+<div class="page">
+  <header class="nav">
+    <a class="logo" href="if-we-never-met.html">Parallel Heart</a>
+    <nav class="nav-links" aria-label="If We Never Met navigation">
+      <a href="index.html">Home</a>
+      <a href="dear-you.html">Dear You</a>
+      <a href="#love-drop">Random Love Drop</a>
+      <a href="#badge-garden">Badge Garden</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="never-met-title">
+      <div class="hero-copy">
+        <div class="eyebrow">🌙 If We Never Met</div>
+        <h1 id="never-met-title">Wrong<br><span>Universe</span></h1>
+        <p>A tiny surreal page for the timeline where we somehow missed each other. It is dramatic, a little dumb, very honest, and obviously the worst possible universe because you would not have the best person alive.</p>
+      </div>
+      <aside class="portal-card" aria-label="Glowing alternate reality portal">
+        <div class="portal-ring"></div>
+        <div class="portal-ring"></div>
+        <div class="portal-ring"></div>
+        <div class="portal-text">
+          <strong>Reality Check</strong>
+          This universe has been rejected for not including enough of us.
+        </div>
+      </aside>
+    </section>
+
+    <section class="section-panel" aria-labelledby="timeline-title">
+      <div class="section-heading">
+        <h2 id="timeline-title">The Almost-Timeline</h2>
+        <p>Genuine mine + fun his: three tiny scenes from a reality that simply did not pass quality control.</p>
+      </div>
+      <div class="timeline-grid">
+        <article class="reality-card" style="--tilt:-2deg;">
+          <h3>“You’d still be dumb…”</h3>
+          <p>…but with nobody this perfect lovingly bullying you, hyping you, and making your days ten times softer.</p>
+        </article>
+        <article class="reality-card" style="--tilt:1.8deg;">
+          <h3>“You won’t have…”</h3>
+          <p>…the best person alive, which is honestly a tragic loss for that version of you. Very sad. Very preventable.</p>
+        </article>
+        <article class="reality-card" style="--tilt:-1deg;">
+          <h3>“I would’ve never learned…”</h3>
+          <p>…how naturally safe, silly, genuine, and fun love can feel when it has your exact smile attached to it.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-panel" id="love-drop" aria-labelledby="drop-title">
+      <div class="section-heading">
+        <h2 id="drop-title">Random Love Drop</h2>
+        <p>Every visit opens with a fresh little note. Tap the button when you want another comfort message to pop in.</p>
+      </div>
+      <div class="love-drop-wrap">
+        <div class="drop-machine" id="dropMachine">
+          <button class="drop-button" id="newDropButton" type="button">drop another<br>tiny love</button>
+        </div>
+        <article class="drop-note pop" id="dropNote" aria-live="polite">
+          <div class="drop-label" id="dropLabel">today's note</div>
+          <p class="drop-text" id="dropText"></p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-panel" id="badge-garden" aria-labelledby="badge-title">
+      <div class="section-heading">
+        <h2 id="badge-title">The 60-Day Badge Garden</h2>
+        <p>Five cutesy achievements per 60-day season. Edit the little list in the script whenever a new season deserves new badges.</p>
+      </div>
+      <div class="achievement-grid" id="achievementGrid"></div>
+      <p class="cycle-note">Structure note: this page keeps the achievements in one simple JavaScript array named <strong>achievementSeason</strong>, so you can swap the five badge names every 60 days without touching the layout.</p>
+    </section>
+  </main>
+
+  <div class="footer-home">
+    <a class="home-chip" href="index.html">🏠 back to the lobby</a>
+  </div>
+</div>
+
+<script>
+const loveDrops = [
+  { label:"random note", text:"Reminder: even on an ordinary day, you are my favorite notification." },
+  { label:"comfort message", text:"If today feels heavy, pause here. Breathe. You are loved, wanted, and never alone in this little universe." },
+  { label:"tiny reminder", text:"You do not have to be perfect to be adored. You already have the softest permanent spot in my heart." },
+  { label:"silly truth", text:"Breaking news: local boy remains cute, annoying, and extremely mine-coded." },
+  { label:"emergency softness", text:"Here is a pocket hug, a forehead kiss, and a promise that I am cheering for you always." },
+  { label:"daily proof", text:"Somehow the universe made you, then let me know you. That is suspiciously perfect planning." }
+];
+
+const achievementSeason = [
+  {
+    icon:"🏆",
+    title:"Made Me Smile For No Reason",
+    description:"Unlocked by existing, texting, or doing something unfairly cute.",
+    date:"Season 01"
+  },
+  {
+    icon:"💬",
+    title:"Certified Yapper Of My Heart",
+    description:"Awarded for conversations I never want to end.",
+    date:"Season 01"
+  },
+  {
+    icon:"🧸",
+    title:"Comfort Person Status",
+    description:"Granted for making everything feel calmer just by being you.",
+    date:"Season 01"
+  },
+  {
+    icon:"✨",
+    title:"Accidental Butterflies",
+    description:"Unlocked after being sweet without realizing the damage caused.",
+    date:"Season 01"
+  },
+  {
+    icon:"🌙",
+    title:"Best Timeline Confirmed",
+    description:"Awarded because every alternate universe without us is automatically worse.",
+    date:"Season 01"
+  }
+];
+
+const dropText = document.getElementById('dropText');
+const dropLabel = document.getElementById('dropLabel');
+const dropNote = document.getElementById('dropNote');
+const dropMachine = document.getElementById('dropMachine');
+const newDropButton = document.getElementById('newDropButton');
+const achievementGrid = document.getElementById('achievementGrid');
+
+function getRandomDrop(){
+  return loveDrops[Math.floor(Math.random() * loveDrops.length)];
+}
+
+function showDrop(){
+  const drop = getRandomDrop();
+  dropLabel.textContent = drop.label;
+  dropText.textContent = drop.text;
+  dropNote.classList.remove('pop');
+  void dropNote.offsetWidth;
+  dropNote.classList.add('pop');
+  burstSparkles();
+}
+
+function burstSparkles(){
+  for(let i = 0; i < 12; i++){
+    const sparkle = document.createElement('span');
+    sparkle.className = 'sparkle';
+    sparkle.textContent = i % 3 === 0 ? '💖' : '✦';
+    sparkle.style.left = '50%';
+    sparkle.style.top = '50%';
+    sparkle.style.setProperty('--x', `${Math.cos(i) * (80 + i * 3)}px`);
+    sparkle.style.setProperty('--y', `${Math.sin(i) * (70 + i * 2)}px`);
+    dropMachine.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 900);
+  }
+}
+
+function renderAchievements(){
+  achievementGrid.innerHTML = achievementSeason.map((badge) => `
+    <article class="achievement-card">
+      <div class="achievement-icon">${badge.icon}</div>
+      <h3>${badge.title}</h3>
+      <p>${badge.description}</p>
+      <small>${badge.date}</small>
+    </article>
+  `).join('');
+}
+
+newDropButton.addEventListener('click', showDrop);
+renderAchievements();
+showDrop();
+</script>
+</body>
+</html>
