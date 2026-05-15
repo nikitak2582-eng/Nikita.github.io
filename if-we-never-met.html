@@ -28,14 +28,14 @@
 
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth; background:#ffb7a5;}
+html{scroll-behavior:smooth; background:#ff91bd;}
 body{
   margin:0;
   min-height:100vh;
   overflow-x:hidden;
   color:var(--ink);
   font-family:'Fredoka', 'Segoe UI', system-ui, sans-serif;
-  background:linear-gradient(180deg, #ffb7a5 0%, #ff8fab 38%, #7a6c9d 72%, #252746 100%);
+  background:linear-gradient(180deg, #ffb7a5 0%, #ff9fc1 9%, #ff7fb2 36%, #8b70b0 72%, #252746 100%);
 }
 
 body::before,
@@ -50,8 +50,9 @@ body::before{
   z-index:-4;
   background:
     radial-gradient(circle at 12% 12%, rgba(255,255,255,.46), transparent 13%),
-    radial-gradient(circle at 78% 18%, rgba(255,209,220,.38), transparent 17%),
-    radial-gradient(circle at 68% 76%, rgba(122,108,157,.34), transparent 20%);
+    radial-gradient(circle at 76% 16%, rgba(255,159,193,.42), transparent 17%),
+    radial-gradient(circle at 36% 34%, rgba(255,127,178,.24), transparent 22%),
+    radial-gradient(circle at 68% 76%, rgba(139,112,176,.34), transparent 20%);
 }
 
 body::after{
@@ -70,7 +71,7 @@ h1,h2,h3,p{margin-top:0;}
   position:fixed;
   inset:0;
   z-index:-5;
-  background:linear-gradient(to bottom, #ffb7a5, #ff8fab 42%, #7a6c9d 72%, #3a3d5c);
+  background:linear-gradient(to bottom, #ffb7a5 0%, #ff9fc1 9%, #ff7fb2 40%, #8b70b0 72%, #3a3d5c 100%);
 }
 
 .moon{
@@ -535,9 +536,42 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 
 .love-drop-box{
   display:grid;
-  grid-template-columns:minmax(280px, .9fr) minmax(0, 1.1fr);
+  grid-template-columns:minmax(280px, .92fr) minmax(320px, 1.08fr);
   gap:24px;
   align-items:stretch;
+}
+
+.love-drop-side-panel{
+  display:grid;
+  gap:18px;
+  padding:24px;
+  border-radius:34px;
+  color:var(--card-ink);
+  background:linear-gradient(145deg, rgba(255,250,252,.9), rgba(255,209,220,.72));
+  border:1px solid rgba(255,255,255,.72);
+  box-shadow:0 24px 54px rgba(39,28,67,.18), inset 0 1px 0 rgba(255,255,255,.4);
+}
+
+.love-drop-side-copy{
+  padding:18px 20px;
+  border-radius:24px;
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.72);
+}
+
+.love-drop-side-copy h3{
+  margin-bottom:8px;
+  color:#dd527b;
+  font-family:'Space Grotesk', sans-serif;
+  font-size:1.45rem;
+  letter-spacing:-.03em;
+}
+
+.love-drop-side-copy p{
+  margin:0;
+  color:#5d4868;
+  line-height:1.6;
+  font-weight:750;
 }
 
 .love-drop-card{
@@ -844,10 +878,6 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
       </div>
       <aside class="portal-card" aria-label="Polaroid frames for the tower picture">
         <div class="tower-scene">
-          <div class="polaroid-description">
-            <strong>polaroid space</strong>
-            <p>A soft little photo corner with room for memories, captions, and the feeling without crowding the frame.</p>
-          </div>
           <div class="tower-polaroid one">
             <div class="tower-photo-gradient">
               <span>add your tower picture here</span>
@@ -876,11 +906,11 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
     <section class="section-panel" aria-labelledby="timeline-title">
       <div class="section-heading">
         <div>
-          <h2 id="timeline-title">The Almost-Timeline</h2>
-          <p>Six tiny pop-up scenes from a reality that simply did not pass quality control.</p>
-          <div class="section-extra-charm"><span>💫</span> almost-time quality stamp</div>
+          <h2 id="timeline-title">Almost-Time Blooper Reel ✦</h2>
+          <p>Six tiny pop-up scenes from the universe that tried to skip us and immediately failed the vibe check.</p>
+          <div class="section-extra-charm"><span>💫</span> rejected timeline stamp</div>
         </div>
-        <div class="section-kicker"><span>🧃</span> cute audit mode</div>
+        <div class="section-kicker"><span>🎬</span> almost-time archive</div>
       </div>
       <div class="timeline-grid">
         <article class="reality-card" data-step="01" style="--tilt:-2deg; --delay:.02s;">
@@ -928,19 +958,25 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
             <button class="love-drop-button" type="button" id="loveDropButton">tap for a love drop ✦</button>
           </div>
         </figure>
-        <div class="love-drop-list" aria-label="Love drop ideas">
-          <article class="love-drop-item" data-emoji="🌷">
-            <h3>For no reason</h3>
-            <p>You get a tiny note just because existing as you is already enough of an event.</p>
-          </article>
-          <article class="love-drop-item" data-emoji="🫶">
-            <h3>For bad days</h3>
-            <p>A small reminder that you are loved loudly here, even when the world feels too loud outside.</p>
-          </article>
-          <article class="love-drop-item" data-emoji="✨">
-            <h3>For random smiles</h3>
-            <p>Little compliments, inside jokes, and cute one-liners can live here without making the page feel crowded.</p>
-          </article>
+        <div class="love-drop-side-panel" aria-label="Love drop text and cards">
+          <div class="love-drop-side-copy">
+            <h3>tiny cards live here now</h3>
+            <p>The changing love note stays in its own soft drop box, while the extra text and mini love cards sit beside it in this matching pink panel.</p>
+          </div>
+          <div class="love-drop-list" aria-label="Love drop ideas">
+            <article class="love-drop-item" data-emoji="🌷">
+              <h3>For no reason</h3>
+              <p>You get a tiny note just because existing as you is already enough of an event.</p>
+            </article>
+            <article class="love-drop-item" data-emoji="🫶">
+              <h3>For bad days</h3>
+              <p>A small reminder that you are loved loudly here, even when the world feels too loud outside.</p>
+            </article>
+            <article class="love-drop-item" data-emoji="✨">
+              <h3>For random smiles</h3>
+              <p>Little compliments, inside jokes, and cute one-liners can live here without making the page feel crowded.</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
