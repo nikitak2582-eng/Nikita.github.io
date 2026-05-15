@@ -277,28 +277,154 @@ h1 span{color:var(--mint);}
   line-height:1.55;
 }
 
+.cozy-timeline{
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255,196,163,.28), transparent 28%),
+    radial-gradient(circle at 88% 6%, rgba(255,143,199,.24), transparent 26%),
+    linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.075));
+}
+
+.cozy-timeline::before,
+.cozy-timeline::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+}
+
+.cozy-timeline::before{
+  inset:18px;
+  border-radius:28px;
+  border:1px dashed rgba(255,247,232,.28);
+}
+
+.cozy-timeline::after{
+  content:"🧸  ☕  🌙  🧦  ♡";
+  right:28px;
+  bottom:18px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,247,232,.16);
+  border:1px solid rgba(255,255,255,.18);
+  font-size:1rem;
+  letter-spacing:.18em;
+}
+
 .timeline-grid{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
-  gap:16px;
+  gap:18px;
+  position:relative;
+  z-index:1;
+}
+
+.cozy-garland{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:-4px 0 24px;
+  position:relative;
+  z-index:1;
+}
+
+.cozy-garland span{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 12px;
+  border-radius:999px;
+  color:#ffe9f4;
+  background:rgba(255,143,199,.17);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 10px 24px rgba(8,5,28,.14);
 }
 
 .reality-card{
-  min-height:210px;
-  padding:22px;
-  border-radius:28px;
-  background:rgba(255,247,232,.88);
+  min-height:230px;
+  padding:24px;
+  border-radius:30px;
+  background:
+    linear-gradient(150deg, rgba(255,255,255,.96), rgba(255,247,232,.9)),
+    radial-gradient(circle at 18% 12%, rgba(255,143,199,.22), transparent 30%);
   color:var(--ink);
-  box-shadow:0 18px 38px rgba(0,0,0,.16);
+  box-shadow:0 20px 42px rgba(0,0,0,.17), inset 0 1px 0 rgba(255,255,255,.86);
   transform:rotate(var(--tilt));
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.65);
+}
+
+.reality-card::before{
+  content:attr(data-icon);
+  position:absolute;
+  right:18px;
+  top:16px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  background:linear-gradient(135deg, #ffe0ef, #fff5df);
+  box-shadow:0 10px 18px rgba(112,61,184,.12);
+  font-size:1.25rem;
+}
+
+.reality-card::after{
+  content:"";
+  position:absolute;
+  left:-32px;
+  bottom:-32px;
+  width:112px;
+  height:112px;
+  border-radius:50%;
+  background:rgba(153,246,210,.22);
 }
 
 .reality-card:nth-child(2){margin-top:32px;}
 .reality-card h3{
+  max-width:calc(100% - 48px);
   color:#703db8;
   font-size:1.45rem;
 }
-.reality-card p{line-height:1.55; margin-bottom:0;}
+.reality-card > *{position:relative; z-index:1;}
+.reality-card p{line-height:1.58; margin-bottom:0;}
+
+.cozy-tag{
+  display:inline-block;
+  margin-top:18px;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(122,92,255,.1);
+  color:#7d4db0;
+  font-size:.86rem;
+  font-weight:700;
+}
+
+.cozy-note-strip{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:16px;
+  align-items:center;
+  margin-top:24px;
+  padding:16px 18px;
+  border-radius:24px;
+  background:rgba(255,247,232,.14);
+  border:1px solid rgba(255,255,255,.2);
+  color:#fff0d8;
+  position:relative;
+  z-index:1;
+}
+
+.cozy-note-strip p{margin:0; line-height:1.55;}
+
+.cozy-note-strip strong{color:#d9fff2;}
+
+.cozy-note-strip span{
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(153,246,210,.18);
+  color:#d9fff2;
+  white-space:nowrap;
+}
 
 .love-drop-wrap{
   display:grid;
@@ -463,10 +589,12 @@ h1 span{color:var(--mint);}
 @media (max-width:860px){
   .nav{align-items:flex-start; flex-direction:column;}
   .hero,
-  .love-drop-wrap{grid-template-columns:1fr;}
+  .love-drop-wrap,
+  .cozy-note-strip{grid-template-columns:1fr;}
   .timeline-grid{grid-template-columns:1fr;}
   .reality-card,
   .reality-card:nth-child(2){margin-top:0; transform:none;}
+  .cozy-note-strip span{white-space:normal;}
   .achievement-grid{grid-template-columns:repeat(2, minmax(0, 1fr));}
   .hero-copy{padding:32px 24px;}
   .section-panel{padding:24px;}
@@ -518,24 +646,37 @@ h1 span{color:var(--mint);}
       </aside>
     </section>
 
-    <section class="section-panel" aria-labelledby="timeline-title">
+    <section class="section-panel cozy-timeline" aria-labelledby="timeline-title">
       <div class="section-heading">
         <h2 id="timeline-title">The Almost-Timeline</h2>
-        <p>Genuine mine + fun his: three tiny scenes from a reality that simply did not pass quality control.</p>
+        <p>Genuine mine + fun his: three tiny scenes from the blanket-fort reality that failed the vibe check.</p>
+      </div>
+      <div class="cozy-garland" aria-label="Cozy alternate reality details">
+        <span>🕯️ low lights</span>
+        <span>🍪 emergency cookies</span>
+        <span>🧣 borrowed hoodie energy</span>
+        <span>💗 missing-you weather</span>
       </div>
       <div class="timeline-grid">
-        <article class="reality-card" style="--tilt:-2deg;">
+        <article class="reality-card" data-icon="🧸" style="--tilt:-2deg;">
           <h3>“You’d still be dumb…”</h3>
           <p>…but with nobody this perfect lovingly bullying you, hyping you, and making your days ten times softer.</p>
+          <span class="cozy-tag">blanket fort verdict: needs me</span>
         </article>
-        <article class="reality-card" style="--tilt:1.8deg;">
+        <article class="reality-card" data-icon="☕" style="--tilt:1.8deg;">
           <h3>“You won’t have…”</h3>
           <p>…the best person alive, which is honestly a tragic loss for that version of you. Very sad. Very preventable.</p>
+          <span class="cozy-tag">comfort level: unacceptable</span>
         </article>
-        <article class="reality-card" style="--tilt:-1deg;">
+        <article class="reality-card" data-icon="🌙" style="--tilt:-1deg;">
           <h3>“I would’ve never learned…”</h3>
           <p>…how naturally safe, silly, genuine, and fun love can feel when it has your exact smile attached to it.</p>
+          <span class="cozy-tag">soft ending: found you anyway</span>
         </article>
+      </div>
+      <div class="cozy-note-strip">
+        <p><strong>Universe memo:</strong> every almost-timeline gets tucked into a tiny scrapbook and politely ignored because this one has us.</p>
+        <span>approved by the cosy council ♡</span>
       </div>
     </section>
 
