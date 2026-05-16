@@ -169,9 +169,12 @@ body::before{
 
 .header-card{
   position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
   width:310px;
   min-height:170px;
-  padding:24px;
+  padding:24px 122px 24px 24px;
   background:
     linear-gradient(rgba(248,228,195,.85),rgba(226,192,150,.9)),
     var(--paper) center/cover;
@@ -188,9 +191,10 @@ body::before{
 }
 
 .header-card p{
-  position:absolute;
-  left:26px;
-  bottom:24px;
+  position:relative;
+  left:auto;
+  bottom:auto;
+  margin:0;
   font-family:'Special Elite',monospace;
   font-size:.78rem;
   line-height:1.5;

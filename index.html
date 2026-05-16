@@ -423,6 +423,8 @@ a {
 
 .feature-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   min-height: 230px;
   padding: 24px;
   overflow: hidden;
@@ -457,6 +459,7 @@ a {
   width: 54px;
   height: 54px;
   margin-bottom: 26px;
+  flex: 0 0 auto;
   border-radius: 18px;
   background: rgba(255,255,255,.22);
   font-size: 1.55rem;
@@ -471,6 +474,7 @@ a {
   margin: 10px 0 0;
   color: rgba(255,255,255,.76);
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .tiny-moments {
@@ -573,25 +577,35 @@ a {
   }
 
   .love-card {
-    min-height: 590px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: auto;
     border-radius: 30px;
+    overflow: visible;
+  }
+
+  .polaroid,
+  .polaroid.one,
+  .polaroid.two,
+  .note {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-width: 0;
+    transform: none;
   }
 
   .polaroid {
-    width: 68%;
+    padding-bottom: 24px;
   }
 
-  .polaroid.one {
-    left: 16px;
-  }
-
-  .polaroid.two {
-    right: 12px;
-    bottom: 160px;
+  .polaroid small {
+    line-height: 1.35;
   }
 
   .note {
-    width: calc(100% - 34px);
+    transform: none;
   }
 }
 </style>
