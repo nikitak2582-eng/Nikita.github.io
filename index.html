@@ -3,46 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ❤️</title>
+<title>Dhruv's Little Lobby ✦ Starport</title>
 
 <style>
 :root {
-  --curtain: #12020d;
-  --midnight: #090915;
-  --velvet: #3c062a;
-  --wine: #6b103d;
-  --gold: #ffd166;
-  --hot: #ff2f8f;
-  --rose: #ff7ab6;
-  --flash: #fff8dd;
-  --ink: #1c1020;
-  --paper: #fff7e8;
-  --muted: rgba(255, 247, 232, .75);
-  --panel: rgba(20, 8, 18, .72);
-  --stroke: rgba(255, 209, 102, .28);
-  --shadow: 0 28px 90px rgba(0, 0, 0, .45);
+  --void: #05070f;
+  --deep: #071526;
+  --blue: #4cc9f0;
+  --cyan: #80ffdb;
+  --lime: #d7ff5e;
+  --violet: #b388ff;
+  --amber: #ffcf5a;
+  --white: #f6fbff;
+  --muted: rgba(246, 251, 255, .72);
+  --glass: rgba(9, 24, 43, .72);
+  --glass-bright: rgba(128, 255, 219, .12);
+  --line: rgba(128, 255, 219, .24);
+  --shadow: 0 28px 90px rgba(0, 0, 0, .46);
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  background: var(--midnight);
+  background: var(--void);
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  color: var(--paper);
+  color: var(--white);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at 16% 18%, rgba(255, 209, 102, .22), transparent 18rem),
-    radial-gradient(circle at 88% 12%, rgba(255, 47, 143, .22), transparent 22rem),
-    radial-gradient(circle at 48% 88%, rgba(255, 122, 182, .16), transparent 28rem),
-    linear-gradient(140deg, #090915 0%, #2a061f 42%, #5b0d35 70%, #12020d 100%);
+    radial-gradient(circle at 15% 18%, rgba(76, 201, 240, .22), transparent 24rem),
+    radial-gradient(circle at 82% 12%, rgba(179, 136, 255, .18), transparent 22rem),
+    radial-gradient(circle at 72% 82%, rgba(128, 255, 219, .12), transparent 26rem),
+    linear-gradient(145deg, #05070f 0%, #071526 48%, #10233a 100%);
 }
 
 body::before,
@@ -55,721 +52,586 @@ body::after {
 
 body::before {
   z-index: 0;
-  background:
-    linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 74px),
-    linear-gradient(rgba(255,209,102,.05) 0 1px, transparent 1px 74px),
-    repeating-linear-gradient(115deg, rgba(255,209,102,.05) 0 2px, transparent 2px 18px);
-  mask-image: radial-gradient(circle at 50% 24%, #000 0 40%, transparent 78%);
-  opacity: .8;
+  background-image:
+    radial-gradient(circle, rgba(246, 251, 255, .9) 0 1px, transparent 1.6px),
+    radial-gradient(circle, rgba(128, 255, 219, .65) 0 1px, transparent 1.5px),
+    linear-gradient(120deg, transparent 0 48%, rgba(128, 255, 219, .09) 49%, transparent 51%);
+  background-size: 96px 96px, 142px 142px, 100% 100%;
+  background-position: 0 0, 42px 28px, 0 0;
+  mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
+  opacity: .72;
 }
 
 body::after {
   z-index: 1;
   background:
-    radial-gradient(circle at 12% 10%, rgba(255,255,255,.85), transparent 3px),
-    radial-gradient(circle at 70% 18%, rgba(255,255,255,.65), transparent 2px),
-    radial-gradient(circle at 84% 58%, rgba(255,209,102,.8), transparent 2px),
-    radial-gradient(circle at 28% 82%, rgba(255,255,255,.6), transparent 2px),
-    linear-gradient(90deg, rgba(255,255,255,.05), transparent 15%, transparent 85%, rgba(255,255,255,.04));
-  opacity: .5;
-  mix-blend-mode: screen;
+    linear-gradient(rgba(128, 255, 219, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(76, 201, 240, .045) 1px, transparent 1px);
+  background-size: 58px 58px;
+  mask-image: radial-gradient(circle at 48% 36%, #000 0 34%, transparent 70%);
+  opacity: .58;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+a { color: inherit; text-decoration: none; }
 
-.spotlight {
+.orbit {
   position: fixed;
   z-index: 1;
+  border: 1px solid rgba(128, 255, 219, .14);
+  border-radius: 50%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 22px rgba(76, 201, 240, .15));
+}
+
+.orbit.one {
+  width: 48vw;
+  aspect-ratio: 1;
+  left: -18vw;
+  top: 18vh;
+}
+
+.orbit.two {
+  width: 62vw;
+  aspect-ratio: 1;
+  right: -25vw;
   top: -18vh;
-  width: 42vw;
-  height: 118vh;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255,248,221,.34), rgba(255,209,102,.10) 46%, transparent 78%);
-  filter: blur(18px);
-  opacity: .55;
-  transform-origin: top center;
-  mix-blend-mode: screen;
+  border-color: rgba(179, 136, 255, .16);
 }
 
-.spotlight.left {
-  left: -10vw;
-  transform: rotate(-22deg);
-}
-
-.spotlight.right {
-  right: -12vw;
-  transform: rotate(24deg);
-}
-
-.flash-bulbs {
-  position: fixed;
-  inset: 18px;
-  z-index: 2;
-  pointer-events: none;
-  border: 1px solid rgba(255,209,102,.15);
-  border-radius: 38px;
-  box-shadow:
-    inset 0 0 0 10px rgba(255,255,255,.018),
-    0 0 44px rgba(255,209,102,.12);
-}
-
-.flash-bulbs::before,
-.flash-bulbs::after {
-  content: "";
-  position: absolute;
-  inset: 18px auto 18px 18px;
-  width: 8px;
-  border-radius: 999px;
-  background: repeating-linear-gradient(to bottom, var(--flash) 0 10px, transparent 10px 45px);
-  filter: drop-shadow(0 0 14px rgba(255,248,221,.86));
-  opacity: .7;
-}
-
-.flash-bulbs::after {
-  right: 18px;
-  left: auto;
+.orbit.three {
+  width: 34vw;
+  aspect-ratio: 1;
+  right: 8vw;
+  bottom: -18vw;
+  border-color: rgba(255, 207, 90, .14);
 }
 
 .page {
   position: relative;
   z-index: 3;
-  width: min(1220px, calc(100% - 32px));
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 24px 0 76px;
+  padding: 22px 0 72px;
 }
 
-.top-banner {
-  display: grid;
-  grid-template-columns: auto 1fr;
+.navbar {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 18px;
-  padding: 18px clamp(18px, 3vw, 30px);
-  border: 1px solid var(--stroke);
-  border-radius: 30px;
-  background:
-    linear-gradient(120deg, rgba(255,209,102,.17), rgba(255,47,143,.14)),
-    rgba(15, 5, 18, .72);
-  box-shadow: var(--shadow), inset 0 0 0 1px rgba(255,255,255,.06);
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(9, 24, 43, .9), rgba(7, 21, 38, .54));
+  box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.08);
   backdrop-filter: blur(20px);
 }
 
-.brand {
+.logo {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  width: max-content;
+  min-width: max-content;
   font-weight: 950;
   letter-spacing: .2px;
 }
 
-.brand-mark {
+.logo-badge {
   display: grid;
   place-items: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 50% 50% 46% 46%;
-  color: var(--ink);
-  background: radial-gradient(circle at 32% 25%, white, var(--gold) 42%, #f58b2c 100%);
-  box-shadow: 0 0 28px rgba(255,209,102,.62), inset 0 -9px 18px rgba(107,16,61,.18);
-  transform: rotate(-8deg);
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(128, 255, 219, .36);
+  border-radius: 16px;
+  color: var(--void);
+  background: conic-gradient(from 210deg, var(--cyan), var(--blue), var(--violet), var(--lime), var(--cyan));
+  box-shadow: 0 0 34px rgba(128, 255, 219, .32);
 }
 
-.banner-signal {
-  justify-self: end;
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.nav-pills a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid rgba(246, 251, 255, .12);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: .84rem;
+  font-weight: 800;
+  background: rgba(255,255,255,.045);
+  transition: transform .22s ease, color .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.nav-pills a:hover,
+.nav-pills a.active {
+  transform: translateY(-2px);
+  color: var(--white);
+  border-color: rgba(128, 255, 219, .45);
+  background: rgba(128, 255, 219, .11);
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(330px, 1.1fr);
+  gap: clamp(26px, 5vw, 74px);
+  align-items: center;
+  min-height: calc(100vh - 106px);
+  padding: clamp(48px, 7vw, 92px) 0 42px;
+}
+
+.copy-stack {
+  position: relative;
+}
+
+.signal-tag {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--muted);
-  font-size: .78rem;
-  font-weight: 900;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-}
-
-.banner-signal::before {
-  content: "";
-  width: 12px;
-  height: 12px;
+  margin-bottom: 22px;
+  padding: 10px 14px;
+  border: 1px solid rgba(128, 255, 219, .36);
   border-radius: 999px;
-  background: var(--hot);
-  box-shadow: 0 0 20px var(--hot), 0 0 42px var(--gold);
+  color: var(--cyan);
+  font-size: .76rem;
+  font-weight: 950;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: rgba(128, 255, 219, .075);
 }
 
-.room-dock {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-  margin: 16px 0 0;
-  padding: 12px;
-  border: 1px solid rgba(255,209,102,.18);
-  border-radius: 28px;
-  background: rgba(255, 247, 232, .065);
-  backdrop-filter: blur(16px);
+.signal-tag::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 18px var(--lime), 0 0 36px rgba(128, 255, 219, .7);
 }
 
-.room-chip {
-  position: relative;
+h1 {
+  max-width: 860px;
+  margin: 0;
+  font-size: clamp(3.4rem, 8vw, 7.8rem);
+  line-height: .86;
+  letter-spacing: -5px;
+}
+
+h1 span {
+  display: block;
+  color: transparent;
+  background: linear-gradient(90deg, var(--cyan), var(--blue) 36%, var(--violet) 72%, var(--amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 22px rgba(76, 201, 240, .18));
+}
+
+.lede {
+  max-width: 650px;
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: clamp(1.02rem, 2vw, 1.22rem);
+  line-height: 1.8;
+}
+
+.action-row {
   display: flex;
-  min-height: 92px;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 12px;
-  overflow: hidden;
-  padding: 15px;
-  border: 1px solid rgba(255,255,255,.13);
-  border-radius: 21px;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035)),
-    rgba(20, 8, 18, .55);
-  transition: transform .25s ease, border-color .25s ease, background .25s ease;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 32px;
 }
 
-.room-chip::after {
+.action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: 0 22px;
+  border: 1px solid rgba(128, 255, 219, .36);
+  border-radius: 15px;
+  color: #031018;
+  font-weight: 950;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  box-shadow: 0 18px 44px rgba(76, 201, 240, .2);
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+
+.action.secondary {
+  color: var(--white);
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(14px);
+}
+
+.action:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 54px rgba(128, 255, 219, .22);
+}
+
+.command-deck {
+  position: relative;
+  display: grid;
+  min-height: 650px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr .78fr .9fr;
+  gap: 16px;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(128, 255, 219, .22);
+  border-radius: 30px;
+  background: linear-gradient(145deg, rgba(255,255,255,.105), rgba(255,255,255,.035)), var(--glass);
+  box-shadow: 0 20px 64px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(18px);
+}
+
+.panel::before {
   content: "";
   position: absolute;
-  inset: auto -28px -42px auto;
-  width: 96px;
-  height: 96px;
-  border-radius: 34px;
-  background: var(--accent, var(--gold));
-  opacity: .2;
-  transform: rotate(28deg);
+  inset: 0;
+  background: radial-gradient(circle at var(--x, 26%) var(--y, 20%), rgba(128, 255, 219, .22), transparent 28%);
+  opacity: .9;
 }
 
-.room-chip:hover,
-.room-chip.active {
-  transform: translateY(-4px) rotate(-.5deg);
-  border-color: color-mix(in srgb, var(--accent, var(--gold)) 70%, white 20%);
-  background: linear-gradient(145deg, rgba(255,255,255,.18), rgba(255,255,255,.055));
-}
-
-.room-chip strong,
-.room-chip span {
+.panel > * {
   position: relative;
   z-index: 1;
 }
 
-.room-chip strong {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: .98rem;
+.panel.status {
+  grid-column: 1 / 3;
+  min-height: 188px;
+  padding: 24px;
 }
 
-.room-chip span {
-  color: var(--muted);
-  font-size: .78rem;
-  font-weight: 750;
-  line-height: 1.35;
-}
-
-.hero {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, .92fr) minmax(330px, 1.08fr);
-  gap: clamp(28px, 5vw, 78px);
-  align-items: center;
-  padding: clamp(48px, 7vw, 96px) 0 38px;
-}
-
-.hero::before {
-  content: "Bollywood Premiere · Hollywood Flash · Private Screening";
-  position: absolute;
-  left: 50%;
-  top: 26px;
-  z-index: -1;
-  width: 100vw;
-  padding: 12px 0;
-  color: rgba(18, 2, 13, .78);
-  font-size: .8rem;
-  font-weight: 1000;
-  letter-spacing: 3px;
-  text-align: center;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, transparent, rgba(255,209,102,.86), rgba(255,122,182,.82), transparent);
-  transform: translateX(-50%) rotate(-2deg);
-  box-shadow: 0 18px 40px rgba(0,0,0,.16);
-}
-
-.kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding: 10px 15px;
-  border: 1px solid rgba(255,209,102,.42);
-  border-radius: 999px;
-  background: rgba(255, 209, 102, .12);
-  color: #fff3bf;
-  font-size: .78rem;
-  font-weight: 950;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.hero h1 {
-  max-width: 840px;
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.7rem, 10vw, 9rem);
-  line-height: .82;
-  letter-spacing: -5px;
-  text-shadow: 0 8px 34px rgba(0,0,0,.48);
-}
-
-.hero h1 span {
-  display: block;
-  color: transparent;
-  background: linear-gradient(90deg, var(--gold), var(--paper) 32%, var(--rose) 68%, var(--hot));
-  -webkit-background-clip: text;
-  background-clip: text;
-  filter: drop-shadow(0 0 18px rgba(255,209,102,.24));
-}
-
-.hero p {
-  max-width: 650px;
-  margin: 24px 0 0;
-  color: var(--muted);
-  font-size: clamp(1.02rem, 2vw, 1.24rem);
-  line-height: 1.82;
-}
-
-.cta-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 32px;
-}
-
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 56px;
-  padding: 0 23px;
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 999px;
-  color: var(--ink);
-  font-weight: 950;
-  background: linear-gradient(135deg, var(--gold), #ff9f1c 46%, var(--rose));
-  box-shadow: 0 18px 46px rgba(255,47,143,.18), 0 0 36px rgba(255,209,102,.18);
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.cta.secondary {
-  color: var(--paper);
-  background: rgba(255,255,255,.08);
-  backdrop-filter: blur(12px);
-}
-
-.cta:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 58px rgba(255,47,143,.26), 0 0 42px rgba(255,209,102,.24);
-}
-
-.photo-stage {
-  position: relative;
-  min-height: 640px;
-  overflow: hidden;
-  border: 1px solid rgba(255,209,102,.28);
-  border-radius: 42px;
-  background:
-    radial-gradient(circle at 50% 44%, rgba(255,248,221,.2), transparent 24%),
-    radial-gradient(circle at 82% 18%, rgba(255,47,143,.16), transparent 24%),
-    linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035)),
-    rgba(18, 2, 13, .74);
-  box-shadow: var(--shadow), inset 0 0 70px rgba(255,209,102,.05);
-  backdrop-filter: blur(20px);
-}
-
-.photo-stage::before {
+.panel.status::after {
   content: "";
   position: absolute;
-  inset: 24px;
-  border: 1px dashed rgba(255,255,255,.18);
-  border-radius: 30px;
-}
-
-.photo-stage::after {
-  content: "FLASH!";
-  position: absolute;
   right: 28px;
-  top: 28px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  color: var(--ink);
-  font-size: .72rem;
-  font-weight: 1000;
-  letter-spacing: 2px;
-  background: var(--flash);
-  box-shadow: 0 0 28px rgba(255,248,221,.75);
-  transform: rotate(8deg);
+  bottom: -54px;
+  width: 180px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(128, 255, 219, .28);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 30px rgba(76, 201, 240, .05), inset 0 0 0 58px rgba(179, 136, 255, .045);
 }
 
-.photo-strip {
-  position: absolute;
-  width: 170px;
-  padding: 12px 12px 58px;
-  border-radius: 12px;
-  background: linear-gradient(#fffaf0, #f4dfbf);
-  box-shadow: 0 24px 54px rgba(0,0,0,.44);
-}
+.panel h2,
+.panel h3,
+.panel p { margin-top: 0; }
 
-.photo-strip.one {
-  left: 52px;
-  top: 46px;
-  transform: rotate(-14deg);
-}
-
-.photo-strip.two {
-  right: 58px;
-  top: 74px;
-  transform: rotate(13deg);
-}
-
-.photo-strip.three {
-  left: 50%;
-  bottom: -30px;
-  transform: translateX(-50%) rotate(-3deg);
-}
-
-.frame {
-  display: grid;
-  place-items: end start;
-  height: 120px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  padding: 10px;
-  border-radius: 6px;
-  color: white;
-  font-size: 1.65rem;
-  font-weight: 1000;
-  line-height: 1;
-  background:
-    radial-gradient(circle at 28% 20%, rgba(255,255,255,.72), transparent 16%),
-    linear-gradient(135deg, var(--tone-a), var(--tone-b));
-  text-shadow: 0 3px 12px rgba(0,0,0,.48);
-}
-
-.frame:nth-child(2) {
-  --tone-a: #ff2f8f;
-  --tone-b: #321049;
-}
-
-.frame:nth-child(3) {
-  --tone-a: #ffd166;
-  --tone-b: #8a103d;
-}
-
-.frame:nth-child(4) {
-  --tone-a: #312060;
-  --tone-b: #ff7ab6;
-}
-
-.marquee-card {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(410px, calc(100% - 64px));
-  padding: 26px;
-  border: 1px solid rgba(255,209,102,.34);
-  border-radius: 30px;
-  background:
-    linear-gradient(145deg, rgba(255,209,102,.16), rgba(255,47,143,.12)),
-    rgba(14, 4, 18, .78);
-  box-shadow: 0 24px 64px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.06);
-  transform: translate(-50%, -50%) rotate(-1.5deg);
-  backdrop-filter: blur(15px);
-}
-
-.marquee-card strong {
-  display: block;
-  color: var(--gold);
-  margin-bottom: 10px;
-  font-size: .82rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.marquee-card h2 {
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: .95;
-}
-
-.marquee-card p {
-  margin: 16px 0 0;
-  color: var(--muted);
-  font-size: .98rem;
-  line-height: 1.65;
-}
-
-.tape {
-  position: absolute;
-  width: 88px;
-  height: 28px;
-  border-radius: 4px;
-  background: rgba(255, 248, 221, .5);
-  box-shadow: 0 8px 18px rgba(0,0,0,.18);
-}
-
-.tape.one {
-  left: 130px;
-  top: 38px;
-  transform: rotate(16deg);
-}
-
-.tape.two {
-  right: 126px;
-  top: 72px;
-  transform: rotate(-18deg);
-}
-
-.detail-strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 22px;
-}
-
-.detail-card {
-  min-height: 162px;
-  padding: 24px;
-  border: 1px solid rgba(255,209,102,.18);
-  border-radius: 28px;
-  background:
-    linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.035)),
-    rgba(20, 8, 18, .55);
-  backdrop-filter: blur(14px);
-}
-
-.detail-card span {
+.panel-kicker {
   display: inline-flex;
-  margin-bottom: 14px;
-  color: var(--gold);
+  margin-bottom: 12px;
+  color: var(--lime);
+  font-size: .76rem;
   font-weight: 950;
-  letter-spacing: 1.4px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-.detail-card p {
-  margin: 0;
+.panel.status h2 {
+  max-width: 540px;
+  margin-bottom: 14px;
+  font-size: clamp(1.9rem, 4vw, 3.25rem);
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.panel p {
   color: var(--muted);
   line-height: 1.65;
+}
+
+.panel.map {
+  display: grid;
+  place-items: center;
+  min-height: 210px;
+  --x: 70%;
+  --y: 22%;
+}
+
+.radar {
+  position: relative;
+  width: min(250px, 78%);
+  aspect-ratio: 1;
+  border: 1px solid rgba(128, 255, 219, .32);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, transparent 0 26%, rgba(128, 255, 219, .08) 27% 28%, transparent 29% 52%, rgba(128, 255, 219, .08) 53% 54%, transparent 55%),
+    conic-gradient(from 20deg, rgba(128, 255, 219, .48), transparent 27%);
+  box-shadow: 0 0 44px rgba(128, 255, 219, .14);
+}
+
+.radar span {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 18px var(--lime);
+}
+
+.radar span:nth-child(1) { left: 30%; top: 22%; }
+.radar span:nth-child(2) { right: 24%; top: 44%; background: var(--blue); box-shadow: 0 0 18px var(--blue); }
+.radar span:nth-child(3) { left: 52%; bottom: 18%; background: var(--violet); box-shadow: 0 0 18px var(--violet); }
+
+.panel.manifest {
+  padding: 22px;
+  --x: 18%;
+  --y: 80%;
+}
+
+.manifest-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.manifest-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,.09);
+  color: var(--muted);
+  font-weight: 760;
+}
+
+.manifest-list li:last-child { border-bottom: 0; }
+.manifest-list strong { color: var(--white); }
+
+.panel.transmission {
+  grid-column: 1 / 3;
+  display: grid;
+  grid-template-columns: .82fr 1.18fr;
+  gap: 18px;
+  align-items: center;
+  padding: 22px;
+  --x: 82%;
+  --y: 60%;
+}
+
+.waveform {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 122px;
+}
+
+.waveform i {
+  display: block;
+  width: 9px;
+  height: var(--h, 42px);
+  border-radius: 999px;
+  background: linear-gradient(to top, var(--blue), var(--cyan), var(--lime));
+  box-shadow: 0 0 18px rgba(128, 255, 219, .2);
+}
+
+.waveform i:nth-child(2) { --h: 74px; }
+.waveform i:nth-child(3) { --h: 104px; }
+.waveform i:nth-child(4) { --h: 58px; }
+.waveform i:nth-child(5) { --h: 92px; }
+.waveform i:nth-child(6) { --h: 44px; }
+.waveform i:nth-child(7) { --h: 112px; }
+.waveform i:nth-child(8) { --h: 70px; }
+.waveform i:nth-child(9) { --h: 96px; }
+
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.route-card {
+  min-height: 178px;
+  padding: 20px;
+  border: 1px solid rgba(128, 255, 219, .2);
+  border-radius: 26px;
+  background: linear-gradient(160deg, rgba(128, 255, 219, .11), rgba(255,255,255,.035));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  transition: transform .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.route-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(128, 255, 219, .44);
+  background: linear-gradient(160deg, rgba(128, 255, 219, .17), rgba(255,255,255,.055));
+}
+
+.route-card b {
+  display: block;
+  margin-bottom: 12px;
+  color: var(--cyan);
+  font-size: .78rem;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+}
+
+.route-card strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.route-card span {
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.5;
 }
 
 .footer-note {
-  margin: 46px auto 0;
-  max-width: 900px;
-  padding: 25px;
-  border: 1px solid rgba(255,209,102,.28);
-  border-radius: 30px;
+  margin: 18px auto 0;
+  padding: 24px;
+  border: 1px solid rgba(128, 255, 219, .2);
+  border-radius: 28px;
+  color: var(--muted);
   text-align: center;
-  color: rgba(255,247,232,.84);
-  background: linear-gradient(120deg, rgba(255,209,102,.12), rgba(255,47,143,.10), rgba(255,122,182,.10));
+  background: rgba(9, 24, 43, .58);
   backdrop-filter: blur(16px);
 }
 
 .footer-note p {
   margin: 0;
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 @media (max-width: 980px) {
-  .top-banner {
-    grid-template-columns: 1fr;
-  }
-
-  .banner-signal {
-    justify-self: start;
-  }
-
-  .room-dock {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .photo-stage {
-    min-height: 620px;
-  }
-
-  .detail-strip {
-    grid-template-columns: 1fr;
-  }
+  .navbar { align-items: flex-start; flex-direction: column; }
+  .nav-pills { justify-content: flex-start; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .command-deck { min-height: 590px; }
+  .route-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 640px) {
-  .page {
-    width: min(100% - 22px, 1220px);
-    padding-top: 12px;
-  }
-
-  .flash-bulbs {
-    inset: 8px;
-    border-radius: 24px;
-  }
-
-  .room-dock {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    padding-top: 54px;
-  }
-
-  .hero h1 {
-    letter-spacing: -3px;
-  }
-
-  .photo-stage {
-    min-height: 760px;
-    border-radius: 30px;
-  }
-
-  .photo-strip {
-    width: 142px;
-  }
-
-  .photo-strip.one {
-    left: 18px;
-    top: 42px;
-  }
-
-  .photo-strip.two {
-    right: 14px;
-    top: 188px;
-  }
-
-  .photo-strip.three {
-    bottom: 16px;
-  }
-
-  .frame {
-    height: 96px;
-  }
-
-  .marquee-card {
-    top: 48%;
-    width: calc(100% - 36px);
-  }
-
-  .tape {
-    display: none;
-  }
+  .page { width: min(100% - 22px, 1180px); padding-top: 12px; }
+  .navbar { border-radius: 20px; }
+  .nav-pills a { width: 100%; justify-content: center; }
+  h1 { letter-spacing: -3px; }
+  .command-deck { grid-template-columns: 1fr; grid-template-rows: auto; min-height: 0; }
+  .panel.status,
+  .panel.transmission { grid-column: auto; }
+  .panel.transmission { grid-template-columns: 1fr; }
+  .route-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 
 <body>
-<div class="spotlight left" aria-hidden="true"></div>
-<div class="spotlight right" aria-hidden="true"></div>
-<div class="flash-bulbs" aria-hidden="true"></div>
+<div class="orbit one" aria-hidden="true"></div>
+<div class="orbit two" aria-hidden="true"></div>
+<div class="orbit three" aria-hidden="true"></div>
 
 <main class="page">
-  <header class="top-banner">
-    <a class="brand" href="index.html" aria-label="Dhruv's Little Lobby home">
-      <span class="brand-mark">★</span>
+  <header class="navbar">
+    <a class="logo" href="index.html" aria-label="Dhruv's Little Lobby home">
+      <span class="logo-badge">✦</span>
       <span>Dhruv's Little Lobby</span>
     </a>
-    <div class="banner-signal">premiere night online</div>
+    <nav class="nav-pills" aria-label="Main navigation">
+      <a class="active" href="index.html">Home Base</a>
+      <a href="dear-you.html">Letters</a>
+      <a href="if-found.html">Emergency Kit</a>
+      <a href="memory-vault.html">Archive</a>
+      <a href="if-we-never-met.html">Parallel Heart</a>
+    </nav>
   </header>
 
-  <nav class="room-dock" aria-label="Main navigation">
-    <a class="room-chip active" style="--accent:#ffd166" href="index.html">
-      <strong>⌂ Home</strong>
-      <span>The red-carpet entrance</span>
-    </a>
-    <a class="room-chip" style="--accent:#ff2f8f" href="dear-you.html">
-      <strong>💌 Dear You</strong>
-      <span>Letters under marquee lights</span>
-    </a>
-    <a class="room-chip" style="--accent:#ff7ab6" href="if-found.html">
-      <strong>🗝️ If Found</strong>
-      <span>A soft scene for hard days</span>
-    </a>
-    <a class="room-chip" style="--accent:#ff9f1c" href="memory-vault.html">
-      <strong>🍿 Memory Vault</strong>
-      <span>Favorite replays and bloopers</span>
-    </a>
-    <a class="room-chip" style="--accent:#b98cff" href="if-we-never-met.html">
-      <strong>🌙 Parallel Heart</strong>
-      <span>The alternate-universe cut</span>
-    </a>
-  </nav>
-
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-copy">
-      <div class="kicker">✦ private screening begins</div>
-      <h1 id="hero-title">A cinematic love story <span>caught in photobooth flashes.</span></h1>
-      <p>
-        Step into a Bollywood-meets-Hollywood premiere where glowing strips cross the scene,
-        flashbulbs sparkle at the edges, and every room opens like a secret after-credits moment made just for you.
+    <div class="copy-stack">
+      <div class="signal-tag">live coordinates locked</div>
+      <h1 id="hero-title">A tiny starport <span>for every version of us.</span></h1>
+      <p class="lede">
+        No red carpet, no photobooth strips, no dreamy sunset copycat layout. This home screen is now a glowing
+        mission-control hub with orbit rings, radar panels, route cards, and secret transmissions for each room.
       </p>
-      <div class="cta-row">
-        <a class="cta" href="dear-you.html">Open the first scene 💌</a>
-        <a class="cta secondary" href="memory-vault.html">Replay the memories 🍿</a>
+      <div class="action-row">
+        <a class="action" href="dear-you.html">Read the first transmission</a>
+        <a class="action secondary" href="memory-vault.html">Open the archive</a>
       </div>
     </div>
 
-    <aside class="photo-stage" aria-label="Decorative photobooth premiere collage">
-      <span class="tape one" aria-hidden="true"></span>
-      <span class="tape two" aria-hidden="true"></span>
-
-      <div class="photo-strip one" aria-hidden="true">
-        <div class="frame" style="--tone-a:#ff2f8f; --tone-b:#551246;">DANCE</div>
-        <div class="frame">SONG</div>
-        <div class="frame">CUT!</div>
-      </div>
-
-      <div class="photo-strip two" aria-hidden="true">
-        <div class="frame" style="--tone-a:#ffd166; --tone-b:#9b1d44;">STAR</div>
-        <div class="frame">KISS</div>
-        <div class="frame">ROLL</div>
-      </div>
-
-      <article class="marquee-card">
-        <strong>Tonight's intro</strong>
-        <h2>One lobby. Five scenes. Infinite drama.</h2>
+    <aside class="command-deck" aria-label="Decorative starport command dashboard">
+      <article class="panel status">
+        <span class="panel-kicker">station status</span>
+        <h2>Home Base is online, strange, and completely rebuilt.</h2>
         <p>
-          The home page is now its own movie set: warm velvet, gold bulbs, pink flash, intersecting
-          photo strips, and quick links waiting like tickets at the box office.
+          A fresh navigation system replaces the old movie-premiere mood with a futuristic console: cooler colors,
+          sharper geometry, layered glass panels, and a much more transformed first impression.
         </p>
       </article>
 
-      <div class="photo-strip three" aria-hidden="true">
-        <div class="frame" style="--tone-a:#321049; --tone-b:#ff7ab6;">US</div>
-        <div class="frame">LOVE</div>
-        <div class="frame">FIN</div>
+      <div class="panel map" aria-hidden="true">
+        <div class="radar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
+
+      <article class="panel manifest">
+        <span class="panel-kicker">manifest</span>
+        <ul class="manifest-list">
+          <li><strong>Rooms</strong><span>05 linked</span></li>
+          <li><strong>Theme</strong><span>starport</span></li>
+          <li><strong>Mood</strong><span>neon calm</span></li>
+          <li><strong>Old format</strong><span>ejected</span></li>
+        </ul>
+      </article>
+
+      <article class="panel transmission">
+        <div class="waveform" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div>
+          <span class="panel-kicker">incoming note</span>
+          <h3>Every link feels like a route on a private constellation map.</h3>
+          <p>
+            The page now opens like a control room instead of a parallel-heart scene: compact top nav, asymmetric dashboard,
+            radar art, and route cards below for fast jumping.
+          </p>
+        </div>
+      </article>
     </aside>
   </section>
 
-  <section class="detail-strip" aria-label="Home page details">
-    <article class="detail-card">
-      <span>01 · photobooth chaos</span>
-      <p>Layered film strips cross the hero like keepsakes taped over a premiere poster.</p>
-    </article>
-    <article class="detail-card">
-      <span>02 · flashlit intro</span>
-      <p>The page opens with spotlights, bulb borders, velvet gradients, and a dramatic marquee mood.</p>
-    </article>
-    <article class="detail-card">
-      <span>03 · room tickets</span>
-      <p>The navigation stays right under the banner so every chapter is easy to enter on desktop or phone.</p>
-    </article>
+  <section class="route-grid" aria-label="Room routes">
+    <a class="route-card" href="dear-you.html">
+      <b>Route 01</b>
+      <strong>Dear You</strong>
+      <span>Letters stored like quiet signal logs for soft days.</span>
+    </a>
+    <a class="route-card" href="if-found.html">
+      <b>Route 02</b>
+      <strong>If Found</strong>
+      <span>A calm emergency room to land in when things feel heavy.</span>
+    </a>
+    <a class="route-card" href="memory-vault.html">
+      <b>Route 03</b>
+      <strong>Memory Vault</strong>
+      <span>A bright archive of replayable moments, jokes, and keepsakes.</span>
+    </a>
+    <a class="route-card" href="if-we-never-met.html">
+      <b>Route 04</b>
+      <strong>Parallel Heart</strong>
+      <span>The alternate timeline stays separate instead of shaping this page.</span>
+    </a>
   </section>
 
   <section class="footer-note" aria-label="Closing note">
-    <p>Made by the best girlfriend ever — now styled like a private premiere full of photobooth strips, soft drama, and flashbulb magic. ♡</p>
+    <p>Made by the best girlfriend ever — newly transformed into a private little galaxy dashboard for Dhruv. ♡</p>
   </section>
 </main>
 </body>
