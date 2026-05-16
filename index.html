@@ -7,37 +7,37 @@
 
 <style>
 :root {
-  --cream: #fff8f1;
-  --blush: #ffd8e6;
-  --rose: #ff8db3;
-  --berry: #c94f7c;
-  --peach: #ffc7a8;
-  --lavender: #d9c6ff;
-  --cocoa: #593441;
-  --soft: rgba(89, 52, 65, .72);
-  --card: rgba(255, 255, 255, .72);
-  --line: rgba(255, 141, 179, .26);
-  --shadow: 0 24px 70px rgba(201, 79, 124, .18);
+  --black: #050505;
+  --charcoal: #121212;
+  --ink: #1b1b1b;
+  --paper: #f4f1ea;
+  --white: #ffffff;
+  --silver: #cfcfcf;
+  --smoke: rgba(255, 255, 255, .72);
+  --muted: rgba(255, 255, 255, .62);
+  --glass: rgba(10, 10, 10, .62);
+  --line: rgba(255, 255, 255, .18);
+  --shadow: 0 32px 90px rgba(0, 0, 0, .58);
 }
 
 * { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
-  background: var(--cream);
+  background: var(--black);
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
-  color: var(--cocoa);
+  color: var(--white);
   font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
   background:
-    radial-gradient(circle at 12% 16%, rgba(255, 216, 230, .95), transparent 24rem),
-    radial-gradient(circle at 86% 12%, rgba(217, 198, 255, .72), transparent 22rem),
-    radial-gradient(circle at 72% 82%, rgba(255, 199, 168, .72), transparent 24rem),
-    linear-gradient(145deg, #fff8f1 0%, #fff0f6 52%, #fff7fb 100%);
+    radial-gradient(circle at 16% 16%, rgba(255, 255, 255, .28), transparent 11rem),
+    radial-gradient(circle at 84% 18%, rgba(255, 255, 255, .22), transparent 13rem),
+    radial-gradient(circle at 48% 84%, rgba(255, 255, 255, .18), transparent 18rem),
+    linear-gradient(145deg, #020202 0%, #151515 46%, #050505 100%);
 }
 
 body::before,
@@ -50,49 +50,32 @@ body::after {
 
 body::before {
   z-index: 0;
-  background-image:
-    radial-gradient(circle, rgba(255, 141, 179, .28) 0 2px, transparent 2.6px),
-    radial-gradient(circle, rgba(255, 199, 168, .32) 0 1.5px, transparent 2.4px);
-  background-size: 86px 86px, 132px 132px;
-  background-position: 0 0, 42px 28px;
-  mask-image: linear-gradient(to bottom, #000 0 72%, transparent 100%);
-  opacity: .72;
+  background:
+    linear-gradient(108deg, transparent 0 38%, rgba(255,255,255,.58) 39%, transparent 43%),
+    linear-gradient(72deg, transparent 0 63%, rgba(255,255,255,.38) 64%, transparent 68%),
+    radial-gradient(circle at 17% 13%, rgba(255,255,255,.9), transparent 3.5rem),
+    radial-gradient(circle at 84% 13%, rgba(255,255,255,.72), transparent 4rem),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 7px);
+  mix-blend-mode: screen;
+  opacity: .58;
 }
 
 body::after {
   z-index: 1;
   background:
-    linear-gradient(115deg, transparent 0 44%, rgba(255, 255, 255, .55) 45% 46%, transparent 48%),
-    radial-gradient(circle at 42% 28%, rgba(255, 255, 255, .62), transparent 24rem);
-  opacity: .62;
+    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 4px),
+    radial-gradient(circle at center, transparent 0 54%, rgba(0,0,0,.72) 100%);
+  opacity: .84;
 }
 
 a { color: inherit; text-decoration: none; }
 
-.floating-heart {
-  position: fixed;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: clamp(56px, 8vw, 98px);
-  aspect-ratio: 1;
-  border-radius: 999px;
-  color: rgba(201, 79, 124, .55);
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
-  background: rgba(255, 255, 255, .38);
-  box-shadow: 0 18px 50px rgba(255, 141, 179, .16);
-  backdrop-filter: blur(12px);
-  pointer-events: none;
-}
-
-.floating-heart.one { left: 5vw; top: 22vh; transform: rotate(-12deg); }
-.floating-heart.two { right: 6vw; top: 13vh; transform: rotate(14deg); }
-.floating-heart.three { right: 14vw; bottom: 9vh; transform: rotate(-6deg); }
+.floating-heart { display: none; }
 
 .page {
   position: relative;
   z-index: 3;
-  width: min(1120px, calc(100% - 32px));
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   padding: 22px 0 72px;
 }
@@ -102,11 +85,12 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 14px;
+  padding: 12px;
   border: 1px solid var(--line);
-  border-radius: 30px;
-  background: rgba(255, 255, 255, .62);
-  box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.9);
+  border-radius: 999px;
+  color: var(--white);
+  background: rgba(0, 0, 0, .54);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, .38), inset 0 1px 0 rgba(255,255,255,.22);
   backdrop-filter: blur(20px);
 }
 
@@ -115,19 +99,21 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 12px;
   min-width: max-content;
-  font-weight: 900;
-  letter-spacing: .2px;
+  font-weight: 950;
+  letter-spacing: .12em;
+  text-transform: uppercase;
 }
 
 .logo-badge {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 18px;
-  color: white;
-  background: linear-gradient(135deg, var(--rose), var(--peach));
-  box-shadow: 0 12px 28px rgba(255, 141, 179, .34);
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 50%;
+  color: var(--black);
+  background: var(--white);
+  box-shadow: 0 0 26px rgba(255, 255, 255, .46);
 }
 
 .nav-pills {
@@ -141,208 +127,300 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex;
   align-items: center;
   min-height: 38px;
-  padding: 0 13px;
-  border: 1px solid rgba(255, 141, 179, .18);
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, .14);
   border-radius: 999px;
-  color: var(--soft);
-  font-size: .84rem;
-  font-weight: 800;
-  background: rgba(255,255,255,.48);
+  color: rgba(255,255,255,.68);
+  font-size: .78rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: rgba(255,255,255,.05);
   transition: transform .22s ease, color .22s ease, border-color .22s ease, background .22s ease;
 }
 
 .nav-pills a:hover,
 .nav-pills a.active {
   transform: translateY(-2px);
-  color: var(--berry);
-  border-color: rgba(255, 141, 179, .48);
-  background: rgba(255, 216, 230, .72);
+  color: var(--black);
+  border-color: rgba(255, 255, 255, .72);
+  background: rgba(255,255,255,.92);
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, .84fr);
-  gap: clamp(28px, 5vw, 70px);
-  align-items: center;
+  position: relative;
   min-height: calc(100vh - 106px);
-  padding: clamp(48px, 7vw, 92px) 0 42px;
+  display: grid;
+  place-items: center;
+  padding: clamp(42px, 6vw, 82px) 0 50px;
 }
+
+.photo-stage {
+  position: relative;
+  width: 100%;
+  min-height: clamp(720px, 78vw, 920px);
+  isolation: isolate;
+}
+
+.flash {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.92), rgba(255,255,255,.22) 34%, transparent 66%);
+  filter: blur(.2px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.flash.one { width: 220px; height: 220px; left: -42px; top: 28px; }
+.flash.two { width: 280px; height: 280px; right: -72px; top: 98px; opacity: .76; }
+.flash.three { width: 210px; height: 210px; left: 42%; bottom: 12px; opacity: .56; }
+
+.copy-stack {
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  top: 50%;
+  width: min(560px, calc(100% - 34px));
+  transform: translate(-50%, -50%) rotate(-1deg);
+  padding: clamp(28px, 5vw, 52px);
+  border: 1px solid rgba(255,255,255,.32);
+  border-radius: 6px;
+  color: var(--black);
+  text-align: center;
+  background: rgba(255, 255, 255, .88);
+  box-shadow: 0 30px 90px rgba(0,0,0,.54), inset 0 0 0 10px rgba(0,0,0,.035);
+}
+
+.copy-stack::before,
+.copy-stack::after {
+  content: "";
+  position: absolute;
+  width: 112px;
+  height: 34px;
+  background: rgba(255,255,255,.48);
+  border: 1px solid rgba(0,0,0,.12);
+  box-shadow: 0 8px 18px rgba(0,0,0,.18);
+}
+
+.copy-stack::before { left: -34px; top: 20px; transform: rotate(-18deg); }
+.copy-stack::after { right: -32px; bottom: 26px; transform: rotate(-14deg); }
 
 .love-note {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 22px;
-  padding: 10px 15px;
-  border: 1px solid rgba(255, 141, 179, .34);
+  margin-bottom: 20px;
+  padding: 8px 13px;
+  border: 1px solid rgba(0, 0, 0, .72);
   border-radius: 999px;
-  color: var(--berry);
-  font-size: .8rem;
-  font-weight: 900;
-  letter-spacing: 1.2px;
-  background: rgba(255, 255, 255, .55);
+  color: var(--black);
+  font-size: .73rem;
+  font-weight: 950;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  background: transparent;
 }
 
 .love-note::before {
-  content: "♡";
+  content: "✦";
   display: grid;
   place-items: center;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  color: white;
-  background: var(--rose);
-  box-shadow: 0 8px 20px rgba(255, 141, 179, .28);
+  color: var(--white);
+  background: var(--black);
 }
 
-h1 {
-  max-width: 820px;
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.2rem, 7.5vw, 7.2rem);
-  line-height: .92;
-  letter-spacing: -4px;
-}
-
-h1 span {
-  display: block;
-  color: transparent;
-  background: linear-gradient(90deg, var(--berry), var(--rose) 48%, #b489ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-}
+h1 { display: none; }
 
 .lede {
-  max-width: 650px;
-  margin: 24px 0 0;
-  color: var(--soft);
-  font-size: clamp(1.04rem, 2vw, 1.24rem);
-  line-height: 1.8;
+  max-width: 540px;
+  margin: 0 auto;
+  color: rgba(0, 0, 0, .78);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.16rem, 2.3vw, 1.55rem);
+  line-height: 1.72;
 }
 
 .action-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 13px;
-  margin-top: 32px;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
 }
 
 .action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 54px;
-  padding: 0 22px;
-  border: 1px solid rgba(255, 141, 179, .36);
+  min-height: 50px;
+  padding: 0 20px;
+  border: 1px solid var(--black);
   border-radius: 999px;
-  color: white;
+  color: var(--white);
+  font-size: .82rem;
   font-weight: 950;
-  background: linear-gradient(135deg, var(--rose), var(--berry));
-  box-shadow: 0 18px 38px rgba(255, 141, 179, .26);
-  transition: transform .22s ease, box-shadow .22s ease;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  background: var(--black);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .22);
+  transition: transform .22s ease, box-shadow .22s ease, background .22s ease, color .22s ease;
 }
 
 .action.secondary {
-  color: var(--berry);
-  background: rgba(255,255,255,.62);
-  backdrop-filter: blur(14px);
+  color: var(--black);
+  background: transparent;
 }
 
 .action:hover {
   transform: translateY(-4px);
-  box-shadow: 0 22px 48px rgba(255, 141, 179, .32);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .32);
 }
 
-.scrapbook {
-  position: relative;
-  min-height: 620px;
-}
-
-.polaroid {
+.film-strip {
   position: absolute;
-  width: min(310px, 74vw);
-  padding: 16px 16px 24px;
-  border: 1px solid rgba(255, 141, 179, .2);
-  border-radius: 26px;
-  background: rgba(255, 255, 255, .78);
+  z-index: 3;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 156px;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: linear-gradient(180deg, #0b0b0b, #000);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(16px);
 }
 
-.polaroid::before {
+.film-strip.vertical {
+  grid-auto-flow: row;
+  grid-auto-rows: 154px;
+  grid-auto-columns: auto;
+  width: 188px;
+}
+
+.film-strip::before,
+.film-strip::after {
+  content: "";
+  position: absolute;
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.8) 0 13px, transparent 13px 26px);
+  opacity: .88;
+}
+
+.film-strip:not(.vertical)::before,
+.film-strip:not(.vertical)::after {
+  left: 14px;
+  right: 14px;
+  height: 9px;
+}
+
+.film-strip:not(.vertical)::before { top: 4px; }
+.film-strip:not(.vertical)::after { bottom: 4px; }
+
+.film-strip.vertical::before,
+.film-strip.vertical::after {
+  top: 14px;
+  bottom: 14px;
+  width: 9px;
+  background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.8) 0 13px, transparent 13px 26px);
+}
+
+.film-strip.vertical::before { left: 4px; }
+.film-strip.vertical::after { right: 4px; }
+
+.film-strip.diagonal-one {
+  left: -120px;
+  top: 86px;
+  width: 760px;
+  transform: rotate(-16deg);
+}
+
+.film-strip.diagonal-two {
+  right: -136px;
+  top: 238px;
+  width: 720px;
+  transform: rotate(18deg);
+}
+
+.film-strip.diagonal-three {
+  left: 105px;
+  bottom: 104px;
+  width: 790px;
+  transform: rotate(8deg);
+}
+
+.film-strip.vertical-one {
+  right: 72px;
+  bottom: 26px;
+  transform: rotate(-8deg);
+}
+
+.frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 154px;
+  padding: 12px;
+  overflow: hidden;
+  border: 8px solid var(--paper);
+  color: rgba(255,255,255,.74);
+  text-align: center;
+  font-size: .72rem;
+  font-weight: 950;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255,255,255,.55), transparent 19%),
+    linear-gradient(135deg, #2c2c2c, #060606 62%, #777);
+  filter: grayscale(1) contrast(1.15);
+}
+
+.frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(0,0,0,.55);
+  background: linear-gradient(135deg, rgba(255,255,255,.18), transparent 38%, rgba(0,0,0,.28));
+  pointer-events: none;
+}
+
+.frame.alt { background: linear-gradient(135deg, #f7f7f7, #777 48%, #111); color: rgba(0,0,0,.68); }
+.frame.dark { background: radial-gradient(circle, #555, #070707 62%); }
+.frame.flashy { background: radial-gradient(circle at 50% 45%, #fff 0 12%, #aaa 13% 32%, #050505 66%); color: rgba(0,0,0,.68); }
+
+.polaroid-note {
+  position: absolute;
+  z-index: 6;
+  width: min(246px, 52vw);
+  padding: 12px 12px 24px;
+  color: var(--black);
+  background: var(--paper);
+  box-shadow: 0 24px 56px rgba(0,0,0,.5);
+}
+
+.polaroid-note::before {
   content: "";
   display: block;
-  height: 220px;
-  border-radius: 20px;
-  background: var(--photo, linear-gradient(135deg, var(--blush), var(--peach)));
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.42);
+  height: 180px;
+  margin-bottom: 14px;
+  background:
+    radial-gradient(circle at 48% 38%, rgba(255,255,255,.82), transparent 18%),
+    linear-gradient(135deg, #090909, #777 48%, #efefef);
+  filter: grayscale(1);
 }
 
-.polaroid p {
-  margin: 14px 4px 0;
-  color: var(--soft);
-  line-height: 1.55;
-  font-weight: 800;
+.polaroid-note p {
+  margin: 0;
+  color: rgba(0,0,0,.74);
+  font-weight: 900;
+  line-height: 1.45;
 }
 
-.polaroid.main {
-  right: 32px;
-  top: 22px;
-  transform: rotate(5deg);
-  --photo:
-    radial-gradient(circle at 28% 34%, rgba(255,255,255,.85) 0 12%, transparent 13%),
-    radial-gradient(circle at 68% 58%, rgba(255,255,255,.7) 0 10%, transparent 11%),
-    linear-gradient(135deg, #ffd8e6, #ffc7a8 58%, #d9c6ff);
-}
-
-.polaroid.small {
-  left: 8px;
-  top: 146px;
-  width: min(250px, 68vw);
-  transform: rotate(-8deg);
-  --photo:
-    radial-gradient(circle at 50% 46%, rgba(255, 141, 179, .34), transparent 24%),
-    linear-gradient(135deg, #fff0f6, #ffd8e6);
-}
-
-.polaroid.tiny {
-  right: 96px;
-  bottom: 34px;
-  width: min(235px, 64vw);
-  transform: rotate(-4deg);
-  --photo:
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,.78), transparent 23%),
-    linear-gradient(135deg, #ffe5cf, #ffd8e6);
-}
-
-.ribbon-card {
-  position: absolute;
-  left: 68px;
-  bottom: 112px;
-  width: min(310px, 76vw);
-  padding: 24px;
-  border: 1px solid rgba(255, 141, 179, .24);
-  border-radius: 28px;
-  background: rgba(255, 255, 255, .72);
-  box-shadow: 0 22px 54px rgba(201, 79, 124, .16);
-  backdrop-filter: blur(18px);
-}
-
-.ribbon-card h2,
-.ribbon-card p { margin-top: 0; }
-.ribbon-card h2 {
-  margin-bottom: 12px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 2rem;
-  color: var(--berry);
-}
-.ribbon-card p {
-  margin-bottom: 0;
-  color: var(--soft);
-  line-height: 1.65;
-}
+.polaroid-note.one { left: 28px; bottom: 36px; transform: rotate(10deg); }
+.polaroid-note.two { right: 8px; top: 18px; transform: rotate(-11deg); }
 
 .room-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
@@ -352,37 +430,42 @@ h1 span {
 .room-card {
   min-height: 178px;
   padding: 22px;
-  border: 1px solid rgba(255, 141, 179, .22);
-  border-radius: 30px;
-  background: rgba(255, 255, 255, .62);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.78), 0 16px 40px rgba(201, 79, 124, .1);
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, .54);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 16px 42px rgba(0, 0, 0, .32);
+  backdrop-filter: blur(14px);
   transition: transform .22s ease, border-color .22s ease, background .22s ease;
 }
 
 .room-card:hover {
   transform: translateY(-5px) rotate(-1deg);
-  border-color: rgba(255, 141, 179, .48);
-  background: rgba(255, 248, 251, .86);
+  border-color: rgba(255, 255, 255, .58);
+  background: rgba(255, 255, 255, .1);
 }
 
 .room-card b {
   display: inline-flex;
   margin-bottom: 14px;
   padding: 7px 10px;
+  border: 1px solid rgba(255,255,255,.28);
   border-radius: 999px;
-  color: var(--berry);
-  font-size: .78rem;
-  background: rgba(255, 216, 230, .72);
+  color: var(--black);
+  font-size: .72rem;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, .86);
 }
 
 .room-card strong {
   display: block;
   margin-bottom: 10px;
+  color: var(--white);
   font-size: 1.1rem;
 }
 
 .room-card span {
-  color: var(--soft);
+  color: var(--muted);
   font-size: .92rem;
   line-height: 1.55;
 }
@@ -390,11 +473,11 @@ h1 span {
 .footer-note {
   margin: 18px auto 0;
   padding: 24px;
-  border: 1px solid rgba(255, 141, 179, .22);
-  border-radius: 30px;
-  color: var(--soft);
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 8px;
+  color: var(--muted);
   text-align: center;
-  background: rgba(255, 255, 255, .62);
+  background: rgba(0, 0, 0, .54);
   backdrop-filter: blur(16px);
 }
 
@@ -404,13 +487,14 @@ h1 span {
 }
 
 @media (max-width: 980px) {
-  .navbar { align-items: flex-start; flex-direction: column; }
+  .navbar { align-items: flex-start; flex-direction: column; border-radius: 24px; }
   .nav-pills { justify-content: flex-start; }
-  .hero { grid-template-columns: 1fr; min-height: auto; }
-  .scrapbook { min-height: 720px; }
-  .polaroid.main { right: 8%; }
-  .polaroid.small { left: 4%; }
-  .ribbon-card { left: 10%; }
+  .photo-stage { min-height: 940px; }
+  .film-strip.diagonal-one { left: -190px; top: 92px; }
+  .film-strip.diagonal-two { right: -230px; top: 310px; }
+  .film-strip.diagonal-three { left: -120px; bottom: 120px; }
+  .film-strip.vertical-one { right: 0; bottom: 42px; }
+  .polaroid-note.two { right: 24px; top: 18px; }
   .room-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -418,18 +502,16 @@ h1 span {
   .page { width: min(100% - 22px, 1120px); padding-top: 12px; }
   .navbar { border-radius: 22px; }
   .nav-pills a { width: 100%; justify-content: center; }
-  h1 { letter-spacing: -3px; }
-  .scrapbook { min-height: auto; display: grid; gap: 16px; }
-  .polaroid,
-  .polaroid.main,
-  .polaroid.small,
-  .polaroid.tiny,
-  .ribbon-card {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    transform: none;
-  }
+  .photo-stage { min-height: 1180px; overflow: hidden; }
+  .copy-stack { top: 46%; padding: 28px 20px; }
+  .film-strip { grid-auto-columns: 132px; }
+  .film-strip.diagonal-one { left: -260px; top: 116px; }
+  .film-strip.diagonal-two { right: -340px; top: 386px; }
+  .film-strip.diagonal-three { left: -228px; bottom: 184px; }
+  .film-strip.vertical-one { right: -18px; bottom: 18px; }
+  .polaroid-note { width: min(210px, 64vw); }
+  .polaroid-note.one { left: 8px; bottom: 74px; }
+  .polaroid-note.two { right: 8px; top: 18px; }
   .room-grid { grid-template-columns: 1fr; }
 }
 </style>
@@ -444,7 +526,7 @@ h1 span {
   <header class="navbar">
     <a class="logo" href="index.html" aria-label="Dhruv's Little Lobby home">
       <span class="logo-badge">♡</span>
-      <span>Dhruv's Little Lobby</span>
+      <span>Dhruv's Lobby</span>
     </a>
     <nav class="nav-pills" aria-label="Main navigation">
       <a class="active" href="index.html">Home</a>
@@ -455,35 +537,59 @@ h1 span {
     </nav>
   </header>
 
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="copy-stack">
-      <div class="love-note">made with extra love</div>
-      <h1 id="hero-title">A soft little corner <span>made only for us.</span></h1>
-      <p class="lede">
-        You were right — this should feel warm, cute, personal, and loved. So the home page is back to soft colors,
-        tiny hearts, scrapbook cards, cozy notes, and rooms that feel like sweet memories instead of a dashboard.
-      </p>
-      <div class="action-row">
-        <a class="action" href="dear-you.html">Read a love letter</a>
-        <a class="action secondary" href="memory-vault.html">Open our memories</a>
+  <section class="hero" aria-label="Hollywood photobooth love collage">
+    <div class="photo-stage">
+      <span class="flash one" aria-hidden="true"></span>
+      <span class="flash two" aria-hidden="true"></span>
+      <span class="flash three" aria-hidden="true"></span>
+
+      <div class="film-strip diagonal-one" aria-hidden="true">
+        <span class="frame">pic here</span>
+        <span class="frame alt">pic here</span>
+        <span class="frame dark">pic here</span>
+        <span class="frame flashy">pic here</span>
+      </div>
+
+      <div class="film-strip diagonal-two" aria-hidden="true">
+        <span class="frame flashy">pic here</span>
+        <span class="frame dark">pic here</span>
+        <span class="frame alt">pic here</span>
+        <span class="frame">pic here</span>
+      </div>
+
+      <div class="film-strip diagonal-three" aria-hidden="true">
+        <span class="frame dark">pic here</span>
+        <span class="frame">pic here</span>
+        <span class="frame flashy">pic here</span>
+        <span class="frame alt">pic here</span>
+      </div>
+
+      <div class="film-strip vertical vertical-one" aria-hidden="true">
+        <span class="frame alt">pic here</span>
+        <span class="frame flashy">pic here</span>
+        <span class="frame dark">pic here</span>
+      </div>
+
+      <article class="polaroid-note one">
+        <p>flash on, world off — just our tiny movie scene.</p>
+      </article>
+
+      <article class="polaroid-note two">
+        <p>drop a favorite picture here and make it look famous.</p>
+      </article>
+
+      <div class="copy-stack">
+        <div class="love-note">black & white photobooth</div>
+        <p class="lede">
+          A dramatic little home page for Dhruv: intersecting film strips, empty frames for your favorite pictures,
+          camera-flash glow, and a soft intro tucked right in the middle like a secret Hollywood note.
+        </p>
+        <div class="action-row">
+          <a class="action" href="dear-you.html">Read a love letter</a>
+          <a class="action secondary" href="memory-vault.html">Open our memories</a>
+        </div>
       </div>
     </div>
-
-    <aside class="scrapbook" aria-label="Cute love scrapbook decoration">
-      <article class="polaroid main">
-        <p>our favorite kind of magic: the tiny everyday things ♡</p>
-      </article>
-      <article class="polaroid small">
-        <p>saved hugs, soft words, and all the little smiles</p>
-      </article>
-      <article class="ribbon-card">
-        <h2>No statistics. Just feelings.</h2>
-        <p>This space is meant to feel like a handwritten note, a warm hug, and a cute secret page made for Dhruv.</p>
-      </article>
-      <article class="polaroid tiny">
-        <p>a pocket-sized reminder: you are loved</p>
-      </article>
-    </aside>
   </section>
 
   <section class="room-grid" aria-label="Love rooms">
@@ -510,7 +616,7 @@ h1 span {
   </section>
 
   <section class="footer-note" aria-label="Closing note">
-    <p>Made by the best girlfriend ever — not like a report, not like a control room, just a cute little love site for Dhruv. ♡</p>
+    <p>Made by the best girlfriend ever — a black-and-white photobooth lobby with space for every picture that deserves the spotlight.</p>
   </section>
 </main>
 </body>
