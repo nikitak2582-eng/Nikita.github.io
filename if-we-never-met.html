@@ -540,8 +540,8 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 
 .love-drop-card{
   position:relative;
-  width:min(100%, 560px);
-  height:390px;
+  width:min(100%, 760px);
+  min-height:310px;
   margin:0 auto;
   overflow:hidden;
   border-radius:30px;
@@ -595,18 +595,18 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 .love-drop-main{
   position:relative;
   z-index:1;
-  height:100%;
+  min-height:250px;
   display:grid;
-  grid-template-rows:1fr auto;
-  gap:18px;
-  align-items:stretch;
+  grid-template-columns:minmax(0, 1fr) auto;
+  gap:22px;
+  align-items:center;
 }
 
 .love-drop-text-card{
   display:grid;
   grid-template-rows:auto 1fr auto;
   gap:14px;
-  height:260px;
+  min-height:240px;
   padding:26px;
   overflow:hidden;
   border-radius:24px;
@@ -618,7 +618,8 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 }
 
 .love-drop-label{
-  width:max-content;
+  display:inline-flex;
+  width:fit-content;
   max-width:100%;
   padding:8px 12px;
   border-radius:999px;
@@ -627,8 +628,10 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   border:1px solid rgba(221,82,123,.14);
   font-size:.72rem;
   font-weight:900;
-  letter-spacing:.14em;
+  letter-spacing:.08em;
+  line-height:1.25;
   text-transform:uppercase;
+  white-space:normal;
 }
 
 .love-drop-message{
@@ -640,7 +643,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   font-size:clamp(1.75rem,4vw,2.85rem);
   line-height:1.04;
   letter-spacing:-.055em;
-  overflow:hidden;
+  overflow-wrap:anywhere;
 }
 
 .love-drop-note{
@@ -650,7 +653,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   color:#5d4868;
   font-weight:750;
   line-height:1.45;
-  overflow:hidden;
+  overflow-wrap:anywhere;
 }
 
 .love-drop-button{
@@ -658,6 +661,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   max-width:100%;
   cursor:pointer;
   justify-self:center;
+  align-self:center;
   padding:13px 19px;
   border-radius:999px;
   color:#8a365f;
@@ -783,6 +787,11 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 }
 
 
+@media (max-width:620px){
+  .love-drop-main{grid-template-columns:1fr; min-height:auto;}
+  .love-drop-button{justify-self:center;}
+}
+
 @media (max-width:520px){
   .page{width:min(100% - 20px, 1180px); padding-top:14px;}
   .achievement-grid{grid-template-columns:1fr;}
@@ -792,9 +801,9 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   .tower-polaroid{position:relative; width:82%; min-width:0;}
   .tower-polaroid.one{top:auto; left:auto; justify-self:start;}
   .tower-polaroid.two{right:auto; bottom:auto; justify-self:end; margin-top:-82px;}
-  .love-drop-card{height:390px; padding:22px;}
-  .love-drop-text-card{height:260px; padding:22px;}
-  .love-drop-button{justify-self:center;}
+  .love-drop-card{min-height:auto; padding:22px;}
+  .love-drop-text-card{min-height:260px; padding:22px;}
+  .love-drop-label{font-size:.68rem; letter-spacing:.06em;}
   .love-drop-heart{top:18px; right:22px; transform:rotate(8deg); opacity:.55;}
 }
 
