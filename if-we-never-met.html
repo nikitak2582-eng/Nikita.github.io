@@ -28,14 +28,14 @@
 
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth; background:#ff91bd;}
+html{scroll-behavior:smooth; background:#ffb7a5;}
 body{
   margin:0;
   min-height:100vh;
   overflow-x:hidden;
   color:var(--ink);
-  font-family:'Fredoka', 'Segoe UI', system-ui, sans-serif;
-  background:linear-gradient(180deg, #ffb7a5 0%, #ff9fc1 9%, #ff7fb2 36%, #8b70b0 72%, #252746 100%);
+  font-family:'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:linear-gradient(180deg, #ffb7a5 0%, #ff8fab 38%, #7a6c9d 72%, #252746 100%);
 }
 
 body::before,
@@ -50,9 +50,8 @@ body::before{
   z-index:-4;
   background:
     radial-gradient(circle at 12% 12%, rgba(255,255,255,.46), transparent 13%),
-    radial-gradient(circle at 76% 16%, rgba(255,159,193,.42), transparent 17%),
-    radial-gradient(circle at 36% 34%, rgba(255,127,178,.24), transparent 22%),
-    radial-gradient(circle at 68% 76%, rgba(139,112,176,.34), transparent 20%);
+    radial-gradient(circle at 78% 18%, rgba(255,209,220,.38), transparent 17%),
+    radial-gradient(circle at 68% 76%, rgba(122,108,157,.34), transparent 20%);
 }
 
 body::after{
@@ -71,7 +70,7 @@ h1,h2,h3,p{margin-top:0;}
   position:fixed;
   inset:0;
   z-index:-5;
-  background:linear-gradient(to bottom, #ffb7a5 0%, #ff9fc1 9%, #ff7fb2 40%, #8b70b0 72%, #3a3d5c 100%);
+  background:linear-gradient(to bottom, #ffb7a5, #ff8fab 42%, #7a6c9d 72%, #3a3d5c);
 }
 
 .moon{
@@ -282,11 +281,8 @@ h1 .title-gradient{
   display:inline-block;
   padding:0;
   margin-left:0;
-  background:linear-gradient(105deg, #fff7bf 0%, #ffd1dc 28%, #ff8fab 58%, #fff7fb 100%);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  text-shadow:none;
+  color:#fff7fb;
+  text-shadow:0 18px 50px rgba(58,61,92,.42);
 }
 
 h1 span{display:block; color:#fff7fb;}
@@ -354,9 +350,9 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 
 .tower-polaroid{
   position:absolute;
-  width:46%;
-  min-width:180px;
-  padding:12px 12px 38px;
+  width:56%;
+  min-width:250px;
+  padding:14px 14px 42px;
   border-radius:10px;
   background:#fffaf5;
   color:#7b536b;
@@ -365,18 +361,18 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 }
 
 .tower-polaroid.one{
-  top:128px;
-  left:32px;
+  top:112px;
+  left:18px;
 }
 
 .tower-polaroid.two{
-  right:28px;
-  bottom:36px;
+  right:16px;
+  bottom:26px;
   transform:rotate(8deg);
 }
 
 .tower-photo-gradient{
-  height:190px;
+  height:230px;
   border-radius:8px;
   display:grid;
   place-items:center;
@@ -538,17 +534,19 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 
 .love-drop-box{
   display:grid;
-  place-items:center;
+  grid-template-columns:minmax(0, 1fr) auto;
+  align-items:center;
+  gap:clamp(18px, 4vw, 34px);
 }
 
 .love-drop-card{
   position:relative;
-  width:min(100%, 640px);
-  min-height:360px;
+  width:100%;
+  min-height:280px;
   margin:0 auto;
   overflow:hidden;
   border-radius:34px;
-  padding:clamp(24px, 5vw, 42px);
+  padding:clamp(24px, 4vw, 40px);
   color:var(--card-ink);
   background:
     radial-gradient(circle at 16% 18%, rgba(255,255,255,.78), transparent 18%),
@@ -582,8 +580,8 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 
 .love-drop-heart{
   position:absolute;
-  top:30px;
-  right:clamp(28px, 6vw, 48px);
+  top:50%;
+  right:clamp(28px, 5vw, 56px);
   width:56px;
   height:56px;
   display:grid;
@@ -592,16 +590,23 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   background:linear-gradient(135deg, #fff7bf, #ff8fab);
   box-shadow:0 16px 30px rgba(221,82,123,.25);
   font-size:1.8rem;
-  transform:rotate(8deg);
+  transform:translateY(-50%) rotate(8deg);
 }
 
 .love-drop-main{
   position:relative;
   z-index:1;
   display:grid;
-  gap:18px;
-  min-height:276px;
+  grid-template-columns:minmax(180px, .62fr) minmax(260px, 1fr);
+  grid-template-areas:
+    "label message"
+    "note message";
+  align-items:center;
+  column-gap:clamp(22px, 4vw, 46px);
+  row-gap:16px;
+  min-height:204px;
   align-content:center;
+  padding-right:100px;
 }
 
 .love-drop-label{
@@ -616,6 +621,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   font-weight:900;
   letter-spacing:.16em;
   text-transform:uppercase;
+  grid-area:label;
 }
 
 .love-drop-message{
@@ -626,6 +632,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   font-size:clamp(2rem,4.8vw,3.6rem);
   line-height:1.03;
   letter-spacing:-.06em;
+  grid-area:message;
 }
 
 .love-drop-note{
@@ -634,6 +641,7 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   color:#5d4868;
   font-weight:750;
   line-height:1.6;
+  grid-area:note;
 }
 
 .love-drop-button{
@@ -649,6 +657,8 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   font:inherit;
   font-weight:900;
   transition:transform .22s ease, box-shadow .22s ease, background .22s ease;
+  justify-self:start;
+  align-self:center;
 }
 
 .love-drop-button:hover,
@@ -767,6 +777,9 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   .tower-polaroid.one{top:auto; left:auto; justify-self:start;}
   .tower-polaroid.two{right:auto; bottom:auto; justify-self:end; margin-top:-82px;}
   .love-drop-card{min-height:360px;}
+  .love-drop-main{grid-template-columns:1fr; grid-template-areas:"label" "message" "note"; padding-right:0;}
+  .love-drop-button{justify-self:start;}
+  .love-drop-heart{top:24px; right:24px; transform:rotate(8deg); opacity:.42;}
 }
 
 </style>
@@ -885,9 +898,9 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
             <span class="love-drop-label">open when you need a tiny soft thing</span>
             <blockquote class="love-drop-message" id="loveDropMessage">you are my favorite notification.</blockquote>
             <p class="love-drop-note" id="loveDropNote">Tap the cute button and this little box will swap to a new soft line just for this timeline.</p>
-            <button class="love-drop-button" type="button" id="loveDropButton">drop another love note ♡</button>
           </div>
         </figure>
+        <button class="love-drop-button" type="button" id="loveDropButton">drop another love note ♡</button>
       </div>
     </section>
 
