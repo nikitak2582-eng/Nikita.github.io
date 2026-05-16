@@ -40,6 +40,8 @@ body {
   color: var(--cream);
   font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
   background:
+    linear-gradient(rgba(24, 9, 31, .58), rgba(14, 6, 20, .8)),
+    url("sakura-bg.jpg") center / cover fixed,
     radial-gradient(circle at 50% 2%, rgba(255, 150, 91, .42), transparent 17rem),
     radial-gradient(circle at 18% 17%, rgba(255, 143, 184, .34), transparent 18rem),
     radial-gradient(circle at 84% 20%, rgba(255, 181, 92, .28), transparent 16rem),
@@ -200,6 +202,10 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   isolation: isolate;
   border-radius: 42px;
+  background:
+    linear-gradient(180deg, rgba(24, 9, 31, .2), rgba(14, 6, 20, .78)),
+    url("pexels-186116490-11751919.jpg") center / cover;
+  box-shadow: inset 0 0 0 1px rgba(255, 209, 138, .16), 0 28px 90px rgba(9, 2, 18, .5);
 }
 
 .photo-stage::before,
@@ -333,47 +339,39 @@ a { color: inherit; text-decoration: none; }
   display: grid;
   place-items: center;
   min-height: 116px;
-  overflow: visible;
+  overflow: hidden;
   border: 1px solid rgba(255, 219, 161, .58);
-  border-radius: 46% 46% 42% 42%;
+  border-radius: 20px;
   color: rgba(255, 246, 225, .82);
   text-align: center;
   font-size: .6rem;
   font-weight: 950;
   letter-spacing: .13em;
   text-transform: uppercase;
-  background:
-    radial-gradient(circle at 50% 42%, #fff6bf 0 7%, #ffb251 8% 38%, #dd4a3c 39% 66%, #771f2e 67% 100%);
-  box-shadow: 0 0 34px rgba(255, 133, 61, .66), 0 16px 32px rgba(0, 0, 0, .35), inset 0 -14px 22px rgba(75, 13, 23, .42);
+  background: rgba(255, 243, 220, .12);
+  box-shadow: 0 0 34px rgba(255, 133, 61, .46), 0 16px 32px rgba(0, 0, 0, .35), inset 0 0 0 7px rgba(255, 243, 220, .14);
 }
 
-.frame::before,
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.08) contrast(1.03) sepia(.12);
+}
+
 .frame::after {
   content: "";
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--wood-dark);
-  border-radius: 999px;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 238, 190, .24), transparent 42%, rgba(96, 25, 38, .24));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
+  pointer-events: none;
 }
 
-.frame::before {
-  top: -10px;
-  width: 56px;
-  height: 9px;
-  box-shadow: 0 126px 0 var(--wood-dark);
-}
-
-.frame::after {
-  top: -38px;
-  width: 1px;
-  height: 30px;
-  background: rgba(255, 224, 172, .5);
-}
-
-.frame.alt { background: radial-gradient(circle at 50% 42%, #fff1b6 0 7%, #ff9850 8% 38%, #c82d42 39% 66%, #5f1830 67% 100%); }
-.frame.dark { background: radial-gradient(circle at 50% 42%, #ffdea3 0 7%, #eb6943 8% 38%, #9f263a 39% 66%, #3c1432 67% 100%); }
-.frame.flashy { background: radial-gradient(circle at 50% 42%, #ffffce 0 8%, #ffc162 9% 40%, #f05454 41% 66%, #761b2a 67% 100%); }
+.frame.alt img { object-position: center 35%; }
+.frame.dark img { filter: saturate(.95) contrast(1.08) sepia(.18) brightness(.86); }
+.frame.flashy img { filter: saturate(1.2) contrast(1.04) sepia(.08) brightness(1.06); }
 
 .polaroid-note {
   position: absolute;
@@ -395,10 +393,9 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 14px;
   border-radius: 14px;
   background:
-    radial-gradient(circle at 50% 30%, rgba(255, 231, 163, .9), transparent 12%),
-    radial-gradient(circle at 50% 42%, rgba(255, 147, 71, .62), transparent 30%),
-    linear-gradient(90deg, transparent 0 18%, rgba(53, 22, 16, .9) 18% 24%, transparent 24% 76%, rgba(53, 22, 16, .9) 76% 82%, transparent 82%),
-    linear-gradient(180deg, rgba(255, 143, 184, .38), rgba(58, 17, 47, .76));
+    linear-gradient(180deg, rgba(255, 143, 184, .08), rgba(58, 17, 47, .34)),
+    url("postcard.png") center / cover;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
 }
 
 .polaroid-note p {
@@ -738,30 +735,30 @@ h1 {
       <span class="flash three" aria-hidden="true"></span>
 
       <div class="film-strip diagonal-one" aria-hidden="true">
-        <span class="frame">lantern</span>
-        <span class="frame alt">sakura</span>
-        <span class="frame dark">kyoto</span>
-        <span class="frame flashy">glow</span>
+        <span class="frame"><img src="bg.jpg" alt=""></span>
+        <span class="frame alt"><img src="sakura.png" alt=""></span>
+        <span class="frame dark"><img src="desk.jpg" alt=""></span>
+        <span class="frame flashy"><img src="kissmark.png" alt=""></span>
       </div>
 
       <div class="film-strip diagonal-two" aria-hidden="true">
-        <span class="frame flashy">glow</span>
-        <span class="frame dark">alley</span>
-        <span class="frame alt">sakura</span>
-        <span class="frame">lantern</span>
+        <span class="frame flashy"><img src="couple-cats.webp" alt=""></span>
+        <span class="frame dark"><img src="paper.jpg" alt=""></span>
+        <span class="frame alt"><img src="sakura-bg.jpg" alt=""></span>
+        <span class="frame"><img src="envelope2.png" alt=""></span>
       </div>
 
       <div class="film-strip diagonal-three" aria-hidden="true">
-        <span class="frame dark">night</span>
-        <span class="frame">lantern</span>
-        <span class="frame flashy">warm</span>
-        <span class="frame alt">blush</span>
+        <span class="frame dark"><img src="stamp1.png" alt=""></span>
+        <span class="frame"><img src="black-cat.webp" alt=""></span>
+        <span class="frame flashy"><img src="waxseal.png" alt=""></span>
+        <span class="frame alt"><img src="stamp2.png" alt=""></span>
       </div>
 
       <div class="film-strip vertical vertical-one" aria-hidden="true">
-        <span class="frame alt">dream</span>
-        <span class="frame flashy">glow</span>
-        <span class="frame dark">kiss</span>
+        <span class="frame alt"><img src="postcard.png" alt=""></span>
+        <span class="frame flashy"><img src="bg.jpg" alt=""></span>
+        <span class="frame dark"><img src="sakura.png" alt=""></span>
       </div>
 
       <article class="polaroid-note one">
