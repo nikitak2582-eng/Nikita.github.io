@@ -535,59 +535,59 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 .love-drop-box{
   display:grid;
   place-items:center;
+  padding:8px 0;
 }
 
 .love-drop-card{
   position:relative;
-  width:min(100%, 680px);
-  min-height:390px;
+  width:min(100%, 560px);
+  height:390px;
   margin:0 auto;
   overflow:hidden;
-  border-radius:34px;
-  padding:clamp(24px, 5vw, 42px);
+  border-radius:30px;
+  padding:30px;
   color:var(--card-ink);
   background:
-    radial-gradient(circle at 16% 18%, rgba(255,255,255,.78), transparent 18%),
-    radial-gradient(circle at 86% 14%, rgba(255,240,168,.48), transparent 20%),
-    linear-gradient(145deg, rgba(255,250,252,.96), rgba(255,209,220,.88) 48%, rgba(255,143,171,.78));
-  border:1px solid rgba(255,255,255,.76);
-  box-shadow:0 24px 54px rgba(39,28,67,.22), inset 0 0 0 8px rgba(255,255,255,.14);
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,.84), transparent 16%),
+    linear-gradient(180deg, #fffafc 0%, #ffe3eb 62%, #ffc2d2 100%);
+  border:2px solid rgba(255,255,255,.82);
+  box-shadow:0 22px 48px rgba(39,28,67,.2), inset 0 0 0 7px rgba(255,255,255,.2);
   isolation:isolate;
 }
 
 .love-drop-card::before{
   content:"";
   position:absolute;
-  inset:18px;
-  border:1px dashed rgba(122,108,157,.24);
-  border-radius:26px;
+  inset:16px;
+  border:2px dashed rgba(221,82,123,.2);
+  border-radius:22px;
   pointer-events:none;
 }
 
 .love-drop-card::after{
-  content:"";
+  content:"♡";
   position:absolute;
-  right:-42px;
-  bottom:-52px;
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  background:rgba(255,183,165,.22);
+  right:28px;
+  bottom:20px;
+  color:rgba(221,82,123,.22);
+  font-size:5.8rem;
+  line-height:1;
   pointer-events:none;
+  transform:rotate(-10deg);
 }
 
 .love-drop-heart{
   position:absolute;
-  top:30px;
-  right:clamp(28px, 6vw, 48px);
-  width:56px;
-  height:56px;
+  top:22px;
+  right:28px;
+  width:48px;
+  height:48px;
   display:grid;
   place-items:center;
-  border-radius:22px;
+  border-radius:18px;
   background:linear-gradient(135deg, #fff7bf, #ff8fab);
-  box-shadow:0 16px 30px rgba(221,82,123,.25);
-  font-size:1.8rem;
+  box-shadow:0 12px 22px rgba(221,82,123,.2);
+  font-size:1.55rem;
   transform:rotate(8deg);
   z-index:2;
 }
@@ -595,22 +595,24 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 .love-drop-main{
   position:relative;
   z-index:1;
+  height:100%;
   display:grid;
-  gap:16px;
-  min-height:306px;
-  align-content:center;
+  grid-template-rows:1fr auto;
+  gap:18px;
+  align-items:stretch;
 }
 
 .love-drop-text-card{
   display:grid;
-  gap:18px;
-  min-height:236px;
-  align-content:center;
-  padding:clamp(22px, 4vw, 34px);
-  border-radius:28px;
-  background:linear-gradient(145deg, rgba(255,255,255,.7), rgba(255,250,252,.38));
-  border:1px solid rgba(255,255,255,.74);
-  box-shadow:0 18px 38px rgba(86,48,85,.14), inset 0 1px 0 rgba(255,255,255,.75);
+  grid-template-rows:auto 1fr auto;
+  gap:14px;
+  height:260px;
+  padding:26px;
+  overflow:hidden;
+  border-radius:24px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.86);
+  box-shadow:0 14px 28px rgba(86,48,85,.12), inset 0 1px 0 rgba(255,255,255,.82);
   transform-origin:center;
   will-change:transform, opacity, filter;
 }
@@ -618,51 +620,50 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 .love-drop-label{
   width:max-content;
   max-width:100%;
-  padding:9px 13px;
+  padding:8px 12px;
   border-radius:999px;
-  background:rgba(122,108,157,.12);
-  color:#7a4f79;
-  border:1px solid rgba(122,108,157,.16);
-  font-size:.78rem;
+  background:rgba(255,143,171,.16);
+  color:#8a365f;
+  border:1px solid rgba(221,82,123,.14);
+  font-size:.72rem;
   font-weight:900;
-  letter-spacing:.16em;
+  letter-spacing:.14em;
   text-transform:uppercase;
 }
 
 .love-drop-message{
-  max-width:520px;
+  align-self:center;
+  max-width:430px;
   margin:0;
   color:#3b2b52;
   font-family:'Space Grotesk', sans-serif;
-  font-size:clamp(2rem,4.8vw,3.6rem);
-  line-height:1.03;
-  letter-spacing:-.06em;
+  font-size:clamp(1.75rem,4vw,2.85rem);
+  line-height:1.04;
+  letter-spacing:-.055em;
+  overflow:hidden;
 }
 
 .love-drop-note{
   max-width:390px;
+  min-height:50px;
   margin:0;
   color:#5d4868;
   font-weight:750;
-  line-height:1.6;
+  line-height:1.45;
+  overflow:hidden;
 }
 
 .love-drop-button{
   width:max-content;
   max-width:100%;
   cursor:pointer;
-  justify-self:start;
-  padding:14px 20px;
+  justify-self:center;
+  padding:13px 19px;
   border-radius:999px;
   color:#8a365f;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,240,247,.82)),
-    linear-gradient(135deg, #fff7bf, #ff8fab);
-  border:1px solid rgba(255,255,255,.9);
-  box-shadow:
-    0 16px 30px rgba(221,82,123,.22),
-    0 6px 0 rgba(221,82,123,.16),
-    inset 0 1px 0 rgba(255,255,255,.95);
+  background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,240,247,.9));
+  border:1px solid rgba(255,255,255,.94);
+  box-shadow:0 12px 22px rgba(221,82,123,.2), 0 5px 0 rgba(221,82,123,.14), inset 0 1px 0 rgba(255,255,255,.96);
   font:inherit;
   font-weight:950;
   letter-spacing:.01em;
@@ -671,20 +672,14 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 
 .love-drop-button:hover,
 .love-drop-button:focus-visible{
-  transform:translateY(-4px) scale(1.04) rotate(-1deg);
+  transform:translateY(-3px) scale(1.03);
   filter:saturate(1.08) brightness(1.02);
-  box-shadow:
-    0 22px 40px rgba(221,82,123,.3),
-    0 8px 0 rgba(221,82,123,.2),
-    inset 0 1px 0 rgba(255,255,255,.98);
+  box-shadow:0 18px 32px rgba(221,82,123,.28), 0 7px 0 rgba(221,82,123,.18), inset 0 1px 0 rgba(255,255,255,.98);
 }
 
 .love-drop-button:active{
   transform:translateY(1px) scale(.99);
-  box-shadow:
-    0 10px 22px rgba(221,82,123,.22),
-    0 2px 0 rgba(221,82,123,.16),
-    inset 0 1px 0 rgba(255,255,255,.95);
+  box-shadow:0 9px 18px rgba(221,82,123,.2), 0 2px 0 rgba(221,82,123,.14), inset 0 1px 0 rgba(255,255,255,.95);
 }
 
 .love-drop-button:disabled{pointer-events:none; opacity:.86;}
@@ -692,10 +687,10 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
 .love-drop-text-card.is-switching{animation:loveCardSwitch .36s ease both;}
 
 @keyframes loveCardSwitch{
-  0%{transform:translateY(0) scale(1) rotate(0deg); opacity:1; filter:blur(0);}
-  42%{transform:translateY(12px) scale(.975) rotate(-1deg); opacity:0; filter:blur(4px);}
-  48%{transform:translateY(-12px) scale(.975) rotate(1deg); opacity:0; filter:blur(4px);}
-  100%{transform:translateY(0) scale(1) rotate(0deg); opacity:1; filter:blur(0);}
+  0%{transform:translateY(0) scale(1); opacity:1; filter:blur(0);}
+  42%{transform:translateY(10px) scale(.98); opacity:0; filter:blur(4px);}
+  48%{transform:translateY(-10px) scale(.98); opacity:0; filter:blur(4px);}
+  100%{transform:translateY(0) scale(1); opacity:1; filter:blur(0);}
 }
 
 
@@ -797,10 +792,10 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
   .tower-polaroid{position:relative; width:82%; min-width:0;}
   .tower-polaroid.one{top:auto; left:auto; justify-self:start;}
   .tower-polaroid.two{right:auto; bottom:auto; justify-self:end; margin-top:-82px;}
-  .love-drop-card{min-height:380px;}
-  .love-drop-main{min-height:296px;}
-  .love-drop-button{justify-self:start;}
-  .love-drop-heart{top:24px; right:24px; transform:rotate(8deg); opacity:.42;}
+  .love-drop-card{height:390px; padding:22px;}
+  .love-drop-text-card{height:260px; padding:22px;}
+  .love-drop-button{justify-self:center;}
+  .love-drop-heart{top:18px; right:22px; transform:rotate(8deg); opacity:.55;}
 }
 
 </style>
@@ -843,15 +838,11 @@ h1 em{color:#ffe4a9; font-style:normal; text-shadow:0 0 35px rgba(255,228,169,.5
       <aside class="portal-card" aria-label="Polaroid frames for the tower picture">
         <div class="tower-scene">
           <div class="tower-polaroid one">
-            <div class="tower-photo-gradient">
-              <span>add your tower picture here</span>
-            </div>
+            <div class="tower-photo-gradient" aria-hidden="true"></div>
             <small>favorite landmark energy</small>
           </div>
           <div class="tower-polaroid two">
-            <div class="tower-photo-gradient">
-              <span>soft city glow</span>
-            </div>
+            <div class="tower-photo-gradient" aria-hidden="true"></div>
             <small>tiny tower moment</small>
           </div>
         </div>
